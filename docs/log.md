@@ -68,3 +68,10 @@ One dated entry per task: what was built, the review score, and what was left.
 ## 2026-11-21: Design work merged with main
 
 - main had taken decisions 0005 and 0006 and spec 02 (launch markets, account data, auth database), so the design decisions were renumbered 0007 (visual foundations), 0008 (interaction, disclosure, space) and 0009 (design system), and the design-system spec became 03. `no-ai-slop` moved to `.claude/skills/` with the other skills.
+
+## 2026-11-21: Logo and brand guidelines proposed (0010)
+
+- Five logo directions on the canvas "Jubilee logo propositions", modelled on how category leaders build theirs. Flovet chose D (the path) with A's two-dot wordmark for use on its own.
+- Logged 0010 as Proposed. Wrote `docs/design/brand-guidelines.md` (structure taken from Spotify, GOV.UK, Mailchimp and Atlassian) and 13 SVG files in `docs/design/brand/logo/`: logo, wordmark and icon in colour, on dark, on violet and one colour, plus app icons and a three-dot favicon.
+- Not reviewed: no spec (brand assets only, nothing wired into the app).
+- Left: Flovet to approve 0010; PNG and ICO exports and the favicon go in with the app shell spec.
