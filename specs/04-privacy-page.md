@@ -8,15 +8,15 @@ Give users one clear, honest page that says what Jubilee does with their persona
 
 ## Decisions
 
-Implements [0010](../docs/decisions/0010-privacy-policy-page.md). Follows [0002](../docs/decisions/0002-project-structure.md), [0003](../docs/decisions/0003-internationalisation.md), [0007](../docs/decisions/0007-visual-foundations.md), [0008](../docs/decisions/0008-interaction-disclosure-and-space.md), [0009](../docs/decisions/0009-design-system-components-icons-motion.md).
+Implements [0011](../docs/decisions/0011-privacy-policy-page.md). Follows [0002](../docs/decisions/0002-project-structure.md), [0003](../docs/decisions/0003-internationalisation.md), [0007](../docs/decisions/0007-visual-foundations.md), [0008](../docs/decisions/0008-interaction-disclosure-and-space.md), [0009](../docs/decisions/0009-design-system-components-icons-motion.md).
 
 ## Acceptance criteria
 
 1. The page renders at `/en/privacy` and `/fr/privacy` inside `src/app/[locale]/(marketing)/privacy/`, as a Server Component, with no header or footer.
-2. It has the sections and order listed in 0010's Decision, the "We will not" list and the summary at the top, and a contents list whose links jump to each section (keyboard and screen reader friendly).
+2. It has the sections and order listed in 0011's Decision, the "We will not" list and the summary at the top, and a contents list whose links jump to each section (keyboard and screen reader friendly).
 3. "Last updated" appears at the top as a `<time dateTime>` element, formatted per locale.
 4. Every string comes from `src/messages/{en,fr}.json` under one `privacy` namespace; the existing key-parity test passes.
-5. Processors and data named on the page match what exists in the repo when the spec is built (0010: Supabase, Vercel, Google and LinkedIn sign-in, the `profiles` row, the session cookie). Nothing undecided is named.
+5. Processors and data named on the page match what exists in the repo when the spec is built (0011: Supabase, Vercel, Google and LinkedIn sign-in, the `profiles` row, the session cookie). Nothing undecided is named.
 6. Page metadata: localised title and description, canonical URL and `hreflang` alternates for both locales; listed in `sitemap.ts`.
 7. Visual: one reading column (about 65–75 characters a line), 0007 tokens and 0009 components only, contents list in a grey well, no violet button, no illustrations. Holds at 360 px with no horizontal scroll; passes contrast in light and dark.
 8. The privacy contact email is a `mailto:` link; the CNIL complaint route links to cnil.fr.
@@ -27,7 +27,7 @@ Header, footer and app shell. Cookie or consent banner. Terms of service. Data e
 
 ## Edge cases
 
-- **Facts Flovet must supply before the text is final:** the controller's legal name and country, a postal address, the privacy contact email, a DPO (or none), the minimum age (0010 proposes 16), and whether "we don't use your CV to train AI" is a commitment. If one is missing at build time, stop and ask; never fill in a placeholder that looks real.
+- **Facts Flovet must supply before the text is final:** the controller's legal name and country, a postal address, the privacy contact email, a DPO (or none), the minimum age (0011 proposes 16), and whether "we don't use your CV to train AI" is a commitment. If one is missing at build time, stop and ask; never fill in a placeholder that looks real.
 - Long French headings wrap cleanly; contents-list links don't overflow at 360 px.
 - Jump links land below any future sticky header (`scroll-margin-top` from a token).
 - Reduced motion: no smooth-scroll animation when `prefers-reduced-motion` is set.

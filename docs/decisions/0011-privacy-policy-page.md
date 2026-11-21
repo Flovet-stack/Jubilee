@@ -1,8 +1,8 @@
-# 0010: Privacy policy page: structure, content and what it may claim
+# 0011: Privacy policy page: structure, content and what it may claim
 
 - **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, Copy, UX, UI, Frontend, Tech Lead)
-- **Approved:** 2026-11-21 by Flovet (in chat)
+- **Approved:** 2026-11-21 by Flovet (in chat, as "0010"; renumbered to 0011 because main had already taken 0010, logo and brand identity)
 - **Builds on:** 0002 (`(marketing)` holds legal pages), 0003 (en/fr, copy in message files), 0004 and 0006 (what is stored today), 0007 and 0008 (look and disclosure)
 - **Specs:** specs/04-privacy-page.md
 
