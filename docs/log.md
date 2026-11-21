@@ -36,3 +36,35 @@ One dated entry per task: what was built, the review score, and what was left.
 - `supabase/tests/profiles.sql` passed on the remote project (rolled back, no data left). Security and performance advisors: no findings. Types in `src/types/database.types.ts`. `supabase/config.toml` enables email, `google` and `linkedin_oidc` with secrets from env.
 - Not in 0006 but built: name capped at 200 characters and avatar URL at 2,048, so a long provider value can't block sign-up.
 - Left for Flovet: `npx supabase login` and `npx supabase link --project-ref ylxywgfnfgopiielyqgn`; create the LinkedIn app (OIDC product, LinkedIn Page) and the Google client; enter both in Supabase > Authentication > Providers; add the redirect URLs. Email sign-in reaches team members only until custom SMTP is decided.
+
+## 2026-11-21: Design brief proposed
+
+- `docs/design/design-brief.md` plus decisions 0007 (visual foundations) and 0008 (interaction, progressive disclosure, hierarchy of explicitness, space), all Proposed. Structure drawn from GOV.UK, Atlassian, Carbon, Primer, Material and NN/g; approach from the FlickVale and AniKansou briefs.
+- No code changed. Left: Flovet to approve 0007 and 0008; then a Jubilee no-ai-slop skill and the design-foundations spec.
+
+## 2026-11-21: Design direction revised, no-ai-slop skill added
+
+- After Flovet's review of the sample screens: 0007 rewritten as "quiet desk, bright moments" (Ownr-style violet and confetti accents, Clemta-style grey wells with light borders, Plus Jakarta Sans); 0008 grouping rule now uses wells and cards; brief updated. All still Proposed.
+- New `.claude/skills/no-ai-slop/SKILL.md`: AI-generated UI, copy and behaviour tells from 7 sources, with Jubilee's rule for each, and how the borrowed Ownr/Clemta patterns stay safe.
+- Sample canvas restyled to the new direction.
+
+## 2026-11-21: Design decisions approved
+
+- Flovet approved 0007 (visual foundations, "quiet desk, bright moments") and 0008 (interaction, disclosure, explicitness and space). The design brief is now Approved.
+- Left: the design-foundations spec (tokens, font, base primitives), then the app shell, CV templates and icon list decisions.
+
+## 2026-11-21: Design system built (spec 03)
+
+- Decision 0009 and spec 03. Tokens for light and dark in `globals.css` (three tiers, Tailwind 4 theme), Plus Jakarta Sans via `next/font`, a contrast test over every 0007 pair (52 checks).
+- 34 animated icons vendored from icons-animated (Hugeicons, as AniKansou) with a shared accessibility hook; 31 components (most on Base UI) with every state; `/design-system` preview (development only); guide in `docs/design/design-system.md`.
+- New dependencies, approved by Flovet in chat: motion 13.1.1, @base-ui/react 1.9.0, class-variance-authority, clsx, tailwind-merge.
+- Reviewed 96/100 (first pass 83: reduced-motion leaks, raw values, small toast targets, all fixed). `/design-system` returns 404 in the production build.
+- Left: the app shell (providers, navigation) wires `TooltipProvider` and `ToastProvider`.
+
+## 2026-11-21: Decision 0009 approved
+
+- Flovet approved 0009 in chat. 0007's status notes that its Iconography paragraph is superseded by 0009; 0007 and 0009 link spec 03. Index, brief and spec 03 status updated.
+
+## 2026-11-21: Design work merged with main
+
+- main had taken decisions 0005 and 0006 and spec 02 (launch markets, account data, auth database), so the design decisions were renumbered 0007 (visual foundations), 0008 (interaction, disclosure, space) and 0009 (design system), and the design-system spec became 03. `no-ai-slop` moved to `.claude/skills/` with the other skills.

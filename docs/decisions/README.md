@@ -18,20 +18,24 @@ The product team researches every product, UX, UI and architecture decision for 
 
 ## Index
 
-| #    | Decision                                                                       | Status   |
-| ---- | ------------------------------------------------------------------------------ | -------- |
-| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                 | Approved |
-| 0002 | [Project structure](0002-project-structure.md)                                 | Approved |
-| 0003 | [Internationalisation](0003-internationalisation.md)                           | Approved |
-| 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                | Approved |
-| 0005 | [Target markets and rollout order](0005-launch-markets.md)                     | Approved |
-| 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md) | Approved |
+| #    | Decision                                                                                                      | Status   |
+| ---- | ------------------------------------------------------------------------------------------------------------- | -------- |
+| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                                                | Approved |
+| 0002 | [Project structure](0002-project-structure.md)                                                                | Approved |
+| 0003 | [Internationalisation](0003-internationalisation.md)                                                          | Approved |
+| 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                               | Approved |
+| 0005 | [Target markets and rollout order](0005-launch-markets.md)                                                    | Approved |
+| 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md)                                | Approved |
+| 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                             | Approved |
+| 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                   | Approved |
+| 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md) | Approved |
 
 ## Still to decide (before the specs that need them)
 
 | Topic                                                              | Needed by                  |
 | ------------------------------------------------------------------ | -------------------------- |
-| Design direction, tokens, type and the no-ai-slop rules            | Any screen                 |
+| App shell and navigation                                           | Any screen                 |
+| CV templates and their typography                                  | Resume builder             |
 | AI provider, prompts, cost limits and data handling                | Tailoring, letters, import |
 | CV data model and PDF rendering                                    | Resume builder             |
 | Country format rules, France and US first (0005)                   | Country CV formats         |

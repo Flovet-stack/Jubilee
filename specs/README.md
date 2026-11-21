@@ -28,5 +28,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | ---------------------------------------- | -------------------------------- |
 | [01: Foundations](01-foundations.md)     | Blocked (0001–0004 are Proposed) |
 | [02: Auth database](02-auth-database.md) | Done (96/100)                    |
+| [03: Design system](03-design-system.md) | Done (96/100)                    |
 
-Planned next (each needs its decisions first): sign-in, design foundations, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
+Planned next (each needs its decisions first): sign-in, app shell, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

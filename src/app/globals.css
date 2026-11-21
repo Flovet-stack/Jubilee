@@ -1,17 +1,271 @@
 @import "tailwindcss";
+@import "../components/ui/components.css";
 
-/* Design tokens arrive with the design decision (see docs/decisions/README.md). */
+/*
+ * Jubilee design tokens.
+ * Values: decision 0007 (colour, type, space, shape, motion) and 0008
+ * (hover, press). Component and motion tokens: decision 0009.
+ * Reference: docs/design/design-system.md. Components use these tokens only:
+ * never a raw hex, px size or easing in a component.
+ *
+ * Three tiers (Carbon / Primer model):
+ *   1. primitives  → the raw values below in :root (one place per value)
+ *   2. semantic    → the role names (--page, --ink, --violet, …)
+ *   3. component   → --control-h, --focus-ring, … built from 1 and 2
+ */
+
+/* ── 1 + 2. Colour (semantic roles over 0007's values) ─────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --page: #ffffff;
+  --well: #f4f4f6;
+  --card: #ffffff;
+  --line: #e5e4ea;
+  --tint: #f3f0ff;
+  --field: #8b8999;
+  --ink: #1d1a44;
+  --ink-muted: #4f4c66;
+  --ink-subtle: #6b6880;
+  --violet: #5a32d6;
+  --violet-press: #3f1fa8;
+  --on-violet: #ffffff;
+  --marigold: #f6c453;
+  --pink: #e8679f;
+  --sky: #5aa7f0;
+  --success: #1f7a4d;
+  --danger: #c0262d;
+
+  /* Tracker stages (0007): always with an icon and a label. */
+  --stage-saved: #5d5b70;
+  --stage-applied: #2457c5;
+  --stage-interview: #9a2d77;
+  --stage-rejected: #6e6763;
+
+  /* The CV and letter previews stay white paper in both themes. */
+  --paper: #ffffff;
+  --paper-ink: #1d1a44;
+
+  /* Washes (0008 §5: hover is an 8% ink wash). Derived, never hand-picked. */
+  --wash-hover: color-mix(in oklab, var(--ink) 8%, transparent);
+  --wash-press: color-mix(in oklab, var(--ink) 12%, transparent);
+  --wash-danger: color-mix(in oklab, var(--danger) 10%, transparent);
+  --scrim: rgb(14 13 31 / 0.48);
+
+  /* Elevation (0007): only the paper and floating layers have shadows. */
+  --shadow-paper:
+    0 1px 2px rgb(29 26 68 / 0.06), 0 8px 24px rgb(29 26 68 / 0.08);
+  --shadow-float: 0 12px 32px rgb(29 26 68 / 0.18);
+  --shadow-thumb: 0 1px 2px rgb(29 26 68 / 0.24); /* switch thumb */
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --page: #0e0d1f;
+    --well: #121126;
+    --card: #1b1a33;
+    --line: #2f2d4a;
+    --tint: #252148;
+    --field: #7f7c98;
+    --ink: #f1f0f8;
+    --ink-muted: #b7b4cc;
+    --ink-subtle: #9592ad;
+    --violet: #a48cff;
+    --violet-press: #c3b4ff;
+    --on-violet: #120d2e;
+    --pink: #f08cb8;
+    --success: #5fd39a;
+    --danger: #ff7b7b;
+
+    --stage-saved: #aeacc2;
+    --stage-applied: #8fb0ff;
+    --stage-interview: #f39ad3;
+    --stage-rejected: #b2aaa5;
+
+    --scrim: rgb(5 4 14 / 0.64);
+    --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
+  }
+}
+
+/* ── 3. Component and motion tokens (0009) ──────────────────────────── */
+:root {
+  /* Controls: 48 px everywhere (0007), 44 px minimum for small ones. */
+  --control-h: 48px;
+  --control-h-sm: 44px;
+  --icon-ui: 20px;
+  --icon-nav: 24px;
+  --focus-ring: 2px solid var(--violet);
+  --focus-offset: 2px;
+
+  /* Motion (0007 values; 0008 §5 in/out; 0009 additions). */
+  --dur-fast: 120ms; /* hover in, press, checkbox */
+  --dur-exit: 150ms; /* hover out, anything leaving */
+  --dur-base: 200ms; /* a reveal, a tab, a popover */
+  --dur-slow: 320ms; /* sheets, a card settling; the ceiling */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1); /* iOS sheet, via Vaul */
+  --press-scale: 0.98; /* 0008 §5 */
+  --pop-scale: 0.96; /* popovers grow from here, never from 0 */
+
+  /* Layout steps reused by fixed layers (0007 gutters). */
+  --gutter-sm: 16px;
+  --gutter-md: 24px;
+  /* Toast stack (0009 §7, Sonner numbers). */
+  --toast-width: 380px;
+  --toast-gap: 12px;
+  --toast-peek: 14px;
+}
+
+/* ── Tailwind 4 theme: utilities read the roles above ───────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-page: var(--page);
+  --color-well: var(--well);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-tint: var(--tint);
+  --color-field: var(--field);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-violet: var(--violet);
+  --color-violet-press: var(--violet-press);
+  --color-on-violet: var(--on-violet);
+  --color-marigold: var(--marigold);
+  --color-pink: var(--pink);
+  --color-sky: var(--sky);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-stage-saved: var(--stage-saved);
+  --color-stage-applied: var(--stage-applied);
+  --color-stage-interview: var(--stage-interview);
+  --color-stage-rejected: var(--stage-rejected);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-wash-hover: var(--wash-hover);
+  --color-wash-press: var(--wash-press);
+  --color-wash-danger: var(--wash-danger);
+  --color-scrim: var(--scrim);
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-paper: var(--shadow-paper);
+  --shadow-float: var(--shadow-float);
+  --shadow-thumb: var(--shadow-thumb);
+
+  --ease-standard: var(--ease-standard);
+  --ease-enter: var(--ease-enter);
+  --ease-exit: var(--ease-exit);
+  --ease-sheet: var(--ease-sheet);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+/* Static theme values (not themed, so not inline). */
+@theme {
+  /* Type scale (0007): 12 · 14 · 16 · 18 · 20 · 24 · 32 · 40. */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.45;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.45;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.3;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.2;
+  --text-3xl: 2rem;
+  --text-3xl--line-height: 1.15;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 1.15;
+
+  /* Spacing: Tailwind's 4 px base gives 1 = 4, 2 = 8, 3 = 12, 4 = 16, 6 = 24,
+     8 = 32, 12 = 48, 16 = 64, 24 = 96, 32 = 128. Use only those steps (0007). */
+  --spacing: 0.25rem;
+
+  /* Radius by role (0007). */
+  --radius-paper: 2px;
+  --radius-mark: 4px; /* checkbox box (0009) */
+  --radius-control: 8px;
+  --radius-box: 12px;
+  --radius-sheet: 16px;
+
+  /* Layout (0007). */
+  --container-content: 1200px;
+  --container-reading: 640px;
+  --container-dialog: 480px;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-lg: 1024px;
+}
+
+/* Pointer-only hover (0008 §5): touch gets :active instead. */
+@custom-variant hover-fine {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+/* ── Base ───────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--violet) 24%, transparent);
+  }
+
+  /* One focus style everywhere: 2 px violet, 2 px away, keyboard only. */
+  :focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+}
+
+/* Reduced motion (0007): movement becomes a short fade. Components keep
+   their opacity transitions; transforms and long durations collapse. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --press-scale: 1;
+    --pop-scale: 1;
+    --dur-base: 120ms;
+    --dur-slow: 120ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }

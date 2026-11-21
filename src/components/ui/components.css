@@ -1,0 +1,171 @@
+/*
+ * Component styles that read better as CSS than as utility classes:
+ * keyframes, the toast stack and the spinner (decision 0009, motion rules).
+ * Imported by src/app/globals.css. Tokens only.
+ */
+
+@keyframes jb-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes jb-appear {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes jb-shimmer {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@layer components {
+  /* Spinner: the one loop allowed (0009 §8). Shows after 400 ms. */
+  .jb-spinner {
+    transform-origin: center;
+    animation:
+      jb-spin 700ms linear infinite,
+      jb-appear var(--dur-fast) var(--ease-enter) var(--spinner-delay, 400ms)
+        both;
+  }
+
+  .jb-skeleton {
+    animation: jb-shimmer 1.6s ease-in-out infinite;
+  }
+
+  /* Toast stack, after Base UI's toast demo and Sonner (0009 §7). */
+  .jb-toast-viewport {
+    position: fixed;
+    z-index: 50;
+    inset-inline: var(--gutter-sm);
+    bottom: calc(var(--gutter-sm) + env(safe-area-inset-bottom));
+    margin-inline: auto;
+    width: auto;
+    max-width: var(--toast-width);
+
+    @media (min-width: 640px) {
+      inset-inline: auto var(--gutter-md);
+      bottom: var(--gutter-md);
+      width: var(--toast-width);
+    }
+  }
+
+  .jb-toast {
+    --gap: var(--toast-gap);
+    --peek: var(--toast-peek);
+    --scale: calc(max(0, 1 - (var(--toast-index) * 0.05)));
+    --shrink: calc(1 - var(--scale));
+    --height: var(--toast-frontmost-height, var(--toast-height));
+    --offset-y: calc(
+      var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) +
+        var(--toast-swipe-movement-y)
+    );
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: calc(1000 - var(--toast-index));
+    height: var(--height);
+    transform-origin: bottom center;
+    user-select: none;
+    transform: translateX(var(--toast-swipe-movement-x))
+      translateY(
+        calc(
+          var(--toast-swipe-movement-y) - (var(--toast-index) * var(--peek)) -
+            (var(--shrink) * var(--height))
+        )
+      )
+      scale(var(--scale));
+    transition:
+      transform var(--dur-slow) var(--ease-enter),
+      opacity var(--dur-base) var(--ease-standard),
+      height var(--dur-exit) var(--ease-standard);
+
+    /* Hover area between stacked toasts keeps the stack expanded. */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: calc(var(--gap) + 1px);
+    }
+
+    &[data-expanded] {
+      transform: translateX(var(--toast-swipe-movement-x))
+        translateY(var(--offset-y));
+      height: var(--toast-height);
+    }
+
+    /* Enter and leave the same way (Sonner). */
+    &[data-starting-style],
+    &[data-ending-style] {
+      transform: translateY(150%);
+    }
+
+    &[data-limited] {
+      opacity: 0;
+    }
+
+    &[data-ending-style] {
+      opacity: 0;
+      transition-duration: var(--dur-exit);
+      transition-timing-function: var(--ease-exit);
+
+      &[data-swipe-direction="down"] {
+        transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+      }
+      &[data-swipe-direction="left"] {
+        transform: translateX(calc(var(--toast-swipe-movement-x) - 150%))
+          translateY(var(--offset-y));
+      }
+      &[data-swipe-direction="right"] {
+        transform: translateX(calc(var(--toast-swipe-movement-x) + 150%))
+          translateY(var(--offset-y));
+      }
+    }
+
+    /* While dragging, follow the finger with no lag. */
+    &[data-swiping] {
+      transition: none;
+    }
+  }
+
+  .jb-toast-content {
+    transition: opacity var(--dur-base) var(--ease-standard);
+
+    &[data-behind] {
+      opacity: 0;
+    }
+    &[data-expanded] {
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The spinner is information, not decoration: it keeps turning, slowly. */
+  .jb-spinner {
+    animation-duration: 1.6s, var(--dur-fast) !important;
+    animation-iteration-count: infinite, 1 !important;
+  }
+
+  /* Toasts fade in place: no slide, the stack still holds its shape. */
+  .jb-toast {
+    transition:
+      opacity var(--dur-fast) linear,
+      height var(--dur-fast) linear;
+  }
+
+  .jb-toast[data-starting-style],
+  .jb-toast[data-ending-style] {
+    opacity: 0;
+    transform: translateY(calc(0px - (var(--toast-index) * var(--peek))))
+      scale(var(--scale));
+  }
+}

@@ -48,12 +48,15 @@ None chosen yet. Every job source needs a recorded licence or terms check in a d
 
 ## Design direction
 
-Not decided. Needs its own decision (design brief, tokens, type) before any screen is built.
+Approved: `docs/design/design-brief.md` ("quiet desk, bright moments": light, grey wells with light borders, one violet action per screen, confetti only at earned milestones), with decisions 0007 and 0008 (approved 2026-11-21).
 
 ## Decisions (newest first)
 
 See `docs/decisions/README.md`. Product-wide ones:
 
+- 0009 (Approved 2026-11-21): design system: three-tier tokens, Base UI components restyled with our tokens, icons-animated Hugeicons (as AniKansou), motion rules after Emil Kowalski. Adds motion, @base-ui/react, cva, clsx, tailwind-merge.
+- 0008 (Approved 2026-11-21): hierarchy of explicitness (visibility tier + consequence level), progressive disclosure in two levels, space by relationship.
+- 0007 (Approved 2026-11-21): visual foundations, "quiet desk, bright moments" (Plus Jakarta Sans, navy-violet ink, one violet action, Clemta-style wells).
 - 0006 (Approved): one owner-only `profiles` row per user, created on sign-up; the magic-link email also carries a 6-digit code.
 - 0005 (Approved): phased rollout, starting with France + US, then UK + Canada, then Africa country by country; the market follows the target job.
 - 0004 (Approved): sign-in with email magic link, Google or LinkedIn via Supabase; RLS on every table.
