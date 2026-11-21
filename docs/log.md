@@ -89,3 +89,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - One proxy pass: Supabase refreshes the session first and writes the cookies onto the request, then next-intl routes (`src/proxy.test.ts`). ESLint bans Supabase clients outside the data-access layer (tested). `robots.ts`, `sitemap.ts` with hreflang, optional Search Console tag. Localised 404 under a locale, bilingual global 404 otherwise.
 - Reviewed 92/100. Findings fixed after review: cookies now reach Server Components in the same request; localised 404 under a known locale; versions pinned; build-time choices recorded in the spec's build notes.
 - Left: Flovet to confirm the locale order (saved choice before `Accept-Language`); spec 04 now waits only on company facts.
+
+## 2026-11-21: Privacy policy page built (spec 04)
+
+- `/en/privacy` and `/fr/privacy`, static, no header or footer. Thirteen sections in 0011's order, a contents list in a grey well, "last updated" as a `<time>`, every string in `src/messages` under `privacy`. Added to the sitemap with hreflang.
+- Facts from Flovet: company not registered yet (the page says so and names no one), contact through the contact page only, no DPO, minimum age 16, no AI training. Spec 04 updated to match.
+- `TextLink` renders a native anchor for `#` links, so keyboard focus moves to the section.
+- Left: the contact page (linked five times, 404 until built); company name and address once registered; legal and native-French review before launch.

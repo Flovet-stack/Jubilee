@@ -9,5 +9,152 @@
     "title": "Page not found",
     "body": "This page doesn't exist or has moved. Check the address, or start again from the home page.",
     "home": "Go to the home page"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "description": "What Jubilee collects about you, why, who handles it, and how to see, correct or delete it.",
+    "updated": "Last updated: <time>{date}</time>",
+    "intro": "This page explains what personal data Jubilee keeps about you, why, and what you can do about it. It covers the Jubilee website and app.",
+    "contents": "On this page",
+    "externalHint": "(opens in a new tab)",
+    "sections": {
+      "summary": {
+        "title": "In short",
+        "blocks": [
+          "Today Jubilee keeps only what it needs to run your account: your name, your email address and, if your sign-in provider shares one, your profile photo.",
+          "What we don't do:",
+          {
+            "list": [
+              "sell your data",
+              "send anything in your name without your approval",
+              "use your data to train AI models"
+            ]
+          },
+          "You can see, correct or delete your data at any time. <contact>Contact us</contact> and we'll do it."
+        ]
+      },
+      "who": {
+        "title": "Who looks after your data",
+        "blocks": [
+          "Jubilee is run by its founder and is not a registered company yet. Until it is, the founder decides how your data is used and is responsible for it (the “data controller” in GDPR terms).",
+          "When the company is registered, its legal name and address will be added here, and the date at the top of this page will change.",
+          "Jubilee has no data protection officer. For any question about your data, use the <contact>contact page</contact>."
+        ]
+      },
+      "collect": {
+        "title": "What we collect",
+        "blocks": [
+          "When you create an account, we keep:",
+          {
+            "list": [
+              "your email address, to sign you in",
+              "your name and profile photo, if you sign in with Google or LinkedIn and they share them (you can change both)",
+              "the dates your account was created and last updated"
+            ]
+          },
+          "When you use the site, our host records technical data such as your IP address, your browser and the pages requested, to deliver pages and protect the service.",
+          "Jubilee doesn't collect your CV or your job applications yet, because those features aren't built. Before they are, this page will say what they collect."
+        ]
+      },
+      "why": {
+        "title": "Why we use it",
+        "blocks": [
+          {
+            "list": [
+              "To create and run your account and sign you in. Legal basis: the contract between us (GDPR article 6(1)(b)).",
+              "To keep the service secure and working. Legal basis: our legitimate interest in protecting Jubilee and its users (GDPR article 6(1)(f))."
+            ]
+          },
+          "You don't have to give us any data, but we can't create an account without an email address.",
+          "We don't use your data for advertising."
+        ]
+      },
+      "processors": {
+        "title": "Who else handles it",
+        "blocks": [
+          "A few companies handle data so that Jubilee works, and only for that:",
+          {
+            "list": [
+              "Supabase stores your account and runs sign-in.",
+              "Vercel hosts the website and app.",
+              "Google and LinkedIn, only if you choose to sign in with them. They send us your name, email address and profile photo. Their own privacy policies cover what they do on their side."
+            ]
+          },
+          "We don't sell or share your data with anyone else. If we add a provider, this list changes first."
+        ]
+      },
+      "storage": {
+        "title": "Where it is stored",
+        "blocks": [
+          "Supabase stores your account in the European Union (Ireland).",
+          "Vercel, Google and LinkedIn are based in the United States, so some data may be processed there. These transfers rely on the safeguards GDPR provides for, such as standard contractual clauses, which those companies offer."
+        ]
+      },
+      "retention": {
+        "title": "How long we keep it",
+        "blocks": [
+          "We keep your account data while your account is open.",
+          "Deleting your account deletes your profile with it. Until you can delete your account in the app, ask through the <contact>contact page</contact> and we'll delete it within one month, the time GDPR allows.",
+          "Our host's technical logs are kept for a short time to run and protect the service, then deleted."
+        ]
+      },
+      "rights": {
+        "title": "Your rights",
+        "blocks": [
+          "Wherever you live, you can ask us to:",
+          {
+            "list": [
+              "show you the data we hold about you and send you a copy",
+              "correct it",
+              "delete it",
+              "limit how we use it, or object to how we use it",
+              "send it to you or to another service in a format a computer can read"
+            ]
+          },
+          "If you live in California, you also have the right to know what we collect, to have it deleted or corrected, and not to be treated differently for using these rights. We don't sell or share personal information, so there is nothing to opt out of.",
+          "To use any of these rights, <contact>contact us</contact>. We reply within one month, free of charge."
+        ]
+      },
+      "ai": {
+        "title": "AI and automated decisions",
+        "blocks": [
+          "Jubilee doesn't use AI on your data yet, and makes no automated decisions about you.",
+          "We don't use your data to train AI models.",
+          "When AI features arrive (tailoring your CV, writing letters), this section will say which provider is used and what it sees, before those features touch your data. AI will never add experience you don't have, and nothing will be sent to an employer without your approval."
+        ]
+      },
+      "cookies": {
+        "title": "Cookies",
+        "blocks": [
+          "Jubilee sets two cookies, both needed for the site to work:",
+          {
+            "list": [
+              "a sign-in cookie, which keeps you signed in",
+              "a language cookie (NEXT_LOCALE), which remembers whether you chose English or French"
+            ]
+          },
+          "We don't use advertising or analytics cookies, so there is no cookie banner."
+        ]
+      },
+      "children": {
+        "title": "Age limit",
+        "blocks": [
+          "Jubilee is for people aged 16 and over. If you are under 16, please don't create an account. If we learn that someone under 16 has an account, we delete it."
+        ]
+      },
+      "changes": {
+        "title": "Changes to this policy",
+        "blocks": [
+          "When this policy changes, the date at the top changes too. If a change affects how we use your data, for example a new provider or a new purpose, we'll tell you before it takes effect."
+        ]
+      },
+      "complaints": {
+        "title": "Complaints",
+        "blocks": [
+          "If you're unhappy with how we handle your data, <contact>tell us</contact> first and we'll try to put it right.",
+          "You can also complain to a data protection authority. In France, that's the <cnil>CNIL</cnil>. Elsewhere in the EU, it's the authority in the country where you live."
+        ]
+      }
+    }
   }
 }

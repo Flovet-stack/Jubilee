@@ -23,13 +23,25 @@ export function TextLink({
   children,
   ...props
 }: TextLinkProps) {
+  const classes = cn(
+    "rounded-paper font-semibold text-violet underline decoration-1 underline-offset-[0.2em]",
+    "transition-[text-decoration-thickness,color] duration-(--dur-exit) active:text-violet-press hover-fine:decoration-2 hover-fine:duration-(--dur-fast)",
+    className,
+  );
+
+  // A jump within the page: a native anchor, so the browser moves focus to
+  // the target (next/link scrolls but leaves focus on the link).
+  if (typeof props.href === "string" && props.href.startsWith("#")) {
+    return (
+      <a className={classes} href={props.href}>
+        {children}
+      </a>
+    );
+  }
+
   return (
     <Link
-      className={cn(
-        "rounded-paper font-semibold text-violet underline decoration-1 underline-offset-[0.2em]",
-        "transition-[text-decoration-thickness,color] duration-(--dur-exit) active:text-violet-press hover-fine:decoration-2 hover-fine:duration-(--dur-fast)",
-        className,
-      )}
+      className={classes}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       {...props}
     >

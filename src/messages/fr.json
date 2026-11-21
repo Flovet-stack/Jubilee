@@ -9,5 +9,152 @@
     "title": "Page introuvable",
     "body": "Cette page n’existe pas ou a été déplacée. Vérifiez l’adresse, ou repartez de la page d’accueil.",
     "home": "Aller à la page d’accueil"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "description": "Ce que Jubilee collecte à votre sujet, pourquoi, qui le traite, et comment le consulter, le corriger ou le supprimer.",
+    "updated": "Dernière mise à jour : <time>{date}</time>",
+    "intro": "Cette page explique quelles données personnelles Jubilee conserve à votre sujet, pourquoi, et ce que vous pouvez faire. Elle couvre le site et l’application Jubilee.",
+    "contents": "Sur cette page",
+    "externalHint": "(s’ouvre dans un nouvel onglet)",
+    "sections": {
+      "summary": {
+        "title": "En bref",
+        "blocks": [
+          "Aujourd’hui, Jubilee ne conserve que ce qu’il faut pour faire fonctionner votre compte : votre nom, votre adresse e-mail et, si votre service de connexion la partage, votre photo de profil.",
+          "Ce que nous ne faisons pas :",
+          {
+            "list": [
+              "vendre vos données",
+              "envoyer quoi que ce soit en votre nom sans votre accord",
+              "utiliser vos données pour entraîner des modèles d’IA"
+            ]
+          },
+          "Vous pouvez consulter, corriger ou supprimer vos données à tout moment. <contact>Contactez-nous</contact> et nous nous en chargeons."
+        ]
+      },
+      "who": {
+        "title": "Qui est responsable de vos données",
+        "blocks": [
+          "Jubilee est géré par son fondateur et n’est pas encore une société immatriculée. D’ici là, c’est le fondateur qui décide de l’usage de vos données et qui en est responsable (le « responsable du traitement » au sens du RGPD).",
+          "Une fois la société immatriculée, sa dénomination et son adresse figureront ici, et la date en haut de cette page changera.",
+          "Jubilee n’a pas de délégué à la protection des données. Pour toute question sur vos données, passez par la <contact>page de contact</contact>."
+        ]
+      },
+      "collect": {
+        "title": "Ce que nous collectons",
+        "blocks": [
+          "Quand vous créez un compte, nous conservons :",
+          {
+            "list": [
+              "votre adresse e-mail, pour vous connecter",
+              "votre nom et votre photo de profil, si vous vous connectez avec Google ou LinkedIn et qu’ils les partagent (vous pouvez les modifier)",
+              "les dates de création et de dernière modification de votre compte"
+            ]
+          },
+          "Quand vous utilisez le site, notre hébergeur enregistre des données techniques, comme votre adresse IP, votre navigateur et les pages demandées, pour afficher les pages et protéger le service.",
+          "Jubilee ne collecte pas encore votre CV ni vos candidatures, car ces fonctionnalités n’existent pas encore. Avant leur arrivée, cette page indiquera ce qu’elles collectent."
+        ]
+      },
+      "why": {
+        "title": "Pourquoi nous les utilisons",
+        "blocks": [
+          {
+            "list": [
+              "Pour créer et gérer votre compte, et vous connecter. Base légale : le contrat entre nous (article 6.1.b du RGPD).",
+              "Pour assurer la sécurité et le bon fonctionnement du service. Base légale : notre intérêt légitime à protéger Jubilee et ses utilisateurs (article 6.1.f du RGPD)."
+            ]
+          },
+          "Vous n’êtes pas obligé de nous fournir des données, mais sans adresse e-mail, nous ne pouvons pas créer de compte.",
+          "Nous n’utilisons pas vos données à des fins publicitaires."
+        ]
+      },
+      "processors": {
+        "title": "Qui d’autre les traite",
+        "blocks": [
+          "Quelques entreprises traitent des données pour que Jubilee fonctionne, et uniquement pour cela :",
+          {
+            "list": [
+              "Supabase stocke votre compte et gère la connexion.",
+              "Vercel héberge le site et l’application.",
+              "Google et LinkedIn, seulement si vous choisissez de vous connecter avec eux. Ils nous transmettent votre nom, votre adresse e-mail et votre photo de profil. Leurs propres politiques de confidentialité couvrent ce qu’ils font de leur côté."
+            ]
+          },
+          "Nous ne vendons ni ne partageons vos données avec qui que ce soit d’autre. Si nous ajoutons un prestataire, cette liste est mise à jour avant."
+        ]
+      },
+      "storage": {
+        "title": "Où elles sont stockées",
+        "blocks": [
+          "Supabase stocke votre compte dans l’Union européenne (Irlande).",
+          "Vercel, Google et LinkedIn sont basés aux États-Unis, donc certaines données peuvent y être traitées. Ces transferts reposent sur les garanties prévues par le RGPD, comme les clauses contractuelles types, que ces entreprises proposent."
+        ]
+      },
+      "retention": {
+        "title": "Durée de conservation",
+        "blocks": [
+          "Nous conservons les données de votre compte tant que celui-ci est ouvert.",
+          "Supprimer votre compte supprime aussi votre profil. Tant que la suppression n’est pas disponible dans l’application, demandez-la via la <contact>page de contact</contact> : nous supprimerons votre compte dans un délai d’un mois, comme le prévoit le RGPD.",
+          "Les journaux techniques de notre hébergeur sont conservés peu de temps, pour faire fonctionner et protéger le service, puis supprimés."
+        ]
+      },
+      "rights": {
+        "title": "Vos droits",
+        "blocks": [
+          "Où que vous viviez, vous pouvez nous demander de :",
+          {
+            "list": [
+              "vous montrer les données que nous détenons sur vous et vous en envoyer une copie",
+              "les corriger",
+              "les supprimer",
+              "limiter leur utilisation, ou vous y opposer",
+              "vous les transmettre, à vous ou à un autre service, dans un format lisible par une machine"
+            ]
+          },
+          "Si vous vivez en Californie, vous avez aussi le droit de savoir ce que nous collectons, de le faire supprimer ou corriger, et de ne pas être traité différemment parce que vous exercez ces droits. Nous ne vendons ni ne partageons d’informations personnelles : il n’y a donc rien à refuser.",
+          "Pour exercer l’un de ces droits, <contact>contactez-nous</contact>. Nous répondons sous un mois, gratuitement."
+        ]
+      },
+      "ai": {
+        "title": "IA et décisions automatisées",
+        "blocks": [
+          "Jubilee n’utilise pas encore l’IA sur vos données et ne prend aucune décision automatisée vous concernant.",
+          "Nous n’utilisons pas vos données pour entraîner des modèles d’IA.",
+          "Quand les fonctionnalités d’IA arriveront (adaptation du CV, rédaction de lettres), cette section indiquera quel prestataire est utilisé et ce qu’il voit, avant qu’elles ne traitent vos données. L’IA n’ajoutera jamais d’expérience que vous n’avez pas, et rien ne sera envoyé à un employeur sans votre accord."
+        ]
+      },
+      "cookies": {
+        "title": "Cookies",
+        "blocks": [
+          "Jubilee utilise deux cookies, tous deux nécessaires au fonctionnement du site :",
+          {
+            "list": [
+              "un cookie de connexion, qui vous garde connecté",
+              "un cookie de langue (NEXT_LOCALE), qui retient si vous avez choisi le français ou l’anglais"
+            ]
+          },
+          "Nous n’utilisons aucun cookie publicitaire ni de mesure d’audience : il n’y a donc pas de bandeau cookies."
+        ]
+      },
+      "children": {
+        "title": "Âge minimum",
+        "blocks": [
+          "Jubilee s’adresse aux personnes de 16 ans et plus. Si vous avez moins de 16 ans, merci de ne pas créer de compte. Si nous apprenons qu’une personne de moins de 16 ans a un compte, nous le supprimons."
+        ]
+      },
+      "changes": {
+        "title": "Modifications de cette politique",
+        "blocks": [
+          "Quand cette politique change, la date en haut de la page change aussi. Si une modification touche à l’usage de vos données, par exemple un nouveau prestataire ou une nouvelle finalité, nous vous prévenons avant qu’elle ne s’applique."
+        ]
+      },
+      "complaints": {
+        "title": "Réclamations",
+        "blocks": [
+          "Si la façon dont nous traitons vos données ne vous convient pas, <contact>dites-le-nous</contact> d’abord : nous essaierons de corriger le problème.",
+          "Vous pouvez aussi déposer une réclamation auprès d’une autorité de protection des données. En France, c’est la <cnil>CNIL</cnil>. Ailleurs dans l’UE, c’est l’autorité du pays où vous vivez."
+        ]
+      }
+    }
   }
 }
