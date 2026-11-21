@@ -102,8 +102,8 @@ export function Gallery() {
           <header className="flex flex-col gap-3">
             <h1 className="text-3xl sm:text-4xl">Design system</h1>
             <p className="max-w-(--container-reading) text-lg text-ink-muted">
-              Every token and component in every state. Decisions 0005, 0006 and
-              0007; guide in docs/design/design-system.md. Switch your system
+              Every token and component in every state. Decisions 0007, 0008 and
+              0009; guide in docs/design/design-system.md. Switch your system
               theme to see dark.
             </p>
           </header>
@@ -160,7 +160,7 @@ function Foundations() {
   return (
     <Section
       title="Foundations"
-      intro="Values from 0005. Components read the role names, never the hex."
+      intro="Values from 0007. Components read the role names, never the hex."
     >
       <Well title="Colour roles">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
@@ -860,7 +860,7 @@ function JubileePatterns() {
   return (
     <Section
       title="Jubilee patterns"
-      intro="From 0006: undo instead of 'Are you sure?', AI changes as marked changes, and final actions that name exactly what goes out."
+      intro="From 0008: undo instead of 'Are you sure?', AI changes as marked changes, and final actions that name exactly what goes out."
     >
       <div className="grid gap-6 lg:grid-cols-2">
         <Well title="Undo line and marked change">

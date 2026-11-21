@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 
 /**
  * Three dots ("More actions"). icons-animated has no ellipsis, so it's drawn
- * here, static, on the same 24 px grid (decision 0007).
+ * here, static, on the same 24 px grid (decision 0009).
  */
 export function MoreIcon({
   size = 20,

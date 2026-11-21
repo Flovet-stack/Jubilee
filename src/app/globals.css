@@ -3,8 +3,8 @@
 
 /*
  * Jubilee design tokens.
- * Values: decision 0005 (colour, type, space, shape, motion) and 0006
- * (hover, press). Component and motion tokens: decision 0007.
+ * Values: decision 0007 (colour, type, space, shape, motion) and 0008
+ * (hover, press). Component and motion tokens: decision 0009.
  * Reference: docs/design/design-system.md. Components use these tokens only:
  * never a raw hex, px size or easing in a component.
  *
@@ -14,7 +14,7 @@
  *   3. component   → --control-h, --focus-ring, … built from 1 and 2
  */
 
-/* ── 1 + 2. Colour (semantic roles over 0005's values) ─────────────── */
+/* ── 1 + 2. Colour (semantic roles over 0007's values) ─────────────── */
 :root {
   color-scheme: light;
 
@@ -36,7 +36,7 @@
   --success: #1f7a4d;
   --danger: #c0262d;
 
-  /* Tracker stages (0005): always with an icon and a label. */
+  /* Tracker stages (0007): always with an icon and a label. */
   --stage-saved: #5d5b70;
   --stage-applied: #2457c5;
   --stage-interview: #9a2d77;
@@ -46,13 +46,13 @@
   --paper: #ffffff;
   --paper-ink: #1d1a44;
 
-  /* Washes (0006 §5: hover is an 8% ink wash). Derived, never hand-picked. */
+  /* Washes (0008 §5: hover is an 8% ink wash). Derived, never hand-picked. */
   --wash-hover: color-mix(in oklab, var(--ink) 8%, transparent);
   --wash-press: color-mix(in oklab, var(--ink) 12%, transparent);
   --wash-danger: color-mix(in oklab, var(--danger) 10%, transparent);
   --scrim: rgb(14 13 31 / 0.48);
 
-  /* Elevation (0005): only the paper and floating layers have shadows. */
+  /* Elevation (0007): only the paper and floating layers have shadows. */
   --shadow-paper:
     0 1px 2px rgb(29 26 68 / 0.06), 0 8px 24px rgb(29 26 68 / 0.08);
   --shadow-float: 0 12px 32px rgb(29 26 68 / 0.18);
@@ -89,9 +89,9 @@
   }
 }
 
-/* ── 3. Component and motion tokens (0007) ──────────────────────────── */
+/* ── 3. Component and motion tokens (0009) ──────────────────────────── */
 :root {
-  /* Controls: 48 px everywhere (0005), 44 px minimum for small ones. */
+  /* Controls: 48 px everywhere (0007), 44 px minimum for small ones. */
   --control-h: 48px;
   --control-h-sm: 44px;
   --icon-ui: 20px;
@@ -99,7 +99,7 @@
   --focus-ring: 2px solid var(--violet);
   --focus-offset: 2px;
 
-  /* Motion (0005 values; 0006 §5 in/out; 0007 additions). */
+  /* Motion (0007 values; 0008 §5 in/out; 0009 additions). */
   --dur-fast: 120ms; /* hover in, press, checkbox */
   --dur-exit: 150ms; /* hover out, anything leaving */
   --dur-base: 200ms; /* a reveal, a tab, a popover */
@@ -108,13 +108,13 @@
   --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
   --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1); /* iOS sheet, via Vaul */
-  --press-scale: 0.98; /* 0006 §5 */
+  --press-scale: 0.98; /* 0008 §5 */
   --pop-scale: 0.96; /* popovers grow from here, never from 0 */
 
-  /* Layout steps reused by fixed layers (0005 gutters). */
+  /* Layout steps reused by fixed layers (0007 gutters). */
   --gutter-sm: 16px;
   --gutter-md: 24px;
-  /* Toast stack (0007 §7, Sonner numbers). */
+  /* Toast stack (0009 §7, Sonner numbers). */
   --toast-width: 380px;
   --toast-gap: 12px;
   --toast-peek: 14px;
@@ -164,7 +164,7 @@
 
 /* Static theme values (not themed, so not inline). */
 @theme {
-  /* Type scale (0005): 12 · 14 · 16 · 18 · 20 · 24 · 32 · 40. */
+  /* Type scale (0007): 12 · 14 · 16 · 18 · 20 · 24 · 32 · 40. */
   --text-xs: 0.75rem;
   --text-xs--line-height: 1.4;
   --text-sm: 0.875rem;
@@ -183,17 +183,17 @@
   --text-4xl--line-height: 1.15;
 
   /* Spacing: Tailwind's 4 px base gives 1 = 4, 2 = 8, 3 = 12, 4 = 16, 6 = 24,
-     8 = 32, 12 = 48, 16 = 64, 24 = 96, 32 = 128. Use only those steps (0005). */
+     8 = 32, 12 = 48, 16 = 64, 24 = 96, 32 = 128. Use only those steps (0007). */
   --spacing: 0.25rem;
 
-  /* Radius by role (0005). */
+  /* Radius by role (0007). */
   --radius-paper: 2px;
-  --radius-mark: 4px; /* checkbox box (0007) */
+  --radius-mark: 4px; /* checkbox box (0009) */
   --radius-control: 8px;
   --radius-box: 12px;
   --radius-sheet: 16px;
 
-  /* Layout (0005). */
+  /* Layout (0007). */
   --container-content: 1200px;
   --container-reading: 640px;
   --container-dialog: 480px;
@@ -202,7 +202,7 @@
   --breakpoint-lg: 1024px;
 }
 
-/* Pointer-only hover (0006 §5): touch gets :active instead. */
+/* Pointer-only hover (0008 §5): touch gets :active instead. */
 @custom-variant hover-fine {
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -251,7 +251,7 @@
   }
 }
 
-/* Reduced motion (0005): movement becomes a short fade. Components keep
+/* Reduced motion (0007): movement becomes a short fade. Components keep
    their opacity transitions; transforms and long durations collapse. */
 @media (prefers-reduced-motion: reduce) {
   :root {

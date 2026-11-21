@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 type SpinnerProps = {
   /** Read by screen readers. Omit only inside a control that has `aria-busy`. */
   label?: string;
-  /** Shown after this delay so quick work doesn't flash (0007 §8). */
+  /** Shown after this delay so quick work doesn't flash (0009 §8). */
   delay?: "none" | "default";
   size?: number;
   className?: string;
@@ -11,7 +11,7 @@ type SpinnerProps = {
 
 /**
  * Loading indicator: a 270° arc turning at 700 ms per turn. The only looping
- * motion allowed (0007 §8); under reduced motion it turns slowly.
+ * motion allowed (0009 §8); under reduced motion it turns slowly.
  */
 export function Spinner({
   label,

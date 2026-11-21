@@ -18,7 +18,7 @@ import { getDefaultValueType, setTarget, visualElementStore } from "motion";
 import { useControlHover } from "./use-control-hover";
 
 /**
- * Shared by every animated icon (decision 0007). icons-animated ships this
+ * Shared by every animated icon (decision 0009). icons-animated ships this
  * helper inside each icon file; we keep one copy here so a fix lands once.
  * Vendoring edits, same as AniKansou:
  * 1. one shared module instead of 34 copies;

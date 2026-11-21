@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
 /**
- * Class-name merging that knows our theme names (decision 0007), so
+ * Class-name merging that knows our theme names (decision 0009), so
  * `shadow-float` replaces `shadow-paper` and `rounded-box` replaces
  * `rounded-control` instead of both staying.
  */

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Every token and component in every state (spec 02). Development only: a
+ * Every token and component in every state (spec 03). Development only: a
  * reference for builders and reviewers, not a product page, so its sample
  * copy lives beside it rather than in the message files.
  */

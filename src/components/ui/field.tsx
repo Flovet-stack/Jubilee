@@ -8,7 +8,7 @@ import { HugeiconsBadgeAlertIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 /**
- * Form fields (0006 §3 spacing: 8 px label → control → hint; 0007 states).
+ * Form fields (0008 §3 spacing: 8 px label → control → hint; 0009 states).
  * Labels sit above the control, never as a placeholder. Optional fields are
  * marked, required ones are not (GOV.UK). Errors say what to do and replace
  * the hint; the control turns danger and the message has an icon.

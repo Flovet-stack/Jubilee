@@ -41,7 +41,7 @@ type SelectProps = {
  * One choice from a longer list (7+ items, or where space is tight). Put it
  * inside <Field> for its label, hint and error. The list grows from the
  * trigger (origin-aware, scale 0.96 → 1, 200 ms in, 150 ms out); keyboard
- * highlight moves without animation (0007 §6). Long labels wrap in the list
+ * highlight moves without animation (0009 §6). Long labels wrap in the list
  * and truncate in the trigger.
  */
 export function Select({

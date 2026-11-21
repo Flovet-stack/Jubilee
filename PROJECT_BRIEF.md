@@ -48,15 +48,15 @@ None chosen yet. Every job source needs a recorded licence or terms check in a d
 
 ## Design direction
 
-Approved: `docs/design/design-brief.md` ("quiet desk, bright moments": light, grey wells with light borders, one violet action per screen, confetti only at earned milestones), with decisions 0005 and 0006 (approved 2026-11-21).
+Approved: `docs/design/design-brief.md` ("quiet desk, bright moments": light, grey wells with light borders, one violet action per screen, confetti only at earned milestones), with decisions 0007 and 0008 (approved 2026-11-21).
 
 ## Decisions (newest first)
 
 See `docs/decisions/README.md`. Product-wide ones:
 
-- 0007 (Approved 2026-11-21): design system: three-tier tokens, Base UI components restyled with our tokens, icons-animated Hugeicons (as AniKansou), motion rules after Emil Kowalski. Adds motion, @base-ui/react, cva, clsx, tailwind-merge.
-- 0006 (Approved 2026-11-21): hierarchy of explicitness (visibility tier + consequence level), progressive disclosure in two levels, space by relationship.
-- 0005 (Approved 2026-11-21): visual foundations, "quiet desk, bright moments" (Plus Jakarta Sans, navy-violet ink, one violet action, Clemta-style wells).
+- 0009 (Approved 2026-11-21): design system: three-tier tokens, Base UI components restyled with our tokens, icons-animated Hugeicons (as AniKansou), motion rules after Emil Kowalski. Adds motion, @base-ui/react, cva, clsx, tailwind-merge.
+- 0008 (Approved 2026-11-21): hierarchy of explicitness (visibility tier + consequence level), progressive disclosure in two levels, space by relationship.
+- 0007 (Approved 2026-11-21): visual foundations, "quiet desk, bright moments" (Plus Jakarta Sans, navy-violet ink, one violet action, Clemta-style wells).
 - 0003 (Proposed): UI in English and French via next-intl; CV language is separate from UI language.
 - 0002 (Proposed): single Next.js app, feature folders, data access only in `queries.ts` / `actions.ts`.
 - 0001 (Proposed): stack and tooling.

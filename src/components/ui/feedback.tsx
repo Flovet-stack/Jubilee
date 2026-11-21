@@ -17,7 +17,7 @@ import { IconButton } from "./button";
 
 type AlertTone = "info" | "success" | "warning" | "danger";
 
-/** "i" in a circle. icons-animated has no info icon, so it's drawn here (0007). */
+/** "i" in a circle. icons-animated has no info icon, so it's drawn here (0009). */
 function InfoMark() {
   return (
     <svg
@@ -63,7 +63,7 @@ type AlertProps = {
 };
 
 /**
- * Inline message, placed where the problem is (0006: feedback inline, not a
+ * Inline message, placed where the problem is (0008: feedback inline, not a
  * toast). Danger is announced at once (role="alert"); the others politely.
  * Tone shows as an icon and the title's words, never as a coloured edge.
  */

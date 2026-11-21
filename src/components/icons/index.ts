@@ -1,4 +1,4 @@
-// Animated icons (decision 0007). One set: Hugeicons via icons-animated.
+// Animated icons (decision 0009). One set: Hugeicons via icons-animated.
 export {
   HugeiconsArrowLeftIcon,
   type HugeiconsArrowLeftIconHandle,

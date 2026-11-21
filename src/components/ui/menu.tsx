@@ -25,7 +25,7 @@ type MenuProps = {
 };
 
 /**
- * Menu button (APG menu button; 0006 §4 "More"). Grows from its trigger in
+ * Menu button (APG menu button; 0008 §4 "More"). Grows from its trigger in
  * 200 ms and leaves in 150 ms. Arrow keys move the highlight with no
  * animation; type-ahead works. Items are ≥ 44 px tall.
  */

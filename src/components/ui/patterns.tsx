@@ -23,7 +23,7 @@ type EmptyStateProps = {
 
 /**
  * Empty states are words and one button until the illustration decision
- * (0005). Says what will appear here and how to get it.
+ * (0007). Says what will appear here and how to get it.
  */
 export function EmptyState({
   title,
@@ -58,7 +58,7 @@ type UndoLineProps = {
 };
 
 /**
- * Short feedback in the place the change happened (0006 §4), with Undo
+ * Short feedback in the place the change happened (0008 §4), with Undo
  * instead of "Are you sure?" for anything reversible. Fades in, 200 ms.
  */
 export function UndoLine({
@@ -110,7 +110,7 @@ type MarkedChangeProps = {
 };
 
 /**
- * An AI edit shown as a marked change, never applied silently (0006 §1b):
+ * An AI edit shown as a marked change, never applied silently (0008 §1b):
  * added text on --tint, underlined in violet; removed text struck through in
  * muted ink; a reason; Accept / Reject per change.
  */
@@ -184,7 +184,7 @@ type ReviewPanelProps = {
 };
 
 /**
- * Final actions (0006 §1b, fully explicit): a summary of what leaves Jubilee
+ * Final actions (0008 §1b, fully explicit): a summary of what leaves Jubilee
  * and one button naming the act and the target. Never the default focus.
  */
 export function ReviewPanel({

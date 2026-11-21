@@ -1,4 +1,4 @@
-# 02: Design system foundations
+# 03: Design system foundations
 
 Status: Done (96/100, 2026-11-21) · Written: 2026-11-21
 
@@ -8,15 +8,15 @@ Give every screen the same tokens, icons, motion and components, so feature spec
 
 ## Decisions
 
-Implements [0005](../docs/decisions/0005-visual-foundations.md), [0006](../docs/decisions/0006-interaction-disclosure-and-space.md), [0007](../docs/decisions/0007-design-system-components-icons-motion.md).
+Implements [0007](../docs/decisions/0007-visual-foundations.md), [0008](../docs/decisions/0008-interaction-disclosure-and-space.md), [0009](../docs/decisions/0009-design-system-components-icons-motion.md).
 
 ## Acceptance criteria
 
-1. `src/app/globals.css` holds every 0005 token for light and dark, plus 0007's component and motion tokens, exposed through Tailwind 4 `@theme`.
+1. `src/app/globals.css` holds every 0007 token for light and dark, plus 0009's component and motion tokens, exposed through Tailwind 4 `@theme`.
 2. Plus Jakarta Sans loads through `next/font` (latin + latin-ext) as `--font-jakarta`.
 3. `src/components/icons/` holds the vendored animated icons, their licence files and the shared accessibility hook; icons play on hover or keyboard focus of their control and never under reduced motion.
-4. `src/components/ui/` holds every component in 0007's table, each with the states 0007 lists, styled only with tokens.
-5. A unit test checks the WCAG contrast pairs 0005 promises, in both themes, by reading `globals.css`.
+4. `src/components/ui/` holds every component in 0009's table, each with the states 0009 lists, styled only with tokens.
+5. A unit test checks the WCAG contrast pairs 0007 promises, in both themes, by reading `globals.css`.
 6. `/design-system` shows every component and state in light and dark, and returns 404 in production.
 7. `docs/design/design-system.md` documents tokens, components, states, motion and how to add an icon.
 

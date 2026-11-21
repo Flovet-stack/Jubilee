@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 
 /**
- * Toasts (0007 §7, after Sonner): short confirmations away from the change,
+ * Toasts (0009 §7, after Sonner): short confirmations away from the change,
  * like "Moved to Interview · Undo". Inline feedback is preferred (no-ai-slop:
  * no toasts for everything). At most 3 visible; 4 s, or 6 s with an action;
  * paused on hover, focus and hidden tab; swipe down or right to dismiss.

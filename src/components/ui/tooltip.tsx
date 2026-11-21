@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Wrap a region (the app shell) once. After the first tooltip opens, its
- * neighbours open with no delay and no animation (Emil Kowalski; 0007 §6).
+ * neighbours open with no delay and no animation (Emil Kowalski; 0009 §6).
  */
 export function TooltipProvider({ children }: { children: ReactNode }) {
   return (
@@ -26,7 +26,7 @@ type TooltipProps = {
 };
 
 /**
- * Tooltip (0006 §4: hint only). Opens on hover after 500 ms and immediately on
+ * Tooltip (0008 §4: hint only). Opens on hover after 500 ms and immediately on
  * keyboard focus; grows from its trigger, from scale 0.96, in 120 ms.
  */
 export function Tooltip({ content, children, side = "top" }: TooltipProps) {

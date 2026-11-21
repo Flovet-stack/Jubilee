@@ -1,14 +1,14 @@
-# 0005: Visual foundations ("quiet desk, bright moments")
+# 0007: Visual foundations ("quiet desk, bright moments")
 
-- **Status:** Approved; the _Iconography_ paragraph is superseded by [0007](0007-design-system-components-icons-motion.md)
+- **Status:** Approved; the _Iconography_ paragraph is superseded by [0009](0009-design-system-components-icons-motion.md)
 - **Proposed:** 2026-11-21 by the product team (roles: UI, UX, Copy, Frontend, Product)
 - **Revised:** 2026-11-21 after Flovet's review of the sample screens: the green accent was too common (the AI-tells catalogue lists emerald/teal as the default fallback accent); Flovet prefers Ownr's colour and playfulness, Clemta's grey wells with light borders, and a font one of them uses. Revision 1 ("the green light", Public Sans + Newsreader) is replaced in full; it was never approved.
 - **Approved:** 2026-11-21 by Flovet (in chat, after reviewing the revised sample screens)
-- **Specs:** specs/02-design-system.md
+- **Specs:** specs/03-design-system.md
 
 ## Context
 
-The scaffold has no tokens or fonts. The brief says the design direction must be decided "before any screen is built". Constraints from `PROJECT_BRIEF.md`: mid-range phones and paid data ("keep pages light"); English and French; sensitive personal data (the look must read as careful); and one irreversible act, sending an application, only on the user's approval. Interaction, disclosure and space rules are in [0006](0006-interaction-disclosure-and-space.md); the list of patterns to avoid is the `no-ai-slop` skill (`claude-setup/skills/no-ai-slop/SKILL.md`).
+The scaffold has no tokens or fonts. The brief says the design direction must be decided "before any screen is built". Constraints from `PROJECT_BRIEF.md`: mid-range phones and paid data ("keep pages light"); English and French; sensitive personal data (the look must read as careful); and one irreversible act, sending an application, only on the user's approval. Interaction, disclosure and space rules are in [0008](0008-interaction-disclosure-and-space.md); the list of patterns to avoid is the `no-ai-slop` skill (`.claude/skills/no-ai-slop/SKILL.md`).
 
 ## Research
 
@@ -32,10 +32,10 @@ Exact brand colours are not copied (product-team rule); the values below are our
 | Reference                                                                                               | What they do                                                                                                                | Adopt / adapt / reject | Why                                                                                                                                               |
 | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ownr palette and type                                                                                   | Violet + navy-violet ink, Plus Jakarta Sans, confetti accents                                                               | **Adapt**              | Flovet's choice. Plus Jakarta Sans is free (OFL) and not in the slop font lists; violet is, so it is fenced by rules (below and `no-ai-slop` §10) |
-| Clemta containment                                                                                      | Grey well + hairline, white card + hairline, 12 px radius                                                                   | **Adopt**              | Flovet's choice; gives information clear groups without heavy boxes. Limited to one level (0006 §3)                                               |
+| Clemta containment                                                                                      | Grey well + hairline, white card + hairline, 12 px radius                                                                   | **Adopt**              | Flovet's choice; gives information clear groups without heavy boxes. Limited to one level (0008 §3)                                               |
 | Inter / Inter Tight                                                                                     | Clemta's face; Ownr's small text                                                                                            | **Reject**             | Inter is the most-cited AI-default font (4 of 4 slop sources)                                                                                     |
 | AI-tells sources (Paralect, avoid-ai-design catalogue, 925Studios, prg.sh, Anthropic `frontend-design`) | Purple gradients, violet CTAs, emerald/teal fallback accent, Inter, same radius everywhere, borders around everything, glow | Adopt as constraints   | Every value below was checked against them; see `no-ai-slop`                                                                                      |
-| Atlassian, Carbon, Primer, GOV.UK spacing (revision 1 research, still valid)                            | Spacing by named job; larger steps on larger screens                                                                        | Adopt                  | Scale below; rules in 0006                                                                                                                        |
+| Atlassian, Carbon, Primer, GOV.UK spacing (revision 1 research, still valid)                            | Spacing by named job; larger steps on larger screens                                                                        | Adopt                  | Scale below; rules in 0008                                                                                                                        |
 | Material 3 / Android button emphasis                                                                    | One high-emphasis action per screen                                                                                         | Adopt                  | One violet button per screen                                                                                                                      |
 | NN/g visual hierarchy                                                                                   | At most 3 sizes; 2 primary + 2 secondary colours; never colour alone                                                        | Adopt                  | Type and colour limits                                                                                                                            |
 | WCAG 2.2 AA                                                                                             | Text 4.5:1, UI and large text 3:1                                                                                           | Adopt                  | Ratios computed for every pair (script, 2026-11-21)                                                                                               |
@@ -100,10 +100,10 @@ Rules: one `--violet` button per screen; **no gradients, glows or glass, ever**;
 
 ### Spacing, layout, shape
 
-- **Scale (4 px base):** 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128. Chosen by relationship (0006 §3).
+- **Scale (4 px base):** 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128. Chosen by relationship (0008 §3).
 - **Gutters:** 16 px (< 640), 24 px (640–1023), 32 px (≥ 1024). Content max 1200 px; forms and reading max 640 px.
 - **Radius by role:** `2px` the CV paper · `8px` buttons, inputs, menus · `12px` wells and cards · `16px` sheets and dialogs · `full` pills.
-- **Containment (Clemta pattern):** a well is `--well` + 1 px `--line` + radius 12 + 16–24 px padding; a card inside it is `--card` + 1 px `--line` + radius 12. **One level only:** never a card inside a card, never a well inside a well (0006 §3).
+- **Containment (Clemta pattern):** a well is `--well` + 1 px `--line` + radius 12 + 16–24 px padding; a card inside it is `--card` + 1 px `--line` + radius 12. **One level only:** never a card inside a card, never a well inside a well (0008 §3).
 - **Elevation:** resting wells and cards have no shadow. The CV paper has `--shadow-paper: 0 1px 2px rgb(29 26 68 / 0.06), 0 8px 24px rgb(29 26 68 / 0.08)`. Floating layers (menus, sheets, a dragged card) have `--shadow-float: 0 12px 32px rgb(29 26 68 / 0.18)`.
 - **Buttons:** 48 px tall on phones and desktop (Ownr), 44 px minimum for small ones; primary violet; secondary `--card` with a `--field` border; quiet = text only.
 

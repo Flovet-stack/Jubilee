@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 import { IconButton } from "./button";
 
 /**
- * Overlays (0006 §4): every one traps focus, closes with Esc and a visible
+ * Overlays (0008 §4): every one traps focus, closes with Esc and a visible
  * Close, returns focus to its trigger and locks the page scroll. Base UI does
- * the behaviour; these set the look and motion (0007 §3–4).
+ * the behaviour; these set the look and motion (0009 §3–4).
  */
 
 const backdropClasses = cn(
@@ -131,7 +131,7 @@ type SheetProps = OverlayProps & {
 
 /**
  * Sheet: a panel from the bottom on phones and from the right on desktop
- * (0006 §4). Moves with the iOS sheet curve in 320 ms, leaves in 150 ms.
+ * (0008 §4). Moves with the iOS sheet curve in 320 ms, leaves in 150 ms.
  * Under reduced motion it fades in place.
  */
 export function Sheet({

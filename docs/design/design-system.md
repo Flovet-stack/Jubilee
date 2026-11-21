@@ -2,10 +2,10 @@
 
 How to build a screen with Jubilee's tokens and components. The _why_ lives in the decisions; this page is the _how_.
 
-- Look and feel: [0005 Visual foundations](../decisions/0005-visual-foundations.md)
-- Interaction, disclosure, explicitness, space: [0006](../decisions/0006-interaction-disclosure-and-space.md)
-- Components, icons, motion: [0007](../decisions/0007-design-system-components-icons-motion.md)
-- Voice and the overall direction: [design brief](design-brief.md); what to avoid: [`no-ai-slop`](../../claude-setup/skills/no-ai-slop/SKILL.md)
+- Look and feel: [0007 Visual foundations](../decisions/0007-visual-foundations.md)
+- Interaction, disclosure, explicitness, space: [0008](../decisions/0008-interaction-disclosure-and-space.md)
+- Components, icons, motion: [0009](../decisions/0009-design-system-components-icons-motion.md)
+- Voice and the overall direction: [design brief](design-brief.md); what to avoid: [`no-ai-slop`](../../.claude/skills/no-ai-slop/SKILL.md)
 - **See it:** `pnpm dev`, then open `/design-system` (development only). Every component in every state; switch the system theme for dark.
 
 ## 1. Tokens
@@ -24,13 +24,13 @@ One source: `src/app/globals.css`. Tailwind 4 `@theme` turns the tokens into uti
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Colour    | `page well card line tint field ink ink-muted ink-subtle violet violet-press on-violet marigold pink sky success danger`, `stage-saved/applied/interview/rejected`, `paper paper-ink`, `wash-hover wash-press wash-danger scrim` → `bg-*`, `text-*` … |
 | Type      | `text-xs` 12 · `sm` 14 · `base` 16 · `lg` 18 · `xl` 20 · `2xl` 24 · `3xl` 32 · `4xl` 40 (line heights included). Plus Jakarta Sans via `--font-jakarta`. `tabular-nums` for dates, scores, counts                                                     |
-| Spacing   | 4 px base: `1` 4 · `2` 8 · `3` 12 · `4` 16 · `6` 24 · `8` 32 · `12` 48 · `16` 64 · `24` 96 · `32` 128. Choose by relationship (0006 §3)                                                                                                               |
+| Spacing   | 4 px base: `1` 4 · `2` 8 · `3` 12 · `4` 16 · `6` 24 · `8` 32 · `12` 48 · `16` 64 · `24` 96 · `32` 128. Choose by relationship (0008 §3)                                                                                                               |
 | Radius    | `rounded-paper` 2 · `rounded-mark` 4 · `rounded-control` 8 · `rounded-box` 12 · `rounded-sheet` 16 · `rounded-full`                                                                                                                                   |
 | Elevation | `shadow-paper` (the CV only), `shadow-float` (menus, sheets, toasts, a dragged card). Resting surfaces have none                                                                                                                                      |
 | Layout    | `max-w-(--container-content)` 1200 · `-reading` 640 · `-dialog` 480; breakpoints `sm` 640, `lg` 1024; fixed layers: `--gutter-sm` 16, `--gutter-md` 24; toasts: `--toast-width` 380, `--toast-gap` 12, `--toast-peek` 14                              |
 | Controls  | `--control-h` 48 · `--control-h-sm` 44 · `--icon-ui` 20 · `--icon-nav` 24 · `--focus-ring` · `--shadow-thumb` (switch)                                                                                                                                |
 | Motion    | `--dur-fast` 120 · `--dur-exit` 150 · `--dur-base` 200 · `--dur-slow` 320; `ease-enter`, `ease-exit`, `ease-standard`, `ease-sheet`; `--press-scale` 0.98, `--pop-scale` 0.96                                                                         |
-| Variant   | `hover-fine:` = hover on real pointers only (0006 §5). Never use plain `hover:`                                                                                                                                                                       |
+| Variant   | `hover-fine:` = hover on real pointers only (0008 §5). Never use plain `hover:`                                                                                                                                                                       |
 
 `src/lib/tokens.test.ts` reads `globals.css` and fails if any colour pair drops below WCAG 2.2 AA, in either theme.
 
@@ -60,7 +60,7 @@ All in `src/components/ui/`, icons in `src/components/icons/`. Labels and messag
 | `Dialog`, `Sheet`, `OverlayClose`                       | `dialog.tsx`                  | One short decision; a panel of detail | controlled or with trigger; footer; sheet bottom (phone) / right (desktop)                                              |
 | `ToastProvider`, `useToast`                             | `toast.tsx`                   | A confirmation away from the change   | info, success, danger; action (Undo); stack of 3; swipe                                                                 |
 | `Tabs`                                                  | `tabs.tsx`                    | Peer views of one thing               | meta count, disabled tab, scrolls on narrow screens                                                                     |
-| `EmptyState`, `UndoLine`, `MarkedChange`, `ReviewPanel` | `patterns.tsx`                | Jubilee patterns from 0006            | empty with one action; undo in place; AI change with reason + accept/reject; final-action summary                       |
+| `EmptyState`, `UndoLine`, `MarkedChange`, `ReviewPanel` | `patterns.tsx`                | Jubilee patterns from 0008            | empty with one action; undo in place; AI change with reason + accept/reject; final-action summary                       |
 
 ### States every control has
 
@@ -94,7 +94,7 @@ All in `src/components/ui/`, icons in `src/components/icons/`. Labels and messag
 
 ## 4. Motion
 
-Rules from 0007, after Emil Kowalski:
+Rules from 0009, after Emil Kowalski:
 
 1. Animate `transform` and `opacity` only. (Two exceptions: the tab underline's width and a progress bar's fill, which have no transform equivalent.)
 2. Use CSS transitions with Base UI's `data-starting-style` / `data-ending-style`, so a half-finished animation reverses smoothly. Never `transition: all`.
@@ -110,6 +110,6 @@ Rules from 0007, after Emil Kowalski:
 1. One `Well` per group, white `Card`s inside it. Never a card in a card.
 2. One `primary` button per screen. Everything else is secondary or quiet.
 3. Spacing by relationship: 4–8 inside a unit, 12–16 between items, 32–48 between groups, 48–96 between sections.
-4. Every control has a visibility tier and a consequence level (0006 §1). Final actions use `ReviewPanel` and a button that names the target.
+4. Every control has a visibility tier and a consequence level (0008 §1). Final actions use `ReviewPanel` and a button that names the target.
 5. Feedback goes inline (`Alert`, `UndoLine`) before reaching for a toast.
 6. Wrap the app once in `TooltipProvider` and `ToastProvider` (the app-shell spec does this).

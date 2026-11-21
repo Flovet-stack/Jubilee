@@ -1,7 +1,7 @@
 "use client";
 
 // Vendored from icons-animated (Hugeicons set), MIT. See ./LICENSE and
-// ./THIRD_PARTY_NOTICES.md. Edits: decision 0007 and ./use-icon-accessibility.ts.
+// ./THIRD_PARTY_NOTICES.md. Edits: decision 0009 and ./use-icon-accessibility.ts.
 
 import type { Transition } from "motion/react";
 import type { HTMLAttributes } from "react";

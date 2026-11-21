@@ -57,7 +57,7 @@ const stageClasses: Record<Stage, string> = {
     "bg-[color-mix(in_oklab,var(--stage-rejected)_10%,var(--card))] text-stage-rejected",
 };
 
-/** Small static marks: a stage is never colour alone (0005). */
+/** Small static marks: a stage is never colour alone (0007). */
 function StageMark({ stage }: { stage: Stage }) {
   const common = {
     width: 14,
@@ -113,7 +113,7 @@ type StageBadgeProps = {
 };
 
 /**
- * Tracker stage (0005): fixed colour + mark + word. Rejected is warm grey,
+ * Tracker stage (0007): fixed colour + mark + word. Rejected is warm grey,
  * never red; the offer is the one marigold pill.
  */
 export function StageBadge({ stage, label, className }: StageBadgeProps) {

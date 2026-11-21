@@ -1,9 +1,9 @@
 # Jubilee design brief
 
-- **Status:** Approved (0005 and 0006 approved by Flovet on 2026-11-21).
+- **Status:** Approved (0007 and 0008 approved by Flovet on 2026-11-21).
 - **Written:** 2026-11-21 by the product team (roles: Product, UX, UI, Copy, Frontend, Tech Lead)
-- **Anti-patterns:** [no-ai-slop skill](../../claude-setup/skills/no-ai-slop/SKILL.md): what makes a UI, its copy or its behaviour look AI-generated, and our rule for each.
-- **Decisions:** [0005 visual foundations](../decisions/0005-visual-foundations.md) · [0006 interaction, progressive disclosure, the hierarchy of explicitness and space](../decisions/0006-interaction-disclosure-and-space.md) · [0003 internationalisation](../decisions/0003-internationalisation.md)
+- **Anti-patterns:** [no-ai-slop skill](../../.claude/skills/no-ai-slop/SKILL.md): what makes a UI, its copy or its behaviour look AI-generated, and our rule for each.
+- **Decisions:** [0007 visual foundations](../decisions/0007-visual-foundations.md) · [0008 interaction, progressive disclosure, the hierarchy of explicitness and space](../decisions/0008-interaction-disclosure-and-space.md) · [0003 internationalisation](../decisions/0003-internationalisation.md)
 
 This brief says what Jubilee should look, feel and behave like, and why. The decisions it links hold the research and the exact values; this file shows how they fit together and how to use them. `PROJECT_BRIEF.md` stays the source of truth for scope.
 
@@ -14,12 +14,12 @@ There is no standard design brief, so we looked at how large teams publish their
 | What large teams publish                                                                                           | Who does it this way (opened)                                                                                                                  | Where it lives here  |
 | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
 | **Principles first**, short and numbered, used as tie-breakers                                                     | GOV.UK Government Design Principles (11 rules: "Do less", "This is for everyone", "Be consistent, not uniform")                                | §6                   |
-| **Foundations** as a fixed list of tokens: colour, type, spacing, grid, radius, elevation, motion, iconography     | Atlassian Foundations, IBM Carbon, GitHub Primer                                                                                               | §8, values in 0005   |
-| **Spacing with named jobs**, not raw numbers: ranges for inside / between / layout; larger steps on larger screens | Atlassian (small/medium/large), Carbon ("jump a step" at breakpoints), Primer (condensed/normal/spacious stacks), GOV.UK (small/large screens) | §9, rules in 0006 §3 |
+| **Foundations** as a fixed list of tokens: colour, type, spacing, grid, radius, elevation, motion, iconography     | Atlassian Foundations, IBM Carbon, GitHub Primer                                                                                               | §8, values in 0007   |
+| **Spacing with named jobs**, not raw numbers: ranges for inside / between / layout; larger steps on larger screens | Atlassian (small/medium/large), Carbon ("jump a step" at breakpoints), Primer (condensed/normal/spacious stacks), GOV.UK (small/large screens) | §9, rules in 0008 §3 |
 | **Emphasis levels for actions**: one high-emphasis action per screen                                               | Material 3 / Android button guidance                                                                                                           | §6.3, §10            |
-| **Patterns** for disclosure, overlays and states, separate from components                                         | GOV.UK Patterns, NN/g                                                                                                                          | §9, 0006 §2 and §4   |
+| **Patterns** for disclosure, overlays and states, separate from components                                         | GOV.UK Patterns, NN/g                                                                                                                          | §9, 0008 §2 and §4   |
 | **Content and voice** as part of the system                                                                        | GOV.UK content design, Atlassian Content                                                                                                       | §7                   |
-| **A reference look the owner chose**, reverse-engineered rather than copied                                        | Ownr (colour, type, playfulness) and Clemta (grey wells with light borders), computed styles read in the browser                               | §8, 0005 research    |
+| **A reference look the owner chose**, reverse-engineered rather than copied                                        | Ownr (colour, type, playfulness) and Clemta (grey wells with light borders), computed styles read in the browser                               | §8, 0007 research    |
 | **A list of what not to do**                                                                                       | Paralect, avoid-ai-design, 925Studios, Anthropic `frontend-design`, NN/g                                                                       | `no-ai-slop` skill   |
 | **Accessibility and contribution rules** at the end                                                                | Every system above                                                                                                                             | §12–13               |
 
@@ -52,10 +52,10 @@ Jubilee takes a job seeker from CV to job offer in English and French: an ATS-sa
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | Looks like Jubilee, not a template   | A reviewer can't name a component library or starter from a screenshot; no no-ai-slop P0 tell appears                         |
 | The user's document leads            | On every CV or letter screen, the paper preview is the most prominent element; the chrome sits in grey and ink tones          |
-| Nothing goes out without a clear yes | Every final action (0006 §1b) names its target and shows what is sent; no final action is reachable by one stray tap          |
+| Nothing goes out without a clear yes | Every final action (0008 §1b) names its target and shows what is sent; no final action is reachable by one stray tap          |
 | Fast to first CV                     | The structure supports the brief's target: 60% finish a CV within 15 minutes (measured after launch)                          |
 | Calm by default                      | One violet button per screen; no red for job outcomes; empty states say the next step                                         |
-| Space is adequate                    | Every spacing choice can be named by relationship (0006 §3); a reviewer finds no screen where a larger step would read better |
+| Space is adequate                    | Every spacing choice can be named by relationship (0008 §3); a reviewer finds no screen where a larger step would read better |
 | Light enough                         | Fonts ≤ 100 KB; a phone screen renders readable text before fonts load                                                        |
 | Accessible                           | WCAG 2.2 AA in light and dark; keyboard-only works end to end; reduced motion honoured                                        |
 
@@ -73,11 +73,11 @@ Jubilee takes a job seeker from CV to job offer in English and French: an ATS-sa
 
 Eight rules. When two conflict, the earlier one wins.
 
-1. **The user's document leads.** The CV and the letter are the "artwork": white paper with a soft page shadow, the largest thing on the screen. Chrome sits back in grey and ink tones. (0005)
-2. **Nothing leaves without a clear yes.** The more an action costs to undo, the more explicit it is. Sending names the employer and shows exactly what goes. Reversible things just happen, with Undo. (0006 §1b; brief: approval-based apply)
-3. **The hierarchy of explicitness: obvious, easy, possible.** Every control is placed on purpose by how often and how many use it. Obvious: visible, labelled, large. Easy: one step away. Possible: two steps, in a menu or settings. Never deeper. (Will Grant / Canonical; 0006 §1a)
-4. **Progressive disclosure: show what's needed now.** One job at a time on Today. A summary line per CV section. Reasons behind "Why this match". Two levels, each trigger labelled with what it opens. (NN/g; 0006 §2)
-5. **Space is a feature; it shows relationships.** Tight inside a unit, wider between items, generous between groups and sections. When two steps look right, take the larger. A group sits in one grey well with a light border; never a box in a box. (Atlassian, Carbon, Clemta, NN/g, Refactoring UI; 0006 §3)
+1. **The user's document leads.** The CV and the letter are the "artwork": white paper with a soft page shadow, the largest thing on the screen. Chrome sits back in grey and ink tones. (0007)
+2. **Nothing leaves without a clear yes.** The more an action costs to undo, the more explicit it is. Sending names the employer and shows exactly what goes. Reversible things just happen, with Undo. (0008 §1b; brief: approval-based apply)
+3. **The hierarchy of explicitness: obvious, easy, possible.** Every control is placed on purpose by how often and how many use it. Obvious: visible, labelled, large. Easy: one step away. Possible: two steps, in a menu or settings. Never deeper. (Will Grant / Canonical; 0008 §1a)
+4. **Progressive disclosure: show what's needed now.** One job at a time on Today. A summary line per CV section. Reasons behind "Why this match". Two levels, each trigger labelled with what it opens. (NN/g; 0008 §2)
+5. **Space is a feature; it shows relationships.** Tight inside a unit, wider between items, generous between groups and sections. When two steps look right, take the larger. A group sits in one grey well with a light border; never a box in a box. (Atlassian, Carbon, Clemta, NN/g, Refactoring UI; 0008 §3)
 6. **AI shows its work.** AI changes appear as marked edits with a reason, and the user accepts them. AI is named by what it does ("Tailor to this job"), never by a sparkle. It never invents experience. (brief; Huntr's explained suggestions)
 7. **Calm every day, bright when it counts.** One violet button per screen. Confetti only for milestones the user earned. Rejection is grey, not red. No streak shaming, no fake urgency, no upsell in the middle of a task. (GOV.UK "Do less"; competitor map)
 8. **Decisions, not defaults.** A choice that would fit any product gets replaced with one from Jubilee's material: the CV as paper, the day's queue, the stages of an application, the milestones worth celebrating. Every screen is checked against the `no-ai-slop` skill.
@@ -105,7 +105,7 @@ Copy rules (Copy role, GOV.UK content design):
 
 ## 8. Foundations
 
-Exact values and contrast checks are in [0005](../decisions/0005-visual-foundations.md). Summary:
+Exact values and contrast checks are in [0007](../decisions/0007-visual-foundations.md). Summary:
 
 ### 8.1 Colour: quiet desk, bright moments
 
@@ -146,7 +146,7 @@ No stock or generated photos of people. Spot illustrations for empty states are 
 
 ## 9. Space, disclosure and explicitness in practice
 
-The full rules are in [0006](../decisions/0006-interaction-disclosure-and-space.md). This is how a builder applies them.
+The full rules are in [0008](../decisions/0008-interaction-disclosure-and-space.md). This is how a builder applies them.
 
 ### 9.1 Spacing ladder
 
@@ -195,7 +195,7 @@ Built in specs, on native elements, styled only through tokens.
 - **Next-step panel:** a violet-tint panel for the single next action on a screen ("2 follow-ups are ready").
 - **Review panel:** the final-action summary (who, which version, which letter, which address) with the named button at the bottom.
 - **Undo line:** inline where the change happened, 6 s, also reachable by keyboard.
-- **Sheets, menus, dialogs:** per 0006 §4.
+- **Sheets, menus, dialogs:** per 0008 §4.
 
 ## 11. Existing screens: what changes
 
@@ -203,12 +203,12 @@ Built in specs, on native elements, styled only through tokens.
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | `src/app/page.tsx` | Replaced by the localised placeholder pages (spec 01), then by the real home                                           |
 | `layout.tsx`       | Plus Jakarta Sans through `next/font`; `lang` from the locale; theme colour `#ffffff` / `#0e0d1f`                      |
-| `globals.css`      | The 0005 tokens mapped into Tailwind 4 `@theme`; base styles (white page, ink text, violet focus ring, reduced motion) |
+| `globals.css`      | The 0007 tokens mapped into Tailwind 4 `@theme`; base styles (white page, ink text, violet focus ring, reduced motion) |
 | 404 / error        | Short, calm copy with a way back ("This page isn't here. Go to Today."), no illustration                               |
 
 ## 12. Accessibility
 
-- WCAG 2.2 AA in both themes; every pair in 0005 is computed.
+- WCAG 2.2 AA in both themes; every pair in 0007 is computed.
 - Focus ring 2 px violet with 2 px offset, never removed; targets ≥ 44 × 44 px with 8 px apart for obvious actions.
 - Every drag (tracker) has a button or select alternative; every gesture has a control.
 - Forms: labels above, errors linked with `aria-describedby`, error summary at the top of long forms.
@@ -217,8 +217,8 @@ Built in specs, on native elements, styled only through tokens.
 
 ## 13. Approval and next steps
 
-1. Flovet reviews 0005 and 0006 (and this brief). Each becomes `Approved` only on an explicit yes.
-2. Done: the Jubilee `no-ai-slop` skill (`claude-setup/skills/no-ai-slop/SKILL.md`). Next: the design-foundations spec (tokens, font, base primitives).
+1. Flovet reviews 0007 and 0008 (and this brief). Each becomes `Approved` only on an explicit yes.
+2. Done: the Jubilee `no-ai-slop` skill (`.claude/skills/no-ai-slop/SKILL.md`). Next: the design-foundations spec (tokens, font, base primitives).
 3. Still to decide before the screens that need them: app shell and navigation, CV templates and typography, icon list.
 4. Every UI spec is reviewed with the reviewer skill against this brief: 90/100 or it isn't done.
 

@@ -10,12 +10,12 @@ import { Spinner } from "./spinner";
 import { Tooltip } from "./tooltip";
 
 /**
- * Buttons (0005 shape, 0006 §1 explicitness and §5 hover/press, 0007 motion).
+ * Buttons (0007 shape, 0008 §1 explicitness and §5 hover/press, 0009 motion).
  *
  * - primary: the one violet action on a screen.
  * - secondary: card fill + field border.
  * - quiet: text only, for low-stakes actions next to a primary.
- * - danger: destructive final actions; the label names the target (0006 §1b).
+ * - danger: destructive final actions; the label names the target (0008 §1b).
  *
  * States: hover (fine pointers only, colour only), focus-visible (global ring),
  * pressed (scale 0.98 + darker fill), disabled, loading (keeps its width,
@@ -155,7 +155,7 @@ type IconButtonProps = Omit<
   ButtonBaseProps,
   "icon" | "iconEnd" | "children"
 > & {
-  /** Required: the accessible name and the tooltip text (0006: no mystery icons). */
+  /** Required: the accessible name and the tooltip text (0008: no mystery icons). */
   label: string;
   icon: ReactNode;
   /** Hide the tooltip when the label is already visible nearby. */

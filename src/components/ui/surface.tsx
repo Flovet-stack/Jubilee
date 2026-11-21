@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Containment (0005, Clemta pattern; 0006 §3): a grey Well holds white Cards.
+ * Containment (0007, Clemta pattern; 0008 §3): a grey Well holds white Cards.
  * One level only: never a Card in a Card, never a Well in a Well. Resting
  * surfaces have no shadow.
  */
@@ -60,7 +60,7 @@ type CardLinkProps = ComponentProps<typeof Link>;
 
 /**
  * A card that opens something. Only clickable cards change on hover: the
- * border darkens to --field (0006 §5). Press scales to 0.98. The whole card is
+ * border darkens to --field (0008 §5). Press scales to 0.98. The whole card is
  * the link, so keep only one link inside it.
  */
 export function CardLink({ className, ...props }: CardLinkProps) {
@@ -89,7 +89,7 @@ type NextStepProps = {
 };
 
 /**
- * The "next step" panel (0005): a tint panel for the single next action of a
+ * The "next step" panel (0007): a tint panel for the single next action of a
  * screen, e.g. "2 follow-ups are ready". At most one per screen.
  */
 export function NextStep({

@@ -25,7 +25,7 @@ type TabsProps = {
 };
 
 /**
- * Tabs (APG tabs; 0006 §1a "easy" tier). The underline slides to the active
+ * Tabs (APG tabs; 0008 §1a "easy" tier). The underline slides to the active
  * tab in 200 ms with the standard curve; it's a transition, so fast clicking
  * retargets smoothly. The list scrolls sideways on narrow screens rather than
  * wrapping. Panels switch without animation.

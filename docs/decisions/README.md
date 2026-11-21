@@ -24,9 +24,9 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0002 | [Project structure](0002-project-structure.md)                                                                | Proposed |
 | 0003 | [Internationalisation](0003-internationalisation.md)                                                          | Proposed |
 | 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                               | Proposed |
-| 0005 | [Visual foundations](0005-visual-foundations.md) (iconography superseded by 0007)                             | Approved |
-| 0006 | [Interaction, disclosure, explicitness and space](0006-interaction-disclosure-and-space.md)                   | Approved |
-| 0007 | [Design system: tokens, components, animated icons and motion](0007-design-system-components-icons-motion.md) | Approved |
+| 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                             | Approved |
+| 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                   | Approved |
+| 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md) | Approved |
 
 ## Still to decide (before the specs that need them)
 

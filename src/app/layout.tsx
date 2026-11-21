@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 import "./globals.css";
 
-// One family, variable 400–800 (decision 0005).
+// One family, variable 400–800 (decision 0007).
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
   variable: "--font-jakarta",

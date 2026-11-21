@@ -8,7 +8,7 @@ const CONTROL = "a[href], button, [role='button'], [role='tab'], summary";
 /**
  * Plays an animated icon when the button or link around it is hovered with a
  * mouse or pen, or focused from the keyboard, and settles it when the pointer
- * leaves or focus moves away (decision 0007).
+ * leaves or focus moves away (decision 0009).
  * Touch taps don't start it. Returns whether the icon found a control, so the
  * icon's own hover handlers can stand down and not play it twice.
  */

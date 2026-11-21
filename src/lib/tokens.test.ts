@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 /**
- * Guards the contrast promises of decision 0005 by reading the real tokens in
+ * Guards the contrast promises of decision 0007 by reading the real tokens in
  * globals.css, so a colour edit that breaks WCAG 2.2 AA fails the tests.
  */
 const css = readFileSync(
@@ -92,11 +92,11 @@ const pairs: [string, string, number][] = [
 describe.each([
   ["light", light],
   ["dark", dark],
-] as const)("%s theme contrast (0005)", (_theme, tokens) => {
+] as const)("%s theme contrast (0007)", (_theme, tokens) => {
   it.each(pairs)("%s on %s ≥ %s:1", (fg, bg, min) => {
     const a = tokens[fg];
     const b = fg === "ink" && bg === "marigold" ? light.marigold : tokens[bg];
-    // Text on marigold is always the light ink (0005: "always with --ink").
+    // Text on marigold is always the light ink (0007: "always with --ink").
     const text = fg === "ink" && bg === "marigold" ? light.ink : a;
     expect(text, `--${fg} is missing`).toBeDefined();
     expect(b, `--${bg} is missing`).toBeDefined();
