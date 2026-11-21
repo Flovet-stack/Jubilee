@@ -18,21 +18,22 @@ The product team researches every product, UX, UI and architecture decision for 
 
 ## Index
 
-| #    | Decision                                                                                                      | Status   |
-| ---- | ------------------------------------------------------------------------------------------------------------- | -------- |
-| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                                                | Approved |
-| 0002 | [Project structure](0002-project-structure.md)                                                                | Approved |
-| 0003 | [Internationalisation](0003-internationalisation.md)                                                          | Approved |
-| 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                               | Approved |
-| 0005 | [Target markets and rollout order](0005-launch-markets.md)                                                    | Approved |
-| 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md)                                | Approved |
-| 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                             | Approved |
-| 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                   | Approved |
-| 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md) | Approved |
-| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Approved |
-| 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                            | Approved |
-| 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                  | Approved |
-| 0013 | [CV data model and PDF rendering](0013-cv-data-model-and-pdf-rendering.md)                                    | Approved |
+| #    | Decision                                                                                                         | Status   |
+| ---- | ---------------------------------------------------------------------------------------------------------------- | -------- |
+| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                                                   | Approved |
+| 0002 | [Project structure](0002-project-structure.md)                                                                   | Approved |
+| 0003 | [Internationalisation](0003-internationalisation.md)                                                             | Approved |
+| 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                                  | Approved |
+| 0005 | [Target markets and rollout order](0005-launch-markets.md)                                                       | Approved |
+| 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md)                                   | Approved |
+| 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                                | Approved |
+| 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                      | Approved |
+| 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md)    | Approved |
+| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                          | Approved |
+| 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                               | Approved |
+| 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                     | Approved |
+| 0013 | [CV data model and PDF rendering](0013-cv-data-model-and-pdf-rendering.md)                                       | Approved |
+| 0014 | [Regional locales and what we call a CV](0014-regional-locales-and-cv-naming.md) (supersedes 0003 when approved) | Proposed |
 
 ## Still to decide (before the specs that need them)
 
