@@ -31,6 +31,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md) | Approved |
 | 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Proposed |
 | 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                            | Approved |
+| 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                  | Approved |
 
 ## Still to decide (before the specs that need them)
 

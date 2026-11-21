@@ -156,5 +156,54 @@
         ]
       }
     }
+  },
+  "auth": {
+    "providers": {
+      "google": "Google",
+      "linkedin_oidc": "LinkedIn"
+    },
+    "signIn": {
+      "metaTitle": "Sign in",
+      "title": "Sign in to Jubilee",
+      "google": "Continue with Google",
+      "linkedin": "Continue with LinkedIn",
+      "or": "or",
+      "emailLabel": "Email",
+      "sendCode": "Email me a code",
+      "sending": "Sending your code",
+      "redirecting": "Opening {provider}",
+      "newHere": "New here? This creates your account. Read our <link>privacy policy</link>."
+    },
+    "code": {
+      "title": "Check your email",
+      "sentTo": "We sent a 6-digit code to <strong>{email}</strong>.",
+      "label": "6-digit code",
+      "hint": "The email also has a sign-in link, if you'd rather tap that.",
+      "submit": "Sign in",
+      "verifying": "Signing you in",
+      "change": "Change email",
+      "resend": "Send a new code",
+      "resendIn": "Send a new code in {seconds} s",
+      "resent": "We sent a new code. Use the latest one."
+    },
+    "errors": {
+      "cancelled": "Sign-in was cancelled. Choose a way to continue.",
+      "provider": "We couldn't sign you in with {provider}. Try again, or use your email.",
+      "codeInvalid": "That code doesn't work. It may be mistyped or expired. Check the latest email from Jubilee, or send a new code.",
+      "codeFormat": "Enter the 6 digits from the email.",
+      "linkExpired": "This sign-in link has expired or was already used. Links work once and for a short time. Ask for a new code below.",
+      "rateLimited": "Wait {seconds} seconds before asking for another code.",
+      "emailInvalid": "Enter your full email address, for example ada.okafor@gmail.com.",
+      "emailNotAllowed": "Email sign-in isn't open yet. Continue with Google or LinkedIn.",
+      "unknown": "We couldn't reach the sign-in service. Try again in a moment."
+    },
+    "home": {
+      "metaTitle": "Home",
+      "greeting": "Hello, {name}",
+      "greetingNoName": "Hello",
+      "body": "You're signed in. Your workspace is coming soon.",
+      "signOut": "Sign out",
+      "loading": "Loading your account"
+    }
   }
 }
