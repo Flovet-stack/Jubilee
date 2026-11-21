@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment."
+  },
+  "home": {
+    "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Cette page n’existe pas ou a été déplacée. Vérifiez l’adresse, ou repartez de la page d’accueil.",
+    "home": "Aller à la page d’accueil"
+  }
+}

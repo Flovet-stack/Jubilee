@@ -1,6 +1,6 @@
 # 01: Foundations
 
-Status: Ready · Written: 2026-11-21
+Status: Done (92/100, 2026-11-21) · Written: 2026-11-21
 
 ## Goal
 
@@ -47,3 +47,13 @@ Sign-in screens, any database table, design tokens and fonts, any feature.
 - `pnpm check` passes.
 - `curl -I` on `/` with `Accept-Language: fr` shows a redirect to `/fr`.
 - Reviewer skill run against this spec; score of 90 or more.
+
+## Build notes (2026-11-21)
+
+Choices the build made that no decision spells out. None changes a decision; the first two are worth confirming.
+
+- **Locale order:** URL prefix, then the saved `NEXT_LOCALE` cookie, then `Accept-Language` (next-intl's order). 0003 lists `Accept-Language` before the saved choice; a saved choice winning is the usual behaviour. Confirm, or ask for a 0003 amendment.
+- **Session refresh on every page request:** next-intl has to run on every page, so the Supabase refresh shares that pass. AniKansou limits it to signed-in areas. With no `sb-` cookie, `getClaims` makes no network call. The refresh runs first and writes the new cookies onto the request, so Server Components in the same request see the fresh token (`src/proxy.test.ts`).
+- **Root layout under `[locale]`**, read with `next/root-params`, so pages stay static under `cacheComponents` (next-intl's `setRequestLocale` is deprecated). `/design-system` moved to `/[locale]/design-system`.
+- **404s:** `[locale]/[...rest]` makes unknown paths under a locale render the localised `[locale]/not-found.tsx`; `app/global-not-found.tsx` (experimental `globalNotFound` flag, the case its docs describe) covers URLs with no locale and shows both languages.
+- **`pnpm-workspace.yaml`:** build scripts off for `@parcel/watcher` and `@swc/core`, pulled in by next-intl.
