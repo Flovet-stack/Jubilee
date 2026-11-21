@@ -54,6 +54,7 @@ Not decided. Needs its own decision (design brief, tokens, type) before any scre
 
 See `docs/decisions/README.md`. Product-wide ones:
 
+- 0005 (Proposed): launch markets are Cameroon and France; the market follows the target job.
 - 0003 (Proposed): UI in English and French via next-intl; CV language is separate from UI language.
 - 0002 (Proposed): single Next.js app, feature folders, data access only in `queries.ts` / `actions.ts`.
 - 0001 (Proposed): stack and tooling.

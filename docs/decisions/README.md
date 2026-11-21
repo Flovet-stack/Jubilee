@@ -24,6 +24,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0002 | [Project structure](0002-project-structure.md)                  | Proposed |
 | 0003 | [Internationalisation](0003-internationalisation.md)            | Proposed |
 | 0004 | [Auth, database and environment](0004-auth-database-and-env.md) | Proposed |
+| 0005 | [Launch markets](0005-launch-markets.md)                        | Proposed |
 
 ## Still to decide (before the specs that need them)
 
@@ -32,7 +33,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | Design direction, tokens, type and the no-ai-slop rules                | Any screen                 |
 | AI provider, prompts, cost limits and data handling                    | Tailoring, letters, import |
 | CV data model and PDF rendering                                        | Resume builder             |
-| Country format rules for the 2 launch markets                          | Country CV formats         |
+| Country format rules for Cameroon and France (0005)                    | Country CV formats         |
 | Job sources and their licences                                         | Job matches                |
 | How approved applications are sent                                     | Approval-based apply       |
 | Payments for the pass (must work in launch markets, e.g. mobile money) | Paid pass                  |
