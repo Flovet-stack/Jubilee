@@ -17,3 +17,9 @@ One dated entry per task: what was built, the review score, and what was left.
 
 - Researched and logged 0005 as Proposed: Cameroon and France. Default UI and CV languages set per market. Main risk: no licensed job feed confirmed for Cameroon yet (fallback: saved and pasted jobs).
 - Left: Flovet to approve 0001–0005. Sources came from web-search summaries and need re-checking in the job-sources and payments decisions.
+
+## 2026-11-21: Sign-in options and target markets revised (Flovet's input)
+
+- 0004: sign-in is now email magic link, Google and LinkedIn (`linkedin_oidc`). Still Proposed.
+- 0005 rewritten: the targets are the US, Canada, the UK, France and six African markets. Rollout is phased: France + US (MVP), then UK + Canada, then Africa one country at a time. Brief, MVP doc and index updated to match.
+- Left: Flovet to approve 0001–0005; issue #9 (sign-in) scope updated to include LinkedIn.

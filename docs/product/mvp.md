@@ -16,7 +16,7 @@ The MVP is 10 features. It tests one thing: will people pay for a pass that turn
 
 1. **Resume builder.** A guided editor that builds a clean, ATS-readable CV: no tables or graphics that break applicant tracking systems. Free, and the hook that drives sign-ups.
 2. **LinkedIn import.** The user pastes their LinkedIn profile or uploads its PDF. Work history, education and skills fill in automatically.
-3. **Country CV formats (lite).** Each CV follows the target country's norms: length, photo, personal details, section order, date style. 2 launch markets only (for example Cameroon and France).
+3. **Country CV formats (lite).** Each CV follows the target country's norms: length, photo, personal details, section order, date style. 2 launch markets only: France and the US (decision 0005).
 4. **French and English CVs.** Write once, then produce a natural professional version in the other language.
 5. **Match score and AI tailoring.** For any job, a match score with missing keywords and skills. One click rewrites the summary and bullets for that job, without inventing experience.
 6. **Cover letter generator.** A short, specific letter per job, made in the same step as the tailored CV.
