@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Frontend, Copy, Product Designer, UX)
 - **Approved:** 2026-11-21 by Flovet (in chat)
 - **Supersedes:** 0003 (internationalisation)
-- **Specs:** none yet (a follow-up to spec 01 moves the routing to these locales)
+- **Specs:** specs/06-regional-locales.md
 
 ## Context
 
