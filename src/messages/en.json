@@ -173,7 +173,9 @@
       "sendCode": "Email me a code",
       "sending": "Sending your code",
       "redirecting": "Opening {provider}",
-      "newHere": "New here? This creates your account. Read our <link>privacy policy</link>."
+      "newHere": "New here? This creates your account.",
+      "legal": "By signing in, you agree to the <terms>Terms of service</terms> and <privacy>Privacy Policy</privacy>.",
+      "help": "Need help? <link>Contact support</link>."
     },
     "code": {
       "title": "Check your email",

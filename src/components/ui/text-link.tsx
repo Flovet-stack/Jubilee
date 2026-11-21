@@ -43,8 +43,12 @@ export function TextLink({
   );
 
   // A jump within the page: a native anchor, so the browser moves focus to
-  // the target (next/link scrolls but leaves focus on the link).
-  if (typeof props.href === "string" && props.href.startsWith("#")) {
+  // the target (next/link scrolls but leaves focus on the link). A mailto:
+  // link is not a route either.
+  if (
+    typeof props.href === "string" &&
+    (props.href.startsWith("#") || props.href.startsWith("mailto:"))
+  ) {
     // Keep every anchor attribute (aria-*, id, onClick…); drop only the
     // props that mean something to next/link alone.
     const anchorProps = Object.fromEntries(

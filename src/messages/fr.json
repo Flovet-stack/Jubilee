@@ -173,7 +173,9 @@
       "sendCode": "Recevoir un code par e-mail",
       "sending": "Envoi de votre code",
       "redirecting": "Ouverture de {provider}",
-      "newHere": "Première visite ? Votre compte sera créé. Lisez notre <link>politique de confidentialité</link>."
+      "newHere": "Première visite ? Votre compte sera créé.",
+      "legal": "En vous connectant, vous acceptez les <terms>conditions d'utilisation</terms> et la <privacy>politique de confidentialité</privacy>.",
+      "help": "Besoin d'aide ? <link>Contactez le support</link>."
     },
     "code": {
       "title": "Consultez vos e-mails",
