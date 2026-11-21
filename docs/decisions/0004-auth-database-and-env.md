@@ -3,7 +3,7 @@
 - **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Backend, Database Expert)
 - **Approved:** 2026-11-21 by Flovet
-- **Specs:** specs/01-foundations.md
+- **Specs:** specs/01-foundations.md, specs/02-auth-database.md
 
 ## Context
 

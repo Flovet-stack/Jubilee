@@ -54,6 +54,7 @@ Not decided. Needs its own decision (design brief, tokens, type) before any scre
 
 See `docs/decisions/README.md`. Product-wide ones:
 
+- 0006 (Approved): one owner-only `profiles` row per user, created on sign-up; the magic-link email also carries a 6-digit code.
 - 0005 (Approved): phased rollout, starting with France + US, then UK + Canada, then Africa country by country; the market follows the target job.
 - 0004 (Approved): sign-in with email magic link, Google or LinkedIn via Supabase; RLS on every table.
 - 0003 (Approved): UI in English and French via next-intl; CV language is separate from UI language.
