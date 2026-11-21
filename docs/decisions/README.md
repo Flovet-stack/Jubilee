@@ -1,0 +1,41 @@
+# Decision log
+
+The product team researches every product, UX, UI and architecture decision for Jubilee, and Flovet approves each one. This folder records them, so builds and reviews follow written decisions instead of chat history.
+
+## Rules
+
+- **One file per decision:** `NNNN-short-name.md`. Copy [`0000-template.md`](0000-template.md). Numbers are never reused.
+- **Research comes first.** Every decision includes the Research block from the product-team skill (Step 1): the references checked, what each does, and the sources actually opened.
+- **Nothing is built on a `Proposed` decision.** Only `Approved` counts.
+- **Never edit an approved decision.** Write a new one that supersedes it and set the old one's status to `Superseded by NNNN`. The status line and the `Specs:` back-link are the only edits allowed.
+- **Specs link decisions; they don't repeat them.** A spec lists the decisions it implements ("Implements 0002, 0003").
+- **Reviews check against decisions.** A build that makes a new decision nobody logged is a finding.
+- **Log only what limits the build.** Approach, design, data, scope or dependency choices get an entry. Copy tweaks and lint fixes don't.
+
+## Statuses
+
+`Proposed` → `Approved` (or `Rejected`) → optionally `Superseded by NNNN`.
+
+## Index
+
+| #    | Decision                                                        | Status   |
+| ---- | --------------------------------------------------------------- | -------- |
+| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                  | Proposed |
+| 0002 | [Project structure](0002-project-structure.md)                  | Proposed |
+| 0003 | [Internationalisation](0003-internationalisation.md)            | Proposed |
+| 0004 | [Auth, database and environment](0004-auth-database-and-env.md) | Proposed |
+
+## Still to decide (before the specs that need them)
+
+| Topic                                                                  | Needed by                  |
+| ---------------------------------------------------------------------- | -------------------------- |
+| Design direction, tokens, type and the no-ai-slop rules                | Any screen                 |
+| AI provider, prompts, cost limits and data handling                    | Tailoring, letters, import |
+| CV data model and PDF rendering                                        | Resume builder             |
+| Country format rules for the 2 launch markets                          | Country CV formats         |
+| Job sources and their licences                                         | Job matches                |
+| How approved applications are sent                                     | Approval-based apply       |
+| Payments for the pass (must work in launch markets, e.g. mobile money) | Paid pass                  |
+| Transactional email and scheduling                                     | Alerts, follow-ups         |
+| Analytics and error tracking                                           | Launch                     |
+| Privacy, consent and data deletion                                     | Launch                     |
