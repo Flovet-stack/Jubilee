@@ -3,7 +3,8 @@
     "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time."
   },
   "home": {
-    "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time."
+    "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time.",
+    "signIn": "Sign in"
   },
   "notFound": {
     "title": "Page not found",
