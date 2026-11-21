@@ -21,7 +21,7 @@
       "summary": {
         "title": "In short",
         "blocks": [
-          "Today Jubilee keeps only what it needs to run your account: your name, your email address and, if your sign-in provider shares one, your profile photo.",
+          "Today Jubilee keeps only what it needs to run your account: your email address and, if your sign-in provider shares them, your name and profile photo.",
           "What we don't do:",
           {
             "list": [
@@ -48,11 +48,11 @@
           {
             "list": [
               "your email address, to sign you in",
-              "your name and profile photo, if you sign in with Google or LinkedIn and they share them (you can change both)",
-              "the dates your account was created and last updated"
+              "your name and profile photo, if you sign in with Google or LinkedIn and they share them (to change them, ask through the <contact>contact page</contact>)",
+              "when your account was created, last updated and last signed in to"
             ]
           },
-          "When you use the site, our host records technical data such as your IP address, your browser and the pages requested, to deliver pages and protect the service.",
+          "When you use the site, our host and Supabase record technical data such as your IP address, your browser and the pages requested, to deliver pages, sign you in and protect the service.",
           "Jubilee doesn't collect your CV or your job applications yet, because those features aren't built. Before they are, this page will say what they collect."
         ]
       },
@@ -72,14 +72,14 @@
       "processors": {
         "title": "Who else handles it",
         "blocks": [
-          "A few companies handle data so that Jubilee works, and only for that:",
+          "Two companies work for Jubilee to run the service, and only for that:",
           {
             "list": [
               "Supabase stores your account and runs sign-in.",
-              "Vercel hosts the website and app.",
-              "Google and LinkedIn, only if you choose to sign in with them. They send us your name, email address and profile photo. Their own privacy policies cover what they do on their side."
+              "Vercel hosts the website and app."
             ]
           },
+          "If you choose to sign in with Google or LinkedIn, they send us your name, email address and profile photo. They act under their own privacy policies, not for Jubilee.",
           "We don't sell or share your data with anyone else. If we add a provider, this list changes first."
         ]
       },
@@ -87,7 +87,7 @@
         "title": "Where it is stored",
         "blocks": [
           "Supabase stores your account in the European Union (Ireland).",
-          "Vercel, Google and LinkedIn are based in the United States, so some data may be processed there. These transfers rely on the safeguards GDPR provides for, such as standard contractual clauses, which those companies offer."
+          "Supabase and Vercel are US companies, so some of your data may be processed in the United States. These transfers are covered by the safeguards in their data processing agreements."
         ]
       },
       "retention": {
@@ -95,7 +95,7 @@
         "blocks": [
           "We keep your account data while your account is open.",
           "Deleting your account deletes your profile with it. Until you can delete your account in the app, ask through the <contact>contact page</contact> and we'll delete it within one month, the time GDPR allows.",
-          "Our host's technical logs are kept for a short time to run and protect the service, then deleted."
+          "Technical logs kept by our host and Supabase are kept for a short time to run and protect the service, then deleted."
         ]
       },
       "rights": {
@@ -126,11 +126,11 @@
       "cookies": {
         "title": "Cookies",
         "blocks": [
-          "Jubilee sets two cookies, both needed for the site to work:",
+          "Jubilee sets two kinds of cookies, both needed for the site to work:",
           {
             "list": [
-              "a sign-in cookie, which keeps you signed in",
-              "a language cookie (NEXT_LOCALE), which remembers whether you chose English or French"
+              "sign-in cookies, which keep you signed in",
+              "a language cookie (NEXT_LOCALE), which remembers your language"
             ]
           },
           "We don't use advertising or analytics cookies, so there is no cookie banner."

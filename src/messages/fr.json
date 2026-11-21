@@ -21,7 +21,7 @@
       "summary": {
         "title": "En bref",
         "blocks": [
-          "Aujourd’hui, Jubilee ne conserve que ce qu’il faut pour faire fonctionner votre compte : votre nom, votre adresse e-mail et, si votre service de connexion la partage, votre photo de profil.",
+          "Aujourd’hui, Jubilee ne conserve que ce qu’il faut pour faire fonctionner votre compte : votre adresse e-mail et, si votre service de connexion les partage, votre nom et votre photo de profil.",
           "Ce que nous ne faisons pas :",
           {
             "list": [
@@ -48,11 +48,11 @@
           {
             "list": [
               "votre adresse e-mail, pour vous connecter",
-              "votre nom et votre photo de profil, si vous vous connectez avec Google ou LinkedIn et qu’ils les partagent (vous pouvez les modifier)",
-              "les dates de création et de dernière modification de votre compte"
+              "votre nom et votre photo de profil, si vous vous connectez avec Google ou LinkedIn et qu’ils les partagent (pour les modifier, passez par la <contact>page de contact</contact>)",
+              "les dates de création, de dernière modification et de dernière connexion de votre compte"
             ]
           },
-          "Quand vous utilisez le site, notre hébergeur enregistre des données techniques, comme votre adresse IP, votre navigateur et les pages demandées, pour afficher les pages et protéger le service.",
+          "Quand vous utilisez le site, notre hébergeur et Supabase enregistrent des données techniques, comme votre adresse IP, votre navigateur et les pages demandées, pour afficher les pages, vous connecter et protéger le service.",
           "Jubilee ne collecte pas encore votre CV ni vos candidatures, car ces fonctionnalités n’existent pas encore. Avant leur arrivée, cette page indiquera ce qu’elles collectent."
         ]
       },
@@ -61,33 +61,33 @@
         "blocks": [
           {
             "list": [
-              "Pour créer et gérer votre compte, et vous connecter. Base légale : le contrat entre nous (article 6.1.b du RGPD).",
+              "Pour créer et gérer votre compte, et vous connecter. Base légale : l’exécution du contrat qui nous lie (article 6.1.b du RGPD).",
               "Pour assurer la sécurité et le bon fonctionnement du service. Base légale : notre intérêt légitime à protéger Jubilee et ses utilisateurs (article 6.1.f du RGPD)."
             ]
           },
-          "Vous n’êtes pas obligé de nous fournir des données, mais sans adresse e-mail, nous ne pouvons pas créer de compte.",
+          "Fournir vos données n’est pas obligatoire, mais sans adresse e-mail, nous ne pouvons pas créer de compte.",
           "Nous n’utilisons pas vos données à des fins publicitaires."
         ]
       },
       "processors": {
         "title": "Qui d’autre les traite",
         "blocks": [
-          "Quelques entreprises traitent des données pour que Jubilee fonctionne, et uniquement pour cela :",
+          "Deux entreprises travaillent pour Jubilee afin de faire fonctionner le service, et uniquement pour cela :",
           {
             "list": [
               "Supabase stocke votre compte et gère la connexion.",
-              "Vercel héberge le site et l’application.",
-              "Google et LinkedIn, seulement si vous choisissez de vous connecter avec eux. Ils nous transmettent votre nom, votre adresse e-mail et votre photo de profil. Leurs propres politiques de confidentialité couvrent ce qu’ils font de leur côté."
+              "Vercel héberge le site et l’application."
             ]
           },
-          "Nous ne vendons ni ne partageons vos données avec qui que ce soit d’autre. Si nous ajoutons un prestataire, cette liste est mise à jour avant."
+          "Si vous choisissez de vous connecter avec Google ou LinkedIn, ils nous transmettent votre nom, votre adresse e-mail et votre photo de profil. Ils agissent selon leurs propres politiques de confidentialité, et non pour le compte de Jubilee.",
+          "Nous ne vendons ni ne partageons vos données avec qui que ce soit d’autre. Si nous ajoutons un prestataire, cette liste est mise à jour au préalable."
         ]
       },
       "storage": {
         "title": "Où elles sont stockées",
         "blocks": [
           "Supabase stocke votre compte dans l’Union européenne (Irlande).",
-          "Vercel, Google et LinkedIn sont basés aux États-Unis, donc certaines données peuvent y être traitées. Ces transferts reposent sur les garanties prévues par le RGPD, comme les clauses contractuelles types, que ces entreprises proposent."
+          "Supabase et Vercel sont des entreprises américaines : certaines de vos données peuvent donc être traitées aux États-Unis. Ces transferts sont encadrés par les garanties prévues dans leurs accords de traitement des données."
         ]
       },
       "retention": {
@@ -95,7 +95,7 @@
         "blocks": [
           "Nous conservons les données de votre compte tant que celui-ci est ouvert.",
           "Supprimer votre compte supprime aussi votre profil. Tant que la suppression n’est pas disponible dans l’application, demandez-la via la <contact>page de contact</contact> : nous supprimerons votre compte dans un délai d’un mois, comme le prévoit le RGPD.",
-          "Les journaux techniques de notre hébergeur sont conservés peu de temps, pour faire fonctionner et protéger le service, puis supprimés."
+          "Les journaux techniques de notre hébergeur et de Supabase sont conservés peu de temps, pour faire fonctionner et protéger le service, puis supprimés."
         ]
       },
       "rights": {
@@ -111,7 +111,7 @@
               "vous les transmettre, à vous ou à un autre service, dans un format lisible par une machine"
             ]
           },
-          "Si vous vivez en Californie, vous avez aussi le droit de savoir ce que nous collectons, de le faire supprimer ou corriger, et de ne pas être traité différemment parce que vous exercez ces droits. Nous ne vendons ni ne partageons d’informations personnelles : il n’y a donc rien à refuser.",
+          "Si vous vivez en Californie, vous avez aussi le droit de savoir ce que nous collectons, de le faire supprimer ou corriger, et de ne pas être traité différemment parce que vous exercez ces droits. Nous ne vendons ni ne partageons d’informations personnelles : vous n’avez donc pas à vous y opposer.",
           "Pour exercer l’un de ces droits, <contact>contactez-nous</contact>. Nous répondons sous un mois, gratuitement."
         ]
       },
@@ -126,11 +126,11 @@
       "cookies": {
         "title": "Cookies",
         "blocks": [
-          "Jubilee utilise deux cookies, tous deux nécessaires au fonctionnement du site :",
+          "Jubilee utilise deux types de cookies, tous nécessaires au fonctionnement du site :",
           {
             "list": [
-              "un cookie de connexion, qui vous garde connecté",
-              "un cookie de langue (NEXT_LOCALE), qui retient si vous avez choisi le français ou l’anglais"
+              "des cookies de connexion, qui maintiennent votre session",
+              "un cookie de langue (NEXT_LOCALE), qui retient votre langue"
             ]
           },
           "Nous n’utilisons aucun cookie publicitaire ni de mesure d’audience : il n’y a donc pas de bandeau cookies."

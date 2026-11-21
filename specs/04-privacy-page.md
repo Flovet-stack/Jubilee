@@ -1,6 +1,6 @@
 # 04: Privacy policy page
 
-Status: In progress · Written: 2026-11-21
+Status: Done (91/100, 2026-11-21) · Written: 2026-11-21
 
 ## Goal
 
@@ -50,4 +50,4 @@ Header, footer and app shell. Cookie or consent banner. Terms of service. Data e
 - Screenshots of `/en/privacy` and `/fr/privacy` at 390 px and 1440 px, light and dark.
 - Keyboard-only: Tab reaches every contents link, Enter moves focus to the section.
 - Reviewer skill run against this spec; score of 90 or more.
-- Before public launch (not this spec): a lawyer or GDPR professional reviews both languages, and a native speaker reviews the French.
+- Before public launch (not this spec): the contact page exists (the page links to it five times); the controller is identified, by the registered company's name and address or, if Jubilee launches first, by naming the founder (GDPR art. 13(1)(a)); each provider's transfer safeguard is checked and named; a lawyer or GDPR professional reviews both languages; a native speaker reviews the French.

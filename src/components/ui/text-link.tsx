@@ -12,6 +12,19 @@ type TextLinkProps = ComponentProps<typeof Link> & {
   children: ReactNode;
 };
 
+/** Props only next/link understands; a plain <a> must not receive them. */
+const LINK_ONLY_PROPS = new Set([
+  "as",
+  "replace",
+  "scroll",
+  "shallow",
+  "passHref",
+  "prefetch",
+  "locale",
+  "legacyBehavior",
+  "onNavigate",
+]);
+
 /**
  * Inline link: violet, underlined (links are never colour alone), thicker
  * underline on hover. Wraps with the text.
@@ -32,8 +45,13 @@ export function TextLink({
   // A jump within the page: a native anchor, so the browser moves focus to
   // the target (next/link scrolls but leaves focus on the link).
   if (typeof props.href === "string" && props.href.startsWith("#")) {
+    // Keep every anchor attribute (aria-*, id, onClick…); drop only the
+    // props that mean something to next/link alone.
+    const anchorProps = Object.fromEntries(
+      Object.entries(props).filter(([key]) => !LINK_ONLY_PROPS.has(key)),
+    ) as ComponentProps<"a">;
     return (
-      <a className={classes} href={props.href}>
+      <a className={classes} {...anchorProps}>
         {children}
       </a>
     );
