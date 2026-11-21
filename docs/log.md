@@ -112,4 +112,6 @@ One dated entry per task: what was built, the review score, and what was left.
 - Researched JSON Resume, Reactive Resume v6, OpenResume, react-pdf, headless Chromium on Vercel, Jobscan's ATS formatting guidance and the Postgres JSON docs. Indeed's and Greenhouse's ATS pages were gone (404), so no ATS vendor page backs the format rules.
 - Proposed: `cvs`, `cv_versions` and an append-only `cv_revisions`, each with `user_id` and owner-only RLS; CV content as one Zod-validated `jsonb` document using JSON Resume names; AI changes only through accepted proposals that write a revision; PDFs with `@react-pdf/renderer` on the server, checked by a pdf.js text-extraction test. No Chromium.
 - 0010 (logo) marked Approved: Flovet approved it in another chat.
-- Left: Flovet to approve 0013; then spec and build #10.
+- 0013 approved by Flovet in chat, with a note that #14 may render the preview in the browser.
+- Naming agreed in chat: "CV" in code and data; on screen "CV" in French and "resume" in English (US) for now; an `en-GB` locale with "CV" when the UK launches. To be logged as 0014.
+- Left: log 0014; spec and build #10.

@@ -1,8 +1,8 @@
 # 0013: CV data model and PDF rendering
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Database Expert, Backend, Frontend, Product Designer)
-- **Approved:**
+- **Approved:** 2026-11-21 by Flovet (in chat)
 - **Builds on:** 0002 (data access only in `queries.ts` / `actions.ts`), 0003 (CV language is separate from UI language), 0004 and 0006 (RLS on every table, user data cascades from `profiles`), 0005 (market follows the target job)
 - **Specs:** none yet (issue #10, CV schema, RLS and data access layer, is next)
 
@@ -99,6 +99,7 @@ Storage option 3, versions option 1, PDF option 1.
 - Data export (#36) is one query per table and maps to JSON Resume. Account deletion cascades through all three tables.
 - No search inside CV content in the MVP. If matching (#19) needs it, a GIN `jsonb_path_ops` index can be added then.
 - No Chromium anywhere. If a template ever needs layout react-pdf can't do, that is a new decision.
+- react-pdf also runs in the browser. The builder spec (#14) may render the same templates there for the live preview and download (as Reactive Resume v6 does, so the preview always matches), keeping the server render for files attached to applications (#29). The cost is a heavier builder page on phones; #14 weighs it against the brief's "keep pages light".
 - DOCX export is out of scope for the MVP (Jobscan: PDF is the safe default).
 - Untested: whether react-pdf makes tagged (accessible) PDFs. The PDF/A options exist; the export spec should check, and the result is noted, not assumed.
 - Reviews check: RLS on all three tables with a zero-rows test for another user; no `anon` grants; revisions have no update or delete policy; `content` always passes the Zod schema; AI code paths never write `content` without an accepted proposal; the extraction test passes for every template.

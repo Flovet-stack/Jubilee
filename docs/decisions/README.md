@@ -32,7 +32,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Approved |
 | 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                            | Approved |
 | 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                  | Approved |
-| 0013 | [CV data model and PDF rendering](0013-cv-data-model-and-pdf-rendering.md)                                    | Proposed |
+| 0013 | [CV data model and PDF rendering](0013-cv-data-model-and-pdf-rendering.md)                                    | Approved |
 
 ## Still to decide (before the specs that need them)
 

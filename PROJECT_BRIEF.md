@@ -54,6 +54,7 @@ Approved: `docs/design/design-brief.md` ("quiet desk, bright moments": light, gr
 
 See `docs/decisions/README.md`. Product-wide ones:
 
+- 0013 (Approved 2026-11-21): CV data model and PDF: `cvs`, `cv_versions`, append-only `cv_revisions`, owner-only RLS; content as one Zod-validated `jsonb` document; AI changes only through accepted proposals; PDFs with react-pdf, no Chromium.
 - 0011 (Approved 2026-11-21): privacy policy page: one layered page in en/fr that describes only what Jubilee processes today; updated by every decision that adds a processor; legal review before launch.
 - 0009 (Approved 2026-11-21): design system: three-tier tokens, Base UI components restyled with our tokens, icons-animated Hugeicons (as AniKansou), motion rules after Emil Kowalski. Adds motion, @base-ui/react, cva, clsx, tailwind-merge.
 - 0008 (Approved 2026-11-21): hierarchy of explicitness (visibility tier + consequence level), progressive disclosure in two levels, space by relationship.
