@@ -25,6 +25,8 @@ Implements [0012](../docs/decisions/0012-sign-in-flow-and-screens.md), on [0004]
 11. All copy is in `src/messages/{en,fr}.json` under an `auth` namespace, and the key-parity test passes.
 12. **Metadata:** sign-in has a localised title, is `noindex`, and isn't in the sitemap. `/home` is `noindex`.
 
+13. **Addendum (Flovet, 2026-11-21):** the placeholder home page (`/[locale]`) shows a temporary **Sign in** button (a link styled as the primary button) to `/[locale]/sign-in`, until the landing page (#39) replaces it. The home page stays static.
+
 ## Out of scope
 
 App shell and navigation, onboarding, profile editing, account linking UI, CAPTCHA, custom SMTP, Terms page, account deletion, Playwright.
