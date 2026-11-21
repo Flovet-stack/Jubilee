@@ -106,3 +106,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - First review 75/100. Fixed since: "Change email" state after a failed send, per-form spinners, the code field now describes where the code went, a countdown after a rate limit, clearer "unknown" error.
 - Left: Flovet pastes the Magic Link template and tests Google, LinkedIn, code and link sign-in on port 3000; decisions on the logo, the merged code message and the LinkedIn mark (spec 05 build notes); then a second review.
 - Addendum (Flovet): a temporary Sign in button on the placeholder home page, going to `/[locale]/sign-in`. No separate sign-up page: one page does both (0012).
+
+## 2026-11-21: CV data model and PDF rendering proposed (0013, issue #5)
+
+- Researched JSON Resume, Reactive Resume v6, OpenResume, react-pdf, headless Chromium on Vercel, Jobscan's ATS formatting guidance and the Postgres JSON docs. Indeed's and Greenhouse's ATS pages were gone (404), so no ATS vendor page backs the format rules.
+- Proposed: `cvs`, `cv_versions` and an append-only `cv_revisions`, each with `user_id` and owner-only RLS; CV content as one Zod-validated `jsonb` document using JSON Resume names; AI changes only through accepted proposals that write a revision; PDFs with `@react-pdf/renderer` on the server, checked by a pdf.js text-extraction test. No Chromium.
+- 0010 (logo) marked Approved: Flovet approved it in another chat.
+- Left: Flovet to approve 0013; then spec and build #10.

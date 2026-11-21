@@ -1,8 +1,8 @@
 # 0010: Logo and brand identity ("the path")
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
-- **Approved:**
+- **Approved:** 2026-11-21 by Flovet (in another chat)
 - **Specs:** none yet (the app shell spec will use the files)
 
 ## Context

@@ -29,9 +29,10 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                             | Approved |
 | 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                   | Approved |
 | 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md) | Approved |
-| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Proposed |
+| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Approved |
 | 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                            | Approved |
 | 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                  | Approved |
+| 0013 | [CV data model and PDF rendering](0013-cv-data-model-and-pdf-rendering.md)                                    | Proposed |
 
 ## Still to decide (before the specs that need them)
 
@@ -40,7 +41,6 @@ The product team researches every product, UX, UI and architecture decision for 
 | App shell and navigation                                           | Any screen                 |
 | CV templates and their typography                                  | Resume builder             |
 | AI provider, prompts, cost limits and data handling                | Tailoring, letters, import |
-| CV data model and PDF rendering                                    | Resume builder             |
 | Country format rules, France and US first (0005)                   | Country CV formats         |
 | Job sources and their licences                                     | Job matches                |
 | How approved applications are sent                                 | Approval-based apply       |
