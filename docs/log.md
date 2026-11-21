@@ -75,3 +75,17 @@ One dated entry per task: what was built, the review score, and what was left.
 - Logged 0010 as Proposed. Wrote `docs/design/brand-guidelines.md` (structure taken from Spotify, GOV.UK, Mailchimp and Atlassian) and 13 SVG files in `docs/design/brand/logo/`: logo, wordmark and icon in colour, on dark, on violet and one colour, plus app icons and a three-dot favicon.
 - Not reviewed: no spec (brand assets only, nothing wired into the app).
 - Left: Flovet to approve 0010; PNG and ICO exports and the favicon go in with the app shell spec.
+
+## 2026-11-21: Privacy policy page decided and specced
+
+- Decision 0011 (privacy policy page; drafted as 0010, renumbered when merging main, which had taken 0010 for the logo): researched against GDPR Art. 13, CNIL, CCPA, Teal, 37signals and GOV.UK; approved by Flovet in chat. One layered page in English and French that describes only what Jubilee processes today.
+- Spec 04 written, status Blocked: it needs spec 01 (next-intl routing and message files) built first, and company facts from Flovet (legal name, address, privacy email, DPO, minimum age, the AI-training commitment).
+- Left: build spec 01, then spec 04; a legal review of both languages before launch.
+
+## 2026-11-21: Foundations built (spec 01)
+
+- next-intl 4.15.3, @supabase/ssr, @supabase/supabase-js, @t3-oss/env-nextjs, zod and server-only, as named in 0003 and 0004 (pinned).
+- `src/env.ts` fails the build on a missing variable. `src/app/[locale]/` with `(marketing)`, `(auth)` and `(app)`; the root layout reads the locale with `next/root-params`, so `/en` and `/fr` stay static. `/` redirects by saved choice, then `Accept-Language` (`fr-CM` → `/fr`, `de-DE` → `/en`). Messages in `src/messages/{en,fr}.json` with a key-parity test.
+- One proxy pass: Supabase refreshes the session first and writes the cookies onto the request, then next-intl routes (`src/proxy.test.ts`). ESLint bans Supabase clients outside the data-access layer (tested). `robots.ts`, `sitemap.ts` with hreflang, optional Search Console tag. Localised 404 under a locale, bilingual global 404 otherwise.
+- Reviewed 92/100. Findings fixed after review: cookies now reach Server Components in the same request; localised 404 under a known locale; versions pinned; build-time choices recorded in the spec's build notes.
+- Left: Flovet to confirm the locale order (saved choice before `Accept-Language`); spec 04 now waits only on company facts.

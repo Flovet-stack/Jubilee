@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time."
+  },
+  "home": {
+    "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page doesn't exist or has moved. Check the address, or start again from the home page.",
+    "home": "Go to the home page"
+  }
+}
