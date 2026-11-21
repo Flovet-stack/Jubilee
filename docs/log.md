@@ -105,3 +105,4 @@ One dated entry per task: what was built, the review score, and what was left.
 - 41 unit tests for the `next` check, error mapping and the email form state. `pnpm check` passes. Checked on the dev server: guard redirect, sign-in in en/fr, light/dark, 390/1440 px, field and URL errors, callback and confirm failure paths.
 - First review 75/100. Fixed since: "Change email" state after a failed send, per-form spinners, the code field now describes where the code went, a countdown after a rate limit, clearer "unknown" error.
 - Left: Flovet pastes the Magic Link template and tests Google, LinkedIn, code and link sign-in on port 3000; decisions on the logo, the merged code message and the LinkedIn mark (spec 05 build notes); then a second review.
+- Addendum (Flovet): a temporary Sign in button on the placeholder home page, going to `/[locale]/sign-in`. No separate sign-up page: one page does both (0012).

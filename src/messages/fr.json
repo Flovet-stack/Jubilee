@@ -3,7 +3,8 @@
     "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment."
   },
   "home": {
-    "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment."
+    "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment.",
+    "signIn": "Se connecter"
   },
   "notFound": {
     "title": "Page introuvable",
