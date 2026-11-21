@@ -156,5 +156,54 @@
         ]
       }
     }
+  },
+  "auth": {
+    "providers": {
+      "google": "Google",
+      "linkedin_oidc": "LinkedIn"
+    },
+    "signIn": {
+      "metaTitle": "Connexion",
+      "title": "Se connecter à Jubilee",
+      "google": "Continuer avec Google",
+      "linkedin": "Continuer avec LinkedIn",
+      "or": "ou",
+      "emailLabel": "E-mail",
+      "sendCode": "Recevoir un code par e-mail",
+      "sending": "Envoi de votre code",
+      "redirecting": "Ouverture de {provider}",
+      "newHere": "Première visite ? Votre compte sera créé. Lisez notre <link>politique de confidentialité</link>."
+    },
+    "code": {
+      "title": "Consultez vos e-mails",
+      "sentTo": "Nous avons envoyé un code à 6 chiffres à <strong>{email}</strong>.",
+      "label": "Code à 6 chiffres",
+      "hint": "L’e-mail contient aussi un lien de connexion, si vous préférez.",
+      "submit": "Se connecter",
+      "verifying": "Connexion en cours",
+      "change": "Modifier l’e-mail",
+      "resend": "Envoyer un nouveau code",
+      "resendIn": "Nouveau code possible dans {seconds} s",
+      "resent": "Nous avons envoyé un nouveau code. Utilisez le plus récent."
+    },
+    "errors": {
+      "cancelled": "La connexion a été annulée. Choisissez un moyen de continuer.",
+      "provider": "La connexion avec {provider} n’a pas abouti. Réessayez ou utilisez votre e-mail.",
+      "codeInvalid": "Ce code ne fonctionne pas. Il est peut-être mal saisi ou expiré. Vérifiez le dernier e-mail de Jubilee ou demandez un nouveau code.",
+      "codeFormat": "Saisissez les 6 chiffres reçus par e-mail.",
+      "linkExpired": "Ce lien de connexion a expiré ou a déjà servi. Un lien ne fonctionne qu’une fois, pendant peu de temps. Demandez un nouveau code ci-dessous.",
+      "rateLimited": "Patientez {seconds} secondes avant de demander un nouveau code.",
+      "emailInvalid": "Saisissez votre adresse e-mail complète, par exemple ada.okafor@gmail.com.",
+      "emailNotAllowed": "La connexion par e-mail n’est pas encore ouverte. Continuez avec Google ou LinkedIn.",
+      "unknown": "Le service de connexion ne répond pas. Réessayez dans un instant."
+    },
+    "home": {
+      "metaTitle": "Accueil",
+      "greeting": "Bonjour {name}",
+      "greetingNoName": "Bonjour",
+      "body": "Connexion réussie. Votre espace de travail arrive bientôt.",
+      "signOut": "Se déconnecter",
+      "loading": "Chargement de votre compte"
+    }
   }
 }

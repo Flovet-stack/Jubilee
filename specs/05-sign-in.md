@@ -1,6 +1,6 @@
 # 05: Sign-in
 
-Status: Ready · Written: 2026-11-21 · Issue: #9
+Status: In progress (first review 75/100, findings 1, 7, 9, 10 and 12 fixed since; end-to-end check waiting on Flovet) · Written: 2026-11-21 · Issue: #9
 
 ## Goal
 
@@ -60,3 +60,12 @@ App shell and navigation, onboarding, profile editing, account linking UI, CAPTC
 - Screenshots of sign-in (both states) and `/home` at 390 px and 1440 px, light and dark, in `en` and `fr`.
 - Keyboard only: Tab order follows the visual order, focus is visible, and Enter submits each form.
 - Reviewer skill run against this spec; score of 90 or more, recorded above. One entry in `docs/log.md`.
+
+## Build notes (2026-11-21)
+
+- **No logo on the sign-in card.** 0012 puts the logo first, but the logo decision (0010) is still Proposed, so none is drawn. Flovet to decide: wait for 0010, or show the name "Jubilee" as a text wordmark until then.
+- **Wrong and expired codes share one message.** Supabase returns `otp_expired` for both, so the app can't tell them apart. `codeInvalid` covers either case. This departs from 0012's table and needs Flovet's approval as an amendment.
+- **LinkedIn mark.** The Iconify file has cut-out letters, so a white square sits behind them to keep "in" white on the dark button. 0012 says "unmodified". Flovet to approve this, or the build switches to LinkedIn's own download.
+- **Button spinner delay.** The shared `Button` shows its spinner at once, not after 400 ms (0009 §8). It's a design-system component, so the fix belongs in its own change.
+- **Rate limits by IP.** Codes are requested and checked on the server, so Supabase may count every user against the server's IP. To check under #24 (transactional email).
+- **Before the Check can pass:** paste `supabase/templates/magic-link.html` and its subject (in `config.toml`) into the hosted Magic Link template. The hosted redirect allowlist needs the production and Vercel preview origins (`<origin>/**`), or the email link falls back to the Site URL and breaks.

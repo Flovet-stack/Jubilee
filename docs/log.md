@@ -97,3 +97,11 @@ One dated entry per task: what was built, the review score, and what was left.
 - `TextLink` renders a native anchor for `#` links, so keyboard focus moves to the section.
 - Left: the contact page (linked five times, 404 until built); company name and address once registered; legal and native-French review before launch.
 - Reviewed 91/100. Fixed after review: transfer wording (Supabase and Vercel are US companies; safeguards "in their data processing agreements", not a named mechanism nobody checked); Google and LinkedIn described as sign-in services under their own policies, not processors; no promise of a profile editor that doesn't exist; cookie and log wording; French polish; `TextLink` keeps every anchor attribute on `#` links (tested). Launch gates added to spec 04's Check.
+
+## 2026-11-21: Sign-in built (spec 05, issue #9)
+
+- Decision 0012 approved (logos from Iconify's CC0 `logos` set allowed by Flovet). Spec 05 written.
+- Built: `/[locale]/sign-in` (Google, LinkedIn, email code in two steps), `/[locale]/auth/callback` and `/auth/confirm`, `features/auth/{logic,schemas,queries,actions}.ts`, the `(app)` guard with a way back (`next`, set by the proxy), a temporary `/home` with Sign out, en/fr copy, brand marks with `SOURCES.md`, provider-button tokens, and the bilingual Magic Link template (`supabase/templates/`).
+- 41 unit tests for the `next` check, error mapping and the email form state. `pnpm check` passes. Checked on the dev server: guard redirect, sign-in in en/fr, light/dark, 390/1440 px, field and URL errors, callback and confirm failure paths.
+- First review 75/100. Fixed since: "Change email" state after a failed send, per-form spinners, the code field now describes where the code went, a countdown after a rate limit, clearer "unknown" error.
+- Left: Flovet pastes the Magic Link template and tests Google, LinkedIn, code and link sign-in on port 3000; decisions on the logo, the merged code message and the LinkedIn mark (spec 05 build notes); then a second review.
