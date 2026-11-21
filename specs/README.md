@@ -24,8 +24,9 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | `Done (NN/100)` | Reviewed at 90 or more. Record the score and the date.              |
 | `Dropped`       | Won't be built. Say why. The number is never reused.                |
 
-| Spec                                 | Status                           |
-| ------------------------------------ | -------------------------------- |
-| [01: Foundations](01-foundations.md) | Blocked (0001–0004 are Proposed) |
+| Spec                                     | Status                           |
+| ---------------------------------------- | -------------------------------- |
+| [01: Foundations](01-foundations.md)     | Blocked (0001–0004 are Proposed) |
+| [02: Auth database](02-auth-database.md) | Done (96/100)                    |
 
 Planned next (each needs its decisions first): sign-in, design foundations, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
