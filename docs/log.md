@@ -23,3 +23,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - 0004: sign-in is now email magic link, Google and LinkedIn (`linkedin_oidc`). Still Proposed.
 - 0005 rewritten: the targets are the US, Canada, the UK, France and six African markets. Rollout is phased: France + US (MVP), then UK + Canada, then Africa one country at a time. Brief, MVP doc and index updated to match.
 - Left: Flovet to approve 0001–0005; issue #9 (sign-in) scope updated to include LinkedIn.
+
+## 2026-11-21: Decisions 0001–0005 approved (issues #1, #3)
+
+- Flovet approved 0001–0005. Status lines, index and brief updated; spec 01 (Foundations) set to Ready.
+- Left: build spec 01 (#6).

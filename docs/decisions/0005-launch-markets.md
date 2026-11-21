@@ -1,8 +1,8 @@
 # 0005: Target markets and rollout order
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, PM, Tech Lead, Backend, Copy)
-- **Approved:**
+- **Approved:** 2026-11-21 by Flovet
 - **Specs:**
 
 ## Context

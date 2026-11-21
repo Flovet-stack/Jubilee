@@ -1,8 +1,8 @@
 # 0004: Auth, database and environment
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Backend, Database Expert)
-- **Approved:**
+- **Approved:** 2026-11-21 by Flovet
 - **Specs:** specs/01-foundations.md
 
 ## Context

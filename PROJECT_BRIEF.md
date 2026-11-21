@@ -40,7 +40,7 @@ Must have, nice to have and not in scope: `docs/product/feature-priorities.md`. 
 
 ## Stack
 
-Proposed in decision 0001 (Next.js 16, React 19, TypeScript, Tailwind 4, pnpm, Supabase, Vercel). Not final until approved.
+Decision 0001 (Next.js 16, React 19, TypeScript, Tailwind 4, pnpm, Supabase, Vercel). Approved 2026-11-21.
 
 ## Data sources and licences
 
@@ -54,11 +54,11 @@ Not decided. Needs its own decision (design brief, tokens, type) before any scre
 
 See `docs/decisions/README.md`. Product-wide ones:
 
-- 0005 (Proposed): phased rollout, starting with France + US, then UK + Canada, then Africa country by country; the market follows the target job.
-- 0004 (Proposed): sign-in with email magic link, Google or LinkedIn via Supabase; RLS on every table.
-- 0003 (Proposed): UI in English and French via next-intl; CV language is separate from UI language.
-- 0002 (Proposed): single Next.js app, feature folders, data access only in `queries.ts` / `actions.ts`.
-- 0001 (Proposed): stack and tooling.
+- 0005 (Approved): phased rollout, starting with France + US, then UK + Canada, then Africa country by country; the market follows the target job.
+- 0004 (Approved): sign-in with email magic link, Google or LinkedIn via Supabase; RLS on every table.
+- 0003 (Approved): UI in English and French via next-intl; CV language is separate from UI language.
+- 0002 (Approved): single Next.js app, feature folders, data access only in `queries.ts` / `actions.ts`.
+- 0001 (Approved): stack and tooling.
 
 ## Domain rules and vocabulary
 

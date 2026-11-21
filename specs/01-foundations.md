@@ -1,6 +1,6 @@
 # 01: Foundations
 
-Status: Blocked (needs 0001, 0002, 0003, 0004 approved) · Written: 2026-11-21
+Status: Ready · Written: 2026-11-21
 
 ## Goal
 

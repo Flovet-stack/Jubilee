@@ -20,11 +20,11 @@ The product team researches every product, UX, UI and architecture decision for 
 
 | #    | Decision                                                        | Status   |
 | ---- | --------------------------------------------------------------- | -------- |
-| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                  | Proposed |
-| 0002 | [Project structure](0002-project-structure.md)                  | Proposed |
-| 0003 | [Internationalisation](0003-internationalisation.md)            | Proposed |
-| 0004 | [Auth, database and environment](0004-auth-database-and-env.md) | Proposed |
-| 0005 | [Target markets and rollout order](0005-launch-markets.md)      | Proposed |
+| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                  | Approved |
+| 0002 | [Project structure](0002-project-structure.md)                  | Approved |
+| 0003 | [Internationalisation](0003-internationalisation.md)            | Approved |
+| 0004 | [Auth, database and environment](0004-auth-database-and-env.md) | Approved |
+| 0005 | [Target markets and rollout order](0005-launch-markets.md)      | Approved |
 
 ## Still to decide (before the specs that need them)
 
