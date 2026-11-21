@@ -1,8 +1,8 @@
 # 0002: Project structure
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Frontend, Backend)
-- **Approved:**
+- **Approved:** 2026-11-21 by Flovet
 - **Specs:** specs/01-foundations.md
 
 ## Context

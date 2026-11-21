@@ -2,9 +2,56 @@
 
 One dated entry per task: what was built, the review score, and what was left.
 
-## 2026-11-21: Decision 0009 approved
+## 2026-11-21: Codebase initialised
 
-- Flovet approved 0009 in chat. 0007's status notes that its Iconography paragraph is superseded by 0009; 0007 and 0009 link spec 03. Index, brief and spec 03 status updated.
+- Next.js 16.4.6 scaffold with pnpm, Prettier (Tailwind plugin), ESLint + Prettier config, Vitest and one smoke test; `pnpm check` script.
+- Project brief, decision log (0001–0004 Proposed), spec 01 (Blocked on those decisions), product docs, product-team and reviewer skills.
+- Left: Flovet to approve 0001–0004; then build spec 01. Design, AI, job sources, payments and email decisions still to research.
+
+## 2026-11-21: Skills moved into .claude/ (issue #2)
+
+- Moved `claude-setup/skills/*` to `.claude/skills/` and `claude-setup/agents/*` to `.claude/agents/`; removed `claude-setup/`. The paths in CLAUDE.md, README and the skills now resolve.
+- No spec (tooling only). Not reviewed (no spec to score against).
+
+## 2026-11-21: Decision 0006, launch markets (issue #3)
+
+- Researched and logged 0005 as Proposed: Cameroon and France. Default UI and CV languages set per market. Main risk: no licensed job feed confirmed for Cameroon yet (fallback: saved and pasted jobs).
+- Left: Flovet to approve 0001–0005. Sources came from web-search summaries and need re-checking in the job-sources and payments decisions.
+
+## 2026-11-21: Sign-in options and target markets revised (Flovet's input)
+
+- 0004: sign-in is now email magic link, Google and LinkedIn (`linkedin_oidc`). Still Proposed.
+- 0005 rewritten: the targets are the US, Canada, the UK, France and six African markets. Rollout is phased: France + US (MVP), then UK + Canada, then Africa one country at a time. Brief, MVP doc and index updated to match.
+- Left: Flovet to approve 0001–0005; issue #9 (sign-in) scope updated to include LinkedIn.
+
+## 2026-11-21: Decisions 0001–0005 approved (issues #1, #3)
+
+- Flovet approved 0001–0005. Status lines, index and brief updated; spec 01 (Foundations) set to Ready.
+- Left: build spec 01 (#6).
+
+## 2026-11-21: Spec 02, auth database (96/100)
+
+- Decision 0006 approved by Flovet (drafted as 0005, renumbered after main's 0005 landed). 0006: sign-in with email code, Google or LinkedIn; one `profiles` row per user.
+- Migration `20261121033326_profiles` applied to the `jubilee` project: `public.profiles`, owner-only RLS (select and update for `authenticated`), no `anon` access, sign-up trigger filling name and photo from Google or LinkedIn metadata, `on delete cascade`.
+- `supabase/tests/profiles.sql` passed on the remote project (rolled back, no data left). Security and performance advisors: no findings. Types in `src/types/database.types.ts`. `supabase/config.toml` enables email, `google` and `linkedin_oidc` with secrets from env.
+- Not in 0006 but built: name capped at 200 characters and avatar URL at 2,048, so a long provider value can't block sign-up.
+- Left for Flovet: `npx supabase login` and `npx supabase link --project-ref ylxywgfnfgopiielyqgn`; create the LinkedIn app (OIDC product, LinkedIn Page) and the Google client; enter both in Supabase > Authentication > Providers; add the redirect URLs. Email sign-in reaches team members only until custom SMTP is decided.
+
+## 2026-11-21: Design brief proposed
+
+- `docs/design/design-brief.md` plus decisions 0007 (visual foundations) and 0008 (interaction, progressive disclosure, hierarchy of explicitness, space), all Proposed. Structure drawn from GOV.UK, Atlassian, Carbon, Primer, Material and NN/g; approach from the FlickVale and AniKansou briefs.
+- No code changed. Left: Flovet to approve 0007 and 0008; then a Jubilee no-ai-slop skill and the design-foundations spec.
+
+## 2026-11-21: Design direction revised, no-ai-slop skill added
+
+- After Flovet's review of the sample screens: 0007 rewritten as "quiet desk, bright moments" (Ownr-style violet and confetti accents, Clemta-style grey wells with light borders, Plus Jakarta Sans); 0008 grouping rule now uses wells and cards; brief updated. All still Proposed.
+- New `.claude/skills/no-ai-slop/SKILL.md`: AI-generated UI, copy and behaviour tells from 7 sources, with Jubilee's rule for each, and how the borrowed Ownr/Clemta patterns stay safe.
+- Sample canvas restyled to the new direction.
+
+## 2026-11-21: Design decisions approved
+
+- Flovet approved 0007 (visual foundations, "quiet desk, bright moments") and 0008 (interaction, disclosure, explicitness and space). The design brief is now Approved.
+- Left: the design-foundations spec (tokens, font, base primitives), then the app shell, CV templates and icon list decisions.
 
 ## 2026-11-21: Design system built (spec 03)
 
@@ -14,24 +61,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - Reviewed 96/100 (first pass 83: reduced-motion leaks, raw values, small toast targets, all fixed). `/design-system` returns 404 in the production build.
 - Left: the app shell (providers, navigation) wires `TooltipProvider` and `ToastProvider`.
 
-## 2026-11-21: Design decisions approved
+## 2026-11-21: Decision 0009 approved
 
-- Flovet approved 0007 (visual foundations, "quiet desk, bright moments") and 0008 (interaction, disclosure, explicitness and space). The design brief is now Approved.
-- Left: the design-foundations spec (tokens, font, base primitives), then the app shell, CV templates and icon list decisions.
+- Flovet approved 0009 in chat. 0007's status notes that its Iconography paragraph is superseded by 0009; 0007 and 0009 link spec 03. Index, brief and spec 03 status updated.
 
-## 2026-11-21: Design direction revised, no-ai-slop skill added
+## 2026-11-21: Design work merged with main
 
-- After Flovet's review of the sample screens: 0007 rewritten as "quiet desk, bright moments" (Ownr-style violet and confetti accents, Clemta-style grey wells with light borders, Plus Jakarta Sans); 0008 grouping rule now uses wells and cards; brief updated. All still Proposed.
-- New `.claude/skills/no-ai-slop/SKILL.md`: AI-generated UI, copy and behaviour tells from 7 sources, with Jubilee's rule for each, and how the borrowed Ownr/Clemta patterns stay safe.
-- Sample canvas restyled to the new direction.
-
-## 2026-11-21: Design brief proposed
-
-- `docs/design/design-brief.md` plus decisions 0007 (visual foundations) and 0008 (interaction, progressive disclosure, hierarchy of explicitness, space), all Proposed. Structure drawn from GOV.UK, Atlassian, Carbon, Primer, Material and NN/g; approach from the FlickVale and AniKansou briefs.
-- No code changed. Left: Flovet to approve 0007 and 0008; then a Jubilee no-ai-slop skill and the design-foundations spec.
-
-## 2026-11-21: Codebase initialised
-
-- Next.js 16.4.6 scaffold with pnpm, Prettier (Tailwind plugin), ESLint + Prettier config, Vitest and one smoke test; `pnpm check` script.
-- Project brief, decision log (0001–0004 Proposed), spec 01 (Blocked on those decisions), product docs, product-team and reviewer skills.
-- Left: Flovet to approve 0001–0004; then build spec 01. Design, AI, job sources, payments and email decisions still to research.
+- main had taken decisions 0005 and 0006 and spec 02 (launch markets, account data, auth database), so the design decisions were renumbered 0007 (visual foundations), 0008 (interaction, disclosure, space) and 0009 (design system), and the design-system spec became 03. `no-ai-slop` moved to `.claude/skills/` with the other skills.
