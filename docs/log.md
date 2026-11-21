@@ -117,4 +117,5 @@ One dated entry per task: what was built, the review score, and what was left.
 - Flovet then asked for regional locales from the start (shared links, countries beyond the launch markets). Proposed 0014, superseding 0003: three language-region locales to start (`/en-us`, `/en-gb`, `/fr-fr`; cut from 11 at Flovet's request, other countries map to one of them), base en/fr messages with small regional overrides, no redirect on deep links, "resume" only in en-US and en-CA. Research: Google hreflang and multi-regional guidance, Stripe, Apple, Notion, Airbnb, resume.io, next-intl routing docs.
 - 0014 approved by Flovet in chat; 0003 marked Superseded by 0014.
 - Spec 06 (regional locales) written, status Ready.
-- Left: build spec 06; then spec and build #10.
+- Spec 07 (CV schema, RLS and data access, #10) written, status Ready. Applying its migration to the remote project waits on Flovet.
+- Left: build spec 06, then spec 07.
