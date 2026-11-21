@@ -115,4 +115,5 @@ One dated entry per task: what was built, the review score, and what was left.
 - 0013 approved by Flovet in chat, with a note that #14 may render the preview in the browser.
 - Naming agreed in chat: "CV" in code and data; on screen "CV" in French and "resume" in English (US) for now; an `en-GB` locale with "CV" when the UK launches. To be logged as 0014.
 - Flovet then asked for regional locales from the start (shared links, countries beyond the launch markets). Proposed 0014, superseding 0003: three language-region locales to start (`/en-us`, `/en-gb`, `/fr-fr`; cut from 11 at Flovet's request, other countries map to one of them), base en/fr messages with small regional overrides, no redirect on deep links, "resume" only in en-US and en-CA. Research: Google hreflang and multi-regional guidance, Stripe, Apple, Notion, Airbnb, resume.io, next-intl routing docs.
-- Left: Flovet to approve 0014; then a routing spec, and spec and build #10.
+- 0014 approved by Flovet in chat; 0003 marked Superseded by 0014.
+- Left: a routing spec for 0014; spec and build #10.
