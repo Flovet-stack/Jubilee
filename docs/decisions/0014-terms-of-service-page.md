@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, Copy, UX, Frontend)
 - **Approved:** 2026-11-21 by Flovet (in chat)
 - **Builds on:** 0011 (same page pattern as the privacy policy), 0013 (sign-in links to it), 0003 (en/fr)
-- **Specs:** none yet
+- **Specs:** specs/07-terms-page.md
 
 ## Context
 

@@ -32,5 +32,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | [04: Privacy page](04-privacy-page.md)       | Done (91/100) |
 | [05: Sign-in](05-sign-in.md)                 | In progress   |
 | [06: Sign-in refresh](06-sign-in-refresh.md) | In progress   |
+| [07: Terms page](07-terms-page.md)           | In progress   |
 
 Planned next (each needs its decisions first): app shell, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

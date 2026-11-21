@@ -158,6 +158,133 @@
       }
     }
   },
+  "terms": {
+    "title": "Terms of service",
+    "description": "The rules for using Jubilee: your account, your content, fair use, and what each of us is responsible for.",
+    "updated": "Last updated: <time>{date}</time>",
+    "intro": "These terms are the agreement between you and Jubilee when you use the Jubilee website and app. By signing in, you accept them, so they are written to be read.",
+    "contents": "On this page",
+    "sections": {
+      "summary": {
+        "title": "In short",
+        "blocks": [
+          "Jubilee is free to use today.",
+          {
+            "list": [
+              "Your CV and everything you put in Jubilee stay yours.",
+              "Jubilee never invents experience, and nothing is sent to an employer without your approval.",
+              "You can delete your account at any time.",
+              "We tell you before any significant change to these terms."
+            ]
+          },
+          "Questions? <contact>Contact us</contact>."
+        ]
+      },
+      "who": {
+        "title": "Who we are",
+        "blocks": [
+          "Jubilee is run by its founder from the United States and is not a registered company yet. In these terms, “we” means the founder running Jubilee.",
+          "When the company is registered, its legal name and address will be added here, and the date at the top of this page will change.",
+          "To reach us, use the <contact>contact page</contact>."
+        ]
+      },
+      "service": {
+        "title": "What Jubilee is today",
+        "blocks": [
+          "Today Jubilee gives you an account that you sign in to with Google, LinkedIn or a code sent to your email.",
+          "Jubilee is being built to help you write your CV, tailor it to jobs and keep track of your applications. Before a new feature arrives, these terms will be updated to cover it."
+        ]
+      },
+      "account": {
+        "title": "Your account",
+        "blocks": [
+          "You must be 16 or older to use Jubilee.",
+          {
+            "list": [
+              "One account per person, in your own name.",
+              "Keep your details accurate.",
+              "Keep your email and sign-in accounts secure. Anyone who can read your email can sign in to Jubilee as you.",
+              "If you think someone else has used your account, tell us through the <contact>contact page</contact>."
+            ]
+          }
+        ]
+      },
+      "content": {
+        "title": "Your content",
+        "blocks": [
+          "What you put into Jubilee, such as your CV, stays yours.",
+          "You allow us to store and process it only to run Jubilee for you, for as long as your account is open. We don't sell it, and we don't use it to train AI models.",
+          "How we handle your personal data is explained in our <privacy>privacy policy</privacy>."
+        ]
+      },
+      "ai": {
+        "title": "AI and job applications",
+        "blocks": [
+          "Jubilee doesn't use AI yet. When it does, these rules apply:",
+          {
+            "list": [
+              "AI never adds experience, skills or dates you don't have.",
+              "You check what it writes before it's used.",
+              "Nothing is sent to an employer without your explicit approval.",
+              "You are responsible for what you send, so make sure it's true."
+            ]
+          }
+        ]
+      },
+      "fairUse": {
+        "title": "Fair use",
+        "blocks": [
+          "Don't use Jubilee to:",
+          {
+            "list": [
+              "put false information about yourself or anyone else in a CV or an application",
+              "pretend to be someone else",
+              "harass, deceive or harm employers, recruiters or anyone else",
+              "break the law or other people's rights, including copyright",
+              "copy, scrape or overload the service, or get into parts of it you aren't allowed to"
+            ]
+          },
+          "If we believe content or use breaks these rules, we may remove the content or limit the account. A person looks at each case, we tell you what we did and why, and you can ask us to review it through the <contact>contact page</contact>."
+        ]
+      },
+      "price": {
+        "title": "Price",
+        "blocks": [
+          "Jubilee is free today.",
+          "If paid features arrive, we'll show the price clearly before you choose them. We never charge you without your consent."
+        ]
+      },
+      "ending": {
+        "title": "Ending your account",
+        "blocks": [
+          "You can stop using Jubilee and delete your account at any time. Until you can do it in the app, ask through the <contact>contact page</contact> and we'll delete it within one month.",
+          "We may suspend or close an account only if it breaks these terms or the law. We'll tell you why, unless the law stops us."
+        ]
+      },
+      "responsibility": {
+        "title": "Our responsibility",
+        "blocks": [
+          "We work to keep Jubilee available and correct, but we can't promise it will always be available or free of errors, or that it will get you a job.",
+          "As far as the law allows, we aren't responsible for indirect losses, such as a missed job opportunity.",
+          "Nothing in these terms limits the rights you have under the consumer law of the country where you live."
+        ]
+      },
+      "changes": {
+        "title": "Changes to these terms",
+        "blocks": [
+          "When these terms change, the date at the top changes too. Before a significant change takes effect, we'll tell you by email or in the app. If you don't agree, you can delete your account."
+        ]
+      },
+      "law": {
+        "title": "Applicable law",
+        "blocks": [
+          "These terms are governed by the laws of the United States.",
+          "If you live in the European Union or another country whose consumer law protects you, you keep the rights that law gives you, and you can bring a claim in the courts where you live.",
+          "If something goes wrong, <contact>tell us</contact> first and we'll try to put it right."
+        ]
+      }
+    }
+  },
   "auth": {
     "providers": {
       "google": "Google",
