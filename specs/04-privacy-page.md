@@ -1,6 +1,6 @@
 # 04: Privacy policy page
 
-Status: Blocked (facts from Flovet missing, see Edge cases) · Written: 2026-11-21
+Status: Done (91/100, 2026-11-21) · Written: 2026-11-21
 
 ## Goal
 
@@ -19,7 +19,7 @@ Implements [0011](../docs/decisions/0011-privacy-policy-page.md). Follows [0002]
 5. Processors and data named on the page match what exists in the repo when the spec is built (0011: Supabase, Vercel, Google and LinkedIn sign-in, the `profiles` row, the session cookie). Nothing undecided is named.
 6. Page metadata: localised title and description, canonical URL and `hreflang` alternates for both locales; listed in `sitemap.ts`.
 7. Visual: one reading column (about 65–75 characters a line), 0007 tokens and 0009 components only, contents list in a grey well, no violet button, no illustrations. Holds at 360 px with no horizontal scroll; passes contrast in light and dark.
-8. The privacy contact email is a `mailto:` link; the CNIL complaint route links to cnil.fr.
+8. Every "contact us" points to the contact page (`/[locale]/contact`, built in a later spec); no email address appears on the page. The CNIL complaint route links to cnil.fr.
 
 ## Out of scope
 
@@ -27,7 +27,7 @@ Header, footer and app shell. Cookie or consent banner. Terms of service. Data e
 
 ## Edge cases
 
-- **Facts Flovet must supply before the text is final:** the controller's legal name and country, a postal address, the privacy contact email, a DPO (or none), the minimum age (0011 proposes 16), and whether "we don't use your CV to train AI" is a commitment. If one is missing at build time, stop and ask; never fill in a placeholder that looks real.
+- **Facts from Flovet (2026-11-21), for a first version to refine later:** the company isn't registered yet, so the page says so and names no legal entity, person or address. Contact goes through the contact page, never a personal email. No DPO. Minimum age 16. Jubilee trains no AI models. Anything still undecided is stated as undecided, never filled with a placeholder that looks real.
 - Long French headings wrap cleanly; contents-list links don't overflow at 360 px.
 - Jump links land below any future sticky header (`scroll-margin-top` from a token).
 - Reduced motion: no smooth-scroll animation when `prefers-reduced-motion` is set.
@@ -50,4 +50,4 @@ Header, footer and app shell. Cookie or consent banner. Terms of service. Data e
 - Screenshots of `/en/privacy` and `/fr/privacy` at 390 px and 1440 px, light and dark.
 - Keyboard-only: Tab reaches every contents link, Enter moves focus to the section.
 - Reviewer skill run against this spec; score of 90 or more.
-- Before public launch (not this spec): a lawyer or GDPR professional reviews both languages, and a native speaker reviews the French.
+- Before public launch (not this spec): the contact page exists (the page links to it five times); the controller is identified, by the registered company's name and address or, if Jubilee launches first, by naming the founder (GDPR art. 13(1)(a)); each provider's transfer safeguard is checked and named; a lawyer or GDPR professional reviews both languages; a native speaker reviews the French.
