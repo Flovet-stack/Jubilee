@@ -1,6 +1,6 @@
 # 0017: Regional locales and what we call a CV
 
-- **Status:** Approved
+- **Status:** Approved; the "URLs" sentence (next-intl `prefixes`) is superseded by [0018](0018-locale-ids-are-url-segments.md)
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Frontend, Copy, Product Designer, UX)
 - **Approved:** 2026-11-21 by Flovet (in chat)
 - **Supersedes:** 0003 (internationalisation)

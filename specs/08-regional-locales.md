@@ -1,6 +1,6 @@
 # 08: Regional locales
 
-Status: Done (96/100, 2026-11-22; the 0017 `prefixes` wording and a real sign-in on `/en-gb` wait on Flovet) · Written: 2026-11-21
+Status: Done (96/100, 2026-11-22; a real sign-in on `/en-gb` waits on Flovet) · Written: 2026-11-21
 
 ## Goal
 
