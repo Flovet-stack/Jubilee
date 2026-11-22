@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-22 by the product team (roles: UX, UI, Frontend, Copy, Tech Lead)
 - **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** none. Adds three fields to 0009's component set; built on 0009's tokens and 0020's sizes.
-- **Specs:** (the spec that implements it)
+- **Specs:** specs/13-phone-date-and-password-fields.md
 
 ## Context
 

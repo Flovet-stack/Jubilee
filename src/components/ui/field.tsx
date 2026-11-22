@@ -66,6 +66,68 @@ export function Field({
   );
 }
 
+type FieldSetProps = Omit<FieldProps, "children"> & {
+  /** Ids of the controls' own descriptions, if any. */
+  children: ReactNode;
+};
+
+/**
+ * A field made of several controls (a month and a year; "From" and "To").
+ * Same look as `Field`, with fieldset/legend semantics so the label names
+ * the group; each control inside carries its own short accessible name.
+ */
+export function FieldSet({
+  label,
+  hint,
+  error,
+  optionalLabel,
+  disabled,
+  className,
+  children,
+}: FieldSetProps) {
+  const id = useId();
+  const invalid = error != null && error !== false && error !== "";
+  return (
+    <fieldset
+      disabled={disabled}
+      aria-describedby={
+        [hint ? `${id}-hint` : "", invalid ? `${id}-error` : ""]
+          .filter(Boolean)
+          .join(" ") || undefined
+      }
+      className={cn("flex min-w-0 flex-col gap-2", className)}
+    >
+      <legend
+        className={cn(
+          "mb-2 text-sm font-semibold text-ink",
+          disabled && "text-ink-subtle",
+        )}
+      >
+        {label}
+        {optionalLabel ? (
+          <span className="font-normal text-ink-muted"> {optionalLabel}</span>
+        ) : null}
+      </legend>
+      {hint ? (
+        <p id={`${id}-hint`} className="-mt-3 text-sm text-ink-muted">
+          {hint}
+        </p>
+      ) : null}
+      {children}
+      {invalid ? (
+        <p
+          id={`${id}-error`}
+          role="alert"
+          className="flex items-start gap-1.5 text-sm font-medium text-danger"
+        >
+          <HugeiconsBadgeAlertIcon size={18} className="mt-px" />
+          <span>{error}</span>
+        </p>
+      ) : null}
+    </fieldset>
+  );
+}
+
 /** Shared control look: inputs, textareas and select triggers. */
 export const controlClasses = cn(
   "w-full min-w-0 bg-card text-base text-ink shadow-[inset_0_0_0_1px_var(--field)]",

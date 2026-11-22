@@ -343,5 +343,41 @@
       "en-gb": "English (United Kingdom)",
       "fr-fr": "Français (France)"
     }
+  },
+  "fields": {
+    "phone": {
+      "label": "Numéro de téléphone",
+      "hint": "Les recruteurs pourront vous appeler à ce numéro.",
+      "country": "Indicatif du pays",
+      "search": "Chercher un pays ou un indicatif",
+      "noMatch": "Aucun pays ne correspond",
+      "invalid": "Saisissez un numéro comme {example}",
+      "required": "Saisissez votre numéro de téléphone"
+    },
+    "date": {
+      "month": "Mois",
+      "year": "Année",
+      "monthPlaceholder": "Mois",
+      "chooseDate": "Choisir une date dans le calendrier",
+      "chooseDates": "Choisir les dates dans le calendrier",
+      "from": "Du",
+      "to": "Au",
+      "current": "J’occupe toujours ce poste",
+      "endBeforeStart": "La date de fin doit être égale ou postérieure à la date de début",
+      "errors": {
+        "incomplete": "Saisissez la date complète",
+        "impossible": "Saisissez une date qui existe",
+        "yearMissing": "Saisissez l’année",
+        "beforeMin": "Saisissez une date plus récente",
+        "afterMax": "Saisissez une date plus ancienne",
+        "required": "Saisissez une date"
+      }
+    },
+    "password": {
+      "label": "Mot de passe",
+      "show": "Afficher le mot de passe",
+      "hide": "Masquer le mot de passe",
+      "capsLock": "Le verrouillage des majuscules est activé"
+    }
   }
 }

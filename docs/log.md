@@ -197,3 +197,17 @@ One dated entry per task: what was built, the review score, and what was left.
 ## 2026-11-22: Design work merged with main again
 
 - main had taken spec 11 (pull request checks) and decision 0023, so the control sizes and radius spec became spec 12. Decisions 0020–0022 kept their numbers (0023 had skipped them).
+
+## 2026-11-22: Spec 13 written, phone, date and password fields
+
+- Spec 13 (Ready) implements 0021: `PhoneField`, `DateField` (year, month, day), `DateRangeField` (with "Current"), `PasswordField`; every state, all three sizes, copy through props, tests for phone and date parsing in English and French, and a bundle check that the libraries load only where used.
+- Left: none (built below).
+
+## 2026-11-22: Phone, date and password fields built (spec 13)
+
+- Added libphonenumber-js 1.13.17, country-flag-icons 1.6.20, react-day-picker 10.0.2 and date-fns 4.4.0 (approved in 0021).
+- `PhoneField`: flag and dial-code button opening a searchable Base UI Combobox (names from `Intl.DisplayNames`), free typing, checked on blur and submit, a pasted `+` number picks its country, E.164 value. Flags are static SVG files at `/flags/XX.svg` (265 prerendered), so no page bundles the set.
+- `DateField` (year, month, day) and `DateRangeField` ("Current", one range calendar, two months from 1024 px), typing first, DayPicker restyled with our tokens. `PasswordField` with show/hide, hide on submit, Caps Lock hint. All controlled or uncontrolled, three sizes, copy through props; `fields.*` in en and fr. New `FieldSet` for multi-control fields.
+- Tests: phone (US, GB, FR, CM, paste, wrong country), dates in English and French (separators, month names, leap years, min/max), range order, and submit behaviour (`src/lib/form-events.ts`). 224 tests pass; `pnpm check` passes.
+- Browser (fr-fr, 1440 light and 390 touch dark): paste switches to Cameroun, French errors with an example number, country search, two-month calendar, range pick, end-before-start error on "To", password hides on submit, 44 px touch targets, no sideways scroll; sign-in and landing load none of the new libraries.
+- Reviewed 85, then 98/100 after adding controlled values, a DOM-free submit test and a token font size.
