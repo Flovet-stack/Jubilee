@@ -1,6 +1,6 @@
 # 08: Regional locales
 
-Status: Ready · Written: 2026-11-21
+Status: In progress (built 2026-11-22, review pending) · Written: 2026-11-21
 
 ## Goal
 
@@ -56,3 +56,18 @@ Implements [0017](../docs/decisions/0017-and-cv-naming.md). Builds on [0002](..
 - Screenshots at 390 px and 1440 px of the picker on the home page, light and dark.
 - Sign-in from `/en-gb/sign-in` lands on `/en-gb/home`.
 - Reviewer skill run against this spec; score of 90 or more.
+
+## Build notes (2026-11-22)
+
+Choices the build made that no decision spells out.
+
+- **Lowercase locale ids instead of next-intl `prefixes`.** The locales are `en-us`, `en-gb`, `fr-fr`, the same string as the URL segment; `localeTag()` in `src/i18n/locales.ts` gives `en-GB` for `<html lang>`, hreflang and the sitemap. With `prefixes`, every existing `/${locale}/...` link (sign-in, legal pages, auth routes, the `next` check) would have produced `/en-GB/...`; this way they stay correct with no rewrite step. `Intl` accepts the lowercase ids, so dates still follow the region (`en-gb` gives day-first). 0017 names `prefixes` as the mechanism; the URLs, tags and behaviour are exactly as decided.
+- **next-intl detection and its cookie are off** (`localeDetection: false`, `localeCookie: false`, `alternateLinks: false`). next-intl 4 rewrites `NEXT_LOCALE` on any document visit whose locale differs (`syncCookie.js`), which would break criterion 4. `/` is chosen in `src/i18n/redirects.ts`; the picker writes the cookie in the browser (one year, `SameSite=Lax`).
+- **The mapping is a rule, not a list:** any French → `fr-fr`; English from US, CA or no region → `en-us`; English from any other region → `en-gb`; anything else → `en-us`. Same result as 0017's table for every listed country, and covers countries it doesn't list.
+- **Copy:** the base `en.json` now says "resume" and uses US spelling ("canceled"), as 0017 says en-US does; the previous British wording moved to `en-GB.json` unchanged. Nine strings, including privacy and terms text, so a legal review of en-US should note "resume".
+- **Overrides of list items** are written as objects keyed by index (`"blocks": { "3": "..." }`), so an override names only the item that differs.
+- **Mixed case** (`/EN-GB/...`) redirects (308) to lowercase.
+- **Unknown prefix** (`/de-de/x`) behaves as before for unknown paths: next-intl prefixes the default locale (`/en-us/de-de/x`), which renders the localised 404. The spec's edge case said the global 404; this is the same behaviour as `/de/x` before this change.
+- **Picker placement:** the home page and both legal pages (they share `LegalDocument`).
+- **Sitemap** entries also list `x-default`.
+- **Not verified here:** a real sign-in from `/en-gb/sign-in` (this worktree has only placeholder Supabase keys). The guard's redirect, the `locale` form field and the callback paths all carry `en-gb`.

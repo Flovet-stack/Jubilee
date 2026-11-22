@@ -1,8 +1,10 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { LocalePicker } from "@/components/locale-picker/locale-picker";
 import { Well } from "@/components/ui/surface";
 import { TextLink } from "@/components/ui/text-link";
+import type { Locale } from "@/i18n/locales";
 
 /** A section body is a run of paragraphs, with an optional bulleted list. */
 type Block = string | { list: string[] };
@@ -21,7 +23,7 @@ export async function LegalDocument({
   lastUpdated,
   links,
 }: {
-  locale: string;
+  locale: Locale;
   namespace: "privacy" | "terms";
   sections: readonly string[];
   /** ISO date; change with every edit to the text. */
@@ -106,6 +108,8 @@ export async function LegalDocument({
             );
           })}
         </div>
+
+        <LocalePicker locale={locale} />
       </article>
     </main>
   );

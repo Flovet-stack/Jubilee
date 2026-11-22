@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
+import { localeTag } from "@/i18n/locales";
 import { routing, type Locale } from "@/i18n/routing";
 
 /**
- * Canonical URL and hreflang alternates for a public page (decision 0003).
+ * Canonical URL and hreflang alternates for a public page (decision 0017):
+ * one per locale, keyed by its BCP 47 tag, plus `x-default`.
  * `path` is the locale-free path: "" for home, "/privacy" for privacy.
  * Relative URLs resolve against `metadataBase` in the root layout.
  */
@@ -12,7 +14,7 @@ export function alternatesFor(
   path = "",
 ): Metadata["alternates"] {
   const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((l) => [l, `/${l}${path}`]),
+    routing.locales.map((l) => [localeTag(l), `/${l}${path}`]),
   );
   languages["x-default"] = `/${routing.defaultLocale}${path}`;
   return { canonical: `/${locale}${path}`, languages };

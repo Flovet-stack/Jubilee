@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { env } from "@/env";
+import { localeTag } from "@/i18n/locales";
 import { routing } from "@/i18n/routing";
 import { jakarta } from "@/lib/fonts";
 import { site } from "@/lib/site";
@@ -37,7 +38,10 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) notFound();
 
   return (
-    <html lang={locale} className={`${jakarta.variable} h-full antialiased`}>
+    <html
+      lang={localeTag(locale)}
+      className={`${jakarta.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 /**
  * 404 for URLs no route matches. It renders outside the `[locale]` layout, so
- * the locale is unknown: it shows both languages, English first (0003 default).
+ * the locale is unknown: it shows both languages, English first (0017 default).
  */
 export default function GlobalNotFound() {
   return (
@@ -25,14 +25,14 @@ export default function GlobalNotFound() {
             title={en.notFound.title}
             body={en.notFound.body}
             homeLabel={en.notFound.home}
-            homeHref="/en"
+            homeHref="/en-us"
           />
           <NotFoundContent
             lang="fr"
             title={fr.notFound.title}
             body={fr.notFound.body}
             homeLabel={fr.notFound.home}
-            homeHref="/fr"
+            homeHref="/fr-fr"
           />
         </main>
       </body>
