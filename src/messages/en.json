@@ -379,5 +379,289 @@
       "hide": "Hide password",
       "capsLock": "Caps Lock is on"
     }
+  },
+  "cv": {
+    "home": {
+      "title": "Your resumes",
+      "empty": "No resume yet. Create one: it takes about 15 minutes.",
+      "create": "Create a resume",
+      "edited": "Edited {date}"
+    },
+    "create": {
+      "metaTitle": "Create a resume",
+      "back": "Home",
+      "title": "Create a resume",
+      "intro": "Choose the language your resume is written in and the country you're applying in. You can write everything else next.",
+      "titleWord": "Resume",
+      "error": "We could not create your resume. Check your connection and try again.",
+      "language": "Language of the resume",
+      "languageHint": "Headings and dates on the page follow this language.",
+      "languages": {
+        "en": "English",
+        "fr": "French"
+      },
+      "market": "Country you're applying in",
+      "marketHint": "Sets the page size: Letter for the US, A4 for France.",
+      "markets": {
+        "US": "United States",
+        "FR": "France"
+      },
+      "submit": "Create resume"
+    },
+    "editor": {
+      "metaTitle": "Edit resume",
+      "back": "Home",
+      "titleLabel": "Resume name",
+      "titleWord": "Resume",
+      "optional": "(optional)",
+      "preview": "Preview",
+      "previewLabel": "Preview of your resume",
+      "closePreview": "Close preview",
+      "sectionsLabel": "Sections",
+      "allSections": "All sections",
+      "addSection": "Add a section",
+      "notStarted": "Not started",
+      "hidden": "Hidden",
+      "entries": "{count, plural, one {# entry} other {# entries}}",
+      "status": {
+        "done": "Done",
+        "todo": "To do"
+      },
+      "steps": {
+        "contact": "Contact details",
+        "summary": "Summary"
+      },
+      "kinds": {
+        "work": "Experience",
+        "education": "Education",
+        "skills": "Skills",
+        "languages": "Languages",
+        "projects": "Projects",
+        "certificates": "Certifications",
+        "awards": "Awards",
+        "volunteer": "Volunteering",
+        "custom": "Custom section"
+      },
+      "section": {
+        "moveUp": "Move up",
+        "moveDown": "Move down",
+        "show": "Show on resume",
+        "hide": "Hide from resume",
+        "remove": "Remove section",
+        "more": "More for {section}"
+      },
+      "sectionRemoved": "Section removed",
+      "dismiss": "Dismiss",
+      "undo": "Undo",
+      "next": "Next: {section}",
+      "seeCv": "See your resume",
+      "pageBreak": "Page {page} starts about here",
+      "namePlaceholder": "Your name",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "heading": "Heading on your resume",
+      "headingHint": "Leave it empty to use the usual heading.",
+      "add": {
+        "work": "Add a job",
+        "education": "Add education",
+        "skills": "Add skills",
+        "languages": "Add a language",
+        "projects": "Add a project",
+        "certificates": "Add a certification",
+        "awards": "Add an award",
+        "volunteer": "Add volunteering",
+        "custom": "Add an entry"
+      },
+      "entry": {
+        "deleted": "Entry deleted",
+        "done": "Done",
+        "delete": "Delete entry",
+        "edit": "Edit {entry}",
+        "untitled": "New entry"
+      },
+      "bullets": {
+        "label": "Bullet {number}",
+        "count": "{count} characters. Aim for 1 or 2 lines.",
+        "add": "Add a bullet",
+        "moveUp": "Move bullet up",
+        "moveDown": "Move bullet down",
+        "remove": "Remove bullet"
+      },
+      "contact": {
+        "name": "Full name",
+        "headline": "Headline",
+        "headlineHint": "The role you're aiming for, for example \"Data analyst\".",
+        "email": "Email",
+        "city": "City",
+        "region": "State or region",
+        "links": "Links",
+        "linksHint": "LinkedIn, a portfolio or GitHub. They print as plain text.",
+        "linkUrl": "Link {number}",
+        "removeLink": "Remove link",
+        "addLink": "Add a link"
+      },
+      "summary": {
+        "label": "Summary"
+      },
+      "fields": {
+        "position": "Job title",
+        "name": "Employer",
+        "location": "Location",
+        "dates": "Dates",
+        "summary": "Description",
+        "highlights": "Achievements",
+        "highlightsHint": "One per bullet. Start with a verb and add a number where you have one.",
+        "currentWork": "I still work here",
+        "currentOngoing": "Ongoing",
+        "currentStudy": "I still study here",
+        "organization": "Organization",
+        "studyType": "Degree",
+        "area": "Field of study",
+        "institution": "School or university",
+        "score": "Grade",
+        "courses": "Relevant courses",
+        "listHint": "Type one and press Enter, or paste a list separated by commas.",
+        "removeItem": "Remove {item}",
+        "keywords": "Skills",
+        "group": "Group name",
+        "groupHint": "For example \"Languages\" or \"Tools\". Leave it empty for one simple list.",
+        "language": "Language",
+        "fluency": "Level",
+        "fluencyHint": "For example \"Native\" or \"Fluent\".",
+        "projectName": "Project name",
+        "url": "Link",
+        "description": "Description",
+        "certificate": "Certification",
+        "issuer": "Issued by",
+        "date": "Date",
+        "title": "Title",
+        "awarder": "Awarded by",
+        "subtitle": "Subtitle"
+      },
+      "errors": {
+        "email": "Enter an email address like name@example.com",
+        "url": "Enter a full link that starts with https://"
+      },
+      "save": {
+        "saved": "Saved",
+        "saving": "Saving…",
+        "heldBack": "{count, plural, one {1 field not saved. Fix it to save it.} other {# fields not saved. Fix them to save them.}}",
+        "offline": "Not saved. Check your connection.",
+        "retry": "Try again",
+        "conflict": "This resume changed in another tab.",
+        "reload": "Reload",
+        "tooLarge": "Not saved: this resume is too long. Remove some text to save it."
+      },
+      "loadError": {
+        "title": "This resume cannot be opened",
+        "body": "Its content could not be read. Your other resumes are not affected."
+      }
+    },
+    "guidance": {
+      "howTo": "How to write this",
+      "exampleLabel": "Example",
+      "contact": {
+        "hint": "How employers reach you. Your name and an email or phone are enough to start.",
+        "tips": [
+          "Use an email address with your name in it.",
+          "Your city is enough: no street address.",
+          "Add LinkedIn if your profile is up to date."
+        ],
+        "example": "Amina Diallo · Paris, France · amina.diallo@example.com · +33 6 12 34 56 78"
+      },
+      "summary": {
+        "hint": "Two to four lines at the top of your resume. Write it last: it's easier once your experience is down.",
+        "tips": [
+          "Say who you are and what you're looking for.",
+          "Name 2 or 3 strengths the job needs.",
+          "Leave out \"I\" and generic words like \"motivated\"."
+        ],
+        "example": "Data analyst with 4 years in retail. I turn sales data into weekly reports managers use, and I'm looking for an analyst role in e-commerce."
+      },
+      "work": {
+        "hint": "Your jobs, most recent first. Internships and part-time jobs count.",
+        "tips": [
+          "Start each bullet with a verb: led, built, cut, grew.",
+          "Add a number where you have one: what, how, and the result.",
+          "Keep each bullet to 1 or 2 lines.",
+          "3 to 5 bullets for recent jobs, fewer for older ones."
+        ],
+        "example": "Cut monthly reporting time from 3 days to 1 by automating the sales dashboard in Excel."
+      },
+      "education": {
+        "hint": "Degrees and training, most recent first.",
+        "tips": [
+          "Put the degree first, then the school.",
+          "Add a grade only if it helps you.",
+          "List courses when you have little work experience."
+        ],
+        "example": "BSc, Economics · University of Lagos · 2018 – 2021"
+      },
+      "skills": {
+        "hint": "Tools and skills the jobs you want ask for.",
+        "tips": [
+          "Use the words job ads use.",
+          "Group them if the list gets long: Tools, Languages, Methods.",
+          "No bars or ratings: they do not read well in applicant tracking systems."
+        ],
+        "example": "Tools: Excel, SQL, Power BI"
+      },
+      "languages": {
+        "hint": "Languages you speak, with your level.",
+        "tips": [
+          "Use plain levels: native, fluent, intermediate, basic.",
+          "List your strongest language first."
+        ],
+        "example": "French: native, English: fluent"
+      },
+      "projects": {
+        "hint": "Work you did on your own or at school that shows a skill.",
+        "tips": [
+          "Say what you built and why.",
+          "Add a link if people can see it."
+        ],
+        "example": "Built a budget app used by 200 students, in React."
+      },
+      "certificates": {
+        "hint": "Certifications and licences that matter for the job.",
+        "tips": [
+          "Use the certification's official name.",
+          "Add the date you earned it."
+        ],
+        "example": "Google Data Analytics, Coursera · Mar 2024"
+      },
+      "awards": {
+        "hint": "Prizes and honours, with who gave them.",
+        "tips": ["Keep it to awards an employer would care about."],
+        "example": "Best final-year project, University of Yaoundé I · 2022"
+      },
+      "volunteer": {
+        "hint": "Unpaid work counts, especially when it shows skills the job needs.",
+        "tips": ["Write it like a job: role, organization, dates, results."],
+        "example": "Taught weekly coding classes to 30 secondary-school students."
+      },
+      "custom": {
+        "hint": "Anything that does not fit elsewhere: publications, talks, interests.",
+        "tips": [
+          "Give the section a clear heading.",
+          "Keep the same layout as your other entries."
+        ],
+        "example": "Speaker, Lagos Data Meetup · 2023"
+      }
+    },
+    "document": {
+      "headings": {
+        "work": "Work Experience",
+        "education": "Education",
+        "skills": "Skills",
+        "languages": "Languages",
+        "projects": "Projects",
+        "certificates": "Certifications",
+        "awards": "Awards",
+        "volunteer": "Volunteering",
+        "custom": "Other"
+      },
+      "present": "Present"
+    }
   }
 }

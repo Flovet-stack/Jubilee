@@ -69,10 +69,16 @@ export async function createCv(input: {
   return ok({ id: data.id });
 }
 
-/** Replaces the content of a CV or version after validating all of it. */
+/**
+ * Replaces the content of a CV or version after validating all of it. With
+ * `expectedUpdatedAt` (the editor's autosave, 0024 §4), the write only
+ * happens if the row hasn't changed since; otherwise it's a `conflict` and
+ * nothing is overwritten.
+ */
 export async function saveContent(
   target: CvTarget,
   content: unknown,
+  expectedUpdatedAt?: string,
 ): Promise<Result<{ updatedAt: string }>> {
   if (!isUuid(target.id)) return fail({ code: "not_found" });
   const valid = validateContent(content);
@@ -81,18 +87,49 @@ export async function saveContent(
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
 
-  const { data, error } = await supabase
+  let update = supabase
     .from(TABLE[target.kind])
     .update({
       content: asJson(valid.value),
       schema_version: CV_SCHEMA_VERSION,
     })
+    .eq("id", target.id);
+  if (expectedUpdatedAt) update = update.eq("updated_at", expectedUpdatedAt);
+  const { data, error } = await update.select("updated_at").maybeSingle();
+  if (error) return fail(errorFromDatabase(error));
+  if (data) return ok({ updatedAt: data.updated_at });
+  if (!expectedUpdatedAt) return fail({ code: "not_found" });
+
+  // Nothing matched: either the row is gone or it changed since.
+  const { data: row } = await supabase
+    .from(TABLE[target.kind])
+    .select("id")
     .eq("id", target.id)
-    .select("updated_at")
+    .maybeSingle();
+  return fail({ code: row ? "conflict" : "not_found" });
+}
+
+/** Renames a CV or version. */
+export async function renameCvDocument(
+  target: CvTarget,
+  title: string,
+): Promise<Result<{ title: string; updatedAt: string }>> {
+  if (!isUuid(target.id)) return fail({ code: "not_found" });
+  const parsed = newCvSchema.shape.title.safeParse(title);
+  if (!parsed.success) return invalidInput(parsed.error.issues);
+
+  const supabase = await signedInClient();
+  if (!supabase) return fail({ code: "unauthenticated" });
+
+  const { data, error } = await supabase
+    .from(TABLE[target.kind])
+    .update({ title: parsed.data })
+    .eq("id", target.id)
+    .select("title, updated_at")
     .maybeSingle();
   if (error) return fail(errorFromDatabase(error));
   if (!data) return fail({ code: "not_found" });
-  return ok({ updatedAt: data.updated_at });
+  return ok({ title: data.title, updatedAt: data.updated_at });
 }
 
 /** A version of a master CV, starting from a copy of its content. */

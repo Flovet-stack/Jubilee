@@ -5,6 +5,11 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
+import { HugeiconsPlusIcon } from "@/components/icons";
+import { CardLink, Well } from "@/components/ui/surface";
+import { listCvs } from "@/features/cv/queries";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/feedback";
 import { signOut } from "@/features/auth/actions";
 import { getGreetingName } from "@/features/auth/queries";
@@ -38,6 +43,9 @@ export default async function HomePage({
         </Suspense>
         <p className="text-ink-muted">{t("body")}</p>
       </div>
+      <Suspense fallback={<Skeleton className="h-40 w-full" />}>
+        <CvList locale={locale} />
+      </Suspense>
       <form action={signOut}>
         <input type="hidden" name="locale" value={locale} />
         <Button type="submit">{t("signOut")}</Button>
@@ -53,5 +61,49 @@ async function Greeting({ locale }: { locale: Locale }) {
     <h1 className="text-3xl font-bold text-ink sm:text-4xl">
       {name ? t("greeting", { name }) : t("greetingNoName")}
     </h1>
+  );
+}
+
+/** The user's CVs (spec 14), until the app shell decision replaces Home. */
+async function CvList({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "cv.home" });
+  const result = await listCvs();
+  const cvs = result.ok ? result.value : [];
+  const date = new Intl.DateTimeFormat(locale, { dateStyle: "medium" });
+  const create = (
+    <Link
+      href={`/${locale}/cvs/new`}
+      className={buttonVariants({ variant: "primary", size: "md" })}
+    >
+      <HugeiconsPlusIcon size={20} />
+      {t("create")}
+    </Link>
+  );
+
+  return (
+    <Well title={t("title")} actions={cvs.length > 0 ? create : undefined}>
+      {cvs.length === 0 ? (
+        <div className="flex flex-col items-start gap-4">
+          <p className="text-ink-muted">{t("empty")}</p>
+          {create}
+        </div>
+      ) : (
+        <ul className="flex flex-col gap-3">
+          {cvs.map((cv) => (
+            <li key={cv.id}>
+              <CardLink
+                href={`/${locale}/cvs/${cv.id}`}
+                className="flex flex-col gap-1 p-4"
+              >
+                <span className="font-semibold text-ink">{cv.title}</span>
+                <span className="text-sm text-ink-muted">
+                  {t("edited", { date: date.format(new Date(cv.updatedAt)) })}
+                </span>
+              </CardLink>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Well>
   );
 }

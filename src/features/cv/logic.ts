@@ -8,6 +8,8 @@ export type CvError =
   | { code: "invalid_input"; issues: string[] }
   | { code: "invalid_content"; issues: string[] }
   | { code: "too_large" }
+  /** The row changed since the editor loaded it (another tab): 0024 §4. */
+  | { code: "conflict" }
   | { code: "database" };
 
 export type Result<T> = { ok: true; value: T } | { ok: false; error: CvError };
@@ -110,4 +112,22 @@ export function errorFromDatabase(error: {
     return { code: "not_found" };
   }
   return { code: "database" };
+}
+
+/** Issue paths for `savableContent` (editor.ts). */
+export function contentIssuePaths(
+  raw: unknown,
+):
+  { ok: true; value: CvContent } | { ok: false; paths: (string | number)[][] } {
+  const parsed = cvContentSchema.safeParse(raw);
+  return parsed.success
+    ? { ok: true, value: parsed.data }
+    : {
+        ok: false,
+        paths: parsed.error.issues.map((issue) =>
+          issue.path.filter(
+            (key): key is string | number => typeof key !== "symbol",
+          ),
+        ),
+      };
 }
