@@ -1,6 +1,6 @@
 # 09: CV schema, RLS and data access
 
-Status: Ready · Written: 2026-11-22 · Issue: #10
+Status: In progress (built locally 2026-11-22; migration not applied to the remote project yet) · Written: 2026-11-22 · Issue: #10
 
 ## Goal
 
@@ -54,3 +54,16 @@ Any screen or route; the PDF and react-pdf (#15); AI proposals and how they're s
 - `list_migrations` shows the new migration on the remote project, after Flovet's go-ahead.
 - `get_advisors` (security and performance) output.
 - Reviewer skill run against this spec; score of 90 or more.
+
+## Build notes (2026-11-22)
+
+Choices the build made that no decision spells out.
+
+- **Ownership in the database:** each table has `unique (id, user_id)`, and versions and revisions point at `(cv_id, user_id)` / `(cv_version_id, user_id)` with composite foreign keys, so a row can only reference a CV of the same user. `on delete set null (cv_id)` keeps a version when its master is deleted (Postgres 15+).
+- **Column grants:** `user_id`, `cv_id` and the revision columns can't be updated by `authenticated`; only content, title, language, market, template, schema version (and a version's `job_id`) can.
+- **Restore is one SQL function**, `restore_cv_revision(revision_id, content, schema_version)`, `security invoker` with `search_path = ''`, so writing the content and appending the `restore` revision happen in one transaction. The app migrates the content first (`migrateContent`), so a future schema version still restores through code.
+- **`template` is nullable** (null = the default template) until the CV templates decision names the templates.
+- **IDs inside content are UUIDs.** Text fields are trimmed and capped; links must be `http(s)`. End dates are compared with start dates at the precision both share (`1843-05` to `1843` is fine).
+- **Revision indexes** are `(cv_id, user_id, created_at desc)` and `(cv_version_id, user_id, created_at desc)`, so they also cover the composite foreign keys.
+- **Types** for the three tables and the function were written by hand in the generator's shape so the code typechecks; they are replaced by `generate_typescript_types` once the migration is applied.
+- **The data functions are plain server functions**, not `"use server"` actions: there are no screens yet, and the builder (#14) wraps the ones it needs.
