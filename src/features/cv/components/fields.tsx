@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { type ReactNode, useId, useState } from "react";
+import { type ReactNode, useEffect, useId, useRef, useState } from "react";
 
 import {
   HugeiconsChevronDownIcon,
@@ -146,24 +146,28 @@ export function DatesField({
   languageTag: string;
   onChange: (dates: { startDate?: string; endDate?: string }) => void;
 }) {
-  const { range } = useDateMessages();
+  const { range: rangeMessages } = useDateMessages();
+  const range = {
+    start: start ?? null,
+    end: end ?? null,
+    current: Boolean(start) && !end,
+  };
   return (
     <DateRangeField
       label={label}
       precision="month"
       languageTag={languageTag}
-      value={{
-        start: start ?? null,
-        end: end ?? null,
-        current: Boolean(start) && !end,
-      }}
+      // The field reads its first value from defaultValue and later ones
+      // from value, so both are passed.
+      defaultValue={range}
+      value={range}
       onValueChange={(value) =>
         onChange({
           startDate: value.start ?? undefined,
           endDate: value.current ? undefined : (value.end ?? undefined),
         })
       }
-      messages={range(currentLabel)}
+      messages={rangeMessages(currentLabel)}
     />
   );
 }
@@ -187,6 +191,7 @@ export function MonthField({
       optionalLabel={t("optional")}
       precision="month"
       languageTag={languageTag}
+      defaultValue={value ?? null}
       value={value ?? null}
       onValueChange={(next) => onChange(next ?? undefined)}
       messages={messages}
@@ -213,6 +218,16 @@ export function BulletsField({
 }) {
   const t = useTranslations("cv.editor.bullets");
   const groupId = useId();
+  const list = useRef<HTMLOListElement>(null);
+  const focusLast = useRef(false);
+  // A new bullet gets the cursor, so typing goes straight into it.
+  useEffect(() => {
+    if (!focusLast.current) return;
+    focusLast.current = false;
+    list.current
+      ?.querySelector<HTMLTextAreaElement>("li:last-child textarea")
+      ?.focus();
+  }, [items.length]);
   const set = (index: number, value: string) =>
     onChange(items.map((item, i) => (i === index ? value : item)));
   return (
@@ -226,7 +241,7 @@ export function BulletsField({
           {hint}
         </p>
       ) : null}
-      <ol className="flex flex-col gap-2">
+      <ol ref={list} className="flex flex-col gap-2">
         {items.map((item, index) => (
           <li key={index} className="group/row flex items-start gap-1">
             <span aria-hidden className="mt-2.5 w-4 shrink-0 text-ink-muted">
@@ -272,7 +287,10 @@ export function BulletsField({
         size="sm"
         className="self-start"
         icon={<HugeiconsPlusIcon size={18} />}
-        onClick={() => onChange([...items, ""])}
+        onClick={() => {
+          focusLast.current = true;
+          onChange([...items, ""]);
+        }}
         disabled={items.length >= 20}
       >
         {t("add")}

@@ -4,12 +4,10 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { HugeiconsPlusIcon } from "@/components/icons";
 import { CardLink, Well } from "@/components/ui/surface";
 import { listCvs } from "@/features/cv/queries";
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/feedback";
 import { signOut } from "@/features/auth/actions";
 import { getGreetingName } from "@/features/auth/queries";
@@ -71,13 +69,13 @@ async function CvList({ locale }: { locale: Locale }) {
   const cvs = result.ok ? result.value : [];
   const date = new Intl.DateTimeFormat(locale, { dateStyle: "medium" });
   const create = (
-    <Link
+    <ButtonLink
       href={`/${locale}/cvs/new`}
-      className={buttonVariants({ variant: "primary", size: "md" })}
+      variant="primary"
+      icon={<HugeiconsPlusIcon size={20} />}
     >
-      <HugeiconsPlusIcon size={20} />
       {t("create")}
-    </Link>
+    </ButtonLink>
   );
 
   return (

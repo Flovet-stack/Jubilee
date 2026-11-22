@@ -441,7 +441,7 @@ export function CvEditor(props: CvEditorProps) {
   );
 
   return (
-    <div className="mx-auto flex w-full max-w-(--container-content) flex-col gap-6 px-4 py-4 lg:px-6 lg:py-6">
+    <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-6 px-4 py-4 lg:px-6 lg:py-6">
       <header className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link
           href={homeHref}

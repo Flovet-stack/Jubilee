@@ -48,13 +48,14 @@ export function useAutosave({
   const stopped = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const dirty = useCallback(
-    () => JSON.stringify(draft.current) !== savedJson.current,
-    [],
-  );
+  // Edits are counted, so "unsaved" never depends on key order or trimming.
+  const editCount = useRef(0);
+  const savedCount = useRef(0);
+  const dirty = useCallback(() => editCount.current !== savedCount.current, []);
 
   const run = useCallback(async (): Promise<void> => {
     if (stopped.current) return;
+    const count = editCount.current;
     const next = savableContent(
       draft.current,
       saved.current,
@@ -67,6 +68,7 @@ export function useAutosave({
     setHeldBack(next.heldBack);
     const json = JSON.stringify(next.content);
     if (json === savedJson.current) {
+      if (next.heldBack === 0) savedCount.current = count;
       setStatus(next.heldBack > 0 ? "pending" : "saved");
       return;
     }
@@ -83,6 +85,7 @@ export function useAutosave({
         saved.current = next.content;
         savedJson.current = json;
         updatedAt.current = result.value.updatedAt;
+        if (next.heldBack === 0) savedCount.current = count;
         setStatus(next.heldBack > 0 || dirty() ? "pending" : "saved");
         return;
       }
@@ -122,6 +125,7 @@ export function useAutosave({
     (recipe: (current: CvContent) => CvContent) => {
       const next = recipe(draft.current);
       draft.current = next;
+      editCount.current += 1;
       setContent(next);
       if (stopped.current) return;
       setStatus((s) => (s === "saving" ? s : "pending"));
