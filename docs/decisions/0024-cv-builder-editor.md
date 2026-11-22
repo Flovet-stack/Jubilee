@@ -1,8 +1,8 @@
 # 0024: CV builder: guided editor, live preview and autosave
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-22 by the product team (roles: Product, UX, UI, Copy, Frontend, Backend, Tech Lead, PM)
-- **Approved:**
+- **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** none. Builds on 0008 §2 (the CV editor is a section list, not a locked wizard), 0016 (data model, revisions, react-pdf) and 0021 (date and phone fields).
 - **Specs:** (the builder spec, #14)
 
