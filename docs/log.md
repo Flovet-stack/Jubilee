@@ -137,4 +137,5 @@ One dated entry per task: what was built, the review score, and what was left.
 - `/en-us`, `/en-gb`, `/fr-fr` replace `/en` and `/fr`. `/` picks by saved choice, then `Accept-Language` (any French → fr-FR; English outside the US and Canada → en-GB). Shared links never redirect and never change the saved choice; next-intl's own detection and cookie are off. Old `/en`, `/fr` and mixed-case links redirect (308). Picker on the home and legal pages.
 - Copy: `en.json` is now US English ("resume", "canceled"), including privacy and terms text; the "CV" wording moved to `en-GB.json`. Privacy and terms "last updated" set to 2026-11-22. A legal review should cover the en-US wording.
 - Reviewed 96/100. Fixed after review: a broken decision link in specs 08 and 09, the cookie wording in the privacy policy, `Secure` on the locale cookie.
-- Left: Flovet to approve one wording change to 0017 (locale ids are the lowercase URL segments, not next-intl `prefixes`; see spec 08 build notes); a real sign-in from `/en-gb/sign-in` with real Supabase keys.
+- Decision 0018 approved by Flovet: locale ids are the lowercase URL segments, not next-intl `prefixes` (supersedes that sentence of 0017).
+- Left: a real sign-in from `/en-gb/sign-in` with real Supabase keys.
