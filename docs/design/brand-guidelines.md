@@ -1,6 +1,6 @@
 # Jubilee brand guidelines
 
-- **Status:** Proposed with [0010](../decisions/0010-logo-and-brand-identity.md). Nothing is built on it until Flovet approves 0010.
+- **Status:** Approved with [0010](../decisions/0010-logo-and-brand-identity.md) and [0019](../decisions/0019-logo-icon-staircase.md) (the staircase icon).
 - **Written:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
 - **Files:** [`docs/design/brand/logo/`](brand/logo/)
 - **Related:** [design brief](design-brief.md) (voice, principles) · [0007 visual foundations](../decisions/0007-visual-foundations.md) (colour and type tokens)
@@ -24,7 +24,7 @@ We read how large product companies publish their logo rules and kept the parts 
 
 ## 1. The idea
 
-**The path.** Five dots rise from left to right and grow as they go: the steps of a job search, from a saved job through applications and interviews, ending on the offer. The first four are violet, the colour of the work. The last and largest is marigold, the colour Jubilee keeps for earned moments (0007). The logo tells the product's promise in one shape: steady steps, then the offer.
+**The steps.** Six equal dots build a staircase of three steps (one, two, three dots), rising from left to right: the work of a job search, step by step, ending on the offer. The five work dots are violet and grow stronger as they climb; the top dot is marigold, the colour Jubilee keeps for earned moments (0007). The logo tells the product's promise in one shape: steady steps, then the offer.
 
 The name is a custom monoline logotype: lowercase, round ends, one stroke weight, built on the geometry of Plus Jakarta Sans. It is drawn, not typed; never set "jubilee" in a font as a stand-in.
 
@@ -46,13 +46,14 @@ The name is a custom monoline logotype: lowercase, round ends, one stroke weight
 
 ## 3. Construction and clear space
 
-The unit is **x**: the x-height of the name, the height of the "u". In the logo file, x is 78 of 639 units, about 12% of the logo's width.
+The unit is **x**: the x-height of the name, the height of the "u". In the logo file, x is 78 of 615 units, about 13% of the logo's width.
 
-- **Icon height** = the name's height from the top of "b" and "l" to the baseline (1.5 x). The bottom dot sits on the baseline; the top of the marigold dot lines up with the top of the "b".
+- **Icon height** = the name's height from the top of "b" and "l" to the baseline (1.5 x). The bottom row of dots sits on the baseline; the top of the marigold dot lines up with the top of the "b".
 - **Gap** between icon and name = ½ x.
 - **Clear space** around the logo and the wordmark = 1 x on every side. Nothing (text, edges, other logos) enters it.
 - **Clear space** around the icon alone = ¼ of the icon's height.
-- **App icon safe area:** the dots stay inside the middle 75% of the tile.
+- **Icon grid:** dots of diameter 15 on a 20-unit grid (gap = ⅓ of a dot). The violet dots step in opacity by diagonal: 50%, 65%, 80%, 95% from bottom left to top right.
+- **App icon safe area:** the staircase fills the middle 57% of the tile, centred.
 
 The files already carry these proportions. Scale them as a whole; never rebuild the logo from the parts.
 
@@ -64,7 +65,7 @@ Below these, the smallest dot stops reading.
 | -------- | ----------- | ----- | ------------------------------- |
 | Logo     | 120 px wide | 30 mm | Use the icon or the wordmark    |
 | Wordmark | 64 px wide  | 16 mm | Write "Jubilee" in text instead |
-| Icon     | 32 px tall  | 8 mm  | Use the favicon (three dots)    |
+| Icon     | 32 px tall  | 8 mm  | Use the favicon                 |
 | Favicon  | 16 px       | n/a   | Nothing smaller                 |
 
 ## 5. Colour versions
@@ -85,8 +86,8 @@ The marigold dot is the one exception to 0007's rule that bright colours stay of
 
 ## 6. Small sizes and the app icon
 
-- **Favicon:** three dots instead of five (two white, one marigold) on the violet tile, so the shape still reads at 16 px. Use it for every size under 32 px.
-- **App icon:** the five dots, white and marigold, on a violet tile. The rounded file is for places that show it as-is; the square file is for iOS and Android, which round the corners themselves.
+- **Favicon:** the same staircase with bigger dots and less padding (68% of the tile), so it still reads at 16 px. Use it for every size under 32 px.
+- **App icon:** the staircase, white dots stepping in opacity and the marigold top dot, on a flat violet tile (no gradient: 0007). The rounded file is for places that show it as-is; the square file is for iOS and Android, which round the corners themselves.
 - Never put the full logo (icon plus name) in a square slot; the name becomes unreadable.
 
 ## 7. The name in text
@@ -101,7 +102,7 @@ The marigold dot is the one exception to 0007's rule that bright colours stay of
 
 1. Stretch, squash, rotate, flip or skew any version.
 2. Change the colours, swap which dot is marigold, or make more than one dot marigold.
-3. Add or remove dots in the icon (the favicon's three dots are the only small version).
+3. Add, remove or move dots in the icon, or change their opacity steps.
 4. Rearrange the icon and name, change the gap, or stack them in a new way.
 5. Set "jubilee" in a font instead of using the drawn wordmark.
 6. Add shadows, outlines, glows, gradients or 3D effects (0007: no gradients, glows or glass, ever).
@@ -128,10 +129,10 @@ All files are SVG in [`docs/design/brand/logo/`](brand/logo/), drawn on the shar
 | `jubilee-icon-on-dark.svg`      | Icon alone, dark backgrounds          |
 | `jubilee-app-icon.svg`          | App icon, rounded tile                |
 | `jubilee-app-icon-square.svg`   | App icon, square (platform rounds it) |
-| `jubilee-favicon.svg`           | Favicon, three dots                   |
+| `jubilee-favicon.svg`           | Favicon, bigger dots for 16–31 px     |
 
-PNG and ICO exports (favicon.ico, apple-touch-icon, store icons, social images) are generated from these SVGs when the app shell is built; that work needs its own spec.
+The app's `src/app/favicon.ico` (16, 32, 48 px), `src/app/icon.svg` and `src/app/apple-icon.png` (180 px) are generated from these SVGs with `node scripts/render-brand-icons.mjs .` (spec 10). Run it again after any change to the files here. Store icons and social images are not made yet.
 
 ## 10. Changes
 
-The logo changes only through a new decision that supersedes 0010. Update the files here first; every other copy is generated from them.
+The logo changes only through a new decision that supersedes 0010 (0019 replaced the icon with the staircase). Update the files here first; every other copy is generated from them.
