@@ -43,6 +43,9 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0021 | [Phone, date and password fields](0021-phone-date-and-password-fields.md)                                          | Approved           |
 | 0022 | [Corner radius by size](0022-corner-radius-by-size.md) (supersedes 0007's control and card radius)                 | Approved           |
 | 0023 | [Run `pnpm check` on every pull request](0023-pull-request-checks.md)                                              | Approved           |
+| 0024 | [CV builder: guided editor, live preview and autosave](0024-cv-builder-editor.md)                                  | Approved           |
+| 0025 | [The first CV template and its typography](0025-first-cv-template-and-typography.md) (partly superseded by 0026)   | Approved           |
+| 0026 | [CV entry layout in four corners, tighter body lines](0026-cv-entry-layout.md)                                     | Approved           |
 
 ## Still to decide (before the specs that need them)
 

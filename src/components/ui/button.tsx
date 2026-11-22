@@ -2,7 +2,8 @@
 
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ReactNode } from "react";
+import Link from "next/link";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -211,4 +212,37 @@ export function IconButton({
   );
   if (!tooltip) return button;
   return <Tooltip content={label}>{button}</Tooltip>;
+}
+
+type ButtonLinkProps = ComponentProps<typeof Link> &
+  Omit<VariantProps<typeof buttonVariants>, "iconOnly"> & {
+    /** An icon before the label (20 px, decorative). */
+    icon?: ReactNode;
+  };
+
+/**
+ * A link that looks like a button, for navigation ("Create a CV"). Lives
+ * here so server components can render it without calling `buttonVariants`.
+ */
+export function ButtonLink({
+  className,
+  variant,
+  size,
+  fullWidth,
+  icon,
+  children,
+  ...props
+}: ButtonLinkProps) {
+  return (
+    <Link
+      className={cn(
+        buttonVariants({ variant, size, fullWidth, iconOnly: false }),
+        className,
+      )}
+      {...props}
+    >
+      {icon}
+      {children}
+    </Link>
+  );
 }

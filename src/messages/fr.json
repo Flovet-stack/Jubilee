@@ -379,5 +379,292 @@
       "hide": "Masquer le mot de passe",
       "capsLock": "Le verrouillage des majuscules est activé"
     }
+  },
+  "cv": {
+    "home": {
+      "title": "Vos CV",
+      "empty": "Aucun CV pour l’instant. Créez-en un : comptez environ 15 minutes.",
+      "create": "Créer un CV",
+      "edited": "Modifié le {date}"
+    },
+    "create": {
+      "metaTitle": "Créer un CV",
+      "back": "Accueil",
+      "title": "Créer un CV",
+      "intro": "Choisissez la langue de votre CV et le pays où vous postulez. Vous rédigerez le reste ensuite.",
+      "titleWord": "CV",
+      "error": "Votre CV n’a pas pu être créé. Vérifiez votre connexion et réessayez.",
+      "language": "Langue du CV",
+      "languageHint": "Les titres et les dates du document suivent cette langue.",
+      "languages": {
+        "en": "Anglais",
+        "fr": "Français"
+      },
+      "market": "Pays où vous postulez",
+      "marketHint": "Définit le format de page : Letter pour les États-Unis, A4 pour la France.",
+      "markets": {
+        "US": "États-Unis",
+        "FR": "France"
+      },
+      "submit": "Créer le CV"
+    },
+    "editor": {
+      "metaTitle": "Modifier le CV",
+      "back": "Accueil",
+      "titleLabel": "Nom du CV",
+      "titleWord": "CV",
+      "optional": "(facultatif)",
+      "preview": "Aperçu",
+      "previewLabel": "Aperçu de votre CV",
+      "closePreview": "Fermer l’aperçu",
+      "sectionsLabel": "Sections",
+      "allSections": "Toutes les sections",
+      "addSection": "Ajouter une section",
+      "notStarted": "Pas commencé",
+      "hidden": "Masquée",
+      "entries": "{count, plural, one {# élément} other {# éléments}}",
+      "status": {
+        "done": "Fait",
+        "todo": "À faire"
+      },
+      "steps": {
+        "contact": "Coordonnées",
+        "summary": "Profil"
+      },
+      "kinds": {
+        "work": "Expérience",
+        "education": "Formation",
+        "skills": "Compétences",
+        "languages": "Langues",
+        "projects": "Projets",
+        "certificates": "Certifications",
+        "awards": "Distinctions",
+        "volunteer": "Bénévolat",
+        "custom": "Section libre"
+      },
+      "section": {
+        "moveUp": "Monter",
+        "moveDown": "Descendre",
+        "show": "Afficher sur le CV",
+        "hide": "Masquer du CV",
+        "remove": "Supprimer la section",
+        "more": "Plus d’options pour {section}"
+      },
+      "sectionRemoved": "Section supprimée",
+      "dismiss": "Fermer",
+      "undo": "Annuler",
+      "next": "Suivant : {section}",
+      "seeCv": "Voir votre CV",
+      "pageBreak": "La page {page} commence environ ici",
+      "namePlaceholder": "Votre nom",
+      "moveUp": "Monter",
+      "moveDown": "Descendre",
+      "heading": "Titre sur votre CV",
+      "headingHint": "Laissez vide pour utiliser le titre habituel.",
+      "add": {
+        "work": "Ajouter un poste",
+        "education": "Ajouter une formation",
+        "skills": "Ajouter des compétences",
+        "languages": "Ajouter une langue",
+        "projects": "Ajouter un projet",
+        "certificates": "Ajouter une certification",
+        "awards": "Ajouter une distinction",
+        "volunteer": "Ajouter du bénévolat",
+        "custom": "Ajouter un élément"
+      },
+      "entry": {
+        "deleted": "Élément supprimé",
+        "done": "Terminé",
+        "delete": "Supprimer l’élément",
+        "edit": "Modifier {entry}",
+        "untitled": "Nouvel élément"
+      },
+      "bullets": {
+        "label": "Point {number}",
+        "count": "{count} caractères. Visez 1 ou 2 lignes.",
+        "add": "Ajouter un point",
+        "moveUp": "Monter le point",
+        "moveDown": "Descendre le point",
+        "remove": "Supprimer le point"
+      },
+      "contact": {
+        "name": "Nom complet",
+        "headline": "Titre",
+        "headlineHint": "Le poste visé, par exemple « Analyste de données ».",
+        "email": "E-mail",
+        "city": "Ville",
+        "region": "Région",
+        "links": "Liens",
+        "linksHint": "LinkedIn, un portfolio ou GitHub. Ils s’affichent en texte simple.",
+        "linkUrl": "Lien {number}",
+        "removeLink": "Supprimer le lien",
+        "addLink": "Ajouter un lien"
+      },
+      "summary": {
+        "label": "Profil"
+      },
+      "fields": {
+        "position": "Intitulé du poste",
+        "name": "Employeur",
+        "location": "Lieu",
+        "dates": "Dates",
+        "summary": "Description",
+        "highlights": "Réalisations",
+        "highlightsHint": "Une par point. Commencez par un verbe et ajoutez un chiffre quand vous en avez un.",
+        "currentWork": "J’occupe toujours ce poste",
+        "currentOngoing": "En cours",
+        "currentStudy": "Je suis toujours cette formation",
+        "organization": "Organisation",
+        "studyType": "Diplôme",
+        "area": "Domaine d’études",
+        "institution": "École ou université",
+        "score": "Mention",
+        "courses": "Cours suivis",
+        "listHint": "Tapez-en un et appuyez sur Entrée, ou collez une liste séparée par des virgules.",
+        "removeItem": "Supprimer {item}",
+        "keywords": "Compétences",
+        "group": "Nom du groupe",
+        "groupHint": "Par exemple « Langages » ou « Outils ». Laissez vide pour une liste simple.",
+        "language": "Langue",
+        "fluency": "Niveau",
+        "fluencyHint": "Par exemple « Langue maternelle » ou « Courant ».",
+        "projectName": "Nom du projet",
+        "url": "Lien",
+        "description": "Description",
+        "certificate": "Certification",
+        "issuer": "Délivrée par",
+        "date": "Date",
+        "title": "Intitulé",
+        "awarder": "Décernée par",
+        "subtitle": "Sous-titre"
+      },
+      "errors": {
+        "email": "Saisissez une adresse e-mail comme nom@exemple.fr",
+        "url": "Saisissez un lien complet qui commence par https://"
+      },
+      "save": {
+        "saved": "Enregistré",
+        "saving": "Enregistrement…",
+        "heldBack": "{count, plural, one {1 champ non enregistré. Corrigez-le pour l’enregistrer.} other {# champs non enregistrés. Corrigez-les pour les enregistrer.}}",
+        "offline": "Non enregistré. Vérifiez votre connexion.",
+        "retry": "Réessayer",
+        "conflict": "Ce CV a été modifié dans un autre onglet.",
+        "reload": "Recharger",
+        "tooLarge": "Non enregistré : ce CV est trop long. Supprimez du texte pour l’enregistrer.",
+        "invalid": "Non enregistré : un champ pose problème. Corrigez le champ signalé en rouge."
+      },
+      "loadError": {
+        "title": "Ce CV ne peut pas être ouvert",
+        "body": "Son contenu n’a pas pu être lu. Vos autres CV ne sont pas concernés."
+      }
+    },
+    "guidance": {
+      "howTo": "Comment le rédiger",
+      "exampleLabel": "Exemple",
+      "contact": {
+        "hint": "Comment les employeurs vous joignent. Votre nom et un e-mail ou un téléphone suffisent pour commencer.",
+        "tips": [
+          "Utilisez une adresse e-mail avec votre nom.",
+          "La ville suffit : pas d’adresse complète.",
+          "Ajoutez LinkedIn si votre profil est à jour."
+        ],
+        "example": "Amina Diallo · Paris, France · amina.diallo@exemple.fr · +33 6 12 34 56 78"
+      },
+      "summary": {
+        "hint": "Deux à quatre lignes en haut du CV. Rédigez-le en dernier : c’est plus facile une fois vos expériences écrites.",
+        "tips": [
+          "Dites qui vous êtes et ce que vous cherchez.",
+          "Citez 2 ou 3 atouts utiles pour le poste.",
+          "Évitez « je » et les mots vagues comme « motivé »."
+        ],
+        "example": "Analyste de données avec 4 ans d’expérience dans la distribution. Je transforme les ventes en rapports hebdomadaires utilisés par les managers. Je recherche un poste d’analyste dans l’e-commerce."
+      },
+      "work": {
+        "hint": "Vos postes, du plus récent au plus ancien. Les stages et emplois à temps partiel comptent.",
+        "tips": [
+          "Commencez chaque point par un verbe : piloté, créé, réduit, développé.",
+          "Ajoutez un chiffre quand vous en avez un : quoi, comment, avec quel résultat.",
+          "Gardez chaque point sur 1 ou 2 lignes.",
+          "3 à 5 points pour les postes récents, moins pour les plus anciens."
+        ],
+        "example": "Réduit le reporting mensuel de 3 jours à 1 en automatisant le tableau de bord des ventes sous Excel."
+      },
+      "education": {
+        "hint": "Diplômes et formations, du plus récent au plus ancien.",
+        "tips": [
+          "Indiquez d’abord le diplôme, puis l’établissement.",
+          "Ajoutez une mention seulement si elle vous sert.",
+          "Listez des cours si vous avez peu d’expérience."
+        ],
+        "example": "Licence d’économie · Université de Lagos · 2018 – 2021"
+      },
+      "skills": {
+        "hint": "Les outils et compétences que demandent les postes visés.",
+        "tips": [
+          "Reprenez les mots des offres d’emploi.",
+          "Regroupez-les si la liste s’allonge : Outils, Langages, Méthodes.",
+          "Pas de barres ni de notes : les logiciels de recrutement les lisent mal."
+        ],
+        "example": "Outils : Excel, SQL, Power BI"
+      },
+      "languages": {
+        "hint": "Les langues que vous parlez, avec votre niveau.",
+        "tips": [
+          "Utilisez des niveaux simples : langue maternelle, courant, intermédiaire, notions.",
+          "Commencez par votre meilleure langue."
+        ],
+        "example": "Français : langue maternelle, Anglais : courant"
+      },
+      "projects": {
+        "hint": "Un travail personnel ou scolaire qui montre une compétence.",
+        "tips": [
+          "Dites ce que vous avez réalisé et pourquoi.",
+          "Ajoutez un lien s’il est visible en ligne."
+        ],
+        "example": "Création d’une application de budget utilisée par 200 étudiants, en React."
+      },
+      "certificates": {
+        "hint": "Les certifications et habilitations utiles pour le poste.",
+        "tips": [
+          "Utilisez le nom officiel de la certification.",
+          "Ajoutez la date d’obtention."
+        ],
+        "example": "Google Data Analytics, Coursera · mars 2024"
+      },
+      "awards": {
+        "hint": "Prix et distinctions, avec qui les a décernés.",
+        "tips": ["Gardez ceux qui comptent pour un employeur."],
+        "example": "Meilleur projet de fin d’études, Université de Yaoundé I · 2022"
+      },
+      "volunteer": {
+        "hint": "Le travail bénévole compte, surtout s’il montre des compétences utiles.",
+        "tips": [
+          "Présentez-le comme un poste : rôle, organisation, dates, résultats."
+        ],
+        "example": "Cours de programmation hebdomadaires pour 30 lycéens."
+      },
+      "custom": {
+        "hint": "Ce qui ne rentre pas ailleurs : publications, conférences, centres d’intérêt.",
+        "tips": [
+          "Donnez un titre clair à la section.",
+          "Gardez la même présentation que vos autres éléments."
+        ],
+        "example": "Intervenant, Lagos Data Meetup · 2023"
+      }
+    },
+    "document": {
+      "headings": {
+        "work": "Expérience professionnelle",
+        "education": "Formation",
+        "skills": "Compétences",
+        "languages": "Langues",
+        "projects": "Projets",
+        "certificates": "Certifications",
+        "awards": "Distinctions",
+        "volunteer": "Bénévolat",
+        "custom": "Autres"
+      },
+      "present": "aujourd’hui"
+    }
   }
 }

@@ -55,5 +55,57 @@
     "errors": {
       "cancelled": "Sign-in was cancelled. Choose a way to continue."
     }
+  },
+  "cv": {
+    "home": {
+      "title": "Your CVs",
+      "empty": "No CV yet. Create one: it takes about 15 minutes.",
+      "create": "Create a CV"
+    },
+    "create": {
+      "metaTitle": "Create a CV",
+      "title": "Create a CV",
+      "intro": "Choose the language your CV is written in and the country you're applying in. You can write everything else next.",
+      "titleWord": "CV",
+      "error": "We could not create your CV. Check your connection and try again.",
+      "language": "Language of the CV",
+      "submit": "Create CV"
+    },
+    "editor": {
+      "metaTitle": "Edit CV",
+      "titleLabel": "CV name",
+      "titleWord": "CV",
+      "previewLabel": "Preview of your CV",
+      "section": {
+        "show": "Show on CV",
+        "hide": "Hide from CV"
+      },
+      "seeCv": "See your CV",
+      "heading": "Heading on your CV",
+      "fields": {
+        "organization": "Organisation"
+      },
+      "save": {
+        "conflict": "This CV changed in another tab.",
+        "tooLarge": "Not saved: this CV is too long. Remove some text to save it."
+      },
+      "loadError": {
+        "title": "This CV cannot be opened",
+        "body": "Its content could not be read. Your other CVs are not affected."
+      }
+    },
+    "guidance": {
+      "summary": {
+        "hint": "Two to four lines at the top of your CV. Write it last: it's easier once your experience is down."
+      },
+      "work": {
+        "tips": {
+          "0": "Start each bullet with a verb: led, built, cut, grew."
+        }
+      },
+      "volunteer": {
+        "tips": ["Write it like a job: role, organisation, dates, results."]
+      }
+    }
   }
 }

@@ -522,7 +522,7 @@ export type DateRangeValue = {
 
 type DateRangeFieldProps = Omit<
   DateFieldProps,
-  "defaultValue" | "onValueChange" | "name"
+  "defaultValue" | "value" | "onValueChange" | "name"
 > & {
   defaultValue?: Partial<DateRangeValue>;
   /** Controlled value; a change from outside replaces what's shown. */

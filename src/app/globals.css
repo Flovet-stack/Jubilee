@@ -236,6 +236,14 @@
   }
 }
 
+/* Fine pointer with hover (0024 §2): row actions show on hover or focus there,
+   and stay visible on touch. */
+@custom-variant pointer-fine {
+  @media (hover: hover) and (pointer: fine) {
+    @slot;
+  }
+}
+
 /* ── Base ───────────────────────────────────────────────────────────── */
 @layer base {
   html {
