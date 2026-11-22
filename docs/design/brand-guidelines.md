@@ -1,6 +1,6 @@
 # Jubilee brand guidelines
 
-- **Status:** Approved with [0010](../decisions/0010-logo-and-brand-identity.md). The staircase icon in this version is Proposed in [0018](../decisions/0018-logo-icon-staircase.md); the app keeps 0010's path icon until 0018 is approved.
+- **Status:** Approved with [0010](../decisions/0010-logo-and-brand-identity.md) and [0019](../decisions/0019-logo-icon-staircase.md) (the staircase icon).
 - **Written:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
 - **Files:** [`docs/design/brand/logo/`](brand/logo/)
 - **Related:** [design brief](design-brief.md) (voice, principles) · [0007 visual foundations](../decisions/0007-visual-foundations.md) (colour and type tokens)
@@ -131,8 +131,8 @@ All files are SVG in [`docs/design/brand/logo/`](brand/logo/), drawn on the shar
 | `jubilee-app-icon-square.svg`   | App icon, square (platform rounds it) |
 | `jubilee-favicon.svg`           | Favicon, bigger dots for 16–31 px     |
 
-PNG and ICO exports (favicon.ico, apple-touch-icon, store icons, social images) are generated from these SVGs when the app shell is built; that work needs its own spec.
+The app's `src/app/favicon.ico` (16, 32, 48 px), `src/app/icon.svg` and `src/app/apple-icon.png` (180 px) are generated from these SVGs with `node scripts/render-brand-icons.mjs .` (spec 10). Run it again after any change to the files here. Store icons and social images are not made yet.
 
 ## 10. Changes
 
-The logo changes only through a new decision that supersedes 0010 (0018 proposes the staircase icon). Update the files here first; every other copy is generated from them.
+The logo changes only through a new decision that supersedes 0010 (0019 replaced the icon with the staircase). Update the files here first; every other copy is generated from them.

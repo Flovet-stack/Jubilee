@@ -10,7 +10,7 @@ import { routing } from "@/i18n/routing";
 import { alternatesFor } from "@/lib/seo";
 
 /** Change with every edit to the terms text (spec 07, decision 0014). */
-const LAST_UPDATED = "2026-11-21";
+const LAST_UPDATED = "2026-11-22";
 
 /** Section order from decision 0014. The ids are the jump-link anchors. */
 const SECTIONS = [

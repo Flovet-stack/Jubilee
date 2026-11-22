@@ -1,10 +1,10 @@
-# 0018: Logo icon redrawn as a staircase of dots ("the steps")
+# 0019: Logo icon redrawn as a staircase of dots ("the steps")
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-22 by the product team (roles: Product Designer, UI, Frontend)
-- **Approved:**
+- **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** the icon in [0010](0010-logo-and-brand-identity.md) only (the wordmark, the A + D family, proportions, colour rules and name rules stay)
-- **Specs:** none yet
+- **Specs:** specs/10-brand-assets.md
 
 ## Context
 
@@ -32,6 +32,6 @@ Option 2. The idea from 0010 stays (steps of a job search ending on the offer, o
 
 ## Consequences
 
-- When approved: `src/components/brand/jubilee-icon.tsx` (sign-in page) is redrawn from `jubilee-icon.svg`; until then the app keeps 0010's path.
+- Done in spec 10: `src/components/brand/jubilee-icon.tsx` (sign-in page) draws the staircase, and the favicon and Apple icon are generated from the brand files.
 - The favicon no longer needs its own drawing.
 - Before approving, check that the icon is not too close to the reference if the reference is another company's mark.

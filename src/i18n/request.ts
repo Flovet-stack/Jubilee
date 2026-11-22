@@ -2,6 +2,7 @@ import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { locale as rootLocale } from "next/root-params";
 
+import { loadMessages } from "./messages";
 import { routing } from "./routing";
 
 // Reads the locale from the `[locale]` root segment, so pages stay static
@@ -12,8 +13,5 @@ export default getRequestConfig(async () => {
     ? requested
     : routing.defaultLocale;
 
-  return {
-    locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
-  };
+  return { locale, messages: await loadMessages(locale) };
 });

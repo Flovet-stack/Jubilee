@@ -1,9 +1,9 @@
 # 0010: Logo and brand identity ("the path")
 
-- **Status:** Approved
+- **Status:** Approved; the icon is superseded by [0019](0019-logo-icon-staircase.md)
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
 - **Approved:** 2026-11-21 by Flovet (in chat)
-- **Specs:** none yet (the app shell spec will use the files)
+- **Specs:** specs/10-brand-assets.md
 
 ## Context
 

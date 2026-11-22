@@ -1,5 +1,6 @@
 import { hasLocale } from "next-intl";
 
+import { legacyLocale } from "@/i18n/locales";
 import { routing, type Locale } from "@/i18n/routing";
 
 /** Pure helpers for sign-in (spec 05, decision 0012). Unit-tested. */
@@ -21,10 +22,11 @@ export function toLocale(value: unknown): Locale {
 export const PATH_HEADER = "x-jubilee-path";
 
 const BASE = "http://jubilee.invalid";
-const LOCALE_PATH = new RegExp(`^/(${routing.locales.join("|")})(/|$)`);
-const AUTH_PATH = new RegExp(
-  `^/(${routing.locales.join("|")})/(sign-in|auth)(/|$)`,
-);
+// Old `en`/`fr` prefixes (before 0017) are accepted and upgraded, so a
+// `next` saved before the change still lands on the page, not a 404.
+const PREFIXES = [...routing.locales, "en", "fr"].join("|");
+const LOCALE_PATH = new RegExp(`^/(${PREFIXES})(/|$)`);
+const AUTH_PATH = new RegExp(`^/(${PREFIXES})/(sign-in|auth)(/|$)`);
 
 /**
  * The only `next` values we redirect to: a path on our own origin that starts
@@ -51,7 +53,10 @@ export function safeNextPath(raw: unknown): string | null {
   if (!LOCALE_PATH.test(url.pathname) || AUTH_PATH.test(url.pathname)) {
     return null;
   }
-  return `${url.pathname}${url.search}`;
+  const [, first = "", ...rest] = url.pathname.split("/");
+  const upgraded = legacyLocale(first);
+  const pathname = upgraded ? ["", upgraded, ...rest].join("/") : url.pathname;
+  return `${pathname}${url.search}`;
 }
 
 export function homePath(locale: Locale): string {
