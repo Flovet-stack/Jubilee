@@ -1,6 +1,6 @@
 # 13: Phone, date and password fields
 
-Status: Ready · Written: 2026-11-22
+Status: Done (98/100, 2026-11-22) · Written: 2026-11-22
 
 ## Goal
 
@@ -99,6 +99,7 @@ Implements [0021](../docs/decisions/0021-phone-date-and-password-fields.md). Bui
 - `src/components/ui/select.tsx` for Base UI popup styling and motion; `src/components/ui/tooltip.tsx` for Popover-style positioning.
 - Base UI docs in `node_modules/@base-ui/react/docs/react/components/` (combobox, popover, field).
 - `src/i18n/locales.ts` for the locale-to-country mapping.
+- Flags: served as static files (`/flags/XX.svg`) by a route handler with `generateStaticParams`, so no page bundles the full flag set. This is an implementation detail of 0021's "SVG flags, loaded per country".
 
 ## Boundaries
 

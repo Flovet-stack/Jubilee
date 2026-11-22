@@ -39,6 +39,7 @@ import { TextLink } from "@/components/ui/text-link";
 import { ToastProvider, useToast } from "@/components/ui/toast";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
+import { FieldsDemo } from "./fields-demo";
 import { FontSwitcher } from "./font-switcher";
 
 /* Sample content: fictional companies only (no-ai-slop). */
@@ -126,6 +127,7 @@ export function Gallery({ fontVariables }: { fontVariables: string }) {
           <Overlays />
           <Navigation />
           <JubileePatterns />
+          <FieldsDemo />
           <DenseScreen />
           <IconSet />
         </div>

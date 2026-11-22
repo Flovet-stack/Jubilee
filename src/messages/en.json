@@ -343,5 +343,41 @@
       "en-gb": "English (United Kingdom)",
       "fr-fr": "Français (France)"
     }
+  },
+  "fields": {
+    "phone": {
+      "label": "Phone number",
+      "hint": "Employers may call you on it.",
+      "country": "Country code",
+      "search": "Search a country or code",
+      "noMatch": "No country matches",
+      "invalid": "Enter a phone number like {example}",
+      "required": "Enter your phone number"
+    },
+    "date": {
+      "month": "Month",
+      "year": "Year",
+      "monthPlaceholder": "Month",
+      "chooseDate": "Choose a date from the calendar",
+      "chooseDates": "Choose dates from the calendar",
+      "from": "From",
+      "to": "To",
+      "current": "I still work here",
+      "endBeforeStart": "The end date must be on or after the start date",
+      "errors": {
+        "incomplete": "Enter the full date",
+        "impossible": "Enter a real date",
+        "yearMissing": "Enter the year",
+        "beforeMin": "Enter a later date",
+        "afterMax": "Enter an earlier date",
+        "required": "Enter a date"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "show": "Show password",
+      "hide": "Hide password",
+      "capsLock": "Caps Lock is on"
+    }
   }
 }
