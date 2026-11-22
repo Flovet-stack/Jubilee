@@ -163,3 +163,51 @@ One dated entry per task: what was built, the review score, and what was left.
 - Reviewed 96/100. Fixed after review: wider SQL tests, a duplicate-entry test, UUID checks, the restore read moved to `queries.ts`.
 - Flovet approved dropping the English restore note: new migration `20261122123552_restore_without_note.sql` (restore revisions get no note; the UI labels them). Applied to `jubilee`; the SQL tests, now checking the note is empty, passed and rolled back.
 - Left: consider measuring the size cap with `octet_length`.
+
+## 2026-11-22: Spec 11, pull request checks (97/100, issue #7)
+
+- Decision 0023 approved by Flovet (0020–0022 skipped: held by open PR #56). `.github/workflows/check.yml` runs `pnpm check` on every PR to `main`: `pnpm/setup` (pnpm from `packageManager`, Node 24), `.next/cache` cached, actions pinned to SHAs, `contents: read`, placeholder public env, no secrets.
+- `pnpm check` passed locally with only the placeholders; the first Actions run on PR #58 was green.
+- Left for Flovet: make `Check` a required status on `main` (branch protection). The Vercel preview fails on this PR and on #55 alike; not caused by this change.
+
+## 2026-11-22: Decision 0020 proposed, control sizes
+
+- Flovet found 48 px controls too heavy for dense screens like the CV editor. 0020 (Proposed) adds a scale: `lg` 48 for single-task screens, `md` 40 as the default, `sm` 32 for inline row actions, never under 44 px on touch. Research: WCAG 2.5.8, NN/g, Carbon, Primer, Atlassian.
+- Left: a spec to build it.
+
+## 2026-11-22: 0020 approved; 0021 and 0022 proposed; component quality bar
+
+- Flovet approved 0020 in chat; 0009's status notes its control heights are superseded.
+- 0021 (Proposed): `PhoneField`, `DateField` / `DateRangeField`, `PasswordField`. Research: GOV.UK phone, date and password patterns, NN/g date input and password masking, React DayPicker; package licences checked with `npm view`.
+- 0022 (Proposed): radius scales with size. Research: Atlassian, Primer, Fluent 2, Spectrum. No source links radius to text readability; dense systems use smaller radius on smaller elements.
+- Brief: a component quality bar (reusable, every state, edge cases handled).
+- Flovet approved 0021 and 0022 in chat the same day; 0007's status notes its control and card radius are superseded by 0022.
+- Spec 12 written (Ready): control sizes and radius, implementing 0020 + 0022.
+- Left: write the 0021 spec (phone, date, password fields).
+
+## 2026-11-22: Control sizes and radius built (spec 12)
+
+- Tokens: `--control-h-lg` 48, `--control-h` 40, `--control-h-sm` 32, raised to 44 under `pointer: coarse`; radius `control-lg` 8, `control` 6, `control-sm` 4, `card` 8 (wells 12, sheets 16 unchanged). `cn()` knows the new names. `src/lib/sizes.test.ts` guards them.
+- `Button`, `IconButton`, `Input`, `Textarea`, `Select` take `size` (lg / md / sm, md default). Cards, menus, select lists, tooltips, alerts, radio cards and inner pattern panels use the card radius.
+- Sign-in fields, provider buttons and main action on `lg` (looks as before); "Change email" and "Resend" moved from sm to md (one group); landing sign-in link on `lg`. Alert, UndoLine and MarkedChange actions stay `sm` (inline). Toast buttons use the sm tokens. List rows keep 44 px and tabs keep 6 px, both documented.
+- `/design-system`: three sizes for buttons and fields, the radius scale, and a "Dense screen" CV-editor sample.
+- Evidence: `pnpm check` passes (185 tests, build). Browser at 1440 px and 390 px touch, light and dark: lg 48/8, md 40/6, sm 32/4 with a mouse; md and sm 44 px on touch; no sideways scroll.
+- Reviewed 88, then 93/100 after fixing raw toast heights, the undecided toast and tab radius, and two gallery radii.
+
+## 2026-11-22: Design work merged with main again
+
+- main had taken spec 11 (pull request checks) and decision 0023, so the control sizes and radius spec became spec 12. Decisions 0020–0022 kept their numbers (0023 had skipped them).
+
+## 2026-11-22: Spec 13 written, phone, date and password fields
+
+- Spec 13 (Ready) implements 0021: `PhoneField`, `DateField` (year, month, day), `DateRangeField` (with "Current"), `PasswordField`; every state, all three sizes, copy through props, tests for phone and date parsing in English and French, and a bundle check that the libraries load only where used.
+- Left: none (built below).
+
+## 2026-11-22: Phone, date and password fields built (spec 13)
+
+- Added libphonenumber-js 1.13.17, country-flag-icons 1.6.20, react-day-picker 10.0.2 and date-fns 4.4.0 (approved in 0021).
+- `PhoneField`: flag and dial-code button opening a searchable Base UI Combobox (names from `Intl.DisplayNames`), free typing, checked on blur and submit, a pasted `+` number picks its country, E.164 value. Flags are static SVG files at `/flags/XX.svg` (265 prerendered), so no page bundles the set.
+- `DateField` (year, month, day) and `DateRangeField` ("Current", one range calendar, two months from 1024 px), typing first, DayPicker restyled with our tokens. `PasswordField` with show/hide, hide on submit, Caps Lock hint. All controlled or uncontrolled, three sizes, copy through props; `fields.*` in en and fr. New `FieldSet` for multi-control fields.
+- Tests: phone (US, GB, FR, CM, paste, wrong country), dates in English and French (separators, month names, leap years, min/max), range order, and submit behaviour (`src/lib/form-events.ts`). 224 tests pass; `pnpm check` passes.
+- Browser (fr-fr, 1440 light and 390 touch dark): paste switches to Cameroun, French errors with an example number, country search, two-month calendar, range pick, end-before-start error on "To", password hides on submit, 44 px touch targets, no sideways scroll; sign-in and landing load none of the new libraries.
+- Reviewed 85, then 98/100 after adding controlled values, a DOM-free submit test and a token font size.

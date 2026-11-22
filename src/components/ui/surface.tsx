@@ -47,7 +47,7 @@ export function Well({
 }
 
 const cardBase =
-  "flex min-w-0 flex-col gap-2 rounded-box bg-card p-4 text-ink shadow-[inset_0_0_0_1px_var(--line)]";
+  "flex min-w-0 flex-col gap-2 rounded-card bg-card p-4 text-ink shadow-[inset_0_0_0_1px_var(--line)]";
 
 type CardProps = ComponentProps<"div">;
 
@@ -102,7 +102,7 @@ export function NextStep({
   return (
     <section
       className={cn(
-        "flex flex-col gap-4 rounded-box bg-tint p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5",
+        "flex flex-col gap-4 rounded-card bg-tint p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5",
         className,
       )}
     >

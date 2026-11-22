@@ -9,7 +9,12 @@ import {
 } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
-import { controlClasses } from "./field";
+import {
+  type ControlSize,
+  controlClasses,
+  controlHeight,
+  controlRadius,
+} from "./field";
 
 export type SelectItem = {
   value: string;
@@ -31,6 +36,8 @@ type SelectProps = {
   readOnly?: boolean;
   required?: boolean;
   className?: string;
+  /** lg on single-task screens, md by default, sm in dense rows (0020). */
+  size?: ControlSize;
   /** Pass an id when a <Field> label should point at this trigger. */
   id?: string;
   "aria-label"?: string;
@@ -56,6 +63,7 @@ export function Select({
   readOnly,
   required,
   className,
+  size = "md",
   id,
   ...aria
 }: SelectProps) {
@@ -75,7 +83,10 @@ export function Select({
         aria-label={aria["aria-label"]}
         className={cn(
           controlClasses,
-          "group/trigger flex h-(--control-h) cursor-pointer items-center justify-between gap-2 ps-3 pe-2 text-start",
+          controlHeight[size],
+          controlRadius[size],
+          "group/trigger flex cursor-pointer items-center justify-between gap-2 pe-2 text-start",
+          size === "sm" ? "ps-2.5" : "ps-3",
           "data-popup-open:shadow-[inset_0_0_0_1px_var(--violet)] data-readonly:cursor-default",
           className,
         )}
@@ -97,7 +108,7 @@ export function Select({
         >
           <SelectPrimitive.Popup
             className={cn(
-              "max-w-[min(var(--available-width),28rem)] min-w-(--anchor-width) overflow-hidden rounded-control bg-card text-ink outline-none",
+              "max-w-[min(var(--available-width),28rem)] min-w-(--anchor-width) overflow-hidden rounded-card bg-card text-ink outline-none",
               "shadow-[0_0_0_1px_var(--line),var(--shadow-float)]",
               "origin-(--transform-origin) transition-[opacity,scale] duration-(--dur-base) ease-enter",
               "data-starting-style:scale-(--pop-scale) data-starting-style:opacity-0",

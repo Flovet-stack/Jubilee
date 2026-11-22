@@ -73,7 +73,7 @@ export function RadioGroup({
               "group/radio flex cursor-pointer items-start gap-3 has-data-disabled:cursor-not-allowed",
               appearance === "list" && "min-h-11 py-2.5",
               appearance === "cards" && [
-                "rounded-box bg-card p-4 shadow-[inset_0_0_0_1px_var(--line)]",
+                "rounded-card bg-card p-4 shadow-[inset_0_0_0_1px_var(--line)]",
                 "transition-[box-shadow,background-color] duration-(--dur-exit) hover-fine:shadow-[inset_0_0_0_1px_var(--field)] hover-fine:duration-(--dur-fast)",
                 "has-data-checked:bg-tint has-data-checked:shadow-[inset_0_0_0_2px_var(--violet)]",
                 "has-data-disabled:bg-well",

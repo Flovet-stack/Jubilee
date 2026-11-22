@@ -1,6 +1,6 @@
 # 0009: Design system: tokens, components, animated icons and motion
 
-- **Status:** Approved
+- **Status:** Approved; its control heights are superseded by [0020](0020-control-sizes-and-density.md)
 - **Proposed:** 2026-11-21 by the product team (roles: UI, UX, Frontend, Tech Lead)
 - **Approved:** 2026-11-21 by Flovet (in chat, after the design system was built and reviewed)
 - **Supersedes:** the _Iconography_ paragraph of 0007 ("drawn in-house … an icon library would need its own approval"). The rest of 0007 and all of 0008 stand.

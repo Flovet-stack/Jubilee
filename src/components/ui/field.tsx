@@ -66,9 +66,71 @@ export function Field({
   );
 }
 
+type FieldSetProps = Omit<FieldProps, "children"> & {
+  /** Ids of the controls' own descriptions, if any. */
+  children: ReactNode;
+};
+
+/**
+ * A field made of several controls (a month and a year; "From" and "To").
+ * Same look as `Field`, with fieldset/legend semantics so the label names
+ * the group; each control inside carries its own short accessible name.
+ */
+export function FieldSet({
+  label,
+  hint,
+  error,
+  optionalLabel,
+  disabled,
+  className,
+  children,
+}: FieldSetProps) {
+  const id = useId();
+  const invalid = error != null && error !== false && error !== "";
+  return (
+    <fieldset
+      disabled={disabled}
+      aria-describedby={
+        [hint ? `${id}-hint` : "", invalid ? `${id}-error` : ""]
+          .filter(Boolean)
+          .join(" ") || undefined
+      }
+      className={cn("flex min-w-0 flex-col gap-2", className)}
+    >
+      <legend
+        className={cn(
+          "mb-2 text-sm font-semibold text-ink",
+          disabled && "text-ink-subtle",
+        )}
+      >
+        {label}
+        {optionalLabel ? (
+          <span className="font-normal text-ink-muted"> {optionalLabel}</span>
+        ) : null}
+      </legend>
+      {hint ? (
+        <p id={`${id}-hint`} className="-mt-3 text-sm text-ink-muted">
+          {hint}
+        </p>
+      ) : null}
+      {children}
+      {invalid ? (
+        <p
+          id={`${id}-error`}
+          role="alert"
+          className="flex items-start gap-1.5 text-sm font-medium text-danger"
+        >
+          <HugeiconsBadgeAlertIcon size={18} className="mt-px" />
+          <span>{error}</span>
+        </p>
+      ) : null}
+    </fieldset>
+  );
+}
+
 /** Shared control look: inputs, textareas and select triggers. */
 export const controlClasses = cn(
-  "w-full min-w-0 rounded-control bg-card text-base text-ink shadow-[inset_0_0_0_1px_var(--field)]",
+  "w-full min-w-0 bg-card text-base text-ink shadow-[inset_0_0_0_1px_var(--field)]",
   "transition-[box-shadow,background-color] duration-(--dur-exit) hover-fine:duration-(--dur-fast)",
   "placeholder:text-ink-subtle",
   "hover-fine:shadow-[inset_0_0_0_1px_var(--ink-muted)]",
@@ -78,16 +140,45 @@ export const controlClasses = cn(
   "read-only:bg-well read-only:shadow-[inset_0_0_0_1px_var(--line)]",
 );
 
-type InputProps = Omit<ComponentProps<typeof InputPrimitive>, "className"> & {
+/**
+ * Control sizes (0020) and their radius (0022). Text stays 16 px at every
+ * size so iOS doesn't zoom into a focused field.
+ */
+export type ControlSize = "lg" | "md" | "sm";
+
+export const controlHeight: Record<ControlSize, string> = {
+  lg: "h-(--control-h-lg)",
+  md: "h-(--control-h)",
+  sm: "h-(--control-h-sm)",
+};
+
+export const controlRadius: Record<ControlSize, string> = {
+  lg: "rounded-control-lg",
+  md: "rounded-control",
+  sm: "rounded-control-sm",
+};
+
+type InputProps = Omit<
+  ComponentProps<typeof InputPrimitive>,
+  "className" | "size"
+> & {
   className?: string;
+  /** lg on single-task screens, md by default, sm in dense rows (0020). */
+  size?: ControlSize;
   /** A decorative icon at the start, e.g. search. */
   icon?: ReactNode;
   /** A control at the end, e.g. a clear or reveal button. */
   end?: ReactNode;
 };
 
-/** Single-line text. 16 px text so iOS doesn't zoom; 48 px tall. */
-export function Input({ className, icon, end, ...props }: InputProps) {
+/** Single-line text. 16 px text so iOS doesn't zoom; height by `size`. */
+export function Input({
+  className,
+  size = "md",
+  icon,
+  end,
+  ...props
+}: InputProps) {
   return (
     <span className="relative flex w-full min-w-0 items-center">
       {icon ? (
@@ -98,9 +189,11 @@ export function Input({ className, icon, end, ...props }: InputProps) {
       <InputPrimitive
         className={cn(
           controlClasses,
-          "h-(--control-h) px-3",
+          controlHeight[size],
+          controlRadius[size],
+          size === "sm" ? "px-2.5" : "px-3",
           icon ? "ps-10" : undefined,
-          end ? "pe-12" : undefined,
+          end ? (size === "lg" ? "pe-12" : "pe-11") : undefined,
           className,
         )}
         {...props}
@@ -114,6 +207,11 @@ export function Input({ className, icon, end, ...props }: InputProps) {
 
 type TextareaProps = Omit<ComponentProps<"textarea">, "className"> & {
   className?: string;
+  /**
+   * Sets the radius and padding to match the other fields (0020, 0022). The
+   * height stays content-driven (4 lines minimum) at every size.
+   */
+  size?: ControlSize;
   /** Shows "n / max" under the field when `maxLength` is set. */
   showCount?: boolean;
 };
@@ -124,6 +222,7 @@ type TextareaProps = Omit<ComponentProps<"textarea">, "className"> & {
  */
 export function Textarea({
   className,
+  size = "md",
   showCount = false,
   maxLength,
   defaultValue,
@@ -153,7 +252,9 @@ export function Textarea({
         }
         className={cn(
           controlClasses,
-          "field-sizing-content max-h-80 min-h-28 resize-y px-3 py-3 leading-normal",
+          controlRadius[size],
+          "field-sizing-content max-h-80 min-h-28 resize-y leading-normal",
+          size === "sm" ? "px-2.5 py-2" : "px-3 py-2.5",
           className,
         )}
       />

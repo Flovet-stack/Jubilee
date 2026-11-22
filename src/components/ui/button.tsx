@@ -10,7 +10,8 @@ import { Spinner } from "./spinner";
 import { Tooltip } from "./tooltip";
 
 /**
- * Buttons (0007 shape, 0008 §1 explicitness and §5 hover/press, 0009 motion).
+ * Buttons (0007 shape, 0008 §1 explicitness and §5 hover/press, 0009 motion,
+ * 0020 sizes, 0022 radius).
  *
  * - primary: the one violet action on a screen.
  * - secondary: card fill + field border.
@@ -20,10 +21,14 @@ import { Tooltip } from "./tooltip";
  * States: hover (fine pointers only, colour only), focus-visible (global ring),
  * pressed (scale 0.98 + darker fill), disabled, loading (keeps its width,
  * ignores clicks, announces busy). Labels wrap instead of clipping (French).
+ *
+ * Sizes (0020): lg 48 px for single-task screens, md 40 px (the default),
+ * sm 32 px for inline row actions. Touch raises md and sm to 44 px through
+ * the tokens. Radius follows the size (0022). Never mix sizes in a group.
  */
 export const buttonVariants = cva(
   [
-    "relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-control text-center font-semibold select-none",
+    "relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 text-center font-semibold select-none",
     "transition-[background-color,border-color,color,scale] duration-(--dur-exit) ease-standard hover-fine:duration-(--dur-fast)",
     "active:scale-(--press-scale) active:duration-(--dur-fast)",
     "data-disabled:cursor-not-allowed data-disabled:active:scale-100",
@@ -54,8 +59,9 @@ export const buttonVariants = cva(
         ],
       },
       size: {
-        md: "min-h-(--control-h) px-5 py-2 text-base",
-        sm: "min-h-(--control-h-sm) px-4 py-1.5 text-sm",
+        lg: "min-h-(--control-h-lg) rounded-control-lg px-5 py-2 text-base",
+        md: "min-h-(--control-h) rounded-control px-4 py-1.5 text-base",
+        sm: "min-h-(--control-h-sm) rounded-control-sm px-3 py-1 text-sm [&_svg]:size-4",
       },
       iconOnly: {
         true: "px-0 py-0",
@@ -67,6 +73,7 @@ export const buttonVariants = cva(
       },
     },
     compoundVariants: [
+      { iconOnly: true, size: "lg", className: "size-(--control-h-lg)" },
       { iconOnly: true, size: "md", className: "size-(--control-h)" },
       { iconOnly: true, size: "sm", className: "size-(--control-h-sm)" },
     ],

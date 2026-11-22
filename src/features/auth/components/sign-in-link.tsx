@@ -20,7 +20,7 @@ export function SignInLink({
   return (
     <Link
       href={`/${locale}/sign-in`}
-      className={buttonVariants({ variant: "primary" })}
+      className={buttonVariants({ variant: "primary", size: "lg" })}
     >
       {label}
     </Link>
