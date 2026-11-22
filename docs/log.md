@@ -197,3 +197,8 @@ One dated entry per task: what was built, the review score, and what was left.
 ## 2026-11-22: Design work merged with main again
 
 - main had taken spec 11 (pull request checks) and decision 0023, so the control sizes and radius spec became spec 12. Decisions 0020–0022 kept their numbers (0023 had skipped them).
+
+## 2026-11-22: Spec 13 written, phone, date and password fields
+
+- Spec 13 (Ready) implements 0021: `PhoneField`, `DateField` (year, month, day), `DateRangeField` (with "Current"), `PasswordField`; every state, all three sizes, copy through props, tests for phone and date parsing in English and French, and a bundle check that the libraries load only where used.
+- Left: build spec 13.
