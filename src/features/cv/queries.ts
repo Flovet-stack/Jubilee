@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import {
   errorFromDatabase,
   fail,
+  isUuid,
   migrateContent,
   ok,
   type CvTarget,
@@ -107,6 +108,7 @@ export async function listCvs(): Promise<Result<CvSummary[]>> {
 export async function getCvDocument(
   target: CvTarget,
 ): Promise<Result<CvDocument>> {
+  if (!isUuid(target.id)) return fail({ code: "not_found" });
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
 
@@ -132,10 +134,29 @@ export async function getCvDocument(
   return toDocument(data);
 }
 
+/** A revision's stored content and schema version, for restoring it. */
+export async function getRevisionContent(
+  revisionId: string,
+): Promise<Result<{ content: unknown; schemaVersion: number }>> {
+  if (!isUuid(revisionId)) return fail({ code: "not_found" });
+  const supabase = await signedInClient();
+  if (!supabase) return fail({ code: "unauthenticated" });
+
+  const { data, error } = await supabase
+    .from("cv_revisions")
+    .select("content, schema_version")
+    .eq("id", revisionId)
+    .maybeSingle();
+  if (error) return fail(errorFromDatabase(error));
+  if (!data) return fail({ code: "not_found" });
+  return ok({ content: data.content, schemaVersion: data.schema_version });
+}
+
 /** The history of a CV or version, newest first. */
 export async function listRevisions(
   target: CvTarget,
 ): Promise<Result<RevisionSummary[]>> {
+  if (!isUuid(target.id)) return fail({ code: "not_found" });
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
 

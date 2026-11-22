@@ -139,3 +139,11 @@ One dated entry per task: what was built, the review score, and what was left.
 - Reviewed 96/100. Fixed after review: a broken decision link in specs 08 and 09, the cookie wording in the privacy policy, `Secure` on the locale cookie.
 - Decision 0018 approved by Flovet: locale ids are the lowercase URL segments, not next-intl `prefixes` (supersedes that sentence of 0017).
 - Left: a real sign-in from `/en-gb/sign-in` with real Supabase keys.
+
+## 2026-11-22: CV schema built (spec 09, issue #10)
+
+- Migration `20261122111324_cvs` applied to `jubilee` with Flovet's go-ahead: `cvs`, `cv_versions` and append-only `cv_revisions`, owner-only RLS, no anon grants, composite `(id, user_id)` keys so nothing can point at another user's CV, column grants so owners and parents never change, a 256 kB content cap, and `restore_cv_revision` (security invoker) so a restore and its revision land together.
+- `src/features/cv/`: the Zod content schema (JSON Resume names, `YYYY`/`YYYY-MM` dates, UUID ids), `logic.ts` (empty CV, `migrateContent`, typed results), `queries.ts` and `actions.ts`. Types regenerated from the remote schema (unchanged from the hand-written ones).
+- Evidence: `supabase/tests/cvs.sql` on `jubilee` returned "all checks passed" and rolled back; 0 test rows after. Advisors: only the project-wide leaked-password warning (no passwords used). `pnpm check` passes.
+- Reviewed 96/100. Fixed after review: wider SQL tests, a duplicate-entry test, UUID checks, the restore read moved to `queries.ts`.
+- Left (needs Flovet, a new migration): drop the English restore note from the database function so the UI writes it in the user's language; consider measuring the size cap with `octet_length`.

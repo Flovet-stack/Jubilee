@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   emptyCvContent,
   errorFromDatabase,
+  isUuid,
   migrateContent,
   validateContent,
 } from "./logic";
@@ -187,6 +188,18 @@ describe("cvContentSchema (decision 0016)", () => {
     expect(errorsOf(cv).join()).toContain("Duplicate id");
   });
 
+  it("rejects duplicate entry ids within a section", () => {
+    const cv = fullCv();
+    const work = cv.sections[0];
+    if (work?.kind !== "work" || !work.entries[0] || !work.entries[1]) {
+      throw new Error("fixture");
+    }
+    work.entries[1].id = work.entries[0].id;
+    expect(errorsOf(cv).join()).toContain(
+      "sections.0.entries.1.id: Duplicate id",
+    );
+  });
+
   it("rejects over-long fields", () => {
     const cv = fullCv();
     cv.basics.name = "a".repeat(121);
@@ -238,6 +251,15 @@ describe("migrateContent", () => {
       const result = migrateContent(fullCv(), version);
       expect(result.ok).toBe(false);
     }
+  });
+});
+
+describe("isUuid", () => {
+  it("accepts UUIDs only", () => {
+    expect(isUuid("00000000-0000-4000-8000-000000000001")).toBe(true);
+    expect(isUuid("1")).toBe(false);
+    expect(isUuid("00000000-0000-4000-8000-00000000000g")).toBe(false);
+    expect(isUuid(undefined)).toBe(false);
   });
 });
 

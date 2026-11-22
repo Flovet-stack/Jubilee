@@ -22,6 +22,13 @@ export const fail = <T = never>(error: CvError): Result<T> => ({
 export type CvTarget =
   { kind: "cv"; id: string } | { kind: "version"; id: string };
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Ids reach the database only when they can be one; anything else is "not found". */
+export function isUuid(value: unknown): value is string {
+  return typeof value === "string" && UUID.test(value);
+}
+
 /** Readable paths for Zod issues: "sections.0.entries.1.endDate: ...". */
 function describeIssues(issues: { path: PropertyKey[]; message: string }[]) {
   return issues.map(

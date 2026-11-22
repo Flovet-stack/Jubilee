@@ -1,6 +1,6 @@
 # 09: CV schema, RLS and data access
 
-Status: In progress (built 2026-11-22; migration 20261122111324 applied to `jubilee`; review pending) · Written: 2026-11-22 · Issue: #10
+Status: Done (96/100, 2026-11-22) · Written: 2026-11-22 · Issue: #10
 
 ## Goal
 
@@ -69,3 +69,5 @@ Choices the build made that no decision spells out.
 - **Migration file** renamed to `20261122111324_cvs.sql`, the version the remote project recorded.
 - **Evidence (2026-11-22):** `supabase/tests/cvs.sql` run on `jubilee` returned "all checks passed" and rolled back (0 test users, 0 rows after). Security advisor: only the project-wide "leaked password protection" warning (no passwords are used, decision 0006). Performance advisor: no findings.
 - **The data functions are plain server functions**, not `"use server"` actions: there are no screens yet, and the builder (#14) wraps the ones it needs.
+- **After review:** the SQL tests also cover A updating a version and deleting their own CV and version while signed in, B updating A's version, deleting A's CV and adding a revision to A's version, and anon reading versions and writing anything (re-run on `jubilee`: all checks passed, rolled back). A duplicate entry id test was added. Ids are checked as UUIDs before any query (anything else is "not found"). The revision read used by restore moved to `queries.ts` (`getRevisionContent`).
+- **Left for a follow-up migration (needs Flovet):** the restore note is written in English by the database function; the history screen (#14) should build the label from `source = 'restore'` and the date through the message files, so the function should write `note = null` (and could record which revision was restored). The size cap could use `octet_length(content::text)` instead of `pg_column_size`, which measures compressed values copied inside the database.

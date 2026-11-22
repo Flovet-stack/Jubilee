@@ -6,13 +6,14 @@ import {
   emptyCvContent,
   errorFromDatabase,
   fail,
+  isUuid,
   migrateContent,
   ok,
   validateContent,
   type CvTarget,
   type Result,
 } from "./logic";
-import { getCvDocument, signedInClient } from "./queries";
+import { getCvDocument, getRevisionContent, signedInClient } from "./queries";
 import {
   CV_SCHEMA_VERSION,
   newCvSchema,
@@ -73,6 +74,7 @@ export async function saveContent(
   target: CvTarget,
   content: unknown,
 ): Promise<Result<{ updatedAt: string }>> {
+  if (!isUuid(target.id)) return fail({ code: "not_found" });
   const valid = validateContent(content);
   if (!valid.ok) return valid;
 
@@ -165,19 +167,17 @@ export async function addRevision(
 export async function restoreRevision(
   revisionId: string,
 ): Promise<Result<{ revisionId: string }>> {
+  const revision = await getRevisionContent(revisionId);
+  if (!revision.ok) return revision;
+
+  const content = migrateContent(
+    revision.value.content,
+    revision.value.schemaVersion,
+  );
+  if (!content.ok) return content;
+
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
-
-  const { data: revision, error: readError } = await supabase
-    .from("cv_revisions")
-    .select("content, schema_version")
-    .eq("id", revisionId)
-    .maybeSingle();
-  if (readError) return fail(errorFromDatabase(readError));
-  if (!revision) return fail({ code: "not_found" });
-
-  const content = migrateContent(revision.content, revision.schema_version);
-  if (!content.ok) return content;
 
   const { data, error } = await supabase.rpc("restore_cv_revision", {
     revision_id: revisionId,
@@ -192,6 +192,7 @@ export async function restoreRevision(
 export async function deleteCvDocument(
   target: CvTarget,
 ): Promise<Result<null>> {
+  if (!isUuid(target.id)) return fail({ code: "not_found" });
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
 

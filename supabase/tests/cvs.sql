@@ -38,6 +38,22 @@ begin
   get diagnostics n = row_count;
   if n <> 1 then raise exception 'FAIL A update own cv'; end if;
 
+  update public.cv_versions set title = 'A for job, edited', job_id = gen_random_uuid() where id = '00000000-0000-4000-d000-0000000000a1';
+  get diagnostics n = row_count;
+  if n <> 1 then raise exception 'FAIL A update own version'; end if;
+
+  -- A deletes their own CV and version (throwaway rows), signed in.
+  insert into public.cvs (id, title, language, market, content, schema_version)
+  values ('00000000-0000-4000-c000-0000000000a2', 'Throwaway', 'fr', 'FR', '{}', 1);
+  insert into public.cv_versions (id, cv_id, title, language, market, content, schema_version)
+  values ('00000000-0000-4000-d000-0000000000a2', '00000000-0000-4000-c000-0000000000a2', 'Throwaway version', 'fr', 'FR', '{}', 1);
+  delete from public.cv_versions where id = '00000000-0000-4000-d000-0000000000a2';
+  get diagnostics n = row_count;
+  if n <> 1 then raise exception 'FAIL A delete own version'; end if;
+  delete from public.cvs where id = '00000000-0000-4000-c000-0000000000a2';
+  get diagnostics n = row_count;
+  if n <> 1 then raise exception 'FAIL A delete own cv'; end if;
+
   -- Restore: content goes back and a 'restore' revision is appended.
   select public.restore_cv_revision('00000000-0000-4000-e000-0000000000a1', '{"basics": {"v": 1}}', 1) into restored;
   if (select content from public.cvs where id = '00000000-0000-4000-c000-0000000000a1') <> '{"basics": {"v": 1}}'::jsonb then
@@ -129,6 +145,14 @@ begin
   get diagnostics n = row_count;
   if n <> 0 then raise exception 'FAIL B deleted A''s version'; end if;
 
+  update public.cv_versions set title = 'Hacked' where id = '00000000-0000-4000-d000-0000000000a1';
+  get diagnostics n = row_count;
+  if n <> 0 then raise exception 'FAIL B updated A''s version'; end if;
+
+  delete from public.cvs where id = '00000000-0000-4000-c000-0000000000a1';
+  get diagnostics n = row_count;
+  if n <> 0 then raise exception 'FAIL B deleted A''s cv'; end if;
+
   -- A version or revision can't point at another user's CV.
   begin
     insert into public.cv_versions (cv_id, title, language, market, content, schema_version)
@@ -140,6 +164,12 @@ begin
     insert into public.cv_revisions (cv_id, content, schema_version, source)
     values ('00000000-0000-4000-c000-0000000000a1', '{}', 1, 'user');
     raise exception 'FAIL B added a revision to A''s cv';
+  exception when foreign_key_violation then null;
+  end;
+  begin
+    insert into public.cv_revisions (cv_version_id, content, schema_version, source)
+    values ('00000000-0000-4000-d000-0000000000a1', '{}', 1, 'user');
+    raise exception 'FAIL B added a revision to A''s version';
   exception when foreign_key_violation then null;
   end;
 
@@ -165,8 +195,29 @@ begin
   exception when insufficient_privilege then null;
   end;
   begin
+    perform 1 from public.cv_versions;
+    raise exception 'FAIL anon can read versions';
+  exception when insufficient_privilege then null;
+  end;
+  begin
     perform 1 from public.cv_revisions;
     raise exception 'FAIL anon can read revisions';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    insert into public.cvs (user_id, title, language, market, content, schema_version)
+    values ('00000000-0000-4000-a000-0000000000a1', 'Anon', 'en', 'US', '{}', 1);
+    raise exception 'FAIL anon can insert a cv';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    update public.cv_versions set title = 'Anon' where id = '00000000-0000-4000-d000-0000000000a1';
+    raise exception 'FAIL anon can update a version';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    delete from public.cvs where id = '00000000-0000-4000-c000-0000000000a1';
+    raise exception 'FAIL anon can delete a cv';
   exception when insufficient_privilege then null;
   end;
   begin
