@@ -4,8 +4,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
+import { JubileeIcon } from "@/components/brand/jubilee-icon";
 import { Alert, Skeleton } from "@/components/ui/feedback";
-import { Card } from "@/components/ui/surface";
 import { TextLink } from "@/components/ui/text-link";
 import { continueWithProvider, emailFormAction } from "@/features/auth/actions";
 import { EmailSignIn } from "@/features/auth/components/email-sign-in";
@@ -18,6 +18,7 @@ import {
 } from "@/features/auth/logic";
 import { getCurrentUserId } from "@/features/auth/queries";
 import { routing, type Locale } from "@/i18n/routing";
+import { site } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -29,8 +30,9 @@ export async function generateMetadata({
 }
 
 /**
- * Sign-in and sign-up in one page (decision 0012). The card's frame is
- * static; the options read the URL and the session, so they stream in.
+ * Sign-in and sign-up in one page (decision 0012), laid out per 0013: no
+ * card, one centred column. The frame is static; the options read the URL
+ * and the session, so they stream in.
  */
 export default async function SignInPage({
   params,
@@ -42,19 +44,37 @@ export default async function SignInPage({
 
   return (
     <main className="flex flex-1 items-start justify-center px-4 py-12 sm:items-center sm:px-6 sm:py-16">
-      <Card className="w-full max-w-[400px] gap-8 p-6 sm:p-8">
-        <h1 className="text-2xl font-bold text-ink">{t("title")}</h1>
+      <div className="flex w-full max-w-[400px] flex-col gap-8">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <JubileeIcon height={40} />
+          <h1 className="text-2xl font-bold text-ink">{t("title")}</h1>
+        </div>
         <Suspense fallback={<OptionsSkeleton />}>
           <SignInOptions locale={locale} searchParams={searchParams} />
         </Suspense>
-        <p className="text-sm text-ink-muted">
-          {t.rich("newHere", {
-            link: (chunks) => (
-              <TextLink href={`/${locale}/privacy`}>{chunks}</TextLink>
-            ),
-          })}
-        </p>
-      </Card>
+        <div className="flex flex-col gap-4 text-center text-sm text-ink-muted">
+          <p>{t("newHere")}</p>
+          <p>
+            {t.rich("legal", {
+              terms: (chunks) => (
+                <TextLink href={`/${locale}/terms`}>{chunks}</TextLink>
+              ),
+              privacy: (chunks) => (
+                <TextLink href={`/${locale}/privacy`}>{chunks}</TextLink>
+              ),
+            })}
+          </p>
+          <p>
+            {t.rich("help", {
+              link: (chunks) => (
+                <TextLink href={`mailto:${site.supportEmail}`}>
+                  {chunks}
+                </TextLink>
+              ),
+            })}
+          </p>
+        </div>
+      </div>
     </main>
   );
 }

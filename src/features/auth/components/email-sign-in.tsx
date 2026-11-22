@@ -147,7 +147,9 @@ function EmailSteps({
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-xl font-bold text-ink">{t("code.title")}</h2>
+      <h2 className="text-center text-xl font-bold text-ink">
+        {t("code.title")}
+      </h2>
       <form action={formAction} noValidate className="flex flex-col gap-4">
         {hidden}
         <input type="hidden" name="intent" value="verify" />
@@ -193,7 +195,7 @@ function EmailSteps({
           loadingLabel={t("code.verifying")}
         />
       </form>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="quiet" size="sm" onClick={() => setEditing(true)}>
           {t("code.change")}
         </Button>

@@ -29,9 +29,12 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                             | Approved |
 | 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                   | Approved |
 | 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md) | Approved |
-| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Proposed |
+| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Approved |
 | 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                            | Approved |
 | 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                  | Approved |
+| 0013 | [Sign-in page refresh and word spacing](0013-sign-in-page-refresh-and-word-spacing.md)                        | Approved |
+| 0014 | [Terms of service page](0014-terms-of-service-page.md)                                                        | Approved |
+| 0015 | [Keep the font's default word spacing](0015-keep-default-word-spacing.md)                                     | Approved |
 
 ## Still to decide (before the specs that need them)
 

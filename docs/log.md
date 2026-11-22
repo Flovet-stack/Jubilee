@@ -106,3 +106,15 @@ One dated entry per task: what was built, the review score, and what was left.
 - First review 75/100. Fixed since: "Change email" state after a failed send, per-form spinners, the code field now describes where the code went, a countdown after a rate limit, clearer "unknown" error.
 - Left: Flovet pastes the Magic Link template and tests Google, LinkedIn, code and link sign-in on port 3000; decisions on the logo, the merged code message and the LinkedIn mark (spec 05 build notes); then a second review.
 - Addendum (Flovet): a temporary Sign in button on the placeholder home page, going to `/[locale]/sign-in`. No separate sign-up page: one page does both (0012).
+
+## 2026-11-21: Sign-in refresh (spec 06)
+
+- Approved 0010 (logo) and 0013. The sign-in page has no card now: one centred column, the 0010 icon above the title, and a footer with the account note, the Terms and Privacy line, and a support `mailto:` link. Body text gets `word-spacing: 0.06em` (Plus Jakarta Sans's space is 0.17em, the narrowest of 10 faces measured).
+- 0014 (Terms page) is logged as Proposed. The sign-in page links to `/[locale]/terms`, which returns 404 until that page is built.
+- Flovet reviewed the wider word spacing locally and dropped it (0015). 0014 approved.
+
+## 2026-11-21: Terms page (spec 07)
+
+- 0014 approved. Facts from Flovet: not a registered company yet, run from the United States, US law, minimum age 16.
+- Built `/[locale]/terms` in en/fr with 12 sections from 0014, on a new shared `LegalDocument` layout that the privacy page now uses too. Added to the sitemap.
+- Left: the contact page (both legal pages link to it), a US state once the company is registered, and a lawyer's review before launch.
