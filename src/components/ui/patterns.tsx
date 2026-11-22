@@ -71,7 +71,7 @@ export function UndoLine({
     <p
       role="status"
       className={cn(
-        "flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1 rounded-control bg-tint px-3 text-sm text-ink",
+        "flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1 rounded-card bg-tint px-3 text-sm text-ink",
         "transition-opacity duration-(--dur-base) ease-enter starting:opacity-0",
         className,
       )}
@@ -130,7 +130,7 @@ export function MarkedChange({
   return (
     <span
       className={cn(
-        "flex flex-col gap-2 rounded-control bg-card p-3 shadow-[inset_0_0_0_1px_var(--line)]",
+        "flex flex-col gap-2 rounded-card bg-card p-3 shadow-[inset_0_0_0_1px_var(--line)]",
         className,
       )}
     >
@@ -202,7 +202,7 @@ export function ReviewPanel({
       )}
     >
       <h2 className="px-1 text-lg font-bold text-ink">{title}</h2>
-      <dl className="flex flex-col rounded-box bg-card shadow-[inset_0_0_0_1px_var(--line)]">
+      <dl className="flex flex-col rounded-card bg-card shadow-[inset_0_0_0_1px_var(--line)]">
         {rows.map((row, index) => (
           <div
             key={index}

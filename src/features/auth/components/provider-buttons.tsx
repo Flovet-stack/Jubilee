@@ -71,6 +71,7 @@ function ProviderSubmit({
   return (
     <Button
       type="submit"
+      size="lg"
       fullWidth
       loading={pending}
       loadingLabel={loadingLabel}

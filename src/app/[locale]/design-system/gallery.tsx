@@ -96,6 +96,12 @@ const COUNTRIES = [
   { value: "uk", label: "United Kingdom", disabled: true },
 ];
 
+const SIZES = [
+  ["lg", "lg · 48 px · single-task screens"],
+  ["md", "md · 40 px (44 on touch) · the default"],
+  ["sm", "sm · 32 px (44 on touch) · inline row actions"],
+] as const;
+
 export function Gallery({ fontVariables }: { fontVariables: string }) {
   return (
     <TooltipProvider>
@@ -104,9 +110,10 @@ export function Gallery({ fontVariables }: { fontVariables: string }) {
           <header className="flex flex-col gap-3">
             <h1 className="text-3xl sm:text-4xl">Design system</h1>
             <p className="max-w-(--container-reading) text-lg text-ink-muted">
-              Every token and component in every state. Decisions 0007, 0008 and
-              0009; guide in docs/design/design-system.md. Switch your system
-              theme to see dark.
+              Every token and component in every state. Decisions 0007, 0008,
+              0009, 0020 (sizes) and 0022 (radius); guide in
+              docs/design/design-system.md. Switch your system theme to see
+              dark; use touch emulation to see the 44 px floor.
             </p>
             <FontSwitcher fontVariables={fontVariables} />
           </header>
@@ -119,6 +126,7 @@ export function Gallery({ fontVariables }: { fontVariables: string }) {
           <Overlays />
           <Navigation />
           <JubileePatterns />
+          <DenseScreen />
           <IconSet />
         </div>
       </ToastProvider>
@@ -170,7 +178,7 @@ function Foundations() {
           {COLOURS.map(([token, name]) => (
             <Card key={token} className="gap-3 p-3">
               <span
-                className="h-12 rounded-control shadow-[inset_0_0_0_1px_var(--line)]"
+                className="h-12 rounded-mark shadow-[inset_0_0_0_1px_var(--line)]"
                 style={{ background: `var(--${token})` }}
               />
               <span className="flex flex-col">
@@ -215,14 +223,17 @@ function Foundations() {
               ))}
             </Card>
           </Well>
-          <Well title="Radius by role">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+          <Well title="Radius by size (0022)">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
                 ["rounded-paper", "2 · CV paper"],
                 ["rounded-mark", "4 · Checkbox"],
-                ["rounded-control", "8 · Controls"],
-                ["rounded-box", "12 · Cards, wells"],
-                ["rounded-sheet", "16 · Sheets"],
+                ["rounded-control-sm", "4 · sm controls"],
+                ["rounded-control", "6 · md controls"],
+                ["rounded-control-lg", "8 · lg controls"],
+                ["rounded-card", "8 · Cards, menus"],
+                ["rounded-box", "12 · Wells"],
+                ["rounded-sheet", "16 · Dialogs, sheets"],
               ].map(([cls, label]) => (
                 <Card key={cls} className="items-center gap-2 p-3 text-center">
                   <span className={`size-12 bg-tint ${cls}`} />
@@ -294,17 +305,28 @@ function Buttons() {
               Delete this CV
             </Button>
           </Row>
-          <Row label="Small (44 px) and with icons">
-            <Button size="sm" variant="primary" icon={<HugeiconsPlusIcon />}>
-              Add job
-            </Button>
-            <Button size="sm" iconEnd={<HugeiconsArrowRightIcon />}>
-              Next
-            </Button>
-            <Button size="sm" variant="quiet" icon={<HugeiconsCopyIcon />}>
-              Duplicate
-            </Button>
-          </Row>
+          {SIZES.map(([size, label]) => (
+            <Row key={size} label={label}>
+              <Button
+                size={size}
+                variant="primary"
+                icon={<HugeiconsPlusIcon />}
+              >
+                Add job
+              </Button>
+              <Button size={size} iconEnd={<HugeiconsArrowRightIcon />}>
+                Next
+              </Button>
+              <Button size={size} variant="quiet" icon={<HugeiconsCopyIcon />}>
+                Duplicate
+              </Button>
+              <IconButton
+                size={size}
+                label="Edit section"
+                icon={<HugeiconsPencilIcon />}
+              />
+            </Row>
+          ))}
           <Row label="Disabled and loading">
             <Button variant="primary" disabled>
               Send application
@@ -380,6 +402,28 @@ function Forms() {
       title="Forms"
       intro="Label above, hint under it, error replaces nothing and says how to fix it. Optional fields are marked; required ones aren't."
     >
+      <Well title="Sizes (0020): lg, md, sm">
+        <Card className="gap-4">
+          {SIZES.map(([size, label]) => (
+            <div key={size} className="grid gap-3 sm:grid-cols-2">
+              <Input
+                size={size}
+                aria-label={`Job title, ${size}`}
+                placeholder={label}
+              />
+              <Select
+                size={size}
+                aria-label={`Country, ${size}`}
+                placeholder="Country"
+                items={[
+                  { value: "cm", label: "Cameroon" },
+                  { value: "fr", label: "France" },
+                ]}
+              />
+            </div>
+          ))}
+        </Card>
+      </Well>
       <div className="grid gap-6 lg:grid-cols-2">
         <Well title="Text fields">
           <Card className="gap-6">
@@ -936,6 +980,90 @@ function JubileePatterns() {
 
 /* ── Icons ──────────────────────────────────────────────────────────── */
 
+/** A CV-editor-like list: md by default, sm for inline row actions (0020). */
+function DenseScreen() {
+  const jobs = [
+    {
+      title: "Logistics coordinator",
+      company: "Sawa Logistics, Douala",
+      dates: "Mar 2022 – Present",
+      summary:
+        "Planned 40+ weekly container moves across three ports; cut customs delays by a fifth.",
+    },
+    {
+      title: "Customs clearance assistant",
+      company: "Nkam Clearing, Kribi",
+      dates: "Jan 2020 – Feb 2022",
+      summary:
+        "Prepared declarations for importers; kept a 98% first-time acceptance rate.",
+    },
+    {
+      title: "Warehouse intern",
+      company: "Port Autonome de Douala",
+      dates: "Jun 2019 – Dec 2019",
+      summary: "Counted and logged inbound stock; built the first shelf map.",
+    },
+  ];
+  return (
+    <Section
+      title="Dense screen"
+      intro="A CV editor section: md fields and buttons, sm inline actions, 8 px cards inside a 12 px well. Touch raises every control to 44 px."
+    >
+      <Well
+        title="Experience"
+        actions={
+          <Button variant="secondary" icon={<HugeiconsPlusIcon />}>
+            Add a job
+          </Button>
+        }
+      >
+        {jobs.map((job) => (
+          <Card key={job.title} className="gap-1">
+            <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+              <div className="flex min-w-0 flex-col">
+                <span className="font-semibold">{job.title}</span>
+                <span className="text-sm text-ink-muted">
+                  {job.company} ·{" "}
+                  <span className="tabular-nums">{job.dates}</span>
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Button
+                  size="sm"
+                  variant="quiet"
+                  icon={<HugeiconsPencilIcon />}
+                >
+                  Edit
+                </Button>
+                <Button size="sm" variant="quiet" icon={<HugeiconsCopyIcon />}>
+                  Duplicate
+                </Button>
+                <IconButton
+                  size="sm"
+                  label={`Remove ${job.title}`}
+                  icon={<HugeiconsTrashIcon />}
+                />
+              </div>
+            </div>
+            <p className="max-w-(--container-reading) text-sm text-ink">
+              {job.summary}
+            </p>
+          </Card>
+        ))}
+        <div className="grid gap-3 sm:grid-cols-[1fr_12rem_auto] sm:items-end">
+          <Field label="Job title">
+            <Input placeholder="e.g. Freight forwarder" />
+          </Field>
+          <Field label="Started">
+            <Input placeholder="Mar 2024" />
+          </Field>
+          <Button variant="primary">Save job</Button>
+        </div>
+      </Well>
+    </Section>
+  );
+}
+
 function IconSet() {
   const entries = Object.entries(Icons).filter(([name]) =>
     name.endsWith("Icon"),
@@ -958,7 +1086,7 @@ function IconSet() {
               <button
                 key={name}
                 type="button"
-                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-box bg-card px-3 py-3 text-start text-sm shadow-[inset_0_0_0_1px_var(--line)] transition-[box-shadow] duration-(--dur-exit) hover-fine:shadow-[inset_0_0_0_1px_var(--field)] hover-fine:duration-(--dur-fast)"
+                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-card bg-card px-3 py-3 text-start text-sm shadow-[inset_0_0_0_1px_var(--line)] transition-[box-shadow] duration-(--dur-exit) hover-fine:shadow-[inset_0_0_0_1px_var(--field)] hover-fine:duration-(--dur-fast)"
               >
                 <Component size={20} />
                 <span className="min-w-0 truncate">{label}</span>

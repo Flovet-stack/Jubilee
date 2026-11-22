@@ -1,6 +1,6 @@
 # 11: Control sizes and corner radius
 
-Status: Ready · Written: 2026-11-22
+Status: Done (93/100, 2026-11-22) · Written: 2026-11-22
 
 ## Goal
 

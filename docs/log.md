@@ -177,4 +177,13 @@ One dated entry per task: what was built, the review score, and what was left.
 - Brief: a component quality bar (reusable, every state, edge cases handled).
 - Flovet approved 0021 and 0022 in chat the same day; 0007's status notes its control and card radius are superseded by 0022.
 - Spec 11 written (Ready): control sizes and radius, implementing 0020 + 0022.
-- Left: build spec 11; write the 0021 spec (phone, date, password fields).
+- Left: write the 0021 spec (phone, date, password fields).
+
+## 2026-11-22: Control sizes and radius built (spec 11)
+
+- Tokens: `--control-h-lg` 48, `--control-h` 40, `--control-h-sm` 32, raised to 44 under `pointer: coarse`; radius `control-lg` 8, `control` 6, `control-sm` 4, `card` 8 (wells 12, sheets 16 unchanged). `cn()` knows the new names. `src/lib/sizes.test.ts` guards them.
+- `Button`, `IconButton`, `Input`, `Textarea`, `Select` take `size` (lg / md / sm, md default). Cards, menus, select lists, tooltips, alerts, radio cards and inner pattern panels use the card radius.
+- Sign-in fields, provider buttons and main action on `lg` (looks as before); "Change email" and "Resend" moved from sm to md (one group); landing sign-in link on `lg`. Alert, UndoLine and MarkedChange actions stay `sm` (inline). Toast buttons use the sm tokens. List rows keep 44 px and tabs keep 6 px, both documented.
+- `/design-system`: three sizes for buttons and fields, the radius scale, and a "Dense screen" CV-editor sample.
+- Evidence: `pnpm check` passes (185 tests, build). Browser at 1440 px and 390 px touch, light and dark: lg 48/8, md 40/6, sm 32/4 with a mouse; md and sm 44 px on touch; no sideways scroll.
+- Reviewed 88, then 93/100 after fixing raw toast heights, the undecided toast and tab radius, and two gallery radii.

@@ -36,6 +36,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | [08: Regional locales](08-regional-locales.md)                 | Done (96/100) |
 | [09: CV schema](09-cv-schema.md)                               | Done (96/100) |
 | [10: Brand assets](10-brand-assets.md)                         | Done (97/100) |
-| [11: Control sizes and radius](11-control-sizes-and-radius.md) | Ready         |
+| [11: Control sizes and radius](11-control-sizes-and-radius.md) | Done (93/100) |
 
 Planned next (each needs its decisions first): app shell, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

@@ -42,7 +42,7 @@ export function Menu({ trigger, items, align = "start" }: MenuProps) {
         >
           <MenuPrimitive.Popup
             className={cn(
-              "max-w-[min(var(--available-width),20rem)] min-w-48 rounded-control bg-card p-1 text-ink outline-none",
+              "max-w-[min(var(--available-width),20rem)] min-w-48 rounded-card bg-card p-1 text-ink outline-none",
               "shadow-[0_0_0_1px_var(--line),var(--shadow-float)]",
               "origin-(--transform-origin) transition-[opacity,scale] duration-(--dur-base) ease-enter",
               "data-starting-style:scale-(--pop-scale) data-starting-style:opacity-0",
