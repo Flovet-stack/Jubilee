@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-22 by the product team (roles: UI, Copy, Product)
 - **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** in [0025](0025-first-cv-template-and-typography.md), the entry lines for work, volunteering and education, and the body line height. The rest of 0025 stands.
-- **Specs:** (the builder spec #14, and #15)
+- **Specs:** [specs/14-cv-builder.md](../../specs/14-cv-builder.md)
 
 ## Context
 

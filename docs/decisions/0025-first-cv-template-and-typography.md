@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-22 by the product team (roles: UI, Copy, Frontend, Product, Tech Lead)
 - **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** none. Fills the "CV templates and their typography" row in the README's "Still to decide", for the first template only.
-- **Specs:** (the builder spec #14, and the PDF export spec #15)
+- **Specs:** [specs/14-cv-builder.md](../../specs/14-cv-builder.md)
 
 ## Context
 
