@@ -118,3 +118,16 @@ One dated entry per task: what was built, the review score, and what was left.
 - 0014 approved. Facts from Flovet: not a registered company yet, run from the United States, US law, minimum age 16.
 - Built `/[locale]/terms` in en/fr with 12 sections from 0014, on a new shared `LegalDocument` layout that the privacy page now uses too. Added to the sitemap.
 - Left: the contact page (both legal pages link to it), a US state once the company is registered, and a lawyer's review before launch.
+
+## 2026-11-21: CV data model and PDF rendering proposed (0016, issue #5)
+
+- Researched JSON Resume, Reactive Resume v6, OpenResume, react-pdf, headless Chromium on Vercel, Jobscan's ATS formatting guidance and the Postgres JSON docs. Indeed's and Greenhouse's ATS pages were gone (404), so no ATS vendor page backs the format rules.
+- Proposed: `cvs`, `cv_versions` and an append-only `cv_revisions`, each with `user_id` and owner-only RLS; CV content as one Zod-validated `jsonb` document using JSON Resume names; AI changes only through accepted proposals that write a revision; PDFs with `@react-pdf/renderer` on the server, checked by a pdf.js text-extraction test. No Chromium.
+- 0016 approved by Flovet in chat, with a note that #14 may render the preview in the browser.
+- Naming agreed in chat: "CV" in code and data; on screen "CV" in French and "resume" in English (US) for now; an `en-GB` locale with "CV" when the UK launches. To be logged as 0017.
+- Flovet then asked for regional locales from the start (shared links, countries beyond the launch markets). Proposed 0017, superseding 0003: three language-region locales to start (`/en-us`, `/en-gb`, `/fr-fr`; cut from 11 at Flovet's request, other countries map to one of them), base en/fr messages with small regional overrides, no redirect on deep links, "resume" only in en-US and en-CA. Research: Google hreflang and multi-regional guidance, Stripe, Apple, Notion, Airbnb, resume.io, next-intl routing docs.
+- 0017 approved by Flovet in chat; 0003 marked Superseded by 0017.
+- Spec 08 (regional locales) written, status Ready.
+- Spec 09 (CV schema, RLS and data access, #10) written, status Ready. Applying its migration to the remote project waits on Flovet.
+- Left: build spec 08, then spec 09.
+- Renumbered when merging main, which had taken 0013–0015 and specs 06–07: CV data model is 0016, regional locales 0017, specs 08 and 09.
