@@ -151,6 +151,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - `pnpm check` passes; sign-in checked at 1440 and 390 px in light and dark, en-us and fr-fr; the `<head>` links all three icons.
 - Left: store icons, social images and a web manifest (no decision yet); the design canvas still shows the earlier icon.
 
+## 2026-11-22: App icon and favicon on ink
+
+- Flovet's request: the app icon, Apple icon and favicon now use an ink `#1d1a44` tile with `#a48cff` dots (opacity steps kept) and the marigold top dot, square like the reference. Regenerated with `scripts/render-brand-icons.mjs`.
+
 ## 2026-11-22: CV schema built (spec 09, issue #10)
 
 - Migration `20261122111324_cvs` applied to `jubilee` with Flovet's go-ahead: `cvs`, `cv_versions` and append-only `cv_revisions`, owner-only RLS, no anon grants, composite `(id, user_id)` keys so nothing can point at another user's CV, column grants so owners and parents never change, a 256 kB content cap, and `restore_cv_revision` (security invoker) so a restore and its revision land together.
