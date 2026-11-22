@@ -39,7 +39,11 @@ export function useControlHover(
       // Keyboard focus only; a mouse click focuses too but already hovered.
       if (control.matches(":focus-visible")) handlers.current.start();
     };
-    const onBlur = () => handlers.current.stop();
+    // A focused control that is being removed fires blur during unmount;
+    // there is nothing left to settle then.
+    const onBlur = () => {
+      if (control.isConnected) handlers.current.stop();
+    };
 
     control.addEventListener("pointerenter", onEnter);
     control.addEventListener("pointerleave", onLeave);
