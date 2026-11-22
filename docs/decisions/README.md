@@ -40,8 +40,8 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0018 | [Locale ids are the lowercase URL segments](0018-locale-ids-are-url-segments.md) (supersedes one sentence of 0017) | Approved           |
 | 0019 | [Logo icon redrawn as a staircase of dots ("the steps")](0019-logo-icon-staircase.md)                              | Approved           |
 | 0020 | [Control sizes by screen type and pointer](0020-control-sizes-and-density.md) (supersedes 0009's control heights)  | Approved           |
-| 0021 | [Phone, date and password fields](0021-phone-date-and-password-fields.md)                                          | Proposed           |
-| 0022 | [Corner radius by size](0022-corner-radius-by-size.md) (supersedes 0007's control and card radius)                 | Proposed           |
+| 0021 | [Phone, date and password fields](0021-phone-date-and-password-fields.md)                                          | Approved           |
+| 0022 | [Corner radius by size](0022-corner-radius-by-size.md) (supersedes 0007's control and card radius)                 | Approved           |
 
 ## Still to decide (before the specs that need them)
 

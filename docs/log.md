@@ -175,4 +175,5 @@ One dated entry per task: what was built, the review score, and what was left.
 - 0021 (Proposed): `PhoneField`, `DateField` / `DateRangeField`, `PasswordField`. Research: GOV.UK phone, date and password patterns, NN/g date input and password masking, React DayPicker; package licences checked with `npm view`.
 - 0022 (Proposed): radius scales with size. Research: Atlassian, Primer, Fluent 2, Spectrum. No source links radius to text readability; dense systems use smaller radius on smaller elements.
 - Brief: a component quality bar (reusable, every state, edge cases handled).
-- Left: Flovet to approve 0021 and 0022; then one spec for 0020 + 0022 and one for 0021.
+- Flovet approved 0021 and 0022 in chat the same day; 0007's status notes its control and card radius are superseded by 0022.
+- Left: one spec for 0020 + 0022 (sizes and radius) and one for 0021 (the new fields).
