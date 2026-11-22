@@ -176,4 +176,5 @@ One dated entry per task: what was built, the review score, and what was left.
 - 0022 (Proposed): radius scales with size. Research: Atlassian, Primer, Fluent 2, Spectrum. No source links radius to text readability; dense systems use smaller radius on smaller elements.
 - Brief: a component quality bar (reusable, every state, edge cases handled).
 - Flovet approved 0021 and 0022 in chat the same day; 0007's status notes its control and card radius are superseded by 0022.
-- Left: one spec for 0020 + 0022 (sizes and radius) and one for 0021 (the new fields).
+- Spec 11 written (Ready): control sizes and radius, implementing 0020 + 0022.
+- Left: build spec 11; write the 0021 spec (phone, date, password fields).

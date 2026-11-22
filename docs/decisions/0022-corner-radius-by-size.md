@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-22 by the product team (roles: UI, UX, Frontend)
 - **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** the radius values for controls and cards in 0007's "Radius by role" line (8 px controls, 12 px cards). Wells, sheets, dialogs, the CV paper and pills stay as 0007 set them.
-- **Specs:** (the spec that implements it)
+- **Specs:** specs/11-control-sizes-and-radius.md
 
 ## Context
 
