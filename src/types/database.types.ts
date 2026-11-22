@@ -14,6 +14,171 @@ export type Database = {
   };
   public: {
     Tables: {
+      cv_revisions: {
+        Row: {
+          content: Json;
+          created_at: string;
+          cv_id: string | null;
+          cv_version_id: string | null;
+          id: string;
+          note: string | null;
+          schema_version: number;
+          source: string;
+          user_id: string;
+        };
+        Insert: {
+          content: Json;
+          created_at?: string;
+          cv_id?: string | null;
+          cv_version_id?: string | null;
+          id?: string;
+          note?: string | null;
+          schema_version: number;
+          source: string;
+          user_id?: string;
+        };
+        Update: {
+          content?: Json;
+          created_at?: string;
+          cv_id?: string | null;
+          cv_version_id?: string | null;
+          id?: string;
+          note?: string | null;
+          schema_version?: number;
+          source?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "cv_revisions_cv_fkey";
+            columns: ["cv_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "cvs";
+            referencedColumns: ["id", "user_id"];
+          },
+          {
+            foreignKeyName: "cv_revisions_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "cv_revisions_version_fkey";
+            columns: ["cv_version_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "cv_versions";
+            referencedColumns: ["id", "user_id"];
+          },
+        ];
+      };
+      cv_versions: {
+        Row: {
+          content: Json;
+          created_at: string;
+          cv_id: string | null;
+          id: string;
+          job_id: string | null;
+          language: string;
+          market: string;
+          schema_version: number;
+          template: string | null;
+          title: string;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          content: Json;
+          created_at?: string;
+          cv_id?: string | null;
+          id?: string;
+          job_id?: string | null;
+          language: string;
+          market: string;
+          schema_version: number;
+          template?: string | null;
+          title: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Update: {
+          content?: Json;
+          created_at?: string;
+          cv_id?: string | null;
+          id?: string;
+          job_id?: string | null;
+          language?: string;
+          market?: string;
+          schema_version?: number;
+          template?: string | null;
+          title?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "cv_versions_cv_fkey";
+            columns: ["cv_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "cvs";
+            referencedColumns: ["id", "user_id"];
+          },
+          {
+            foreignKeyName: "cv_versions_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      cvs: {
+        Row: {
+          content: Json;
+          created_at: string;
+          id: string;
+          language: string;
+          market: string;
+          schema_version: number;
+          template: string | null;
+          title: string;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          content: Json;
+          created_at?: string;
+          id?: string;
+          language: string;
+          market: string;
+          schema_version: number;
+          template?: string | null;
+          title: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Update: {
+          content?: Json;
+          created_at?: string;
+          id?: string;
+          language?: string;
+          market?: string;
+          schema_version?: number;
+          template?: string | null;
+          title?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "cvs_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profiles: {
         Row: {
           avatar_url: string | null;
@@ -43,7 +208,14 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      restore_cv_revision: {
+        Args: {
+          restored_content: Json;
+          restored_schema_version: number;
+          revision_id: string;
+        };
+        Returns: string;
+      };
     };
     Enums: {
       [_ in never]: never;
