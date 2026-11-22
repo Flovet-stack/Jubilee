@@ -54,6 +54,7 @@ Approved: `docs/design/design-brief.md` ("quiet desk, bright moments": light, gr
 
 See `docs/decisions/README.md`. Product-wide ones:
 
+- 0020 (Proposed 2026-11-22): control sizes by screen type: `lg` 48 px for single-task screens, `md` 40 px default, `sm` 32 px for inline row actions; never under 44 px on touch. Replaces 0009's control heights.
 - 0017 (Approved 2026-11-21): three locales to start, `/en-us` ("resume"), `/en-gb` and `/fr-fr` ("CV"); other countries map to one of them; shared links never redirect; "CV" in code and data. Supersedes 0003.
 - 0016 (Approved 2026-11-21): CV data model and PDF: `cvs`, `cv_versions`, append-only `cv_revisions`, owner-only RLS; content as one Zod-validated `jsonb` document; AI changes only through accepted proposals; PDFs with react-pdf, no Chromium.
 - 0011 (Approved 2026-11-21): privacy policy page: one layered page in en/fr that describes only what Jubilee processes today; updated by every decision that adds a processor; legal review before launch.

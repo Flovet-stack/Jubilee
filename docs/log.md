@@ -163,3 +163,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - Reviewed 96/100. Fixed after review: wider SQL tests, a duplicate-entry test, UUID checks, the restore read moved to `queries.ts`.
 - Flovet approved dropping the English restore note: new migration `20261122123552_restore_without_note.sql` (restore revisions get no note; the UI labels them). Applied to `jubilee`; the SQL tests, now checking the note is empty, passed and rolled back.
 - Left: consider measuring the size cap with `octet_length`.
+
+## 2026-11-22: Decision 0020 proposed, control sizes
+
+- Flovet found 48 px controls too heavy for dense screens like the CV editor. 0020 (Proposed) adds a scale: `lg` 48 for single-task screens, `md` 40 as the default, `sm` 32 for inline row actions, never under 44 px on touch. Research: WCAG 2.5.8, NN/g, Carbon, Primer, Atlassian.
+- Left: Flovet to approve 0020; then a spec to build it.
