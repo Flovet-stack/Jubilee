@@ -1,8 +1,8 @@
 # 0025: The first CV template and its typography
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-22 by the product team (roles: UI, Copy, Frontend, Product, Tech Lead)
-- **Approved:**
+- **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** none. Fills the "CV templates and their typography" row in the README's "Still to decide", for the first template only.
 - **Specs:** (the builder spec #14, and the PDF export spec #15)
 

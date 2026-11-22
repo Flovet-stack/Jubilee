@@ -40,7 +40,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0018 | [Locale ids are the lowercase URL segments](0018-locale-ids-are-url-segments.md) (supersedes one sentence of 0017) | Approved           |
 | 0019 | [Logo icon redrawn as a staircase of dots ("the steps")](0019-logo-icon-staircase.md)                              | Approved           |
 | 0024 | [CV builder: guided editor, live preview and autosave](0024-cv-builder-editor.md)                                  | Approved           |
-| 0025 | [The first CV template and its typography](0025-first-cv-template-and-typography.md)                               | Proposed           |
+| 0025 | [The first CV template and its typography](0025-first-cv-template-and-typography.md)                               | Approved           |
 
 ## Still to decide (before the specs that need them)
 
