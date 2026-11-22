@@ -164,6 +164,12 @@ One dated entry per task: what was built, the review score, and what was left.
 - Flovet approved dropping the English restore note: new migration `20261122123552_restore_without_note.sql` (restore revisions get no note; the UI labels them). Applied to `jubilee`; the SQL tests, now checking the note is empty, passed and rolled back.
 - Left: consider measuring the size cap with `octet_length`.
 
+## 2026-11-22: Spec 11, pull request checks (97/100, issue #7)
+
+- Decision 0023 approved by Flovet (0020–0022 skipped: held by open PR #56). `.github/workflows/check.yml` runs `pnpm check` on every PR to `main`: `pnpm/setup` (pnpm from `packageManager`, Node 24), `.next/cache` cached, actions pinned to SHAs, `contents: read`, placeholder public env, no secrets.
+- `pnpm check` passed locally with only the placeholders; the first Actions run on PR #58 was green.
+- Left for Flovet: make `Check` a required status on `main` (branch protection). The Vercel preview fails on this PR and on #55 alike; not caused by this change.
+
 ## 2026-11-22: Decision 0020 proposed, control sizes
 
 - Flovet found 48 px controls too heavy for dense screens like the CV editor. 0020 (Proposed) adds a scale: `lg` 48 for single-task screens, `md` 40 as the default, `sm` 32 for inline row actions, never under 44 px on touch. Research: WCAG 2.5.8, NN/g, Carbon, Primer, Atlassian.
@@ -176,10 +182,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - 0022 (Proposed): radius scales with size. Research: Atlassian, Primer, Fluent 2, Spectrum. No source links radius to text readability; dense systems use smaller radius on smaller elements.
 - Brief: a component quality bar (reusable, every state, edge cases handled).
 - Flovet approved 0021 and 0022 in chat the same day; 0007's status notes its control and card radius are superseded by 0022.
-- Spec 11 written (Ready): control sizes and radius, implementing 0020 + 0022.
+- Spec 12 written (Ready): control sizes and radius, implementing 0020 + 0022.
 - Left: write the 0021 spec (phone, date, password fields).
 
-## 2026-11-22: Control sizes and radius built (spec 11)
+## 2026-11-22: Control sizes and radius built (spec 12)
 
 - Tokens: `--control-h-lg` 48, `--control-h` 40, `--control-h-sm` 32, raised to 44 under `pointer: coarse`; radius `control-lg` 8, `control` 6, `control-sm` 4, `card` 8 (wells 12, sheets 16 unchanged). `cn()` knows the new names. `src/lib/sizes.test.ts` guards them.
 - `Button`, `IconButton`, `Input`, `Textarea`, `Select` take `size` (lg / md / sm, md default). Cards, menus, select lists, tooltips, alerts, radio cards and inner pattern panels use the card radius.
@@ -187,3 +193,7 @@ One dated entry per task: what was built, the review score, and what was left.
 - `/design-system`: three sizes for buttons and fields, the radius scale, and a "Dense screen" CV-editor sample.
 - Evidence: `pnpm check` passes (185 tests, build). Browser at 1440 px and 390 px touch, light and dark: lg 48/8, md 40/6, sm 32/4 with a mouse; md and sm 44 px on touch; no sideways scroll.
 - Reviewed 88, then 93/100 after fixing raw toast heights, the undecided toast and tab radius, and two gallery radii.
+
+## 2026-11-22: Design work merged with main again
+
+- main had taken spec 11 (pull request checks) and decision 0023, so the control sizes and radius spec became spec 12. Decisions 0020–0022 kept their numbers (0023 had skipped them).

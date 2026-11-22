@@ -42,6 +42,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0020 | [Control sizes by screen type and pointer](0020-control-sizes-and-density.md) (supersedes 0009's control heights)  | Approved           |
 | 0021 | [Phone, date and password fields](0021-phone-date-and-password-fields.md)                                          | Approved           |
 | 0022 | [Corner radius by size](0022-corner-radius-by-size.md) (supersedes 0007's control and card radius)                 | Approved           |
+| 0023 | [Run `pnpm check` on every pull request](0023-pull-request-checks.md)                                              | Approved           |
 
 ## Still to decide (before the specs that need them)
 
