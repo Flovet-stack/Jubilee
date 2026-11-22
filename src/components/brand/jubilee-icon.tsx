@@ -1,9 +1,18 @@
 /**
- * The Jubilee icon, "the path" (decision 0010), drawn from
- * docs/design/brand/logo/jubilee-icon.svg. The colours are the theme's
- * violet and marigold tokens, so it matches the on-dark file in dark mode.
+ * The Jubilee icon, "the steps" (decision 0019), drawn from
+ * docs/design/brand/logo/jubilee-icon.svg: six equal dots in three rising
+ * steps, the top one the marigold offer. The colours are the theme's violet
+ * and marigold tokens, so it matches the on-dark file in dark mode.
  * Decorative where the page names Jubilee in text.
  */
+const STEPS = [
+  { cx: 28, cy: 68, opacity: 0.5 },
+  { cx: 48, cy: 68, opacity: 0.65 },
+  { cx: 48, cy: 48, opacity: 0.8 },
+  { cx: 68, cy: 68, opacity: 0.8 },
+  { cx: 68, cy: 48, opacity: 0.95 },
+] as const;
+
 export function JubileeIcon({
   height = 40,
   className,
@@ -13,20 +22,24 @@ export function JubileeIcon({
 }) {
   return (
     <svg
-      viewBox="9 12 85 71"
+      viewBox="20.5 20.5 55 55"
       height={height}
-      width={(height * 85) / 71}
+      width={height}
       aria-hidden="true"
       focusable="false"
       className={className}
     >
-      <g fill="var(--violet)">
-        <circle cx="14" cy="78" r="5" />
-        <circle cx="31" cy="68" r="6.5" />
-        <circle cx="48" cy="56" r="8" />
-        <circle cx="65" cy="42" r="9.5" />
-      </g>
-      <circle cx="82" cy="24" r="12" fill="var(--marigold)" />
+      {STEPS.map(({ cx, cy, opacity }) => (
+        <circle
+          key={`${cx}-${cy}`}
+          cx={cx}
+          cy={cy}
+          r={7.5}
+          fill="var(--violet)"
+          fillOpacity={opacity}
+        />
+      ))}
+      <circle cx={68} cy={28} r={7.5} fill="var(--marigold)" />
     </svg>
   );
 }
