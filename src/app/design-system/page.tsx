@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { trialFontVariables } from "./font-lab";
 import { Gallery } from "./gallery";
+
+import "./font-lab.css";
 
 export const metadata: Metadata = {
   title: "Design system",
@@ -15,5 +18,5 @@ export const metadata: Metadata = {
  */
 export default function DesignSystemPage() {
   if (process.env.NODE_ENV === "production") notFound();
-  return <Gallery />;
+  return <Gallery fontVariables={trialFontVariables} />;
 }

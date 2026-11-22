@@ -1,0 +1,18 @@
+/*
+ * Font-pairing trial (dev only, /design-system). The switcher sets
+ * data-font-pair on <html> so portalled overlays (dialogs, menus, toasts)
+ * follow too. First font = headings, second = body and UI.
+ */
+html[data-font-pair="figtree-geist"] {
+  --font-sans: var(--font-trial-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-heading-trial: var(--font-trial-figtree);
+}
+
+html[data-font-pair="vietnam-lexend"] {
+  --font-sans: var(--font-trial-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-heading-trial: var(--font-trial-be-vietnam);
+}
+
+html[data-font-pair] :is(h1, h2, h3, h4) {
+  font-family: var(--font-heading-trial), var(--font-sans);
+}
