@@ -1,10 +1,10 @@
-# 0013: CV data model and PDF rendering
+# 0016: CV data model and PDF rendering
 
 - **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Database Expert, Backend, Frontend, Product Designer)
 - **Approved:** 2026-11-21 by Flovet (in chat)
 - **Builds on:** 0002 (data access only in `queries.ts` / `actions.ts`), 0003 (CV language is separate from UI language), 0004 and 0006 (RLS on every table, user data cascades from `profiles`), 0005 (market follows the target job)
-- **Specs:** specs/07-cv-schema.md (tables and data access; the PDF part goes to the export spec, #15)
+- **Specs:** specs/09-cv-schema.md (tables and data access; the PDF part goes to the export spec, #15)
 
 ## Context
 

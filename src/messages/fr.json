@@ -158,6 +158,133 @@
       }
     }
   },
+  "terms": {
+    "title": "Conditions d'utilisation",
+    "description": "Les règles d'utilisation de Jubilee : votre compte, vos contenus, l'usage loyal du service et nos responsabilités respectives.",
+    "updated": "Dernière mise à jour : <time>{date}</time>",
+    "intro": "Ces conditions sont l'accord entre vous et Jubilee lorsque vous utilisez le site et l'application Jubilee. En vous connectant, vous les acceptez : elles sont donc écrites pour être lues.",
+    "contents": "Sur cette page",
+    "sections": {
+      "summary": {
+        "title": "En bref",
+        "blocks": [
+          "Jubilee est gratuit aujourd'hui.",
+          {
+            "list": [
+              "Votre CV et tout ce que vous mettez dans Jubilee restent à vous.",
+              "Jubilee n'invente jamais d'expérience, et rien n'est envoyé à un employeur sans votre accord.",
+              "Vous pouvez supprimer votre compte à tout moment.",
+              "Nous vous prévenons avant toute modification importante de ces conditions."
+            ]
+          },
+          "Une question ? <contact>Contactez-nous</contact>."
+        ]
+      },
+      "who": {
+        "title": "Qui nous sommes",
+        "blocks": [
+          "Jubilee est géré par son fondateur depuis les États-Unis et n'est pas encore une société immatriculée. Dans ces conditions, « nous » désigne le fondateur qui gère Jubilee.",
+          "Une fois la société immatriculée, sa raison sociale et son adresse seront ajoutées ici, et la date en haut de cette page changera.",
+          "Pour nous joindre, utilisez la <contact>page de contact</contact>."
+        ]
+      },
+      "service": {
+        "title": "Ce qu'est Jubilee aujourd'hui",
+        "blocks": [
+          "Aujourd'hui, Jubilee vous donne un compte auquel vous vous connectez avec Google, LinkedIn ou un code envoyé par e-mail.",
+          "Jubilee est conçu pour vous aider à rédiger votre CV, l'adapter aux offres et suivre vos candidatures. Avant l'arrivée d'une nouvelle fonctionnalité, ces conditions seront mises à jour pour la couvrir."
+        ]
+      },
+      "account": {
+        "title": "Votre compte",
+        "blocks": [
+          "Vous devez avoir 16 ans ou plus pour utiliser Jubilee.",
+          {
+            "list": [
+              "Un compte par personne, à votre nom.",
+              "Gardez vos informations exactes.",
+              "Protégez votre messagerie et vos comptes de connexion. Toute personne qui lit vos e-mails peut se connecter à Jubilee à votre place.",
+              "Si vous pensez que quelqu'un d'autre a utilisé votre compte, prévenez-nous via la <contact>page de contact</contact>."
+            ]
+          }
+        ]
+      },
+      "content": {
+        "title": "Vos contenus",
+        "blocks": [
+          "Ce que vous mettez dans Jubilee, comme votre CV, reste à vous.",
+          "Vous nous autorisez à le conserver et à le traiter uniquement pour faire fonctionner Jubilee pour vous, tant que votre compte est ouvert. Nous ne le vendons pas et ne l'utilisons pas pour entraîner des modèles d'IA.",
+          "La façon dont nous traitons vos données personnelles est expliquée dans notre <privacy>politique de confidentialité</privacy>."
+        ]
+      },
+      "ai": {
+        "title": "IA et candidatures",
+        "blocks": [
+          "Jubilee n'utilise pas encore l'IA. Quand ce sera le cas, ces règles s'appliqueront :",
+          {
+            "list": [
+              "L'IA n'ajoute jamais d'expérience, de compétences ou de dates que vous n'avez pas.",
+              "Vous vérifiez ce qu'elle écrit avant qu'il soit utilisé.",
+              "Rien n'est envoyé à un employeur sans votre accord explicite.",
+              "Vous êtes responsable de ce que vous envoyez : assurez-vous que c'est vrai."
+            ]
+          }
+        ]
+      },
+      "fairUse": {
+        "title": "Usage loyal",
+        "blocks": [
+          "N'utilisez pas Jubilee pour :",
+          {
+            "list": [
+              "mettre de fausses informations sur vous ou sur autrui dans un CV ou une candidature",
+              "vous faire passer pour quelqu'un d'autre",
+              "harceler, tromper ou nuire à des employeurs, des recruteurs ou toute autre personne",
+              "enfreindre la loi ou les droits d'autrui, y compris le droit d'auteur",
+              "copier, aspirer ou surcharger le service, ou accéder à des parties qui ne vous sont pas ouvertes"
+            ]
+          },
+          "Si nous pensons qu'un contenu ou un usage enfreint ces règles, nous pouvons retirer le contenu ou limiter le compte. Une personne examine chaque cas, nous vous disons ce que nous avons fait et pourquoi, et vous pouvez nous demander de le réexaminer via la <contact>page de contact</contact>."
+        ]
+      },
+      "price": {
+        "title": "Prix",
+        "blocks": [
+          "Jubilee est gratuit aujourd'hui.",
+          "Si des fonctionnalités payantes arrivent, nous afficherons clairement leur prix avant que vous les choisissiez. Nous ne vous facturons jamais sans votre consentement."
+        ]
+      },
+      "ending": {
+        "title": "Fermer votre compte",
+        "blocks": [
+          "Vous pouvez arrêter d'utiliser Jubilee et supprimer votre compte à tout moment. Tant que ce n'est pas possible dans l'application, demandez-le via la <contact>page de contact</contact> et nous le supprimerons sous un mois.",
+          "Nous ne pouvons suspendre ou fermer un compte que s'il enfreint ces conditions ou la loi. Nous vous dirons pourquoi, sauf si la loi nous en empêche."
+        ]
+      },
+      "responsibility": {
+        "title": "Notre responsabilité",
+        "blocks": [
+          "Nous faisons en sorte que Jubilee reste disponible et exact, mais nous ne pouvons pas garantir qu'il sera toujours disponible ou sans erreur, ni qu'il vous fera obtenir un emploi.",
+          "Dans les limites permises par la loi, nous ne sommes pas responsables des pertes indirectes, comme une opportunité d'emploi manquée.",
+          "Rien dans ces conditions ne limite les droits que vous accorde le droit de la consommation du pays où vous vivez."
+        ]
+      },
+      "changes": {
+        "title": "Modifications de ces conditions",
+        "blocks": [
+          "Quand ces conditions changent, la date en haut de la page change aussi. Avant qu'une modification importante prenne effet, nous vous prévenons par e-mail ou dans l'application. Si vous n'êtes pas d'accord, vous pouvez supprimer votre compte."
+        ]
+      },
+      "law": {
+        "title": "Droit applicable",
+        "blocks": [
+          "Ces conditions sont régies par le droit des États-Unis.",
+          "Si vous vivez dans l'Union européenne ou dans un autre pays dont le droit de la consommation vous protège, vous conservez les droits qu'il vous accorde et pouvez saisir les tribunaux du lieu où vous vivez.",
+          "En cas de problème, <contact>dites-le-nous</contact> d'abord et nous essaierons d'y remédier."
+        ]
+      }
+    }
+  },
   "auth": {
     "providers": {
       "google": "Google",
@@ -173,7 +300,9 @@
       "sendCode": "Recevoir un code par e-mail",
       "sending": "Envoi de votre code",
       "redirecting": "Ouverture de {provider}",
-      "newHere": "Première visite ? Votre compte sera créé. Lisez notre <link>politique de confidentialité</link>."
+      "newHere": "Première visite ? Votre compte sera créé.",
+      "legal": "En vous connectant, vous acceptez les <terms>conditions d'utilisation</terms> et la <privacy>politique de confidentialité</privacy>.",
+      "help": "Besoin d'aide ? <link>Contactez le support</link>."
     },
     "code": {
       "title": "Consultez vos e-mails",

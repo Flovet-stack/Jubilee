@@ -2,7 +2,7 @@
 
 - **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
-- **Approved:** 2026-11-21 by Flovet (in another chat)
+- **Approved:** 2026-11-21 by Flovet (in chat)
 - **Specs:** none yet (the app shell spec will use the files)
 
 ## Context

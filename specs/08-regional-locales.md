@@ -1,19 +1,19 @@
-# 06: Regional locales
+# 08: Regional locales
 
 Status: Ready · Written: 2026-11-21
 
 ## Goal
 
-Move the app from `en` and `fr` to the three regional locales in 0014, so a shared link always opens in the language and region it carries, and people in any country land on the locale that uses their words ("resume" or "CV").
+Move the app from `en` and `fr` to the three regional locales in 0017, so a shared link always opens in the language and region it carries, and people in any country land on the locale that uses their words ("resume" or "CV").
 
 ## Decisions
 
-Implements [0014](../docs/decisions/0014-regional-locales-and-cv-naming.md). Builds on [0002](../docs/decisions/0002-project-structure.md) (structure) and the routing from spec 01.
+Implements [0017](../docs/decisions/0017-and-cv-naming.md). Builds on [0002](../docs/decisions/0002-project-structure.md) (structure) and the routing from spec 01.
 
 ## Acceptance criteria
 
-1. **Locales:** `src/i18n/routing.ts` has the three locales in 0014, default `en-US`, always prefixed, with the lowercase URL prefixes `/en-us`, `/en-gb`, `/fr-fr`. Every existing page and route works under each prefix.
-2. **Country mapping:** a pure, tested function maps an `Accept-Language` header to a locale, following 0014's table: English from the US or Canada, or with no region → `en-US`; English from any other region → `en-GB`; any French → `fr-FR`; anything else → `en-US`. The header's quality order is respected (`de-DE, fr;q=0.8` → `fr-FR`).
+1. **Locales:** `src/i18n/routing.ts` has the three locales in 0017, default `en-US`, always prefixed, with the lowercase URL prefixes `/en-us`, `/en-gb`, `/fr-fr`. Every existing page and route works under each prefix.
+2. **Country mapping:** a pure, tested function maps an `Accept-Language` header to a locale, following 0017's table: English from the US or Canada, or with no region → `en-US`; English from any other region → `en-GB`; any French → `fr-FR`; anything else → `en-US`. The header's quality order is respected (`de-DE, fr;q=0.8` → `fr-FR`).
 3. **`/` only:** `/` redirects to the saved locale cookie if valid, else to the mapped locale. A URL that already has a locale is never redirected to another locale, whatever the cookie or header says.
 4. **Cookie:** the locale cookie is written only when the user picks a locale in the picker (criterion 7). Visiting a shared `/en-gb/...` link does not change it. Old cookie values `en` and `fr` are read as `en-US` and `fr-FR`.
 5. **Old URLs:** `/en/...` and `/fr/...` permanently redirect to `/en-us/...` and `/fr-fr/...`, keeping the path and query.
@@ -25,7 +25,7 @@ Implements [0014](../docs/decisions/0014-regional-locales-and-cv-naming.md). Bui
 
 ## Out of scope
 
-`fr-CA`, `en-CA` or any other new locale; a settings page; the final place of the picker (the app shell spec); any copy change beyond `en-GB` overrides; CV language and market (0013, #10).
+`fr-CA`, `en-CA` or any other new locale; a settings page; the final place of the picker (the app shell spec); any copy change beyond `en-GB` overrides; CV language and market (0016, #10).
 
 ## Edge cases
 

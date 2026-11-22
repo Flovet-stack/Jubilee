@@ -1,6 +1,6 @@
 # 0003: Internationalisation
 
-- **Status:** Superseded by [0014](0014-regional-locales-and-cv-naming.md)
+- **Status:** Superseded by [0017](0017-regional-locales-and-cv-naming.md)
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Frontend, Copy, UX)
 - **Approved:** 2026-11-21 by Flovet
 - **Specs:** specs/01-foundations.md

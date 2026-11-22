@@ -22,7 +22,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | ---- | ------------------------------------------------------------------------------------------------------------- | ------------------ |
 | 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                                                | Approved           |
 | 0002 | [Project structure](0002-project-structure.md)                                                                | Approved           |
-| 0003 | [Internationalisation](0003-internationalisation.md)                                                          | Superseded by 0014 |
+| 0003 | [Internationalisation](0003-internationalisation.md)                                                          | Superseded by 0017 |
 | 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                               | Approved           |
 | 0005 | [Target markets and rollout order](0005-launch-markets.md)                                                    | Approved           |
 | 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md)                                | Approved           |
@@ -32,8 +32,11 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                       | Approved           |
 | 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                            | Approved           |
 | 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                  | Approved           |
-| 0013 | [CV data model and PDF rendering](0013-cv-data-model-and-pdf-rendering.md)                                    | Approved           |
-| 0014 | [Regional locales and what we call a CV](0014-regional-locales-and-cv-naming.md) (supersedes 0003)            | Approved           |
+| 0013 | [Sign-in page refresh and word spacing](0013-sign-in-page-refresh-and-word-spacing.md)                        | Approved           |
+| 0014 | [Terms of service page](0014-terms-of-service-page.md)                                                        | Approved           |
+| 0015 | [Keep the font's default word spacing](0015-keep-default-word-spacing.md)                                     | Approved           |
+| 0016 | [CV data model and PDF rendering](0016-cv-data-model-and-pdf-rendering.md)                                    | Approved           |
+| 0017 | [Regional locales and what we call a CV](0017-regional-locales-and-cv-naming.md) (supersedes 0003)            | Approved           |
 
 ## Still to decide (before the specs that need them)
 

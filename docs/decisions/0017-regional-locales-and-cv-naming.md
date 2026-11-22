@@ -1,10 +1,10 @@
-# 0014: Regional locales and what we call a CV
+# 0017: Regional locales and what we call a CV
 
 - **Status:** Approved
 - **Proposed:** 2026-11-21 by the product team (roles: Tech Lead, Frontend, Copy, Product Designer, UX)
 - **Approved:** 2026-11-21 by Flovet (in chat)
 - **Supersedes:** 0003 (internationalisation)
-- **Specs:** specs/06-regional-locales.md
+- **Specs:** specs/08-regional-locales.md
 
 ## Context
 
@@ -71,7 +71,7 @@ Sending `en-CA` to `en-US` ("resume") is an assumption (no Canadian source was o
 
 **Formats:** dates and numbers follow the locale through `Intl` (`en-GB` gives 21/11/2026, `en-US` 11/21/2026).
 
-**Unchanged from 0003:** no hard-coded UI strings; hreflang alternates on every public page (now one per locale, plus `x-default` to `/en-us`); **CV language and market are data, not the UI locale** (0013 stores them per CV). The UI locale only suggests the defaults for a new CV.
+**Unchanged from 0003:** no hard-coded UI strings; hreflang alternates on every public page (now one per locale, plus `x-default` to `/en-us`); **CV language and market are data, not the UI locale** (0016 stores them per CV). The UI locale only suggests the defaults for a new CV.
 
 **What "supported" means outside the launch markets:** the interface works in the person's regional language now. CV format rules (#13) and job sources (#22) stay limited to the markets in 0005; elsewhere the builder offers the nearest supported format and says so.
 

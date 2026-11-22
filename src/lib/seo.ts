@@ -19,4 +19,4 @@ export function alternatesFor(
 }
 
 /** Every public page, locale-free, for the sitemap. */
-export const publicPaths = ["", "/privacy"] as const;
+export const publicPaths = ["", "/privacy", "/terms"] as const;
