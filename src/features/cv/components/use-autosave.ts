@@ -21,7 +21,13 @@ import type { CvContent } from "../schemas";
  */
 
 export type SaveStatus =
-  "saved" | "saving" | "pending" | "offline" | "conflict" | "tooLarge";
+  | "saved"
+  | "saving"
+  | "pending"
+  | "offline"
+  | "conflict"
+  | "tooLarge"
+  | "invalid";
 
 const DELAY_MS = 1000;
 
@@ -47,6 +53,10 @@ export function useAutosave({
   const again = useRef(false);
   const stopped = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** A rename in progress; saves wait for it so they send its new version. */
+  const renaming = useRef<Promise<unknown> | null>(null);
+  /** The save request on the wire, if any (never waits on a rename). */
+  const request = useRef<Promise<unknown> | null>(null);
 
   // Edits are counted, so "unsaved" never depends on key order or trimming.
   const editCount = useRef(0);
@@ -62,7 +72,7 @@ export function useAutosave({
       contentIssuePaths,
     );
     if (!next) {
-      setStatus("offline");
+      setStatus("invalid");
       return;
     }
     setHeldBack(next.heldBack);
@@ -80,7 +90,13 @@ export function useAutosave({
         if (!snapshot.ok) throw new Error(snapshot.error.code);
         sessionStarted.current = true;
       }
-      const result = await saveCvAction(id, next.content, updatedAt.current);
+      // No await between this check and sending, so a rename can't slip in.
+      while (renaming.current) await renaming.current;
+      const sending = saveCvAction(id, next.content, updatedAt.current);
+      request.current = sending;
+      const result = await sending.finally(() => {
+        if (request.current === sending) request.current = null;
+      });
       if (result.ok) {
         saved.current = next.content;
         savedJson.current = json;
@@ -138,10 +154,19 @@ export function useAutosave({
   /** Renames through the same queue, so the version check stays right. */
   const rename = useCallback(
     async (title: string) => {
-      await inFlight.current;
-      const result = await renameCvAction(id, title);
-      if (result.ok) updatedAt.current = result.value.updatedAt;
-      return result;
+      // After the save request on the wire; later saves wait for this.
+      const task = (async () => {
+        await request.current?.catch(() => undefined);
+        const result = await renameCvAction(id, title);
+        if (result.ok) updatedAt.current = result.value.updatedAt;
+        return result;
+      })();
+      renaming.current = task;
+      try {
+        return await task;
+      } finally {
+        if (renaming.current === task) renaming.current = null;
+      }
     },
     [id],
   );

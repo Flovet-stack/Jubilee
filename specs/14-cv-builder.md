@@ -114,3 +114,19 @@ Builds on:
 - Two tabs on one CV: the conflict appears, and the database row is unchanged.
 - In Supabase, after an edit session: the `cvs` row passes `cvContentSchema`, and exactly one `user` revision was added for the visit.
 - Reviewer skill: 90 or more.
+
+## Build notes
+
+- **Fonts (0025).** Carlito Regular and Bold from `google/fonts` (`ofl/carlito`, the `main` branch on 2026-11-22: 628,032 and 682,468 bytes), subset with fonttools in a throwaway virtual environment (not a project dependency):
+
+  ```
+  pyftsubset Carlito-<Weight>.ttf --unicodes="U+0000-00FF,U+0131,U+0152-0153,U+0100-017F,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212" --layout-features='kern,liga,tnum' --flavor=woff2 --output-file=carlito-<weight>-latin.woff2
+  ```
+
+  Results: 36,896 bytes (Regular) and 39,288 bytes (Bold), in `src/features/cv/templates/classic/fonts/` with `OFL.txt`.
+
+- **`saveContent`** takes an optional `expectedUpdatedAt` and returns a new `conflict` error; `renameCvDocument` was added for the editor's title. No migration.
+- **`DateRangeField`** (spec 13): `value` is now omitted from the inherited single-date props, so a controlled range type-checks. The editor passes the first value as `defaultValue` too, because the field reads its first value from there.
+- **`ButtonLink`** added to `button.tsx`, so server components can render a link styled as a button without calling `buttonVariants` on the server.
+- **CV-language words** (headings, "Present") are read with `loadMessages` for the CV's language, because next-intl's request config always follows the page's locale.
+- **Autosave** counts edits to know what's unsaved, and a rename waits for the save on the wire while later saves wait for the rename, so the version check never trips on one tab.

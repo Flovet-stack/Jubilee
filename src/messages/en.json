@@ -550,7 +550,8 @@
         "retry": "Try again",
         "conflict": "This resume changed in another tab.",
         "reload": "Reload",
-        "tooLarge": "Not saved: this resume is too long. Remove some text to save it."
+        "tooLarge": "Not saved: this resume is too long. Remove some text to save it.",
+        "invalid": "Not saved: a field has a problem. Fix the field marked in red."
       },
       "loadError": {
         "title": "This resume cannot be opened",

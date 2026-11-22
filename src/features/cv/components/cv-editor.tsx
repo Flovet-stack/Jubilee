@@ -511,6 +511,7 @@ export function CvEditor(props: CvEditorProps) {
         title={t("previewLabel")}
         closeLabel={t("closePreview")}
         side="bottom"
+        className="h-dvh max-h-none rounded-none"
       >
         {previewOpen ? <div className="pb-4">{preview}</div> : null}
       </Sheet>
@@ -551,12 +552,18 @@ function SaveStatusLine({
     case "tooLarge":
       message = t("tooLarge");
       break;
+    case "invalid":
+      message = t("invalid");
+      break;
   }
   return (
     <p role="status" className="flex items-center gap-2 text-sm text-ink-muted">
       <span
         className={cn(
-          status === "offline" || status === "conflict" || status === "tooLarge"
+          status === "offline" ||
+            status === "conflict" ||
+            status === "tooLarge" ||
+            status === "invalid"
             ? "text-ink"
             : undefined,
         )}

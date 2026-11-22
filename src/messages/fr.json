@@ -550,7 +550,8 @@
         "retry": "Réessayer",
         "conflict": "Ce CV a été modifié dans un autre onglet.",
         "reload": "Recharger",
-        "tooLarge": "Non enregistré : ce CV est trop long. Supprimez du texte pour l’enregistrer."
+        "tooLarge": "Non enregistré : ce CV est trop long. Supprimez du texte pour l’enregistrer.",
+        "invalid": "Non enregistré : un champ pose problème. Corrigez le champ signalé en rouge."
       },
       "loadError": {
         "title": "Ce CV ne peut pas être ouvert",
