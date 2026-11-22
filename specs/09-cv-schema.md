@@ -1,6 +1,6 @@
 # 09: CV schema, RLS and data access
 
-Status: In progress (built locally 2026-11-22; migration not applied to the remote project yet) · Written: 2026-11-22 · Issue: #10
+Status: In progress (built 2026-11-22; migration 20261122111324 applied to `jubilee`; review pending) · Written: 2026-11-22 · Issue: #10
 
 ## Goal
 
@@ -65,5 +65,7 @@ Choices the build made that no decision spells out.
 - **`template` is nullable** (null = the default template) until the CV templates decision names the templates.
 - **IDs inside content are UUIDs.** Text fields are trimmed and capped; links must be `http(s)`. End dates are compared with start dates at the precision both share (`1843-05` to `1843` is fine).
 - **Revision indexes** are `(cv_id, user_id, created_at desc)` and `(cv_version_id, user_id, created_at desc)`, so they also cover the composite foreign keys.
-- **Types** for the three tables and the function were written by hand in the generator's shape so the code typechecks; they are replaced by `generate_typescript_types` once the migration is applied.
+- **Types** were written in the generator's shape before the migration ran; `generate_typescript_types` after applying it produced the same tables, columns, relationships and function.
+- **Migration file** renamed to `20261122111324_cvs.sql`, the version the remote project recorded.
+- **Evidence (2026-11-22):** `supabase/tests/cvs.sql` run on `jubilee` returned "all checks passed" and rolled back (0 test users, 0 rows after). Security advisor: only the project-wide "leaked password protection" warning (no passwords are used, decision 0006). Performance advisor: no findings.
 - **The data functions are plain server functions**, not `"use server"` actions: there are no screens yet, and the builder (#14) wraps the ones it needs.

@@ -207,4 +207,6 @@ begin
   raise notice 'PASS cascades: cv delete keeps versions, user delete removes all';
 end $$;
 
+select 'all checks passed' as result;
+
 rollback;
