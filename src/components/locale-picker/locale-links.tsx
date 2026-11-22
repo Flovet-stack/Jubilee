@@ -19,7 +19,8 @@ function pathWithoutLocale(pathname: string): string {
 
 /** Saves the choice; only an explicit pick does this (0017). */
 function remember(locale: Locale) {
-  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}; samesite=lax`;
+  const secure = location.protocol === "https:" ? "; secure" : "";
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}; samesite=lax${secure}`;
 }
 
 export function LocaleLinks({

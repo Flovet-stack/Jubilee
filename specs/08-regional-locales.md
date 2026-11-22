@@ -1,6 +1,6 @@
 # 08: Regional locales
 
-Status: In progress (built 2026-11-22, review pending) · Written: 2026-11-21
+Status: Done (96/100, 2026-11-22; the 0017 `prefixes` wording and a real sign-in on `/en-gb` wait on Flovet) · Written: 2026-11-21
 
 ## Goal
 
@@ -68,6 +68,7 @@ Choices the build made that no decision spells out.
 - **Overrides of list items** are written as objects keyed by index (`"blocks": { "3": "..." }`), so an override names only the item that differs.
 - **Mixed case** (`/EN-GB/...`) redirects (308) to lowercase.
 - **Unknown prefix** (`/de-de/x`) behaves as before for unknown paths: next-intl prefixes the default locale (`/en-us/de-de/x`), which renders the localised 404. The spec's edge case said the global 404; this is the same behaviour as `/de/x` before this change.
+- **After review:** the privacy policy now says the language cookie "remembers the language you choose" (en and fr); the cookie gets `Secure` on HTTPS; privacy and terms "last updated" moved to 2026-11-22 for the wording changes.
 - **Picker placement:** the home page and both legal pages (they share `LegalDocument`).
 - **Sitemap** entries also list `x-default`.
 - **Not verified here:** a real sign-in from `/en-gb/sign-in` (this worktree has only placeholder Supabase keys). The guard's redirect, the `locale` form field and the callback paths all carry `en-gb`.

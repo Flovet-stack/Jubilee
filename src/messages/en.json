@@ -131,7 +131,7 @@
           {
             "list": [
               "sign-in cookies, which keep you signed in",
-              "a language cookie (NEXT_LOCALE), which remembers your language"
+              "a language cookie (NEXT_LOCALE), which remembers the language you choose"
             ]
           },
           "We don't use advertising or analytics cookies, so there is no cookie banner."

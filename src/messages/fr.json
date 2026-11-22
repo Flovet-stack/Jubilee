@@ -131,7 +131,7 @@
           {
             "list": [
               "des cookies de connexion, qui maintiennent votre session",
-              "un cookie de langue (NEXT_LOCALE), qui retient votre langue"
+              "un cookie de langue (NEXT_LOCALE), qui retient la langue que vous choisissez"
             ]
           },
           "Nous n’utilisons aucun cookie publicitaire ni de mesure d’audience : il n’y a donc pas de bandeau cookies."
