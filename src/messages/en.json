@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time."
+    "description": "Your AI job-search assistant: country-ready resumes, tailored applications you approve, and follow-ups at the right time."
   },
   "home": {
-    "description": "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time.",
+    "description": "Your AI job-search assistant: country-ready resumes, tailored applications you approve, and follow-ups at the right time.",
     "signIn": "Sign in"
   },
   "notFound": {
@@ -54,7 +54,7 @@
             ]
           },
           "When you use the site, our host and Supabase record technical data such as your IP address, your browser and the pages requested, to deliver pages, sign you in and protect the service.",
-          "Jubilee doesn't collect your CV or your job applications yet, because those features aren't built. Before they are, this page will say what they collect."
+          "Jubilee doesn't collect your resume or your job applications yet, because those features aren't built. Before they are, this page will say what they collect."
         ]
       },
       "why": {
@@ -121,7 +121,7 @@
         "blocks": [
           "Jubilee doesn't use AI on your data yet, and makes no automated decisions about you.",
           "We don't use your data to train AI models.",
-          "When AI features arrive (tailoring your CV, writing letters), this section will say which provider is used and what it sees, before those features touch your data. AI will never add experience you don't have, and nothing will be sent to an employer without your approval."
+          "When AI features arrive (tailoring your resume, writing letters), this section will say which provider is used and what it sees, before those features touch your data. AI will never add experience you don't have, and nothing will be sent to an employer without your approval."
         ]
       },
       "cookies": {
@@ -131,7 +131,7 @@
           {
             "list": [
               "sign-in cookies, which keep you signed in",
-              "a language cookie (NEXT_LOCALE), which remembers your language"
+              "a language cookie (NEXT_LOCALE), which remembers the language you choose"
             ]
           },
           "We don't use advertising or analytics cookies, so there is no cookie banner."
@@ -171,7 +171,7 @@
           "Jubilee is free to use today.",
           {
             "list": [
-              "Your CV and everything you put in Jubilee stay yours.",
+              "Your resume and everything you put in Jubilee stay yours.",
               "Jubilee never invents experience, and nothing is sent to an employer without your approval.",
               "You can delete your account at any time.",
               "We tell you before any significant change to these terms."
@@ -192,7 +192,7 @@
         "title": "What Jubilee is today",
         "blocks": [
           "Today Jubilee gives you an account that you sign in to with Google, LinkedIn or a code sent to your email.",
-          "Jubilee is being built to help you write your CV, tailor it to jobs and keep track of your applications. Before a new feature arrives, these terms will be updated to cover it."
+          "Jubilee is being built to help you write your resume, tailor it to jobs and keep track of your applications. Before a new feature arrives, these terms will be updated to cover it."
         ]
       },
       "account": {
@@ -212,7 +212,7 @@
       "content": {
         "title": "Your content",
         "blocks": [
-          "What you put into Jubilee, such as your CV, stays yours.",
+          "What you put into Jubilee, such as your resume, stays yours.",
           "You allow us to store and process it only to run Jubilee for you, for as long as your account is open. We don't sell it, and we don't use it to train AI models.",
           "How we handle your personal data is explained in our <privacy>privacy policy</privacy>."
         ]
@@ -237,7 +237,7 @@
           "Don't use Jubilee to:",
           {
             "list": [
-              "put false information about yourself or anyone else in a CV or an application",
+              "put false information about yourself or anyone else in a resume or an application",
               "pretend to be someone else",
               "harass, deceive or harm employers, recruiters or anyone else",
               "break the law or other people's rights, including copyright",
@@ -317,7 +317,7 @@
       "resent": "We sent a new code. Use the latest one."
     },
     "errors": {
-      "cancelled": "Sign-in was cancelled. Choose a way to continue.",
+      "cancelled": "Sign-in was canceled. Choose a way to continue.",
       "provider": "We couldn't sign you in with {provider}. Try again, or use your email.",
       "codeInvalid": "That code doesn't work. It may be mistyped or expired. Check the latest email from Jubilee, or send a new code.",
       "codeFormat": "Enter the 6 digits from the email.",
@@ -334,6 +334,14 @@
       "body": "You're signed in. Your workspace is coming soon.",
       "signOut": "Sign out",
       "loading": "Loading your account"
+    }
+  },
+  "localePicker": {
+    "label": "Language and region",
+    "names": {
+      "en-us": "English (United States)",
+      "en-gb": "English (United Kingdom)",
+      "fr-fr": "Français (France)"
     }
   }
 }

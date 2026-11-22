@@ -1,10 +1,18 @@
 import { defineRouting } from "next-intl/routing";
 
-// Decision 0003: English and French, English by default, always prefixed.
+import { defaultLocale, locales } from "./locales";
+
+// Decision 0017: three regional locales, always prefixed. The proxy picks
+// the locale for `/` itself (src/proxy.ts), so next-intl neither detects
+// nor writes the cookie: a visit to a shared link never changes the saved
+// choice. hreflang comes from page metadata (src/lib/seo.ts).
 export const routing = defineRouting({
-  locales: ["en", "fr"],
-  defaultLocale: "en",
+  locales,
+  defaultLocale,
   localePrefix: "always",
+  localeDetection: false,
+  localeCookie: false,
+  alternateLinks: false,
 });
 
-export type Locale = (typeof routing.locales)[number];
+export type { Locale } from "./locales";

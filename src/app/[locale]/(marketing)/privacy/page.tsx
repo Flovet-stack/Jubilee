@@ -10,7 +10,7 @@ import { routing } from "@/i18n/routing";
 import { alternatesFor } from "@/lib/seo";
 
 /** Change with every edit to the policy text (spec 04, decision 0011). */
-const LAST_UPDATED = "2026-11-21";
+const LAST_UPDATED = "2026-11-22";
 
 /** Section order from decision 0011. The ids are the jump-link anchors. */
 const SECTIONS = [

@@ -8,7 +8,7 @@ Store CVs, their tailored versions and their history safely, with one validated 
 
 ## Decisions
 
-Implements [0016](../docs/decisions/0016-and-pdf-rendering.md) (tables, content, revisions; not the PDF part). Builds on [0002](../docs/decisions/0002-project-structure.md), [0006](../docs/decisions/0006-account-data-and-email-code.md) (owner-only RLS, cascade from `profiles`) and [0017](../docs/decisions/0017-and-cv-naming.md) ("CV" in code and data).
+Implements [0016](../docs/decisions/0016-cv-data-model-and-pdf-rendering.md) (tables, content, revisions; not the PDF part). Builds on [0002](../docs/decisions/0002-project-structure.md), [0006](../docs/decisions/0006-account-data-and-email-code.md) (owner-only RLS, cascade from `profiles`) and [0017](../docs/decisions/0017-regional-locales-and-cv-naming.md) ("CV" in code and data).
 
 ## Acceptance criteria
 

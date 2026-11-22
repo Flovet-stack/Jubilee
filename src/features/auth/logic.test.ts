@@ -17,11 +17,16 @@ import {
 
 describe("safeNextPath", () => {
   it.each([
-    ["/en/home", "/en/home"],
-    ["/fr/home", "/fr/home"],
-    ["/en", "/en"],
-    ["/en/cv?tab=2", "/en/cv?tab=2"],
-    ["/en/a/../home", "/en/home"],
+    ["/en-us/home", "/en-us/home"],
+    ["/en-gb/home", "/en-gb/home"],
+    ["/fr-fr/home", "/fr-fr/home"],
+    ["/en-gb", "/en-gb"],
+    ["/en-us/cv?tab=2", "/en-us/cv?tab=2"],
+    ["/en-gb/a/../home", "/en-gb/home"],
+    // Saved before decision 0017: upgraded, not dropped.
+    ["/en/home", "/en-us/home"],
+    ["/fr/cv?tab=2", "/fr-fr/cv?tab=2"],
+    ["/fr", "/fr-fr"],
   ])("accepts %s", (raw, expected) => {
     expect(safeNextPath(raw)).toBe(expected);
   });
@@ -35,12 +40,16 @@ describe("safeNextPath", () => {
     ["evil.com"],
     ["/home"],
     ["/de/home"],
+    ["/de-de/home"],
     ["/english"],
+    ["/en-gbx/home"],
     [""],
     ["/%2F%2Fevil.com"],
     ["/en/../..//evil.com"],
     ["/en/\nhome"],
     ["/en/sign-in"],
+    ["/en-gb/sign-in"],
+    ["/fr-fr/auth/callback?code=1"],
     ["/fr/auth/callback?code=1"],
     ["/" + "a".repeat(600)],
   ])("rejects %j", (raw) => {
@@ -54,8 +63,8 @@ describe("safeNextPath", () => {
   });
 
   it("falls back to the locale's home", () => {
-    expect(nextOrHome("//evil.com", "fr")).toBe("/fr/home");
-    expect(nextOrHome("/en/cv", "fr")).toBe("/en/cv");
+    expect(nextOrHome("//evil.com", "fr-fr")).toBe("/fr-fr/home");
+    expect(nextOrHome("/en-gb/cv", "fr-fr")).toBe("/en-gb/cv");
   });
 });
 
@@ -140,15 +149,15 @@ describe("errors in the URL", () => {
   });
 
   it("builds sign-in links and drops an unsafe next", () => {
-    expect(signInPath("fr")).toBe("/fr/sign-in");
+    expect(signInPath("fr-fr")).toBe("/fr-fr/sign-in");
     expect(
-      signInPath("en", {
+      signInPath("en-gb", {
         error: "provider",
         provider: "google",
-        next: "/en/cv",
+        next: "/en-gb/cv",
       }),
-    ).toBe("/en/sign-in?error=provider&provider=google&next=%2Fen%2Fcv");
-    expect(signInPath("en", { next: "//evil.com" })).toBe("/en/sign-in");
+    ).toBe("/en-gb/sign-in?error=provider&provider=google&next=%2Fen-gb%2Fcv");
+    expect(signInPath("en-us", { next: "//evil.com" })).toBe("/en-us/sign-in");
   });
 });
 

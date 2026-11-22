@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
+import { LocalePicker } from "@/components/locale-picker/locale-picker";
 import { SignInLink } from "@/features/auth/components/sign-in-link";
 import { toLocale } from "@/features/auth/logic";
 import { routing } from "@/i18n/routing";
@@ -28,6 +29,9 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       {/* Temporary until the landing page (#39); spec 05 addendum. */}
       <div className="mt-5">
         <SignInLink locale={toLocale(locale)} label={t("signIn")} />
+      </div>
+      <div className="mt-16">
+        <LocalePicker locale={toLocale(locale)} />
       </div>
     </main>
   );
