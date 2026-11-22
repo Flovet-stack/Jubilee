@@ -1,8 +1,8 @@
 # 0020: Control sizes by screen type and pointer
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-22 by the product team (roles: UI, UX, Frontend, Product)
-- **Approved:**
+- **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** the two control-height values in 0009 (`--control-h` 48 px, `--control-h-sm` 44 px). The rest of 0009 stands.
 - **Specs:** (the spec that implements it)
 

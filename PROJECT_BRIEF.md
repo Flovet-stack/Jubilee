@@ -50,11 +50,28 @@ None chosen yet. Every job source needs a recorded licence or terms check in a d
 
 Approved: `docs/design/design-brief.md` ("quiet desk, bright moments": light, grey wells with light borders, one violet action per screen, confetti only at earned milestones), with decisions 0007 and 0008 (approved 2026-11-21).
 
+### Component quality bar
+
+Every component in `src/components/ui/` must meet all three before it ships. A review fails the component if any is missing.
+
+1. **Reusable.** Built once, used everywhere. Copy and data come in as props (no hard-coded text). No styling tied to one screen, only tokens. Same API pattern as its siblings (`size`, `disabled`, `invalid`, `className`).
+2. **Every state.** Default, hover (`hover-fine:` only), focus-visible, pressed, disabled, read-only, invalid with its message, loading where it does work, empty, and the sizes from 0020. Light and dark. Reduced motion.
+3. **Edge cases handled.**
+   - **Text:** long and French text (about 30% longer) wraps or truncates with the full text available.
+   - **Data:** empty and huge lists; pasted and badly formatted input.
+   - **Actions:** double submits.
+   - **Access:** keyboard-only and screen-reader use; touch targets of at least 44 px.
+   - **Screens:** narrow screens from 360 px; slow networks.
+
+   Each case is listed in the component's spec and shown on `/design-system`.
+
 ## Decisions (newest first)
 
 See `docs/decisions/README.md`. Product-wide ones:
 
-- 0020 (Proposed 2026-11-22): control sizes by screen type: `lg` 48 px for single-task screens, `md` 40 px default, `sm` 32 px for inline row actions; never under 44 px on touch. Replaces 0009's control heights.
+- 0022 (Proposed 2026-11-22): corner radius scales with size: 8 / 6 / 4 px for lg / md / sm controls, 8 px cards and menus; wells 12, dialogs 16 unchanged.
+- 0021 (Proposed 2026-11-22): `PhoneField` (flag, searchable country, libphonenumber-js, E.164), `DateField` / `DateRangeField` (year, month or day; typing first, React DayPicker for near dates), `PasswordField` (show/hide). Adds libphonenumber-js, country-flag-icons, react-day-picker, date-fns.
+- 0020 (Approved 2026-11-22): control sizes by screen type: `lg` 48 px for single-task screens, `md` 40 px default, `sm` 32 px for inline row actions; never under 44 px on touch. Replaces 0009's control heights.
 - 0017 (Approved 2026-11-21): three locales to start, `/en-us` ("resume"), `/en-gb` and `/fr-fr` ("CV"); other countries map to one of them; shared links never redirect; "CV" in code and data. Supersedes 0003.
 - 0016 (Approved 2026-11-21): CV data model and PDF: `cvs`, `cv_versions`, append-only `cv_revisions`, owner-only RLS; content as one Zod-validated `jsonb` document; AI changes only through accepted proposals; PDFs with react-pdf, no Chromium.
 - 0011 (Approved 2026-11-21): privacy policy page: one layered page in en/fr that describes only what Jubilee processes today; updated by every decision that adds a processor; legal review before launch.
