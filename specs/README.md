@@ -24,10 +24,17 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | `Done (NN/100)` | Reviewed at 90 or more. Record the score and the date.              |
 | `Dropped`       | Won't be built. Say why. The number is never reused.                |
 
-| Spec                                     | Status                           |
-| ---------------------------------------- | -------------------------------- |
-| [01: Foundations](01-foundations.md)     | Blocked (0001–0004 are Proposed) |
-| [02: Auth database](02-auth-database.md) | Done (96/100)                    |
-| [03: Design system](03-design-system.md) | Done (96/100)                    |
+| Spec                                           | Status        |
+| ---------------------------------------------- | ------------- |
+| [01: Foundations](01-foundations.md)           | Done (92/100) |
+| [02: Auth database](02-auth-database.md)       | Done (96/100) |
+| [03: Design system](03-design-system.md)       | Done (96/100) |
+| [04: Privacy page](04-privacy-page.md)         | Done (91/100) |
+| [05: Sign-in](05-sign-in.md)                   | In progress   |
+| [06: Sign-in refresh](06-sign-in-refresh.md)   | In progress   |
+| [07: Terms page](07-terms-page.md)             | In progress   |
+| [08: Regional locales](08-regional-locales.md) | Done (96/100) |
+| [09: CV schema](09-cv-schema.md)               | Ready         |
+| [10: Brand assets](10-brand-assets.md)         | Done (97/100) |
 
-Planned next (each needs its decisions first): sign-in, app shell, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
+Planned next (each needs its decisions first): app shell, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

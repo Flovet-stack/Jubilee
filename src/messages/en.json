@@ -1,0 +1,347 @@
+{
+  "metadata": {
+    "description": "Your AI job-search assistant: country-ready resumes, tailored applications you approve, and follow-ups at the right time."
+  },
+  "home": {
+    "description": "Your AI job-search assistant: country-ready resumes, tailored applications you approve, and follow-ups at the right time.",
+    "signIn": "Sign in"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page doesn't exist or has moved. Check the address, or start again from the home page.",
+    "home": "Go to the home page"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "description": "What Jubilee collects about you, why, who handles it, and how to see, correct or delete it.",
+    "updated": "Last updated: <time>{date}</time>",
+    "intro": "This page explains what personal data Jubilee keeps about you, why, and what you can do about it. It covers the Jubilee website and app.",
+    "contents": "On this page",
+    "externalHint": "(opens in a new tab)",
+    "sections": {
+      "summary": {
+        "title": "In short",
+        "blocks": [
+          "Today Jubilee keeps only what it needs to run your account: your email address and, if your sign-in provider shares them, your name and profile photo.",
+          "What we don't do:",
+          {
+            "list": [
+              "sell your data",
+              "send anything in your name without your approval",
+              "use your data to train AI models"
+            ]
+          },
+          "You can see, correct or delete your data at any time. <contact>Contact us</contact> and we'll do it."
+        ]
+      },
+      "who": {
+        "title": "Who looks after your data",
+        "blocks": [
+          "Jubilee is run by its founder and is not a registered company yet. Until it is, the founder decides how your data is used and is responsible for it (the “data controller” in GDPR terms).",
+          "When the company is registered, its legal name and address will be added here, and the date at the top of this page will change.",
+          "Jubilee has no data protection officer. For any question about your data, use the <contact>contact page</contact>."
+        ]
+      },
+      "collect": {
+        "title": "What we collect",
+        "blocks": [
+          "When you create an account, we keep:",
+          {
+            "list": [
+              "your email address, to sign you in",
+              "your name and profile photo, if you sign in with Google or LinkedIn and they share them (to change them, ask through the <contact>contact page</contact>)",
+              "when your account was created, last updated and last signed in to"
+            ]
+          },
+          "When you use the site, our host and Supabase record technical data such as your IP address, your browser and the pages requested, to deliver pages, sign you in and protect the service.",
+          "Jubilee doesn't collect your resume or your job applications yet, because those features aren't built. Before they are, this page will say what they collect."
+        ]
+      },
+      "why": {
+        "title": "Why we use it",
+        "blocks": [
+          {
+            "list": [
+              "To create and run your account and sign you in. Legal basis: the contract between us (GDPR article 6(1)(b)).",
+              "To keep the service secure and working. Legal basis: our legitimate interest in protecting Jubilee and its users (GDPR article 6(1)(f))."
+            ]
+          },
+          "You don't have to give us any data, but we can't create an account without an email address.",
+          "We don't use your data for advertising."
+        ]
+      },
+      "processors": {
+        "title": "Who else handles it",
+        "blocks": [
+          "Two companies work for Jubilee to run the service, and only for that:",
+          {
+            "list": [
+              "Supabase stores your account and runs sign-in.",
+              "Vercel hosts the website and app."
+            ]
+          },
+          "If you choose to sign in with Google or LinkedIn, they send us your name, email address and profile photo. They act under their own privacy policies, not for Jubilee.",
+          "We don't sell or share your data with anyone else. If we add a provider, this list changes first."
+        ]
+      },
+      "storage": {
+        "title": "Where it is stored",
+        "blocks": [
+          "Supabase stores your account in the European Union (Ireland).",
+          "Supabase and Vercel are US companies, so some of your data may be processed in the United States. These transfers are covered by the safeguards in their data processing agreements."
+        ]
+      },
+      "retention": {
+        "title": "How long we keep it",
+        "blocks": [
+          "We keep your account data while your account is open.",
+          "Deleting your account deletes your profile with it. Until you can delete your account in the app, ask through the <contact>contact page</contact> and we'll delete it within one month, the time GDPR allows.",
+          "Technical logs kept by our host and Supabase are kept for a short time to run and protect the service, then deleted."
+        ]
+      },
+      "rights": {
+        "title": "Your rights",
+        "blocks": [
+          "Wherever you live, you can ask us to:",
+          {
+            "list": [
+              "show you the data we hold about you and send you a copy",
+              "correct it",
+              "delete it",
+              "limit how we use it, or object to how we use it",
+              "send it to you or to another service in a format a computer can read"
+            ]
+          },
+          "If you live in California, you also have the right to know what we collect, to have it deleted or corrected, and not to be treated differently for using these rights. We don't sell or share personal information, so there is nothing to opt out of.",
+          "To use any of these rights, <contact>contact us</contact>. We reply within one month, free of charge."
+        ]
+      },
+      "ai": {
+        "title": "AI and automated decisions",
+        "blocks": [
+          "Jubilee doesn't use AI on your data yet, and makes no automated decisions about you.",
+          "We don't use your data to train AI models.",
+          "When AI features arrive (tailoring your resume, writing letters), this section will say which provider is used and what it sees, before those features touch your data. AI will never add experience you don't have, and nothing will be sent to an employer without your approval."
+        ]
+      },
+      "cookies": {
+        "title": "Cookies",
+        "blocks": [
+          "Jubilee sets two kinds of cookies, both needed for the site to work:",
+          {
+            "list": [
+              "sign-in cookies, which keep you signed in",
+              "a language cookie (NEXT_LOCALE), which remembers the language you choose"
+            ]
+          },
+          "We don't use advertising or analytics cookies, so there is no cookie banner."
+        ]
+      },
+      "children": {
+        "title": "Age limit",
+        "blocks": [
+          "Jubilee is for people aged 16 and over. If you are under 16, please don't create an account. If we learn that someone under 16 has an account, we delete it."
+        ]
+      },
+      "changes": {
+        "title": "Changes to this policy",
+        "blocks": [
+          "When this policy changes, the date at the top changes too. If a change affects how we use your data, for example a new provider or a new purpose, we'll tell you before it takes effect."
+        ]
+      },
+      "complaints": {
+        "title": "Complaints",
+        "blocks": [
+          "If you're unhappy with how we handle your data, <contact>tell us</contact> first and we'll try to put it right.",
+          "You can also complain to a data protection authority. In France, that's the <cnil>CNIL</cnil>. Elsewhere in the EU, it's the authority in the country where you live."
+        ]
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of service",
+    "description": "The rules for using Jubilee: your account, your content, fair use, and what each of us is responsible for.",
+    "updated": "Last updated: <time>{date}</time>",
+    "intro": "These terms are the agreement between you and Jubilee when you use the Jubilee website and app. By signing in, you accept them, so they are written to be read.",
+    "contents": "On this page",
+    "sections": {
+      "summary": {
+        "title": "In short",
+        "blocks": [
+          "Jubilee is free to use today.",
+          {
+            "list": [
+              "Your resume and everything you put in Jubilee stay yours.",
+              "Jubilee never invents experience, and nothing is sent to an employer without your approval.",
+              "You can delete your account at any time.",
+              "We tell you before any significant change to these terms."
+            ]
+          },
+          "Questions? <contact>Contact us</contact>."
+        ]
+      },
+      "who": {
+        "title": "Who we are",
+        "blocks": [
+          "Jubilee is run by its founder from the United States and is not a registered company yet. In these terms, “we” means the founder running Jubilee.",
+          "When the company is registered, its legal name and address will be added here, and the date at the top of this page will change.",
+          "To reach us, use the <contact>contact page</contact>."
+        ]
+      },
+      "service": {
+        "title": "What Jubilee is today",
+        "blocks": [
+          "Today Jubilee gives you an account that you sign in to with Google, LinkedIn or a code sent to your email.",
+          "Jubilee is being built to help you write your resume, tailor it to jobs and keep track of your applications. Before a new feature arrives, these terms will be updated to cover it."
+        ]
+      },
+      "account": {
+        "title": "Your account",
+        "blocks": [
+          "You must be 16 or older to use Jubilee.",
+          {
+            "list": [
+              "One account per person, in your own name.",
+              "Keep your details accurate.",
+              "Keep your email and sign-in accounts secure. Anyone who can read your email can sign in to Jubilee as you.",
+              "If you think someone else has used your account, tell us through the <contact>contact page</contact>."
+            ]
+          }
+        ]
+      },
+      "content": {
+        "title": "Your content",
+        "blocks": [
+          "What you put into Jubilee, such as your resume, stays yours.",
+          "You allow us to store and process it only to run Jubilee for you, for as long as your account is open. We don't sell it, and we don't use it to train AI models.",
+          "How we handle your personal data is explained in our <privacy>privacy policy</privacy>."
+        ]
+      },
+      "ai": {
+        "title": "AI and job applications",
+        "blocks": [
+          "Jubilee doesn't use AI yet. When it does, these rules apply:",
+          {
+            "list": [
+              "AI never adds experience, skills or dates you don't have.",
+              "You check what it writes before it's used.",
+              "Nothing is sent to an employer without your explicit approval.",
+              "You are responsible for what you send, so make sure it's true."
+            ]
+          }
+        ]
+      },
+      "fairUse": {
+        "title": "Fair use",
+        "blocks": [
+          "Don't use Jubilee to:",
+          {
+            "list": [
+              "put false information about yourself or anyone else in a resume or an application",
+              "pretend to be someone else",
+              "harass, deceive or harm employers, recruiters or anyone else",
+              "break the law or other people's rights, including copyright",
+              "copy, scrape or overload the service, or get into parts of it you aren't allowed to"
+            ]
+          },
+          "If we believe content or use breaks these rules, we may remove the content or limit the account. A person looks at each case, we tell you what we did and why, and you can ask us to review it through the <contact>contact page</contact>."
+        ]
+      },
+      "price": {
+        "title": "Price",
+        "blocks": [
+          "Jubilee is free today.",
+          "If paid features arrive, we'll show the price clearly before you choose them. We never charge you without your consent."
+        ]
+      },
+      "ending": {
+        "title": "Ending your account",
+        "blocks": [
+          "You can stop using Jubilee and delete your account at any time. Until you can do it in the app, ask through the <contact>contact page</contact> and we'll delete it within one month.",
+          "We may suspend or close an account only if it breaks these terms or the law. We'll tell you why, unless the law stops us."
+        ]
+      },
+      "responsibility": {
+        "title": "Our responsibility",
+        "blocks": [
+          "We work to keep Jubilee available and correct, but we can't promise it will always be available or free of errors, or that it will get you a job.",
+          "As far as the law allows, we aren't responsible for indirect losses, such as a missed job opportunity.",
+          "Nothing in these terms limits the rights you have under the consumer law of the country where you live."
+        ]
+      },
+      "changes": {
+        "title": "Changes to these terms",
+        "blocks": [
+          "When these terms change, the date at the top changes too. Before a significant change takes effect, we'll tell you by email or in the app. If you don't agree, you can delete your account."
+        ]
+      },
+      "law": {
+        "title": "Applicable law",
+        "blocks": [
+          "These terms are governed by the laws of the United States.",
+          "If you live in the European Union or another country whose consumer law protects you, you keep the rights that law gives you, and you can bring a claim in the courts where you live.",
+          "If something goes wrong, <contact>tell us</contact> first and we'll try to put it right."
+        ]
+      }
+    }
+  },
+  "auth": {
+    "providers": {
+      "google": "Google",
+      "linkedin_oidc": "LinkedIn"
+    },
+    "signIn": {
+      "metaTitle": "Sign in",
+      "title": "Sign in to Jubilee",
+      "google": "Continue with Google",
+      "linkedin": "Continue with LinkedIn",
+      "or": "or",
+      "emailLabel": "Email",
+      "sendCode": "Email me a code",
+      "sending": "Sending your code",
+      "redirecting": "Opening {provider}",
+      "newHere": "New here? This creates your account.",
+      "legal": "By signing in, you agree to the <terms>Terms of service</terms> and <privacy>Privacy Policy</privacy>.",
+      "help": "Need help? <link>Contact support</link>."
+    },
+    "code": {
+      "title": "Check your email",
+      "sentTo": "We sent a 6-digit code to <strong>{email}</strong>.",
+      "label": "6-digit code",
+      "hint": "The email also has a sign-in link, if you'd rather tap that.",
+      "submit": "Sign in",
+      "verifying": "Signing you in",
+      "change": "Change email",
+      "resend": "Send a new code",
+      "resendIn": "Send a new code in {seconds} s",
+      "resent": "We sent a new code. Use the latest one."
+    },
+    "errors": {
+      "cancelled": "Sign-in was canceled. Choose a way to continue.",
+      "provider": "We couldn't sign you in with {provider}. Try again, or use your email.",
+      "codeInvalid": "That code doesn't work. It may be mistyped or expired. Check the latest email from Jubilee, or send a new code.",
+      "codeFormat": "Enter the 6 digits from the email.",
+      "linkExpired": "This sign-in link has expired or was already used. Links work once and for a short time. Ask for a new code below.",
+      "rateLimited": "Wait {seconds} seconds before asking for another code.",
+      "emailInvalid": "Enter your full email address, for example ada.okafor@gmail.com.",
+      "emailNotAllowed": "Email sign-in isn't open yet. Continue with Google or LinkedIn.",
+      "unknown": "We couldn't reach the sign-in service. Try again in a moment."
+    },
+    "home": {
+      "metaTitle": "Home",
+      "greeting": "Hello, {name}",
+      "greetingNoName": "Hello",
+      "body": "You're signed in. Your workspace is coming soon.",
+      "signOut": "Sign out",
+      "loading": "Loading your account"
+    }
+  },
+  "localePicker": {
+    "label": "Language and region",
+    "names": {
+      "en-us": "English (United States)",
+      "en-gb": "English (United Kingdom)",
+      "fr-fr": "Français (France)"
+    }
+  }
+}

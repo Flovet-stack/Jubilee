@@ -1,0 +1,67 @@
+<!--
+  Magic Link email (decisions 0006 and 0012): the 6-digit code first, the
+  link second. Supabase has one template per project, so English and French
+  share this message. The app always sends a redirect URL that already has
+  a query (`?next=…`), so the link appends with `&`.
+  Hosted project: paste into Authentication > Emails > Magic Link.
+  Subject: Your Jubilee code: {{ .Token }} · Votre code Jubilee : {{ .Token }}
+-->
+<div
+  style="
+    font-family: -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif;
+    color: #1d1a44;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px;
+  "
+>
+  <h1 style="font-size: 20px; margin: 0 0 16px">Your sign-in code</h1>
+  <p style="margin: 0 0 8px">Enter this code on the Jubilee sign-in page:</p>
+  <p
+    style="
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      margin: 0 0 16px;
+    "
+  >
+    {{ .Token }}
+  </p>
+  <p style="margin: 0 0 24px">
+    Or
+    <a
+      href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email"
+      style="color: #5a32d6"
+      >sign in with this link</a
+    >. The code and the link work once and expire soon. If you didn't ask for
+    this, you can ignore this email.
+  </p>
+
+  <hr style="border: none; border-top: 1px solid #e5e4ea; margin: 0 0 24px" />
+
+  <h1 style="font-size: 20px; margin: 0 0 16px" lang="fr">
+    Votre code de connexion
+  </h1>
+  <p style="margin: 0 0 8px" lang="fr">
+    Saisissez ce code sur la page de connexion de Jubilee&nbsp;:
+  </p>
+  <p
+    style="
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      margin: 0 0 16px;
+    "
+  >
+    {{ .Token }}
+  </p>
+  <p style="margin: 0" lang="fr">
+    Ou
+    <a
+      href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email"
+      style="color: #5a32d6"
+      >connectez-vous avec ce lien</a
+    >. Le code et le lien ne fonctionnent qu’une fois et expirent rapidement. Si
+    vous n’êtes pas à l’origine de cette demande, ignorez cet e-mail.
+  </p>
+</div>

@@ -252,6 +252,11 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
+# Decision 0012: the code first, then the link to /[locale]/auth/confirm.
+[auth.email.template.magic_link]
+subject = "Your Jubilee code: {{ .Token }} · Votre code Jubilee : {{ .Token }}"
+content_path = "./supabase/templates/magic-link.html"
+
 # Uncomment to customize email template
 # [auth.email.template.invite]
 # subject = "You have been invited"

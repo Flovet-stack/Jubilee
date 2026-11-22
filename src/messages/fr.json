@@ -1,0 +1,347 @@
+{
+  "metadata": {
+    "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment."
+  },
+  "home": {
+    "description": "Votre assistant de recherche d’emploi : des CV au format de chaque pays, des candidatures adaptées que vous validez, et des relances au bon moment.",
+    "signIn": "Se connecter"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Cette page n’existe pas ou a été déplacée. Vérifiez l’adresse, ou repartez de la page d’accueil.",
+    "home": "Aller à la page d’accueil"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "description": "Ce que Jubilee collecte à votre sujet, pourquoi, qui le traite, et comment le consulter, le corriger ou le supprimer.",
+    "updated": "Dernière mise à jour : <time>{date}</time>",
+    "intro": "Cette page explique quelles données personnelles Jubilee conserve à votre sujet, pourquoi, et ce que vous pouvez faire. Elle couvre le site et l’application Jubilee.",
+    "contents": "Sur cette page",
+    "externalHint": "(s’ouvre dans un nouvel onglet)",
+    "sections": {
+      "summary": {
+        "title": "En bref",
+        "blocks": [
+          "Aujourd’hui, Jubilee ne conserve que ce qu’il faut pour faire fonctionner votre compte : votre adresse e-mail et, si votre service de connexion les partage, votre nom et votre photo de profil.",
+          "Ce que nous ne faisons pas :",
+          {
+            "list": [
+              "vendre vos données",
+              "envoyer quoi que ce soit en votre nom sans votre accord",
+              "utiliser vos données pour entraîner des modèles d’IA"
+            ]
+          },
+          "Vous pouvez consulter, corriger ou supprimer vos données à tout moment. <contact>Contactez-nous</contact> et nous nous en chargeons."
+        ]
+      },
+      "who": {
+        "title": "Qui est responsable de vos données",
+        "blocks": [
+          "Jubilee est géré par son fondateur et n’est pas encore une société immatriculée. D’ici là, c’est le fondateur qui décide de l’usage de vos données et qui en est responsable (le « responsable du traitement » au sens du RGPD).",
+          "Une fois la société immatriculée, sa dénomination et son adresse figureront ici, et la date en haut de cette page changera.",
+          "Jubilee n’a pas de délégué à la protection des données. Pour toute question sur vos données, passez par la <contact>page de contact</contact>."
+        ]
+      },
+      "collect": {
+        "title": "Ce que nous collectons",
+        "blocks": [
+          "Quand vous créez un compte, nous conservons :",
+          {
+            "list": [
+              "votre adresse e-mail, pour vous connecter",
+              "votre nom et votre photo de profil, si vous vous connectez avec Google ou LinkedIn et qu’ils les partagent (pour les modifier, passez par la <contact>page de contact</contact>)",
+              "les dates de création, de dernière modification et de dernière connexion de votre compte"
+            ]
+          },
+          "Quand vous utilisez le site, notre hébergeur et Supabase enregistrent des données techniques, comme votre adresse IP, votre navigateur et les pages demandées, pour afficher les pages, vous connecter et protéger le service.",
+          "Jubilee ne collecte pas encore votre CV ni vos candidatures, car ces fonctionnalités n’existent pas encore. Avant leur arrivée, cette page indiquera ce qu’elles collectent."
+        ]
+      },
+      "why": {
+        "title": "Pourquoi nous les utilisons",
+        "blocks": [
+          {
+            "list": [
+              "Pour créer et gérer votre compte, et vous connecter. Base légale : l’exécution du contrat qui nous lie (article 6.1.b du RGPD).",
+              "Pour assurer la sécurité et le bon fonctionnement du service. Base légale : notre intérêt légitime à protéger Jubilee et ses utilisateurs (article 6.1.f du RGPD)."
+            ]
+          },
+          "Fournir vos données n’est pas obligatoire, mais sans adresse e-mail, nous ne pouvons pas créer de compte.",
+          "Nous n’utilisons pas vos données à des fins publicitaires."
+        ]
+      },
+      "processors": {
+        "title": "Qui d’autre les traite",
+        "blocks": [
+          "Deux entreprises travaillent pour Jubilee afin de faire fonctionner le service, et uniquement pour cela :",
+          {
+            "list": [
+              "Supabase stocke votre compte et gère la connexion.",
+              "Vercel héberge le site et l’application."
+            ]
+          },
+          "Si vous choisissez de vous connecter avec Google ou LinkedIn, ils nous transmettent votre nom, votre adresse e-mail et votre photo de profil. Ils agissent selon leurs propres politiques de confidentialité, et non pour le compte de Jubilee.",
+          "Nous ne vendons ni ne partageons vos données avec qui que ce soit d’autre. Si nous ajoutons un prestataire, cette liste est mise à jour au préalable."
+        ]
+      },
+      "storage": {
+        "title": "Où elles sont stockées",
+        "blocks": [
+          "Supabase stocke votre compte dans l’Union européenne (Irlande).",
+          "Supabase et Vercel sont des entreprises américaines : certaines de vos données peuvent donc être traitées aux États-Unis. Ces transferts sont encadrés par les garanties prévues dans leurs accords de traitement des données."
+        ]
+      },
+      "retention": {
+        "title": "Durée de conservation",
+        "blocks": [
+          "Nous conservons les données de votre compte tant que celui-ci est ouvert.",
+          "Supprimer votre compte supprime aussi votre profil. Tant que la suppression n’est pas disponible dans l’application, demandez-la via la <contact>page de contact</contact> : nous supprimerons votre compte dans un délai d’un mois, comme le prévoit le RGPD.",
+          "Les journaux techniques de notre hébergeur et de Supabase sont conservés peu de temps, pour faire fonctionner et protéger le service, puis supprimés."
+        ]
+      },
+      "rights": {
+        "title": "Vos droits",
+        "blocks": [
+          "Où que vous viviez, vous pouvez nous demander de :",
+          {
+            "list": [
+              "vous montrer les données que nous détenons sur vous et vous en envoyer une copie",
+              "les corriger",
+              "les supprimer",
+              "limiter leur utilisation, ou vous y opposer",
+              "vous les transmettre, à vous ou à un autre service, dans un format lisible par une machine"
+            ]
+          },
+          "Si vous vivez en Californie, vous avez aussi le droit de savoir ce que nous collectons, de le faire supprimer ou corriger, et de ne pas être traité différemment parce que vous exercez ces droits. Nous ne vendons ni ne partageons d’informations personnelles : vous n’avez donc pas à vous y opposer.",
+          "Pour exercer l’un de ces droits, <contact>contactez-nous</contact>. Nous répondons sous un mois, gratuitement."
+        ]
+      },
+      "ai": {
+        "title": "IA et décisions automatisées",
+        "blocks": [
+          "Jubilee n’utilise pas encore l’IA sur vos données et ne prend aucune décision automatisée vous concernant.",
+          "Nous n’utilisons pas vos données pour entraîner des modèles d’IA.",
+          "Quand les fonctionnalités d’IA arriveront (adaptation du CV, rédaction de lettres), cette section indiquera quel prestataire est utilisé et ce qu’il voit, avant qu’elles ne traitent vos données. L’IA n’ajoutera jamais d’expérience que vous n’avez pas, et rien ne sera envoyé à un employeur sans votre accord."
+        ]
+      },
+      "cookies": {
+        "title": "Cookies",
+        "blocks": [
+          "Jubilee utilise deux types de cookies, tous nécessaires au fonctionnement du site :",
+          {
+            "list": [
+              "des cookies de connexion, qui maintiennent votre session",
+              "un cookie de langue (NEXT_LOCALE), qui retient la langue que vous choisissez"
+            ]
+          },
+          "Nous n’utilisons aucun cookie publicitaire ni de mesure d’audience : il n’y a donc pas de bandeau cookies."
+        ]
+      },
+      "children": {
+        "title": "Âge minimum",
+        "blocks": [
+          "Jubilee s’adresse aux personnes de 16 ans et plus. Si vous avez moins de 16 ans, merci de ne pas créer de compte. Si nous apprenons qu’une personne de moins de 16 ans a un compte, nous le supprimons."
+        ]
+      },
+      "changes": {
+        "title": "Modifications de cette politique",
+        "blocks": [
+          "Quand cette politique change, la date en haut de la page change aussi. Si une modification touche à l’usage de vos données, par exemple un nouveau prestataire ou une nouvelle finalité, nous vous prévenons avant qu’elle ne s’applique."
+        ]
+      },
+      "complaints": {
+        "title": "Réclamations",
+        "blocks": [
+          "Si la façon dont nous traitons vos données ne vous convient pas, <contact>dites-le-nous</contact> d’abord : nous essaierons de corriger le problème.",
+          "Vous pouvez aussi déposer une réclamation auprès d’une autorité de protection des données. En France, c’est la <cnil>CNIL</cnil>. Ailleurs dans l’UE, c’est l’autorité du pays où vous vivez."
+        ]
+      }
+    }
+  },
+  "terms": {
+    "title": "Conditions d'utilisation",
+    "description": "Les règles d'utilisation de Jubilee : votre compte, vos contenus, l'usage loyal du service et nos responsabilités respectives.",
+    "updated": "Dernière mise à jour : <time>{date}</time>",
+    "intro": "Ces conditions sont l'accord entre vous et Jubilee lorsque vous utilisez le site et l'application Jubilee. En vous connectant, vous les acceptez : elles sont donc écrites pour être lues.",
+    "contents": "Sur cette page",
+    "sections": {
+      "summary": {
+        "title": "En bref",
+        "blocks": [
+          "Jubilee est gratuit aujourd'hui.",
+          {
+            "list": [
+              "Votre CV et tout ce que vous mettez dans Jubilee restent à vous.",
+              "Jubilee n'invente jamais d'expérience, et rien n'est envoyé à un employeur sans votre accord.",
+              "Vous pouvez supprimer votre compte à tout moment.",
+              "Nous vous prévenons avant toute modification importante de ces conditions."
+            ]
+          },
+          "Une question ? <contact>Contactez-nous</contact>."
+        ]
+      },
+      "who": {
+        "title": "Qui nous sommes",
+        "blocks": [
+          "Jubilee est géré par son fondateur depuis les États-Unis et n'est pas encore une société immatriculée. Dans ces conditions, « nous » désigne le fondateur qui gère Jubilee.",
+          "Une fois la société immatriculée, sa raison sociale et son adresse seront ajoutées ici, et la date en haut de cette page changera.",
+          "Pour nous joindre, utilisez la <contact>page de contact</contact>."
+        ]
+      },
+      "service": {
+        "title": "Ce qu'est Jubilee aujourd'hui",
+        "blocks": [
+          "Aujourd'hui, Jubilee vous donne un compte auquel vous vous connectez avec Google, LinkedIn ou un code envoyé par e-mail.",
+          "Jubilee est conçu pour vous aider à rédiger votre CV, l'adapter aux offres et suivre vos candidatures. Avant l'arrivée d'une nouvelle fonctionnalité, ces conditions seront mises à jour pour la couvrir."
+        ]
+      },
+      "account": {
+        "title": "Votre compte",
+        "blocks": [
+          "Vous devez avoir 16 ans ou plus pour utiliser Jubilee.",
+          {
+            "list": [
+              "Un compte par personne, à votre nom.",
+              "Gardez vos informations exactes.",
+              "Protégez votre messagerie et vos comptes de connexion. Toute personne qui lit vos e-mails peut se connecter à Jubilee à votre place.",
+              "Si vous pensez que quelqu'un d'autre a utilisé votre compte, prévenez-nous via la <contact>page de contact</contact>."
+            ]
+          }
+        ]
+      },
+      "content": {
+        "title": "Vos contenus",
+        "blocks": [
+          "Ce que vous mettez dans Jubilee, comme votre CV, reste à vous.",
+          "Vous nous autorisez à le conserver et à le traiter uniquement pour faire fonctionner Jubilee pour vous, tant que votre compte est ouvert. Nous ne le vendons pas et ne l'utilisons pas pour entraîner des modèles d'IA.",
+          "La façon dont nous traitons vos données personnelles est expliquée dans notre <privacy>politique de confidentialité</privacy>."
+        ]
+      },
+      "ai": {
+        "title": "IA et candidatures",
+        "blocks": [
+          "Jubilee n'utilise pas encore l'IA. Quand ce sera le cas, ces règles s'appliqueront :",
+          {
+            "list": [
+              "L'IA n'ajoute jamais d'expérience, de compétences ou de dates que vous n'avez pas.",
+              "Vous vérifiez ce qu'elle écrit avant qu'il soit utilisé.",
+              "Rien n'est envoyé à un employeur sans votre accord explicite.",
+              "Vous êtes responsable de ce que vous envoyez : assurez-vous que c'est vrai."
+            ]
+          }
+        ]
+      },
+      "fairUse": {
+        "title": "Usage loyal",
+        "blocks": [
+          "N'utilisez pas Jubilee pour :",
+          {
+            "list": [
+              "mettre de fausses informations sur vous ou sur autrui dans un CV ou une candidature",
+              "vous faire passer pour quelqu'un d'autre",
+              "harceler, tromper ou nuire à des employeurs, des recruteurs ou toute autre personne",
+              "enfreindre la loi ou les droits d'autrui, y compris le droit d'auteur",
+              "copier, aspirer ou surcharger le service, ou accéder à des parties qui ne vous sont pas ouvertes"
+            ]
+          },
+          "Si nous pensons qu'un contenu ou un usage enfreint ces règles, nous pouvons retirer le contenu ou limiter le compte. Une personne examine chaque cas, nous vous disons ce que nous avons fait et pourquoi, et vous pouvez nous demander de le réexaminer via la <contact>page de contact</contact>."
+        ]
+      },
+      "price": {
+        "title": "Prix",
+        "blocks": [
+          "Jubilee est gratuit aujourd'hui.",
+          "Si des fonctionnalités payantes arrivent, nous afficherons clairement leur prix avant que vous les choisissiez. Nous ne vous facturons jamais sans votre consentement."
+        ]
+      },
+      "ending": {
+        "title": "Fermer votre compte",
+        "blocks": [
+          "Vous pouvez arrêter d'utiliser Jubilee et supprimer votre compte à tout moment. Tant que ce n'est pas possible dans l'application, demandez-le via la <contact>page de contact</contact> et nous le supprimerons sous un mois.",
+          "Nous ne pouvons suspendre ou fermer un compte que s'il enfreint ces conditions ou la loi. Nous vous dirons pourquoi, sauf si la loi nous en empêche."
+        ]
+      },
+      "responsibility": {
+        "title": "Notre responsabilité",
+        "blocks": [
+          "Nous faisons en sorte que Jubilee reste disponible et exact, mais nous ne pouvons pas garantir qu'il sera toujours disponible ou sans erreur, ni qu'il vous fera obtenir un emploi.",
+          "Dans les limites permises par la loi, nous ne sommes pas responsables des pertes indirectes, comme une opportunité d'emploi manquée.",
+          "Rien dans ces conditions ne limite les droits que vous accorde le droit de la consommation du pays où vous vivez."
+        ]
+      },
+      "changes": {
+        "title": "Modifications de ces conditions",
+        "blocks": [
+          "Quand ces conditions changent, la date en haut de la page change aussi. Avant qu'une modification importante prenne effet, nous vous prévenons par e-mail ou dans l'application. Si vous n'êtes pas d'accord, vous pouvez supprimer votre compte."
+        ]
+      },
+      "law": {
+        "title": "Droit applicable",
+        "blocks": [
+          "Ces conditions sont régies par le droit des États-Unis.",
+          "Si vous vivez dans l'Union européenne ou dans un autre pays dont le droit de la consommation vous protège, vous conservez les droits qu'il vous accorde et pouvez saisir les tribunaux du lieu où vous vivez.",
+          "En cas de problème, <contact>dites-le-nous</contact> d'abord et nous essaierons d'y remédier."
+        ]
+      }
+    }
+  },
+  "auth": {
+    "providers": {
+      "google": "Google",
+      "linkedin_oidc": "LinkedIn"
+    },
+    "signIn": {
+      "metaTitle": "Connexion",
+      "title": "Se connecter à Jubilee",
+      "google": "Continuer avec Google",
+      "linkedin": "Continuer avec LinkedIn",
+      "or": "ou",
+      "emailLabel": "E-mail",
+      "sendCode": "Recevoir un code par e-mail",
+      "sending": "Envoi de votre code",
+      "redirecting": "Ouverture de {provider}",
+      "newHere": "Première visite ? Votre compte sera créé.",
+      "legal": "En vous connectant, vous acceptez les <terms>conditions d'utilisation</terms> et la <privacy>politique de confidentialité</privacy>.",
+      "help": "Besoin d'aide ? <link>Contactez le support</link>."
+    },
+    "code": {
+      "title": "Consultez vos e-mails",
+      "sentTo": "Nous avons envoyé un code à 6 chiffres à <strong>{email}</strong>.",
+      "label": "Code à 6 chiffres",
+      "hint": "L’e-mail contient aussi un lien de connexion, si vous préférez.",
+      "submit": "Se connecter",
+      "verifying": "Connexion en cours",
+      "change": "Modifier l’e-mail",
+      "resend": "Envoyer un nouveau code",
+      "resendIn": "Nouveau code possible dans {seconds} s",
+      "resent": "Nous avons envoyé un nouveau code. Utilisez le plus récent."
+    },
+    "errors": {
+      "cancelled": "La connexion a été annulée. Choisissez un moyen de continuer.",
+      "provider": "La connexion avec {provider} n’a pas abouti. Réessayez ou utilisez votre e-mail.",
+      "codeInvalid": "Ce code ne fonctionne pas. Il est peut-être mal saisi ou expiré. Vérifiez le dernier e-mail de Jubilee ou demandez un nouveau code.",
+      "codeFormat": "Saisissez les 6 chiffres reçus par e-mail.",
+      "linkExpired": "Ce lien de connexion a expiré ou a déjà servi. Un lien ne fonctionne qu’une fois, pendant peu de temps. Demandez un nouveau code ci-dessous.",
+      "rateLimited": "Patientez {seconds} secondes avant de demander un nouveau code.",
+      "emailInvalid": "Saisissez votre adresse e-mail complète, par exemple ada.okafor@gmail.com.",
+      "emailNotAllowed": "La connexion par e-mail n’est pas encore ouverte. Continuez avec Google ou LinkedIn.",
+      "unknown": "Le service de connexion ne répond pas. Réessayez dans un instant."
+    },
+    "home": {
+      "metaTitle": "Accueil",
+      "greeting": "Bonjour {name}",
+      "greetingNoName": "Bonjour",
+      "body": "Connexion réussie. Votre espace de travail arrive bientôt.",
+      "signOut": "Se déconnecter",
+      "loading": "Chargement de votre compte"
+    }
+  },
+  "localePicker": {
+    "label": "Langue et région",
+    "names": {
+      "en-us": "English (United States)",
+      "en-gb": "English (United Kingdom)",
+      "fr-fr": "Français (France)"
+    }
+  }
+}
