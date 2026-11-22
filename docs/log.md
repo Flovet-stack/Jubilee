@@ -163,3 +163,9 @@ One dated entry per task: what was built, the review score, and what was left.
 - Reviewed 96/100. Fixed after review: wider SQL tests, a duplicate-entry test, UUID checks, the restore read moved to `queries.ts`.
 - Flovet approved dropping the English restore note: new migration `20261122123552_restore_without_note.sql` (restore revisions get no note; the UI labels them). Applied to `jubilee`; the SQL tests, now checking the note is empty, passed and rolled back.
 - Left: consider measuring the size cap with `octet_length`.
+
+## 2026-11-22: Spec 11, pull request checks (97/100, issue #7)
+
+- Decision 0023 approved by Flovet (0020–0022 skipped: held by open PR #56). `.github/workflows/check.yml` runs `pnpm check` on every PR to `main`: `pnpm/setup` (pnpm from `packageManager`, Node 24), `.next/cache` cached, actions pinned to SHAs, `contents: read`, placeholder public env, no secrets.
+- `pnpm check` passed locally with only the placeholders; the first Actions run on PR #58 was green.
+- Left for Flovet: make `Check` a required status on `main` (branch protection). The Vercel preview fails on this PR and on #55 alike; not caused by this change.
