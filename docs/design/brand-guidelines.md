@@ -1,6 +1,6 @@
 # Jubilee brand guidelines
 
-- **Status:** Proposed with [0010](../decisions/0010-logo-and-brand-identity.md). Nothing is built on it until Flovet approves 0010.
+- **Status:** Approved with [0010](../decisions/0010-logo-and-brand-identity.md). The staircase icon in this version is Proposed in [0018](../decisions/0018-logo-icon-staircase.md); the app keeps 0010's path icon until 0018 is approved.
 - **Written:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
 - **Files:** [`docs/design/brand/logo/`](brand/logo/)
 - **Related:** [design brief](design-brief.md) (voice, principles) · [0007 visual foundations](../decisions/0007-visual-foundations.md) (colour and type tokens)
@@ -135,4 +135,4 @@ PNG and ICO exports (favicon.ico, apple-touch-icon, store icons, social images) 
 
 ## 10. Changes
 
-The logo changes only through a new decision that supersedes 0010. Update the files here first; every other copy is generated from them.
+The logo changes only through a new decision that supersedes 0010 (0018 proposes the staircase icon). Update the files here first; every other copy is generated from them.

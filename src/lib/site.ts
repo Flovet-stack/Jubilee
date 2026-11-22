@@ -1,5 +1,8 @@
+// The brand name, the same in every language. Localised copy lives in
+// src/messages (decision 0003).
 export const site = {
   name: "Jubilee",
-  description:
-    "Your AI job-search assistant: country-ready CVs, tailored applications you approve, and follow-ups at the right time.",
+  // Temporary, until contact forms exist (0013). Used only as a mailto:
+  // target; never shown as page text.
+  supportEmail: "lovetofloveto3@gmail.com",
 } as const;

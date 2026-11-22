@@ -46,6 +46,11 @@
   --paper: #ffffff;
   --paper-ink: #1d1a44;
 
+  /* Google and LinkedIn sign-in buttons (0012): Google's own button colours. */
+  --provider: #ffffff;
+  --provider-line: #747775;
+  --provider-ink: #1f1f1f;
+
   /* Washes (0008 §5: hover is an 8% ink wash). Derived, never hand-picked. */
   --wash-hover: color-mix(in oklab, var(--ink) 8%, transparent);
   --wash-press: color-mix(in oklab, var(--ink) 12%, transparent);
@@ -83,6 +88,10 @@
     --stage-applied: #8fb0ff;
     --stage-interview: #f39ad3;
     --stage-rejected: #b2aaa5;
+
+    --provider: #131314;
+    --provider-line: #8e918f;
+    --provider-ink: #e3e3e3;
 
     --scrim: rgb(5 4 14 / 0.64);
     --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
@@ -145,6 +154,9 @@
   --color-stage-rejected: var(--stage-rejected);
   --color-paper: var(--paper);
   --color-paper-ink: var(--paper-ink);
+  --color-provider: var(--provider);
+  --color-provider-line: var(--provider-line);
+  --color-provider-ink: var(--provider-ink);
   --color-wash-hover: var(--wash-hover);
   --color-wash-press: var(--wash-press);
   --color-wash-danger: var(--wash-danger);

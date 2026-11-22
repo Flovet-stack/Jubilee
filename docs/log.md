@@ -76,7 +76,64 @@ One dated entry per task: what was built, the review score, and what was left.
 - Not reviewed: no spec (brand assets only, nothing wired into the app).
 - Left: Flovet to approve 0010; PNG and ICO exports and the favicon go in with the app shell spec.
 
-## 2026-11-22: Logo icon redrawn as a dot staircase (0010)
+## 2026-11-21: Privacy policy page decided and specced
+
+- Decision 0011 (privacy policy page; drafted as 0010, renumbered when merging main, which had taken 0010 for the logo): researched against GDPR Art. 13, CNIL, CCPA, Teal, 37signals and GOV.UK; approved by Flovet in chat. One layered page in English and French that describes only what Jubilee processes today.
+- Spec 04 written, status Blocked: it needs spec 01 (next-intl routing and message files) built first, and company facts from Flovet (legal name, address, privacy email, DPO, minimum age, the AI-training commitment).
+- Left: build spec 01, then spec 04; a legal review of both languages before launch.
+
+## 2026-11-21: Foundations built (spec 01)
+
+- next-intl 4.15.3, @supabase/ssr, @supabase/supabase-js, @t3-oss/env-nextjs, zod and server-only, as named in 0003 and 0004 (pinned).
+- `src/env.ts` fails the build on a missing variable. `src/app/[locale]/` with `(marketing)`, `(auth)` and `(app)`; the root layout reads the locale with `next/root-params`, so `/en` and `/fr` stay static. `/` redirects by saved choice, then `Accept-Language` (`fr-CM` → `/fr`, `de-DE` → `/en`). Messages in `src/messages/{en,fr}.json` with a key-parity test.
+- One proxy pass: Supabase refreshes the session first and writes the cookies onto the request, then next-intl routes (`src/proxy.test.ts`). ESLint bans Supabase clients outside the data-access layer (tested). `robots.ts`, `sitemap.ts` with hreflang, optional Search Console tag. Localised 404 under a locale, bilingual global 404 otherwise.
+- Reviewed 92/100. Findings fixed after review: cookies now reach Server Components in the same request; localised 404 under a known locale; versions pinned; build-time choices recorded in the spec's build notes.
+- Left: Flovet to confirm the locale order (saved choice before `Accept-Language`); spec 04 now waits only on company facts.
+
+## 2026-11-21: Privacy policy page built (spec 04)
+
+- `/en/privacy` and `/fr/privacy`, static, no header or footer. Thirteen sections in 0011's order, a contents list in a grey well, "last updated" as a `<time>`, every string in `src/messages` under `privacy`. Added to the sitemap with hreflang.
+- Facts from Flovet: company not registered yet (the page says so and names no one), contact through the contact page only, no DPO, minimum age 16, no AI training. Spec 04 updated to match.
+- `TextLink` renders a native anchor for `#` links, so keyboard focus moves to the section.
+- Left: the contact page (linked five times, 404 until built); company name and address once registered; legal and native-French review before launch.
+- Reviewed 91/100. Fixed after review: transfer wording (Supabase and Vercel are US companies; safeguards "in their data processing agreements", not a named mechanism nobody checked); Google and LinkedIn described as sign-in services under their own policies, not processors; no promise of a profile editor that doesn't exist; cookie and log wording; French polish; `TextLink` keeps every anchor attribute on `#` links (tested). Launch gates added to spec 04's Check.
+
+## 2026-11-21: Sign-in built (spec 05, issue #9)
+
+- Decision 0012 approved (logos from Iconify's CC0 `logos` set allowed by Flovet). Spec 05 written.
+- Built: `/[locale]/sign-in` (Google, LinkedIn, email code in two steps), `/[locale]/auth/callback` and `/auth/confirm`, `features/auth/{logic,schemas,queries,actions}.ts`, the `(app)` guard with a way back (`next`, set by the proxy), a temporary `/home` with Sign out, en/fr copy, brand marks with `SOURCES.md`, provider-button tokens, and the bilingual Magic Link template (`supabase/templates/`).
+- 41 unit tests for the `next` check, error mapping and the email form state. `pnpm check` passes. Checked on the dev server: guard redirect, sign-in in en/fr, light/dark, 390/1440 px, field and URL errors, callback and confirm failure paths.
+- First review 75/100. Fixed since: "Change email" state after a failed send, per-form spinners, the code field now describes where the code went, a countdown after a rate limit, clearer "unknown" error.
+- Left: Flovet pastes the Magic Link template and tests Google, LinkedIn, code and link sign-in on port 3000; decisions on the logo, the merged code message and the LinkedIn mark (spec 05 build notes); then a second review.
+- Addendum (Flovet): a temporary Sign in button on the placeholder home page, going to `/[locale]/sign-in`. No separate sign-up page: one page does both (0012).
+
+## 2026-11-21: Sign-in refresh (spec 06)
+
+- Approved 0010 (logo) and 0013. The sign-in page has no card now: one centred column, the 0010 icon above the title, and a footer with the account note, the Terms and Privacy line, and a support `mailto:` link. Body text gets `word-spacing: 0.06em` (Plus Jakarta Sans's space is 0.17em, the narrowest of 10 faces measured).
+- 0014 (Terms page) is logged as Proposed. The sign-in page links to `/[locale]/terms`, which returns 404 until that page is built.
+- Flovet reviewed the wider word spacing locally and dropped it (0015). 0014 approved.
+
+## 2026-11-21: Terms page (spec 07)
+
+- 0014 approved. Facts from Flovet: not a registered company yet, run from the United States, US law, minimum age 16.
+- Built `/[locale]/terms` in en/fr with 12 sections from 0014, on a new shared `LegalDocument` layout that the privacy page now uses too. Added to the sitemap.
+- Left: the contact page (both legal pages link to it), a US state once the company is registered, and a lawyer's review before launch.
+
+## 2026-11-21: CV data model and PDF rendering proposed (0016, issue #5)
+
+- Researched JSON Resume, Reactive Resume v6, OpenResume, react-pdf, headless Chromium on Vercel, Jobscan's ATS formatting guidance and the Postgres JSON docs. Indeed's and Greenhouse's ATS pages were gone (404), so no ATS vendor page backs the format rules.
+- Proposed: `cvs`, `cv_versions` and an append-only `cv_revisions`, each with `user_id` and owner-only RLS; CV content as one Zod-validated `jsonb` document using JSON Resume names; AI changes only through accepted proposals that write a revision; PDFs with `@react-pdf/renderer` on the server, checked by a pdf.js text-extraction test. No Chromium.
+- 0016 approved by Flovet in chat, with a note that #14 may render the preview in the browser.
+- Naming agreed in chat: "CV" in code and data; on screen "CV" in French and "resume" in English (US) for now; an `en-GB` locale with "CV" when the UK launches. To be logged as 0017.
+- Flovet then asked for regional locales from the start (shared links, countries beyond the launch markets). Proposed 0017, superseding 0003: three language-region locales to start (`/en-us`, `/en-gb`, `/fr-fr`; cut from 11 at Flovet's request, other countries map to one of them), base en/fr messages with small regional overrides, no redirect on deep links, "resume" only in en-US and en-CA. Research: Google hreflang and multi-regional guidance, Stripe, Apple, Notion, Airbnb, resume.io, next-intl routing docs.
+- 0017 approved by Flovet in chat; 0003 marked Superseded by 0017.
+- Spec 08 (regional locales) written, status Ready.
+- Spec 09 (CV schema, RLS and data access, #10) written, status Ready. Applying its migration to the remote project waits on Flovet.
+- Left: build spec 08, then spec 09.
+- Renumbered when merging main, which had taken 0013–0015 and specs 06–07: CV data model is 0016, regional locales 0017, specs 08 and 09.
+
+## 2026-11-22: Logo icon redrawn as a dot staircase (0018 proposed)
 
 - From a stepped-dot reference Flovet shared: six equal dots in three steps on a 20-unit grid, violet dots stepping in opacity, marigold top dot, flat violet tile (the reference's gradient not adopted, 0007). The favicon is the same staircase with bigger dots.
-- All 13 SVGs regenerated; the brand guidelines and 0010 (still Proposed) updated to match.
+- 0010 was approved on main in the meantime, so the change is logged as 0018 (Proposed, superseding 0010's icon only) instead of editing 0010. All 13 SVGs and the brand guidelines show the staircase.
+- Left: Flovet to approve 0018; then redraw `src/components/brand/jubilee-icon.tsx`, which still draws 0010's path on the sign-in page.
