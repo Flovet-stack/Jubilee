@@ -1,4 +1,4 @@
-# 0010: Logo and brand identity ("the path")
+# 0010: Logo and brand identity ("the steps")
 
 - **Status:** Proposed
 - **Proposed:** 2026-11-21 by the product team (roles: Product Designer, UI, Copy, Frontend)
@@ -15,7 +15,7 @@ Jubilee has visual foundations (0007) but no logo. The app shell, emails, CV foo
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------- |
 | Indeed, Teal, Otta                            | Lowercase wordmark; the brand detail sits inside a letter (Indeed's arc over the i)                                                  | Adapt                        | Our wordmark puts the colour in the two letter dots (j, i) when it stands alone             |
 | LinkedIn, Welcome to the Jungle               | Letter in a square tile that doubles as app icon and avatar                                                                          | Reject as primary (option B) | Strong icon, but says nothing about the product                                             |
-| Glassdoor                                     | Abstract symbol that hints at the promise                                                                                            | Adopt                        | The rising dots show the job search ending on an offer                                      |
+| Glassdoor                                     | Abstract symbol that hints at the promise                                                                                            | Adopt                        | The dot staircase shows the job search ending on an offer                                   |
 | Spotify design guidelines                     | Full logo and icon; clear space = ½ icon height; minimums 70 px / 20 mm, icon 21 px / 6 mm; green only on black or white; don't list | Adopt the structure          | Clear space from a part of the logo; minimums per version in px and mm                      |
 | GOV.UK logo elements                          | Wordmark, crown, lock-up; spacing from the wordmark's dot; small crown for favicons; incorrect-usage list                            | Adopt                        | A separate small version for favicons; spacing measured with the logo's own parts           |
 | Mailchimp brand assets                        | Name rules, logo, reverse for dark, do / don't, downloadable files                                                                   | Adopt                        | A "name in text" section and ready-made files                                               |
@@ -43,7 +43,7 @@ Shown on the canvas "Jubilee logo propositions" (claude.ai artifact), five direc
 
 ## Decision
 
-**D, the path, as one family with A.** The full logo is D's icon plus the ink wordmark; the wordmark used alone takes A's coloured dots; marigold appears once per placement. A three-dot favicon handles sizes under 32 px. Proportions, colour versions, minimum sizes, name rules and the don't list are in [the brand guidelines](../design/brand-guidelines.md); the files are in `docs/design/brand/logo/`.
+**D's idea, as one family with A.** The icon is a staircase of six equal dots (one, two, three) ending on a marigold offer dot, redrawn from D's rising dots after Flovet shared a stepped-dot reference on 2026-11-22: equal dots read better at small sizes than D's growing ones. The full logo is the icon plus the ink wordmark; the wordmark used alone takes A's coloured dots; marigold appears once per placement. The reference's gradient is not adopted (0007). A favicon with bigger dots handles sizes under 32 px. Proportions, colour versions, minimum sizes, name rules and the don't list are in [the brand guidelines](../design/brand-guidelines.md); the files are in `docs/design/brand/logo/`.
 
 Flovet chose D and liked A; putting A's coloured name beside D's icon was rejected because seven dots and two marigold accents compete (canvas board F).
 

@@ -75,3 +75,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - Logged 0010 as Proposed. Wrote `docs/design/brand-guidelines.md` (structure taken from Spotify, GOV.UK, Mailchimp and Atlassian) and 13 SVG files in `docs/design/brand/logo/`: logo, wordmark and icon in colour, on dark, on violet and one colour, plus app icons and a three-dot favicon.
 - Not reviewed: no spec (brand assets only, nothing wired into the app).
 - Left: Flovet to approve 0010; PNG and ICO exports and the favicon go in with the app shell spec.
+
+## 2026-11-22: Logo icon redrawn as a dot staircase (0010)
+
+- From a stepped-dot reference Flovet shared: six equal dots in three steps on a 20-unit grid, violet dots stepping in opacity, marigold top dot, flat violet tile (the reference's gradient not adopted, 0007). The favicon is the same staircase with bigger dots.
+- All 13 SVGs regenerated; the brand guidelines and 0010 (still Proposed) updated to match.
