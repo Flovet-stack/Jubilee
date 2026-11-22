@@ -1,6 +1,6 @@
 # 14: CV builder (guided editor, live preview, autosave)
 
-Status: Not started · Written: 2026-11-22 · Issue: #14
+Status: Done (91/100, 2026-11-22; offline, too_large and a 20-section CV not run in the browser) · Written: 2026-11-22 · Issue: #14
 
 ## Goal
 

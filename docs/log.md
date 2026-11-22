@@ -211,3 +211,12 @@ One dated entry per task: what was built, the review score, and what was left.
 - Tests: phone (US, GB, FR, CM, paste, wrong country), dates in English and French (separators, month names, leap years, min/max), range order, and submit behaviour (`src/lib/form-events.ts`). 224 tests pass; `pnpm check` passes.
 - Browser (fr-fr, 1440 light and 390 touch dark): paste switches to Cameroun, French errors with an example number, country search, two-month calendar, range pick, end-before-start error on "To", password hides on submit, 44 px touch targets, no sideways scroll; sign-in and landing load none of the new libraries.
 - Reviewed 85, then 98/100 after adding controlled values, a DOM-free submit test and a token font size.
+
+## 2026-11-22: CV builder built (spec 14, #14)
+
+- Decisions 0024 (editor, preview, autosave), 0025 (Classic template, Carlito) and 0026 (four-corner entries) researched and approved; spec 14 written on them.
+- Built: Home list and "Create a CV"; the editor at `/[locale]/cvs/[id]` with the section list, guided first pass, forms for every entry kind (date range and phone fields from spec 13), bullets, skill lists, Undo on delete, hover-and-focus row actions with a fine pointer; guidance per section in en, en-GB and fr.
+- One semantic tree (`src/features/cv/tree.ts`) feeds the Classic HTML preview (Carlito Latin subsets, about 37 KB each, OFL); the react-pdf template in #15 reads the same tree.
+- Autosave: about 1 s after typing, version-checked (`saveContent` returns `conflict` instead of overwriting), only valid content sent, one `user` revision per visit, nothing in browser storage. No migration.
+- Browser (1440 light and dark, 390 French): create → Contact → Next through Summary by keyboard, title follows the name, "Mar 2021 – Present" in four corners, two-tab conflict refused and the newer edit kept in Supabase, three revisions for three visits. Fixed on the way: a server call to `buttonVariants`, a stuck "Saving…", dates not prefilled, headings in the UI's language instead of the CV's.
+- Reviewed 84, then 91/100 after ordering renames and saves, an `invalid` status, a full-height phone preview and build notes. Not run: offline, too_large, a 20-section CV.

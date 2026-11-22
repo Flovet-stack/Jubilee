@@ -155,7 +155,9 @@ export function useAutosave({
   const rename = useCallback(
     async (title: string) => {
       // After the save request on the wire; later saves wait for this.
+      const previous = renaming.current;
       const task = (async () => {
+        await previous?.catch(() => undefined);
         await request.current?.catch(() => undefined);
         const result = await renameCvAction(id, title);
         if (result.ok) updatedAt.current = result.value.updatedAt;
