@@ -62,6 +62,10 @@ begin
   if (select source from public.cv_revisions where id = restored) <> 'restore' then
     raise exception 'FAIL restore revision missing';
   end if;
+  -- The UI labels restores in the user's language; the database writes no text.
+  if (select note from public.cv_revisions where id = restored) is not null then
+    raise exception 'FAIL restore revision should have no note';
+  end if;
 
   select count(*) into n from public.cv_revisions;
   if n <> 3 then raise exception 'FAIL A should see 3 revisions, saw %', n; end if;
