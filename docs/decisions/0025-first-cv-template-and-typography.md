@@ -1,6 +1,6 @@
 # 0025: The first CV template and its typography
 
-- **Status:** Approved
+- **Status:** Approved; entry lines and body line height superseded by [0026](0026-cv-entry-layout.md)
 - **Proposed:** 2026-11-22 by the product team (roles: UI, Copy, Frontend, Product, Tech Lead)
 - **Approved:** 2026-11-22 by Flovet (in chat)
 - **Supersedes:** none. Fills the "CV templates and their typography" row in the README's "Still to decide", for the first template only.
