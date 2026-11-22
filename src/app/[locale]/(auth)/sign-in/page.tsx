@@ -129,14 +129,14 @@ function OptionsSkeleton() {
   return (
     <div className="flex flex-col gap-6" aria-hidden="true">
       <div className="flex flex-col gap-3">
-        <Skeleton className="h-(--control-h) rounded-control" />
-        <Skeleton className="h-(--control-h) rounded-control" />
+        <Skeleton className="h-(--control-h-lg) rounded-control-lg" />
+        <Skeleton className="h-(--control-h-lg) rounded-control-lg" />
       </div>
       <Skeleton className="mx-auto h-4 w-8" />
       <div className="flex flex-col gap-4">
         <Skeleton className="h-4 w-12" />
-        <Skeleton className="h-(--control-h) rounded-control" />
-        <Skeleton className="h-(--control-h) rounded-control" />
+        <Skeleton className="h-(--control-h-lg) rounded-control-lg" />
+        <Skeleton className="h-(--control-h-lg) rounded-control-lg" />
       </div>
     </div>
   );

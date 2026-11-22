@@ -1,6 +1,6 @@
 # 0007: Visual foundations ("quiet desk, bright moments")
 
-- **Status:** Approved; the _Iconography_ paragraph is superseded by [0009](0009-design-system-components-icons-motion.md)
+- **Status:** Approved; the _Iconography_ paragraph is superseded by [0009](0009-design-system-components-icons-motion.md); its control and card radius by [0022](0022-corner-radius-by-size.md)
 - **Proposed:** 2026-11-21 by the product team (roles: UI, UX, Copy, Frontend, Product)
 - **Revised:** 2026-11-21 after Flovet's review of the sample screens: the green accent was too common (the AI-tells catalogue lists emerald/teal as the default fallback accent); Flovet prefers Ownr's colour and playfulness, Clemta's grey wells with light borders, and a font one of them uses. Revision 1 ("the green light", Public Sans + Newsreader) is replaced in full; it was never approved.
 - **Approved:** 2026-11-21 by Flovet (in chat, after reviewing the revised sample screens)

@@ -20,17 +20,17 @@ One source: `src/app/globals.css`. Tailwind 4 `@theme` turns the tokens into uti
 | 2. Roles      | `--violet`, `--ink-muted`, `--stage-offer`   | What components use; light and dark swap the value |
 | 3. Components | `--control-h`, `--focus-ring`, `--pop-scale` | Built from 1 and 2; change a whole family at once  |
 
-| Group     | Tokens → utilities                                                                                                                                                                                                                                    |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Colour    | `page well card line tint field ink ink-muted ink-subtle violet violet-press on-violet marigold pink sky success danger`, `stage-saved/applied/interview/rejected`, `paper paper-ink`, `wash-hover wash-press wash-danger scrim` → `bg-*`, `text-*` … |
-| Type      | `text-xs` 12 · `sm` 14 · `base` 16 · `lg` 18 · `xl` 20 · `2xl` 24 · `3xl` 32 · `4xl` 40 (line heights included). Plus Jakarta Sans via `--font-jakarta`. `tabular-nums` for dates, scores, counts                                                     |
-| Spacing   | 4 px base: `1` 4 · `2` 8 · `3` 12 · `4` 16 · `6` 24 · `8` 32 · `12` 48 · `16` 64 · `24` 96 · `32` 128. Choose by relationship (0008 §3)                                                                                                               |
-| Radius    | `rounded-paper` 2 · `rounded-mark` 4 · `rounded-control` 8 · `rounded-box` 12 · `rounded-sheet` 16 · `rounded-full`                                                                                                                                   |
-| Elevation | `shadow-paper` (the CV only), `shadow-float` (menus, sheets, toasts, a dragged card). Resting surfaces have none                                                                                                                                      |
-| Layout    | `max-w-(--container-content)` 1200 · `-reading` 640 · `-dialog` 480; breakpoints `sm` 640, `lg` 1024; fixed layers: `--gutter-sm` 16, `--gutter-md` 24; toasts: `--toast-width` 380, `--toast-gap` 12, `--toast-peek` 14                              |
-| Controls  | `--control-h` 48 · `--control-h-sm` 44 · `--icon-ui` 20 · `--icon-nav` 24 · `--focus-ring` · `--shadow-thumb` (switch)                                                                                                                                |
-| Motion    | `--dur-fast` 120 · `--dur-exit` 150 · `--dur-base` 200 · `--dur-slow` 320; `ease-enter`, `ease-exit`, `ease-standard`, `ease-sheet`; `--press-scale` 0.98, `--pop-scale` 0.96                                                                         |
-| Variant   | `hover-fine:` = hover on real pointers only (0008 §5). Never use plain `hover:`                                                                                                                                                                       |
+| Group     | Tokens → utilities                                                                                                                                                                                                                                                          |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Colour    | `page well card line tint field ink ink-muted ink-subtle violet violet-press on-violet marigold pink sky success danger`, `stage-saved/applied/interview/rejected`, `paper paper-ink`, `wash-hover wash-press wash-danger scrim` → `bg-*`, `text-*` …                       |
+| Type      | `text-xs` 12 · `sm` 14 · `base` 16 · `lg` 18 · `xl` 20 · `2xl` 24 · `3xl` 32 · `4xl` 40 (line heights included). Plus Jakarta Sans via `--font-jakarta`. `tabular-nums` for dates, scores, counts                                                                           |
+| Spacing   | 4 px base: `1` 4 · `2` 8 · `3` 12 · `4` 16 · `6` 24 · `8` 32 · `12` 48 · `16` 64 · `24` 96 · `32` 128. Choose by relationship (0008 §3)                                                                                                                                     |
+| Radius    | By size (0022): `rounded-control-sm` 4 · `rounded-control` 6 · `rounded-control-lg` 8 · `rounded-card` 8 (cards, menus, popovers, tooltips) · `rounded-box` 12 (wells, toasts) · `rounded-sheet` 16 · `rounded-mark` 4 (checkbox) · `rounded-paper` 2 (CV) · `rounded-full` |
+| Elevation | `shadow-paper` (the CV only), `shadow-float` (menus, sheets, toasts, a dragged card). Resting surfaces have none                                                                                                                                                            |
+| Layout    | `max-w-(--container-content)` 1200 · `-reading` 640 · `-dialog` 480; breakpoints `sm` 640, `lg` 1024; fixed layers: `--gutter-sm` 16, `--gutter-md` 24; toasts: `--toast-width` 380, `--toast-gap` 12, `--toast-peek` 14                                                    |
+| Controls  | Heights (0020): `--control-h-lg` 48 · `--control-h` 40 · `--control-h-sm` 32; on touch (`pointer: coarse`) md and sm become 44. `--icon-ui` 20 · `--icon-nav` 24 · `--focus-ring` · `--shadow-thumb` (switch)                                                               |
+| Motion    | `--dur-fast` 120 · `--dur-exit` 150 · `--dur-base` 200 · `--dur-slow` 320; `ease-enter`, `ease-exit`, `ease-standard`, `ease-sheet`; `--press-scale` 0.98, `--pop-scale` 0.96                                                                                               |
+| Variant   | `hover-fine:` = hover on real pointers only (0008 §5). Never use plain `hover:`                                                                                                                                                                                             |
 
 `src/lib/tokens.test.ts` reads `globals.css` and fails if any colour pair drops below WCAG 2.2 AA, in either theme.
 
@@ -61,6 +61,23 @@ All in `src/components/ui/`, icons in `src/components/icons/`. Labels and messag
 | `ToastProvider`, `useToast`                             | `toast.tsx`                   | A confirmation away from the change   | info, success, danger; action (Undo); stack of 3; swipe                                                                 |
 | `Tabs`                                                  | `tabs.tsx`                    | Peer views of one thing               | meta count, disabled tab, scrolls on narrow screens                                                                     |
 | `EmptyState`, `UndoLine`, `MarkedChange`, `ReviewPanel` | `patterns.tsx`                | Jubilee patterns from 0008            | empty with one action; undo in place; AI change with reason + accept/reject; final-action summary                       |
+
+### Sizes (0020)
+
+`Button`, `IconButton`, `Input`, `Textarea` and `Select` take `size`:
+
+| Size | Mouse | Touch | Radius | Use for                                                               |
+| ---- | ----- | ----- | ------ | --------------------------------------------------------------------- |
+| `lg` | 48 px | 48 px | 8 px   | The main action and fields of a single-task screen (sign-in, landing) |
+| `md` | 40 px | 44 px | 6 px   | The default, everywhere else, including the CV editor                 |
+| `sm` | 32 px | 44 px | 4 px   | Inline row actions in dense lists ("Edit", "Remove")                  |
+
+- One size per form and per button group; never mix sizes in a group.
+- Field text stays 16 px at every size, so iOS doesn't zoom.
+- Dense screens get lighter through weight too: quiet and text buttons for secondary actions, one primary per section.
+- See the "Dense screen" section of `/design-system`.
+- **Rows, not controls:** list rows and option rows stay at least 44 px (`min-h-11`) on every pointer. That covers menu and select items, checkbox, radio and switch rows, tabs and the undo line. They're tall targets inside a list, not sized controls.
+- **Fixed radii:** tabs keep `rounded-t-control` (6 px, the md radius), because a tab is an md-height control. The toast's action and close buttons use the `sm` height and radius.
 
 ### States every control has
 

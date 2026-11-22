@@ -80,7 +80,7 @@ export function Alert({
     <div
       role={tone === "danger" ? "alert" : "status"}
       className={cn(
-        "flex items-start gap-3 rounded-box bg-card p-4 shadow-[inset_0_0_0_1px_var(--line)]",
+        "flex items-start gap-3 rounded-card bg-card p-4 shadow-[inset_0_0_0_1px_var(--line)]",
         tone === "danger" && "shadow-[inset_0_0_0_1px_var(--danger)]",
         className,
       )}

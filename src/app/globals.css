@@ -100,9 +100,11 @@
 
 /* ── 3. Component and motion tokens (0009) ──────────────────────────── */
 :root {
-  /* Controls: 48 px everywhere (0007), 44 px minimum for small ones. */
-  --control-h: 48px;
-  --control-h-sm: 44px;
+  /* Control heights (0020): lg for single-task screens, md the default,
+     sm for inline row actions. Touch raises md and sm to 44 px (below). */
+  --control-h-lg: 48px;
+  --control-h: 40px;
+  --control-h-sm: 32px;
   --icon-ui: 20px;
   --icon-nav: 24px;
   --focus-ring: 2px solid var(--violet);
@@ -127,6 +129,14 @@
   --toast-width: 380px;
   --toast-gap: 12px;
   --toast-peek: 14px;
+}
+
+/* Touch never goes below 44 px (0020; WCAG 2.5.5, NN/g 1 cm targets). */
+@media (pointer: coarse) {
+  :root {
+    --control-h: 44px;
+    --control-h-sm: 44px;
+  }
 }
 
 /* ── Tailwind 4 theme: utilities read the roles above ───────────────── */
@@ -198,12 +208,15 @@
      8 = 32, 12 = 48, 16 = 64, 24 = 96, 32 = 128. Use only those steps (0007). */
   --spacing: 0.25rem;
 
-  /* Radius by role (0007). */
-  --radius-paper: 2px;
+  /* Radius by size (0022; 0007 for paper, wells and sheets). */
+  --radius-paper: 2px; /* the CV paper */
   --radius-mark: 4px; /* checkbox box (0009) */
-  --radius-control: 8px;
-  --radius-box: 12px;
-  --radius-sheet: 16px;
+  --radius-control-sm: 4px; /* sm controls, tags, inline marks */
+  --radius-control: 6px; /* md controls */
+  --radius-control-lg: 8px; /* lg controls */
+  --radius-card: 8px; /* cards, menus, popovers, tooltips */
+  --radius-box: 12px; /* wells, page-level groups, toasts */
+  --radius-sheet: 16px; /* dialogs and sheets */
 
   /* Layout (0007). */
   --container-content: 1200px;

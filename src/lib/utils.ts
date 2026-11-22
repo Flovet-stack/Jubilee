@@ -9,7 +9,16 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      radius: ["paper", "mark", "control", "box", "sheet"],
+      radius: [
+        "paper",
+        "mark",
+        "control-sm",
+        "control",
+        "control-lg",
+        "card",
+        "box",
+        "sheet",
+      ],
       shadow: ["paper", "float"],
       ease: ["standard", "enter", "exit", "sheet"],
     },

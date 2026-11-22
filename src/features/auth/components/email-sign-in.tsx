@@ -124,6 +124,7 @@ function EmailSteps({
             error={editing ? null : fieldError}
           >
             <Input
+              size="lg"
               name="email"
               type="email"
               inputMode="email"
@@ -178,6 +179,7 @@ function EmailSteps({
           error={fieldError}
         >
           <Input
+            size="lg"
             name="code"
             type="text"
             inputMode="numeric"
@@ -196,7 +198,7 @@ function EmailSteps({
         />
       </form>
       <div className="flex flex-wrap items-center justify-center gap-2">
-        <Button variant="quiet" size="sm" onClick={() => setEditing(true)}>
+        <Button variant="quiet" onClick={() => setEditing(true)}>
           {t("code.change")}
         </Button>
         <form action={formAction}>
@@ -246,6 +248,7 @@ function SubmitButton({
     <Button
       type="submit"
       variant="primary"
+      size="lg"
       fullWidth
       loading={pending}
       loadingLabel={loadingLabel}
@@ -267,7 +270,6 @@ function ResendButton({ wait }: { wait: number }) {
     <Button
       type="submit"
       variant="quiet"
-      size="sm"
       disabled={remaining > 0}
       loading={pending}
     >
