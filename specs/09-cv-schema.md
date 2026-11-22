@@ -1,6 +1,6 @@
 # 09: CV schema, RLS and data access
 
-Status: Ready · Written: 2026-11-22 · Issue: #10
+Status: Done (96/100, 2026-11-22) · Written: 2026-11-22 · Issue: #10
 
 ## Goal
 
@@ -54,3 +54,21 @@ Any screen or route; the PDF and react-pdf (#15); AI proposals and how they're s
 - `list_migrations` shows the new migration on the remote project, after Flovet's go-ahead.
 - `get_advisors` (security and performance) output.
 - Reviewer skill run against this spec; score of 90 or more.
+
+## Build notes (2026-11-22)
+
+Choices the build made that no decision spells out.
+
+- **Ownership in the database:** each table has `unique (id, user_id)`, and versions and revisions point at `(cv_id, user_id)` / `(cv_version_id, user_id)` with composite foreign keys, so a row can only reference a CV of the same user. `on delete set null (cv_id)` keeps a version when its master is deleted (Postgres 15+).
+- **Column grants:** `user_id`, `cv_id` and the revision columns can't be updated by `authenticated`; only content, title, language, market, template, schema version (and a version's `job_id`) can.
+- **Restore is one SQL function**, `restore_cv_revision(revision_id, content, schema_version)`, `security invoker` with `search_path = ''`, so writing the content and appending the `restore` revision happen in one transaction. The app migrates the content first (`migrateContent`), so a future schema version still restores through code.
+- **`template` is nullable** (null = the default template) until the CV templates decision names the templates.
+- **IDs inside content are UUIDs.** Text fields are trimmed and capped; links must be `http(s)`. End dates are compared with start dates at the precision both share (`1843-05` to `1843` is fine).
+- **Revision indexes** are `(cv_id, user_id, created_at desc)` and `(cv_version_id, user_id, created_at desc)`, so they also cover the composite foreign keys.
+- **Types** were written in the generator's shape before the migration ran; `generate_typescript_types` after applying it produced the same tables, columns, relationships and function.
+- **Migration file** renamed to `20261122111324_cvs.sql`, the version the remote project recorded.
+- **Evidence (2026-11-22):** `supabase/tests/cvs.sql` run on `jubilee` returned "all checks passed" and rolled back (0 test users, 0 rows after). Security advisor: only the project-wide "leaked password protection" warning (no passwords are used, decision 0006). Performance advisor: no findings.
+- **The data functions are plain server functions**, not `"use server"` actions: there are no screens yet, and the builder (#14) wraps the ones it needs.
+- **After review:** the SQL tests also cover A updating a version and deleting their own CV and version while signed in, B updating A's version, deleting A's CV and adding a revision to A's version, and anon reading versions and writing anything (re-run on `jubilee`: all checks passed, rolled back). A duplicate entry id test was added. Ids are checked as UUIDs before any query (anything else is "not found"). The revision read used by restore moved to `queries.ts` (`getRevisionContent`).
+- **Restore note dropped** (Flovet approved): migration `20261122123552_restore_without_note.sql` replaces `restore_cv_revision` so a restore revision has `note = null`; the history screen (#14) labels it from `source = 'restore'` and `created_at` through the message files. The SQL test checks it.
+- **Still open:** the size cap could use `octet_length(content::text)` instead of `pg_column_size`, which measures compressed values copied inside the database. Nothing does that today.
