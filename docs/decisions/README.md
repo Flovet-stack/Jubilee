@@ -39,7 +39,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0017 | [Regional locales and what we call a CV](0017-regional-locales-and-cv-naming.md) (supersedes 0003)                 | Approved           |
 | 0018 | [Locale ids are the lowercase URL segments](0018-locale-ids-are-url-segments.md) (supersedes one sentence of 0017) | Approved           |
 | 0019 | [Logo icon redrawn as a staircase of dots ("the steps")](0019-logo-icon-staircase.md)                              | Approved           |
-| 0023 | [CV builder: guided editor, live preview and autosave](0023-cv-builder-editor.md)                                  | Proposed           |
+| 0024 | [CV builder: guided editor, live preview and autosave](0024-cv-builder-editor.md)                                  | Proposed           |
 
 ## Still to decide (before the specs that need them)
 
