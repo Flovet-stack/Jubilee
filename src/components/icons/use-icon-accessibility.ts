@@ -147,7 +147,14 @@ export function useIconAccessibility(
           control.set(definition);
           return Promise.resolve();
         }
-        return original(definition, transition);
+        try {
+          return original(definition, transition);
+        } catch {
+          // Motion's controls unmount before our cleanup runs; a blur fired
+          // while the focused control is being removed lands here. Nothing
+          // is left to animate, so settle quietly.
+          return Promise.resolve();
+        }
       };
       return original;
     });

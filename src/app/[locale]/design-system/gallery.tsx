@@ -39,6 +39,8 @@ import { TextLink } from "@/components/ui/text-link";
 import { ToastProvider, useToast } from "@/components/ui/toast";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
+import { FontSwitcher } from "./font-switcher";
+
 /* Sample content: fictional companies only (no-ai-slop). */
 
 const COLOURS = [
@@ -94,7 +96,7 @@ const COUNTRIES = [
   { value: "uk", label: "United Kingdom", disabled: true },
 ];
 
-export function Gallery() {
+export function Gallery({ fontVariables }: { fontVariables: string }) {
   return (
     <TooltipProvider>
       <ToastProvider>
@@ -106,6 +108,7 @@ export function Gallery() {
               0009; guide in docs/design/design-system.md. Switch your system
               theme to see dark.
             </p>
+            <FontSwitcher fontVariables={fontVariables} />
           </header>
 
           <Foundations />
