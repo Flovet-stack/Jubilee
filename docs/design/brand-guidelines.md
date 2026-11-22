@@ -87,7 +87,7 @@ The marigold dot is the one exception to 0007's rule that bright colours stay of
 ## 6. Small sizes and the app icon
 
 - **Favicon:** the same staircase with bigger dots and less padding (68% of the tile), so it still reads at 16 px. Use it for every size under 32 px.
-- **App icon:** the staircase, white dots stepping in opacity and the marigold top dot, on a flat violet tile (no gradient: 0007). The rounded file is for places that show it as-is; the square file is for iOS and Android, which round the corners themselves.
+- **App icon:** the staircase, white dots stepping in opacity and the marigold top dot, on a flat ink `#1d1a44` tile with `#a48cff` dots (no gradient: 0007). The rounded file is for places that show it as-is; the square file is for iOS and Android, which round the corners themselves.
 - Never put the full logo (icon plus name) in a square slot; the name becomes unreadable.
 
 ## 7. The name in text
