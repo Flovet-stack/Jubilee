@@ -157,5 +157,5 @@ One dated entry per task: what was built, the review score, and what was left.
 - `src/features/cv/`: the Zod content schema (JSON Resume names, `YYYY`/`YYYY-MM` dates, UUID ids), `logic.ts` (empty CV, `migrateContent`, typed results), `queries.ts` and `actions.ts`. Types regenerated from the remote schema (unchanged from the hand-written ones).
 - Evidence: `supabase/tests/cvs.sql` on `jubilee` returned "all checks passed" and rolled back; 0 test rows after. Advisors: only the project-wide leaked-password warning (no passwords used). `pnpm check` passes.
 - Reviewed 96/100. Fixed after review: wider SQL tests, a duplicate-entry test, UUID checks, the restore read moved to `queries.ts`.
-- Flovet approved dropping the English restore note: new migration `20261122150000_restore_without_note.sql` (restore revisions get no note; the UI labels them).
+- Flovet approved dropping the English restore note: new migration `20261122123552_restore_without_note.sql` (restore revisions get no note; the UI labels them). Applied to `jubilee`; the SQL tests, now checking the note is empty, passed and rolled back.
 - Left: consider measuring the size cap with `octet_length`.
