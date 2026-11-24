@@ -225,3 +225,8 @@ One dated entry per task: what was built, the review score, and what was left.
 
 - Installed `jakubkrehel/skills` → `better-ui` and `emilkowalski/skills` → `emil-design-eng` into `.claude/skills/` (and globally) with the `skills` CLI; sources pinned in `skills-lock.json`. Markdown only, no scripts.
 - No spec (tooling only). Not reviewed (no spec to score against).
+
+## 2026-11-24: Product-team skill asks the four user questions
+
+- `product-team` now answers four questions for one named user before any idea, screen, component or interaction: why they open it, how they use it, what they want next and how we take them there, and what we leave out. They're written as a User lens block. It's used in Workflow A, the spec template (Workflow D) and the Product check in Workflow E. The same change was made to the global copy.
+- No spec (tooling only). Not reviewed (no spec to score against).
