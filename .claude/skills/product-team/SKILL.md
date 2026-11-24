@@ -1,6 +1,6 @@
 ---
 name: product-team
-description: Use when planning, specifying or reviewing product work in any project, and after every agent task to review the output: a research-first, 10-role product team grounded in the project's brief and specs.
+description: Use when brainstorming, planning, specifying or reviewing product work in any project, and after every agent task to review the output: a research-first, 10-role product team grounded in the project's brief and specs.
 ---
 
 # Product team
@@ -25,6 +25,17 @@ Rules:
 - Quote the brief when a decision depends on it ("brief: watchlist is a separate toggle").
 - **No brief found:** say so and offer Workflow 0 before doing anything else. Don't invent project facts.
 - If files contradict each other, flag the conflict and ask; don't pick silently.
+
+## The four questions (before any idea, screen, component or interaction)
+
+During brainstorming, and before anything is built (a product idea, a screen, a component or an interaction), the team answers these four questions about one specific user from the brief. Name that user; "users" in general doesn't count.
+
+1. **Why would this particular user open this?** What brings them here, and the need they arrive with, in their words.
+2. **How is this particular user using it?** Their device, context, time and attention; what they already know; the path they take through it.
+3. **What will they want to know next, and how do we take them there?** Their next question or step, and the link, action or content that gets them to it.
+4. **What are we, the product team, willing to leave out?** What we deliberately don't build or show, and why.
+
+Write the answers as a short **User lens** block, before the Research block (Step 1). Mark any guess as an assumption. If a question can't be answered, research it or ask the user before deciding. What's left out goes in the spec's Out of scope.
 
 ## Step 1: research before any decision or review
 
@@ -243,7 +254,7 @@ Last updated: <date>
 
 ## Workflow A: plan a sprint
 
-0. **Research** (Step 1) for every product, UX, UI or architecture choice in the sprint.
+0. **User lens** (the four questions) for every idea, screen, component or interaction in the sprint, then **Research** (Step 1) for every product, UX, UI or architecture choice.
 1. **PM frames it:** one problem; appetite (small: 1–2 weeks of human time, or a few sessions with agents; big: up to 6 weeks); out of scope.
 2. **Product:** value and viability in one line each, plus the riskiest assumption.
 3. **Relevant roles** add tasks and checks from their checklists.
@@ -276,6 +287,8 @@ Write `specs/NN-short-name.md`, small enough for one session:
 # NN: <task>
 
 ## Goal (what and why, not how)
+
+## User lens (the four questions, for one named user)
 
 ## Decisions (links to Approved entries in the decision log, e.g. "Implements 0003, 0007")
 
@@ -310,6 +323,6 @@ Run this whenever an agent finishes a task, before the PR is opened or merged. T
 4. **Role review**, relevant roles only, each through its checklist:
    - Tech Lead and Backend/Database: correctness, data safety, security (RLS, secrets), idempotency.
    - UX, UI and Copy, for anything visible: screenshots at 390 px and 1440 px, light and dark; compared against the brief's design references (Step 1 research); generic-library look flagged; accessibility (keyboard, contrast, focus, reduced motion).
-   - Product: does it serve the user problem in the spec?
+   - Product: does it serve the user problem in the spec, and does it hold up against the spec's User lens (why they open it, how they use it, where they go next, what was left out)?
 5. **Findings** ranked Critical / High / Medium: problem → why it matters → fix.
 6. **Verdict:** ready to merge / fix first / rethink. Post the review in the PR description or as a PR comment.
