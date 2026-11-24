@@ -220,3 +220,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - Autosave: about 1 s after typing, version-checked (`saveContent` returns `conflict` instead of overwriting), only valid content sent, one `user` revision per visit, nothing in browser storage. No migration.
 - Browser (1440 light and dark, 390 French): create → Contact → Next through Summary by keyboard, title follows the name, "Mar 2021 – Present" in four corners, two-tab conflict refused and the newer edit kept in Supabase, three revisions for three visits. Fixed on the way: a server call to `buttonVariants`, a stuck "Saving…", dates not prefilled, headings in the UI's language instead of the CV's.
 - Reviewed 84, then 91/100 after ordering renames and saves, an `invalid` status, a full-height phone preview and build notes. Not run: offline, too_large, a 20-section CV.
+
+## 2026-11-24: Design skills added (better-ui, emil-design-eng)
+
+- Installed `jakubkrehel/skills` → `better-ui` and `emilkowalski/skills` → `emil-design-eng` into `.claude/skills/` (and globally) with the `skills` CLI; sources pinned in `skills-lock.json`. Markdown only, no scripts.
+- No spec (tooling only). Not reviewed (no spec to score against).
