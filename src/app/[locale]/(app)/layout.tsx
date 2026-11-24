@@ -4,11 +4,12 @@ import { Suspense, type ReactNode } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { toLocale } from "@/features/auth/logic";
 import { requireUserId } from "@/features/auth/queries";
+import { AppShell } from "@/features/shell/components/app-shell";
 
 /**
  * Everything in (app) is for signed-in users (decision 0012). The guard reads
  * the session on the server and sends anyone else to sign-in, with a way
- * back. Pages still read the user through the same DAL, so data stays safe
+ * back. Signed-in pages render inside the app shell (0027, spec 15). Pages still read the user through the same DAL, so data stays safe
  * even when a layout is reused across navigations.
  */
 export default function AppLayout({
@@ -29,9 +30,10 @@ async function SignedInOnly({
   params: LayoutProps<"/[locale]">["params"];
   children: ReactNode;
 }) {
-  const { locale } = await params;
-  await requireUserId(toLocale(locale));
-  return children;
+  const locale = toLocale((await params).locale);
+  await requireUserId(locale);
+  // The shell renders only after the guard, never for a guest (0027).
+  return <AppShell locale={locale}>{children}</AppShell>;
 }
 
 async function GuardFallback({

@@ -54,6 +54,9 @@
   "auth": {
     "errors": {
       "cancelled": "Sign-in was cancelled. Choose a way to continue."
+    },
+    "home": {
+      "body": "Here's where your search stands. Pick up a CV or start a new one."
     }
   },
   "cv": {
@@ -105,6 +108,22 @@
       },
       "volunteer": {
         "tips": ["Write it like a job: role, organisation, dates, results."]
+      }
+    }
+  },
+  "shell": {
+    "cvs": {
+      "title": "Saved CVs",
+      "short": "CVs",
+      "create": "Create CV",
+      "error": "We couldn't load your CVs."
+    },
+    "pages": {
+      "jobs": {
+        "body": "Jobs that fit your CV will appear here, with a match score for each."
+      },
+      "applications": {
+        "body": "Every application you send will appear here, by stage, with the exact CV and letter you sent."
       }
     }
   }

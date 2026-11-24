@@ -89,7 +89,8 @@ export function CvEditor(props: CvEditorProps) {
 
   const [step, setStep] = useState<EditorStep>({ type: "contact" });
   const [firstPass, setFirstPass] = useState(props.start);
-  // Phones show the list or one form; from 1024 px both are on screen.
+  // Narrow windows show the list or one form; from a 56rem (896 px) content
+  // window both are on screen (container query, so the sidebar counts).
   const [listOnPhone, setListOnPhone] = useState(!props.start);
   const [previewOpen, setPreviewOpen] = useState(false);
   const formTop = useRef<HTMLHeadingElement>(null);
@@ -349,7 +350,7 @@ export function CvEditor(props: CvEditorProps) {
   const finishFirstPass = () => {
     void flush();
     setFirstPass(false);
-    if (window.matchMedia("(min-width: 1024px)").matches) {
+    if ((document.getElementById("cv-editor-root")?.clientWidth ?? 0) >= 896) {
       previewRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -365,7 +366,7 @@ export function CvEditor(props: CvEditorProps) {
       <button
         type="button"
         onClick={() => setListOnPhone(true)}
-        className="flex min-h-11 items-center gap-1 self-start text-sm font-semibold text-violet lg:hidden"
+        className="flex min-h-11 items-center gap-1 self-start text-sm font-semibold text-violet @4xl:hidden"
       >
         <HugeiconsArrowLeftIcon size={18} />
         {t("allSections")}
@@ -441,80 +442,85 @@ export function CvEditor(props: CvEditorProps) {
   );
 
   return (
-    <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-6 px-4 py-4 lg:px-6 lg:py-6">
-      <header className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <Link
-          href={homeHref}
-          className="flex min-h-11 items-center gap-1 text-sm font-semibold text-violet"
-        >
-          <HugeiconsArrowLeftIcon size={18} />
-          {t("back")}
-        </Link>
-        <div className="min-w-0 flex-1 basis-56">
-          <label htmlFor="cv-title" className="sr-only">
-            {t("titleLabel")}
-          </label>
-          <Input
-            id="cv-title"
-            size="sm"
-            value={title}
-            maxLength={120}
-            onChange={(e) => setTitle(e.target.value)}
-            onBlur={(e) => void saveTitle(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.currentTarget.blur();
-            }}
-            className="font-semibold"
+    <div
+      className="@container mx-auto w-full max-w-[100rem]"
+      id="cv-editor-root"
+    >
+      <div className="flex w-full flex-col gap-6 px-4 py-4 lg:px-6 lg:py-6">
+        <header className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <Link
+            href={homeHref}
+            className="flex min-h-11 items-center gap-1 text-sm font-semibold text-violet"
+          >
+            <HugeiconsArrowLeftIcon size={18} />
+            {t("back")}
+          </Link>
+          <div className="min-w-0 flex-1 basis-56">
+            <label htmlFor="cv-title" className="sr-only">
+              {t("titleLabel")}
+            </label>
+            <Input
+              id="cv-title"
+              size="sm"
+              value={title}
+              maxLength={120}
+              onChange={(e) => setTitle(e.target.value)}
+              onBlur={(e) => void saveTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") e.currentTarget.blur();
+              }}
+              className="font-semibold"
+            />
+          </div>
+          <SaveStatusLine
+            status={status}
+            heldBack={heldBack}
+            onRetry={() => void flush()}
           />
-        </div>
-        <SaveStatusLine
-          status={status}
-          heldBack={heldBack}
-          onRetry={() => void flush()}
-        />
-        <Button
-          variant="secondary"
-          size="sm"
-          className="lg:hidden"
-          onClick={() => setPreviewOpen(true)}
-          icon={<HugeiconsFileTextIcon size={18} />}
-        >
-          {t("preview")}
-        </Button>
-      </header>
+          <Button
+            variant="secondary"
+            size="sm"
+            className="@4xl:hidden"
+            onClick={() => setPreviewOpen(true)}
+            icon={<HugeiconsFileTextIcon size={18} />}
+          >
+            {t("preview")}
+          </Button>
+        </header>
 
-      <div className="grid gap-6 lg:grid-cols-[14rem_minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start">
-        <div
-          className={cn(
-            listOnPhone ? "block" : "hidden",
-            "lg:sticky lg:top-6 lg:block",
-          )}
-        >
-          {list}
+        <div className="grid gap-6 @4xl:grid-cols-[14rem_minmax(0,1fr)_minmax(0,1.05fr)] @4xl:items-start">
+          <div
+            className={cn(
+              listOnPhone ? "block" : "hidden",
+              "@4xl:sticky @4xl:top-6 @4xl:block",
+            )}
+          >
+            {list}
+          </div>
+          <div className={cn(listOnPhone ? "hidden" : "block", "@4xl:block")}>
+            {form}
+          </div>
+          <aside
+            ref={previewRef}
+            tabIndex={-1}
+            aria-label={t("previewLabel")}
+            className="hidden outline-none @4xl:sticky @4xl:top-6 @4xl:block @4xl:max-h-[calc(100dvh-3rem)] @4xl:overflow-y-auto @4xl:pb-4"
+          >
+            {preview}
+          </aside>
         </div>
-        <div className={cn(listOnPhone ? "hidden" : "block", "lg:block")}>
-          {form}
-        </div>
-        <aside
-          ref={previewRef}
-          tabIndex={-1}
-          aria-label={t("previewLabel")}
-          className="hidden outline-none lg:sticky lg:top-6 lg:block lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto lg:pb-4"
+
+        <Sheet
+          open={previewOpen}
+          onOpenChange={setPreviewOpen}
+          title={t("previewLabel")}
+          closeLabel={t("closePreview")}
+          side="bottom"
+          className="h-dvh max-h-none rounded-none"
         >
-          {preview}
-        </aside>
+          {previewOpen ? <div className="pb-4">{preview}</div> : null}
+        </Sheet>
       </div>
-
-      <Sheet
-        open={previewOpen}
-        onOpenChange={setPreviewOpen}
-        title={t("previewLabel")}
-        closeLabel={t("closePreview")}
-        side="bottom"
-        className="h-dvh max-h-none rounded-none"
-      >
-        {previewOpen ? <div className="pb-4">{preview}</div> : null}
-      </Sheet>
     </div>
   );
 }

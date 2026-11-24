@@ -31,7 +31,11 @@ export default async function DesignSystemPage({
   return (
     <NextIntlClientProvider
       locale={locale}
-      messages={{ fields: messages.fields }}
+      messages={{
+        fields: messages.fields,
+        shell: messages.shell,
+        localePicker: messages.localePicker,
+      }}
     >
       <Gallery fontVariables={trialFontVariables} />
     </NextIntlClientProvider>

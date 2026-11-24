@@ -230,3 +230,24 @@ One dated entry per task: what was built, the review score, and what was left.
 
 - `product-team` now answers four questions for one named user before any idea, screen, component or interaction: why they open it, how they use it, what they want next and how we take them there, and what we leave out. They're written as a User lens block. It's used in Workflow A, the spec template (Workflow D) and the Product check in Workflow E. The same change was made to the global copy.
 - No spec (tooling only). Not reviewed (no spec to score against).
+
+## 2026-11-24: App shell and sidebar (decision 0027, spec 15)
+
+- Decision 0027 (renumbered from 0024, which main had used) approved after two revisions: account and Help at the bottom, logo with notifications and collapse on top, four links (Home, Job search, Applications tracker, To approve), no Letters or Follow-ups pages, and an empathy-based User lens (calm notifications, no rejection pings, neutral counts).
+- Built `src/features/shell/`:
+  - the padded grey frame and the white content window;
+  - the collapsible sidebar, with a cookie and `Ctrl/⌘+B`;
+  - the saved CVs list (empty, loading and error states);
+  - the account menu (Settings, language, sign out) and the notifications empty state;
+  - the phone sheet;
+  - placeholder pages for Job search, Applications tracker, To approve and Settings.
+- Home lost its Sign out button. The CV editor now uses a container query, so it fits inside the window.
+- Checks: `pnpm check` passes (253 tests, build).
+- Browser: 1440 light and dark, 1024 with the editor (expanded and collapsed), and 375 fr-fr (sheet, title, 44 px targets, no overflow).
+- Keyboard: Tab goes logo, bell, collapse, links, CVs, Help, account, with a visible ring.
+- Review: 88, then 93/100.
+- Left:
+  - sign-out not run in the browser;
+  - the screenshot matrix at 390 and 1440 in both themes is partial;
+  - Escape-return and the sheet's focus trap weren't demonstrated;
+  - the `Date.now()` prerender warning from the `(app)` guard predates this work.

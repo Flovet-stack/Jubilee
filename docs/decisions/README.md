@@ -46,6 +46,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0024 | [CV builder: guided editor, live preview and autosave](0024-cv-builder-editor.md)                                  | Approved           |
 | 0025 | [The first CV template and its typography](0025-first-cv-template-and-typography.md) (partly superseded by 0026)   | Approved           |
 | 0026 | [CV entry layout in four corners, tighter body lines](0026-cv-entry-layout.md)                                     | Approved           |
+| 0027 | [App shell and collapsible sidebar](0027-app-shell-and-sidebar.md)                                                 | Approved           |
 
 ## Still to decide (before the specs that need them)
 
