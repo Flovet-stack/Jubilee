@@ -331,7 +331,7 @@
       "metaTitle": "Home",
       "greeting": "Hello, {name}",
       "greetingNoName": "Hello",
-      "body": "You're signed in. Your workspace is coming soon.",
+      "body": "Here's where your search stands. Pick up a resume or start a new one.",
       "signOut": "Sign out",
       "loading": "Loading your account"
     }
@@ -663,6 +663,57 @@
         "custom": "Other"
       },
       "present": "Present"
+    }
+  },
+  "shell": {
+    "appName": "Jubilee",
+    "home": "Jubilee, home",
+    "sidebar": "Main",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "notifications": "Notifications",
+    "nothingNew": "Nothing new. We'll let you know when something needs you.",
+    "nav": {
+      "home": "Home",
+      "jobs": "Job search",
+      "applications": "Applications tracker",
+      "toApprove": "To approve"
+    },
+    "help": "Help",
+    "account": "Account",
+    "settings": "Settings",
+    "signOut": "Sign out",
+    "cvs": {
+      "title": "Saved resumes",
+      "short": "Resumes",
+      "create": "Create resume",
+      "reassure": "Start from your LinkedIn or from scratch.",
+      "error": "We couldn't load your resumes.",
+      "retry": "Try again"
+    },
+    "pages": {
+      "jobs": {
+        "metaTitle": "Job search",
+        "title": "Job search",
+        "body": "Jobs that fit your resume will appear here, with a match score for each."
+      },
+      "applications": {
+        "metaTitle": "Applications tracker",
+        "title": "Applications tracker",
+        "body": "Every application you send will appear here, by stage, with the exact resume and letter you sent."
+      },
+      "toApprove": {
+        "metaTitle": "To approve",
+        "title": "To approve",
+        "body": "Applications and follow-ups ready for your yes will wait here. Nothing is sent without it."
+      },
+      "settings": {
+        "metaTitle": "Settings",
+        "title": "Settings",
+        "body": "Your account settings will live here."
+      }
     }
   }
 }

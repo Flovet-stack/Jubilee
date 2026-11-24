@@ -1,6 +1,6 @@
 # 15: App shell and sidebar
 
-Status: Not started · Written: 2026-11-24
+Status: Done (93/100, 2026-11-24; sign-out not run, screenshot matrix partial) · Written: 2026-11-24
 
 ## Goal
 

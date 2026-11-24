@@ -40,6 +40,7 @@ import { ToastProvider, useToast } from "@/components/ui/toast";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 import { FieldsDemo } from "./fields-demo";
+import { ShellDemo } from "./shell-demo";
 import { FontSwitcher } from "./font-switcher";
 
 /* Sample content: fictional companies only (no-ai-slop). */
@@ -128,6 +129,12 @@ export function Gallery({ fontVariables }: { fontVariables: string }) {
           <Navigation />
           <JubileePatterns />
           <FieldsDemo />
+          <Section
+            title="App shell sidebar"
+            intro="Spec 15, decision 0027. Expanded with CVs, the empty state with its one violet action, loading, error and the collapsed rail. Open the bell and the account to see their popovers."
+          >
+            <ShellDemo />
+          </Section>
           <DenseScreen />
           <IconSet />
         </div>

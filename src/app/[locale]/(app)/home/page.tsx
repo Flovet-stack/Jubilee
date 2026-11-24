@@ -4,12 +4,11 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { HugeiconsPlusIcon } from "@/components/icons";
 import { CardLink, Well } from "@/components/ui/surface";
 import { listCvs } from "@/features/cv/queries";
 import { Skeleton } from "@/components/ui/feedback";
-import { signOut } from "@/features/auth/actions";
 import { getGreetingName } from "@/features/auth/queries";
 import { routing, type Locale } from "@/i18n/routing";
 
@@ -23,8 +22,8 @@ export async function generateMetadata({
 }
 
 /**
- * TEMPORARY (spec 05, decision 0012): where people land after sign-in until
- * the app shell decision replaces it. A greeting and Sign out, nothing else.
+ * TEMPORARY (spec 05, decision 0012): where people land after sign-in, until
+ * Home's own spec. Sign out lives in the shell's account menu (spec 15).
  */
 export default async function HomePage({
   params,
@@ -34,7 +33,7 @@ export default async function HomePage({
   const t = await getTranslations({ locale, namespace: "auth.home" });
 
   return (
-    <main className="mx-auto flex w-full max-w-[640px] flex-1 flex-col justify-center gap-8 px-4 py-16 sm:px-6">
+    <main className="mx-auto flex w-full max-w-[640px] flex-col gap-8 px-4 py-10 sm:px-6 lg:py-16">
       <div className="flex flex-col gap-2">
         <Suspense fallback={<Skeleton className="h-10 w-56" />}>
           <Greeting locale={locale} />
@@ -44,10 +43,6 @@ export default async function HomePage({
       <Suspense fallback={<Skeleton className="h-40 w-full" />}>
         <CvList locale={locale} />
       </Suspense>
-      <form action={signOut}>
-        <input type="hidden" name="locale" value={locale} />
-        <Button type="submit">{t("signOut")}</Button>
-      </form>
     </main>
   );
 }
@@ -68,10 +63,11 @@ async function CvList({ locale }: { locale: Locale }) {
   const result = await listCvs();
   const cvs = result.ok ? result.value : [];
   const date = new Intl.DateTimeFormat(locale, { dateStyle: "medium" });
+  // With no CVs the sidebar shows the one violet "Create" (0007, 0027).
   const create = (
     <ButtonLink
       href={`/${locale}/cvs/new`}
-      variant="primary"
+      variant={result.ok && cvs.length === 0 ? "secondary" : "primary"}
       icon={<HugeiconsPlusIcon size={20} />}
     >
       {t("create")}
