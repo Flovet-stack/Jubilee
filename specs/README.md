@@ -40,5 +40,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | [12: Control sizes and radius](12-control-sizes-and-radius.md)              | Done (93/100) |
 | [13: Phone, date and password fields](13-phone-date-and-password-fields.md) | Done (98/100) |
 | [14: CV builder](14-cv-builder.md)                                          | Done (91/100) |
+| [15: App shell and sidebar](15-app-shell.md)                                | Not started   |
 
-Planned next (each needs its decisions first): app shell, CV builder, LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
+Planned next (each needs its decisions first): LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

@@ -3,7 +3,7 @@
 - **Status:** Approved
 - **Proposed:** 2026-11-24 by the product team (roles: UX, UI, Product, Copy, Frontend); revised the same day after Flovet's review
 - **Approved:** 2026-11-24 by Flovet
-- **Specs:**
+- **Specs:** specs/15-app-shell.md
 
 ## Context
 
