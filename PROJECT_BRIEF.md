@@ -69,6 +69,7 @@ Every component in `src/components/ui/` must meet all three before it ships. A r
 
 See `docs/decisions/README.md`. Product-wide ones:
 
+- 0027 (Approved 2026-11-24): app shell: padded grey frame, white content window, collapsible left sidebar (logo, notifications, collapse; Home, Job search, Applications tracker, To approve; saved CVs; Help and account at the bottom); calm notifications, no rejection pings.
 - 0023 (Approved 2026-11-22): `pnpm check` runs on every PR to `main` in one GitHub Actions job (`pnpm/setup`, Node 24, actions pinned to SHAs, read-only token, placeholder public env). Branch protection is Flovet's call.
 - 0022 (Approved 2026-11-22): corner radius scales with size: 8 / 6 / 4 px for lg / md / sm controls, 8 px cards and menus; wells 12, dialogs 16 unchanged.
 - 0021 (Approved 2026-11-22): `PhoneField` (flag, searchable country, libphonenumber-js, E.164), `DateField` / `DateRangeField` (year, month or day; typing first, React DayPicker for near dates), `PasswordField` (show/hide). Adds libphonenumber-js, country-flag-icons, react-day-picker, date-fns.
