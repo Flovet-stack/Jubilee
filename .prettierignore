@@ -2,3 +2,7 @@ pnpm-lock.yaml
 .next
 node_modules
 .claude/worktrees
+
+# Third-party skills installed with the skills CLI (kept as upstream)
+.claude/skills/better-ui/
+.claude/skills/emil-design-eng/
