@@ -29,7 +29,13 @@ import { blockSubmitUnless } from "@/lib/form-events";
 import { cn } from "@/lib/utils";
 
 import { buttonVariants } from "./button";
-import { type ControlSize, Field, Input, controlRadius } from "./field";
+import {
+  type ControlSize,
+  Field,
+  Input,
+  controlRadius,
+  fieldSpacing,
+} from "./field";
 
 export type PhoneValue = {
   country: CountryCode;
@@ -222,15 +228,18 @@ export function PhoneField({
             className={cn(
               buttonVariants({ variant: "secondary", size }),
               controlRadius[size],
-              // Spacing comes from .jb-button (0028); the dial code keeps the
-              // field's 16 px text so it reads as part of the number.
+              // Part of the field (0029): field spacing and 16 px text, so the
+              // dial code reads as part of the number and the heights match.
+              fieldSpacing[size],
               "shrink-0 text-(length:--text-base) font-medium tabular-nums",
               "data-popup-open:shadow-[inset_0_0_0_1px_var(--violet)]",
             )}
           >
             <Flag code={country} />
             <span>{selected?.dial}</span>
-            <HugeiconsChevronDownIcon size={16} className="text-ink-muted" />
+            <span className="jb-type-icon text-ink-muted">
+              <HugeiconsChevronDownIcon />
+            </span>
           </Combobox.Trigger>
           <Combobox.Portal>
             <Combobox.Positioner
@@ -253,10 +262,10 @@ export function PhoneField({
                   <Combobox.Input
                     placeholder={messages.search}
                     aria-controls={listId}
-                    className="h-(--control-h) w-full rounded-control bg-well px-3 text-base text-ink outline-none placeholder:text-ink-subtle focus-visible:shadow-[inset_0_0_0_1px_var(--violet)]"
+                    className="jb-field jb-field-md jb-field-box h-(--control-h) w-full rounded-control bg-well text-ink outline-none placeholder:text-ink-subtle focus-visible:shadow-[inset_0_0_0_1px_var(--violet)]"
                   />
                 </div>
-                <Combobox.Empty className="px-3 py-3 text-sm text-ink-muted empty:hidden">
+                <Combobox.Empty className="jb-type text-sm text-ink-muted empty:hidden">
                   {messages.noMatch}
                 </Combobox.Empty>
                 <Combobox.List
@@ -268,7 +277,7 @@ export function PhoneField({
                       key={item.code}
                       value={item}
                       className={cn(
-                        "grid min-h-11 cursor-pointer grid-cols-[20px_1fr_auto_20px] items-center gap-3 rounded-mark px-3 py-2 text-base outline-none select-none",
+                        "jb-type grid min-h-11 cursor-pointer grid-cols-[20px_1fr_auto_1lh] items-center rounded-mark text-base outline-none select-none",
                         "data-highlighted:bg-wash-hover data-selected:font-semibold",
                       )}
                     >
@@ -277,7 +286,9 @@ export function PhoneField({
                       <span className="text-sm text-ink-muted tabular-nums">
                         {item.dial}
                       </span>
-                      <Combobox.ItemIndicator className="flex text-violet">
+                      {/* A grid cell, not a flex row: the 1lh column already places it, so
+                          the pull to --py is dropped. */}
+                      <Combobox.ItemIndicator className="jb-type-icon mx-0 text-violet">
                         <HugeiconsCheckIcon />
                       </Combobox.ItemIndicator>
                     </Combobox.Item>

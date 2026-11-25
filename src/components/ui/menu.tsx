@@ -61,7 +61,7 @@ export function Menu({ trigger, items, align = "start" }: MenuProps) {
                   disabled={entry.disabled}
                   onClick={entry.onSelect}
                   className={cn(
-                    "flex min-h-11 cursor-pointer items-center gap-3 rounded-mark px-3 py-2 text-base outline-none select-none",
+                    "jb-type flex min-h-11 cursor-pointer items-center rounded-mark text-base outline-none select-none",
                     "data-highlighted:bg-wash-hover",
                     entry.tone === "danger" &&
                       "text-danger data-highlighted:bg-wash-danger",
@@ -69,7 +69,7 @@ export function Menu({ trigger, items, align = "start" }: MenuProps) {
                   )}
                 >
                   {entry.icon ? (
-                    <span className="flex shrink-0 text-ink-muted">
+                    <span className="jb-type-icon text-ink-muted">
                       {entry.icon}
                     </span>
                   ) : null}

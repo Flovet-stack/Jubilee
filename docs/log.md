@@ -259,3 +259,12 @@ One dated entry per task: what was built, the review score, and what was left.
 - Measured on `/design-system`: heights 40/32/24; icon to edge = icon to top = 8/6/4 px; icon-only square; inputs match at 16 px text; fallback gives the same; touch 44 px everywhere.
 - Reviewer: 94/100. Its findings (phone trigger override, untested fallback and field heights) were fixed or measured afterwards.
 - Left: `sm` fields are 24 px with 16 px text, so they're tight on mouse; watch the CV editor rows.
+
+## 2026-11-25: Type spacing in every control (spec 17, decision 0029)
+
+- Re-read Flovet's notes: `--py` is 0.5em at every size and `line-height` 1.5, so a size is a font size. 0029 (approved: "Font sets size") makes controls 40 / 35 / 30 px at 16 / 14 / 12 px text, 44 px on touch.
+- Shared classes in `components.css` (`jb-type`, `jb-type-icon`, `jb-type-square`, `jb-field*`, `jb-type-badge`) now space buttons, inputs, textarea, select trigger and options, menu items, tabs, badges, tooltip, toast action and close, sidebar rows and the phone field. Fields keep 16 px text and take `--py` from their height; end controls (clear, reveal, calendar) match the start icon.
+- The rule lives in the new `type-spacing` skill; CLAUDE.md and the reviewer skill point to it.
+- Measured on `/design-system`: icon → edge = icon → top = `--py` at every size; start and end icons in a field match (24 px at 5.5 px); badges 25.2 px at line-height 1.5; all 126 controls at least 44 px on touch.
+- Reviewer: 81, then 96/100 after fixes (Tailwind `text-sm` line-height override, badge icon, a padded "⋯" button, fixed icon sizes, end slot, tests).
+- Flovet approved the 0029 amendment (sidebar rows 40 px with a mouse, superseding 0027's 36 px; avatars and text links exempt). Spec 17 Done (96/100).

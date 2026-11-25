@@ -1,6 +1,6 @@
 # 0027: App shell and collapsible sidebar
 
-- **Status:** Approved
+- **Status:** Approved (sidebar row and icon size superseded by 0029)
 - **Proposed:** 2026-11-24 by the product team (roles: UX, UI, Product, Copy, Frontend); revised the same day after Flovet's review
 - **Approved:** 2026-11-24 by Flovet
 - **Specs:** specs/15-app-shell.md

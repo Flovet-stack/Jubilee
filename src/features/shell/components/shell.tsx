@@ -121,10 +121,10 @@ function rememberLocale(locale: Locale) {
 }
 
 const ICONS: Record<NavKey, ReactNode> = {
-  home: <HugeiconsHomeIcon size={20} />,
-  jobs: <HugeiconsSearchIcon size={20} />,
-  applications: <HugeiconsBriefcaseBusinessIcon size={20} />,
-  toApprove: <HugeiconsCircleCheckIcon size={20} />,
+  home: <HugeiconsHomeIcon />,
+  jobs: <HugeiconsSearchIcon />,
+  applications: <HugeiconsBriefcaseBusinessIcon />,
+  toApprove: <HugeiconsCircleCheckIcon />,
 };
 
 /* ------------------------------------------------------------------ */
@@ -236,7 +236,7 @@ export function ShellFrame({
                   <IconButton
                     label={labels.menu}
                     tooltip={false}
-                    icon={<HugeiconsMenuIcon size={20} />}
+                    icon={<HugeiconsMenuIcon />}
                   />
                 }
               />
@@ -260,7 +260,7 @@ export function ShellFrame({
                         <IconButton
                           label={labels.closeMenu}
                           tooltip={false}
-                          icon={<HugeiconsXIcon size={20} />}
+                          icon={<HugeiconsXIcon />}
                         />
                       }
                     />
@@ -383,7 +383,7 @@ function SidebarContents({
       <div className="mt-auto flex flex-col gap-0.5 pt-2">
         <RowLink
           href={`mailto:${SUPPORT_EMAIL}`}
-          icon={<HugeiconsCircleQuestionMarkIcon size={20} />}
+          icon={<HugeiconsCircleQuestionMarkIcon />}
           label={labels.help}
         />
         <AccountMenu name={name} />
@@ -429,12 +429,13 @@ function RowLabel({
 /** Row styles shared by links, CV rows and the account button. */
 const rowClasses = (active: boolean, collapsed: boolean) =>
   cn(
-    "flex min-h-9 w-full min-w-0 items-center gap-3 rounded-control px-2.5 text-start text-base text-ink outline-none select-none",
+    // Type spacing (0029): 16 px text sets a 40 px row; touch keeps 44.
+    "jb-type flex w-full min-w-0 items-center rounded-control text-start text-base text-ink outline-none select-none",
     "pointer-coarse:min-h-11",
     "transition-colors duration-(--dur-fast) hover-fine:bg-wash-hover",
     "focus-visible:shadow-[0_0_0_2px_var(--violet)]",
     active && "bg-wash-hover font-semibold text-violet",
-    collapsed && "relative size-11 min-h-11 justify-center px-0",
+    collapsed && "jb-type-square relative size-11 min-h-11 justify-center",
   );
 
 function NavLink({
@@ -456,7 +457,12 @@ function NavLink({
       aria-label={collapsed ? label : undefined}
       className={rowClasses(active, collapsed)}
     >
-      <span className={cn("flex", active ? "text-violet" : "text-ink-muted")}>
+      <span
+        className={cn(
+          "jb-type-icon",
+          active ? "text-violet" : "text-ink-muted",
+        )}
+      >
         {ICONS[navKey]}
       </span>
       <RowLabel collapsed={collapsed} className="flex-1">
@@ -490,7 +496,7 @@ function RowLink({
       aria-label={collapsed ? label : undefined}
       className={rowClasses(false, collapsed)}
     >
-      <span className="flex text-ink-muted">{icon}</span>
+      <span className="jb-type-icon text-ink-muted">{icon}</span>
       <RowLabel collapsed={collapsed}>{label}</RowLabel>
     </a>
   );
@@ -515,7 +521,7 @@ function Notifications() {
         <IconButton
           label={labels.notifications}
           tooltip={false}
-          icon={<HugeiconsBellIcon size={20} />}
+          icon={<HugeiconsBellIcon />}
           className="text-ink-muted"
         />
       }
@@ -577,18 +583,13 @@ function AccountMenu({ name }: { name: string | null }) {
   const items: MenuEntry[] = [
     {
       label: labels.settings,
-      icon: <HugeiconsSettingsIcon size={20} />,
+      icon: <HugeiconsSettingsIcon />,
       onSelect: () => router.push(`/${locale}/settings`),
     },
     { type: "separator" },
     ...locales.map((l): MenuEntry => ({
       label: <span lang={localeTag(l)}>{labels.localeNames[l]}</span>,
-      icon:
-        l === locale ? (
-          <HugeiconsCheckIcon size={20} />
-        ) : (
-          <span className="size-5" />
-        ),
+      icon: l === locale ? <HugeiconsCheckIcon /> : <span />,
       onSelect: () => {
         if (l !== locale) switchTo(l);
       },
@@ -664,7 +665,7 @@ export function CvSection(props: CvSectionProps) {
   const add = (
     <IconButton
       label={labels.cvs.create}
-      icon={<HugeiconsPlusIcon size={18} />}
+      icon={<HugeiconsPlusIcon />}
       size="sm"
       tooltip={collapsed}
       className="text-ink-muted"
@@ -703,7 +704,7 @@ export function CvSection(props: CvSectionProps) {
             href={newHref}
             variant="primary"
             fullWidth
-            icon={<HugeiconsPlusIcon size={20} />}
+            icon={<HugeiconsPlusIcon />}
           >
             {labels.cvs.create}
           </ButtonLink>
@@ -715,7 +716,7 @@ export function CvSection(props: CvSectionProps) {
       <ul
         className={cn(
           "flex flex-col gap-0.5 overflow-y-auto overscroll-contain",
-          inPopover ? "max-h-80" : "max-h-[calc(8*2.375rem)]",
+          inPopover ? "max-h-80" : "max-h-[calc(8*2.625rem)]",
         )}
       >
         {props.cvs.map((cv) => {
@@ -729,7 +730,9 @@ export function CvSection(props: CvSectionProps) {
                 className={rowClasses(current, false)}
                 title={cv.title}
               >
-                <HugeiconsFileTextIcon size={18} className="text-ink-muted" />
+                <span className="jb-type-icon text-ink-muted">
+                  <HugeiconsFileTextIcon />
+                </span>
                 <span className="min-w-0 flex-1 truncate">{cv.title}</span>
                 <span className="shrink-0 text-xs font-semibold text-ink-subtle">
                   {cv.tag}
@@ -752,7 +755,7 @@ export function CvSection(props: CvSectionProps) {
                 <IconButton
                   label={labels.cvs.short}
                   tooltip={false}
-                  icon={<HugeiconsFileTextIcon size={20} />}
+                  icon={<HugeiconsFileTextIcon />}
                   className="text-ink-muted"
                 />
               }

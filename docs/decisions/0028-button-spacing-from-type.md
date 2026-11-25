@@ -1,6 +1,6 @@
 # 0028: Button spacing from the type, and shorter controls on mouse
 
-- **Status:** Approved
+- **Status:** Approved (size table and per-size `--py` superseded by 0029)
 - **Proposed:** 2026-11-25 by the product team (roles: UI, Frontend, UX)
 - **Approved:** 2026-11-25 by Flovet (in chat). Revised the same day, before the build merged: Flovet set `lg` to 40 px; `md` and `sm` follow in 8 px steps.
 - **Supersedes:** the height table in 0020 (mouse heights only). 0020's touch floor, size-by-screen rule and "never mix sizes" stand. 0022's radius-by-size stands.

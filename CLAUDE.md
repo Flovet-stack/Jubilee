@@ -39,6 +39,7 @@ The result is validated against both the spec and the decisions it links.
 - After every task, run the `reviewer` skill (`.claude/skills/reviewer/SKILL.md`) against the spec. Record the final score in the spec's status line.
 - Keep `docs/log.md` current: one dated entry per task.
 - Keep UI copy in the message files (decision 0003). No hard-coded user-facing strings.
+- Space every control by the `type-spacing` skill (`.claude/skills/type-spacing/SKILL.md`, decision 0029). Never hand-pick padding, gaps or icon sizes inside a control.
 
 ## Ask first
 

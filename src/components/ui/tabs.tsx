@@ -55,7 +55,7 @@ export function Tabs({
             value={item.value}
             disabled={item.disabled}
             className={cn(
-              "flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-t-control px-3 text-base font-semibold whitespace-nowrap text-ink-muted outline-none select-none",
+              "jb-type flex min-h-11 shrink-0 cursor-pointer items-center rounded-t-control text-base font-semibold whitespace-nowrap text-ink-muted outline-none select-none",
               "transition-colors duration-(--dur-exit) hover-fine:text-ink hover-fine:duration-(--dur-fast)",
               "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-violet",
               "data-active:text-ink",
