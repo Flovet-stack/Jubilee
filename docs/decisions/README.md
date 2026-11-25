@@ -50,6 +50,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0028 | [Button spacing from the type, shorter controls on mouse](0028-button-spacing-from-type.md) (supersedes 0020's mouse heights)                       | Approved (sizes superseded by 0029)     |
 | 0029 | [Type spacing for every control, sizes set by font size](0029-type-spacing-for-every-control.md) (supersedes 0028's sizes)                          | Approved (icon size superseded by 0030) |
 | 0030 | [Icons sized from the font size, not the line box](0030-icon-size-from-font-size.md) (supersedes 0029's icon size)                                  | Approved                                |
+| 0031 | [CV editor in two panes, a top bar, and review flags on sections](0031-cv-editor-two-panes-and-review.md) (supersedes parts of 0024 §2–3)           | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

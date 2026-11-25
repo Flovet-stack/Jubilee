@@ -47,22 +47,20 @@ export function Guidance({ step }: { step: GuidanceKey }) {
   const g = useTranslations("cv.guidance");
   const tips = t.raw("tips") as string[];
   return (
-    <div className="flex flex-col gap-2">
-      <p className="text-ink-muted">{t("hint")}</p>
-      <details className="group rounded-card bg-well p-4 shadow-[inset_0_0_0_1px_var(--line)]">
-        <summary className="cursor-pointer font-semibold text-ink marker:text-ink-muted">
-          {g("howTo")}
-        </summary>
-        <ul className="mt-3 flex list-disc flex-col gap-1.5 ps-5 text-ink">
+    <div className="flex flex-col gap-5">
+      <p className="text-ink">{t("hint")}</p>
+      <div className="flex flex-col gap-2">
+        <h3 className="font-semibold text-ink">{g("howTo")}</h3>
+        <ul className="flex list-disc flex-col gap-1.5 ps-5 text-ink">
           {tips.map((tip) => (
             <li key={tip}>{tip}</li>
           ))}
         </ul>
-        <p className="mt-3 text-sm font-semibold text-ink">
-          {g("exampleLabel")}
-        </p>
-        <p className="mt-1 text-sm text-ink-muted italic">{t("example")}</p>
-      </details>
+      </div>
+      <div className="flex flex-col gap-1 rounded-card bg-well p-4 shadow-[inset_0_0_0_1px_var(--line)]">
+        <p className="text-sm font-semibold text-ink">{g("exampleLabel")}</p>
+        <p className="text-sm text-ink-muted italic">{t("example")}</p>
+      </div>
     </div>
   );
 }
@@ -255,6 +253,8 @@ export function SummaryForm({
 
 type SectionFormProps = Common & {
   section: CvSection;
+  /** The entry to open first, e.g. after "Edit" or "Go to it" (0031 §2). */
+  initialOpenId?: string;
   /** Entries as the CV prints them, for the cards' summary lines. */
   printed: Map<string, TreeEntry>;
   defaultHeading: string;
@@ -262,6 +262,7 @@ type SectionFormProps = Common & {
 
 export function SectionForm({
   section,
+  initialOpenId,
   printed,
   defaultHeading,
   update,
@@ -270,8 +271,10 @@ export function SectionForm({
 }: SectionFormProps) {
   const t = useTranslations("cv.editor");
   const toast = useToast();
-  const [openId, setOpenId] = useState<string | null>(() =>
-    section.entries.length === 1 ? (section.entries[0]?.id ?? null) : null,
+  const [openId, setOpenId] = useState<string | null>(
+    () =>
+      initialOpenId ??
+      (section.entries.length === 1 ? (section.entries[0]?.id ?? null) : null),
   );
 
   const setEntries = (recipe: (entries: AnyEntry[]) => AnyEntry[]) =>
@@ -450,7 +453,10 @@ export function SectionForm({
   );
 }
 
-function summaryLine(entry: AnyEntry, printed: TreeEntry | undefined): string {
+export function summaryLine(
+  entry: AnyEntry,
+  printed: TreeEntry | undefined,
+): string {
   if ("keywords" in entry)
     return [entry.name, entry.keywords.join(", ")].filter(Boolean).join(": ");
   if ("fluency" in entry)

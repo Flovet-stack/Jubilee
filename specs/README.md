@@ -44,5 +44,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | [16: Button spacing](16-button-spacing.md)                                  | Done (94/100) |
 | [17: Type spacing in every control](17-type-spacing-everywhere.md)          | Done (96/100) |
 | [18: Icon size from the font size](18-icon-size.md)                         | Done (97/100) |
+| [19: CV editor in two panes](19-cv-editor-two-panes.md)                     | Done (95/100) |
 
 Planned next (each needs its decisions first): LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
