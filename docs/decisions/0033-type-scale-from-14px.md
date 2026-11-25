@@ -1,10 +1,10 @@
 # 0033: A 14 px base and a type scale set by hierarchy
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-26 by the product team (roles: UI, UX, Frontend, Product)
-- **Approved:**
+- **Approved:** 2026-11-26 by Flovet
 - **Supersedes:** 0007's type scale and body size (design brief: "body 400 at 16 / 1.5")
-- **Specs:**
+- **Specs:** specs/21-type-scale-14px.md
 
 ## Context
 
