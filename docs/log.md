@@ -316,3 +316,19 @@ One dated entry per task: what was built, the review score, and what was left.
   - stage-saved #adb3ae, and a neutral scrim.
 - Violet stays only where it means something: the action colour, the focus ring and the tint (selected backgrounds).
 - Checks: `pnpm check`, including the contrast tests. Home at 1440 px in dark, in the browser.
+
+## 2026-11-25: Saved-CV rows: headline, name, marquee, many CVs (Flovet's review)
+
+- **Rows:** read "Headline | Full name", taken from each CV's basics. `listCvs` selects only those two JSON fields, never the whole document.
+- **Text size:** rows are one step smaller (14 px, 35 px rows), so more of the name fits. Cut-off text fades at the end.
+- **Marquee:** hovering with a mouse, or focusing with the keyboard, scrolls cut-off text to its end and back at about 40 px/s. It only moves when the text doesn't fit. Reduced motion and touch don't move; the full text is in the row's title and accessible name.
+- **Edge cases handled:**
+  - **No headline:** the row falls back to the CV's title, then to "Untitled resume / CV".
+  - **Name:** a blank name is dropped, and a name equal to the headline isn't repeated.
+  - **More than 8 CVs:** the list scrolls inside its section with a bottom fade, and a filter box appears. The filter ignores case and accents, and shows "No resume matches" when nothing fits. Help and the account stay pinned.
+  - **Same headline twice:** the language and market tag still tells the rows apart.
+- **Tests:** `cvRowText` and `matchesCv`.
+- **Design system:** a "Many CVs" state on `/design-system`.
+- **Left:**
+  - the sidebar list refreshes on the next navigation, not while you type a new headline in the editor;
+  - phone width not checked.

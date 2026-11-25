@@ -43,3 +43,43 @@ export function activeNav(pathname: string): NavKey | null {
 export function pathInLocale(pathname: string, locale: Locale): string {
   return `/${locale}${pathWithoutLocale(pathname)}`;
 }
+
+export type CvRowText = {
+  /** The headline, or the CV's title when it has none yet. */
+  primary: string;
+  /** The person's full name; "" when missing or the same as primary. */
+  secondary: string;
+  /** "Headline | Name": the accessible name and the hover title. */
+  full: string;
+};
+
+/**
+ * What a saved-CV row says (Flovet, 2026-11-25): the headline, then the
+ * full name after a "|". Falls back to the title, then to `untitled`, so a
+ * row is never blank. Whitespace-only values count as missing.
+ */
+export function cvRowText(
+  cv: { headline: string; name: string; title: string },
+  untitled: string,
+): CvRowText {
+  const headline = cv.headline.trim();
+  const name = cv.name.trim();
+  const primary = headline || cv.title.trim() || untitled;
+  const secondary = name && name !== primary ? name : "";
+  return {
+    primary,
+    secondary,
+    full: secondary ? `${primary} | ${secondary}` : primary,
+  };
+}
+
+/** Rows shown before the list scrolls and a filter box appears. */
+export const CV_LIST_VISIBLE = 8;
+
+/** Case- and accent-insensitive match on headline, name or title. */
+export function matchesCv(text: CvRowText, query: string): boolean {
+  const fold = (value: string) =>
+    value.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase();
+  const q = fold(query.trim());
+  return q === "" || fold(text.full).includes(q);
+}
