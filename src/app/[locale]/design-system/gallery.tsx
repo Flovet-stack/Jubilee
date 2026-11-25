@@ -100,8 +100,8 @@ const COUNTRIES = [
 
 const SIZES = [
   ["lg", "lg · 40 px (44 on touch) · single-task screens"],
-  ["md", "md · 32 px (44 on touch) · the default"],
-  ["sm", "sm · 24 px (44 on touch) · inline row actions"],
+  ["md", "md · 35 px (44 on touch) · the default"],
+  ["sm", "sm · 30 px (44 on touch) · inline row actions"],
 ] as const;
 
 export function Gallery({ fontVariables }: { fontVariables: string }) {
@@ -463,7 +463,7 @@ function Forms() {
                     label="Clear search"
                     size="sm"
                     tooltip={false}
-                    icon={<Icons.HugeiconsXIcon size={18} />}
+                    icon={<Icons.HugeiconsXIcon />}
                   />
                 }
               />
@@ -650,7 +650,7 @@ function Status() {
           <Row label="Badges">
             <Badge>Draft</Badge>
             <Badge tone="violet">Follow-up ready</Badge>
-            <Badge tone="success" icon={<Icons.HugeiconsCheckIcon size={16} />}>
+            <Badge tone="success" icon={<Icons.HugeiconsCheckIcon />}>
               Sent
             </Badge>
             <Badge tone="danger">Couldn&apos;t send</Badge>

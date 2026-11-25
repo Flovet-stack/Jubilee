@@ -157,9 +157,9 @@ const calendarClasses = {
 
 function Chevron({ orientation }: { orientation?: string }) {
   return orientation === "left" ? (
-    <HugeiconsChevronLeftIcon size={18} />
+    <HugeiconsChevronLeftIcon />
   ) : (
-    <HugeiconsChevronRightIcon size={18} />
+    <HugeiconsChevronRightIcon />
   );
 }
 

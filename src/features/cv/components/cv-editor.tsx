@@ -9,8 +9,9 @@ import {
   HugeiconsChevronRightIcon,
   HugeiconsFileTextIcon,
   HugeiconsPlusIcon,
+  MoreIcon,
 } from "@/components/icons";
-import { Button } from "@/components/ui/button";
+import { Button, IconButton } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/field";
 import { Menu, type MenuEntry } from "@/components/ui/menu";
@@ -304,14 +305,12 @@ export function CvEditor(props: CvEditorProps) {
                 <Menu
                   align="end"
                   trigger={
-                    <Button
-                      variant="quiet"
+                    <IconButton
                       size="sm"
-                      className="self-center px-2"
-                      aria-label={t("section.more", { section: stepName(s) })}
-                    >
-                      ⋯
-                    </Button>
+                      className="self-center"
+                      label={t("section.more", { section: stepName(s) })}
+                      icon={<MoreIcon />}
+                    />
                   }
                   items={sectionMenu(index)}
                 />
@@ -325,7 +324,7 @@ export function CvEditor(props: CvEditorProps) {
           <Button
             variant="quiet"
             className="self-start"
-            icon={<HugeiconsPlusIcon size={18} />}
+            icon={<HugeiconsPlusIcon />}
             disabled={content.sections.length >= 20}
           >
             {t("addSection")}
@@ -414,7 +413,7 @@ export function CvEditor(props: CvEditorProps) {
           {next ? (
             <Button
               variant="primary"
-              iconEnd={<HugeiconsChevronRightIcon size={18} />}
+              iconEnd={<HugeiconsChevronRightIcon />}
               onClick={() => open(next)}
             >
               {t("next", { section: stepName(next) })}
@@ -422,7 +421,7 @@ export function CvEditor(props: CvEditorProps) {
           ) : (
             <Button
               variant="primary"
-              icon={<HugeiconsFileTextIcon size={18} />}
+              icon={<HugeiconsFileTextIcon />}
               onClick={finishFirstPass}
             >
               {t("seeCv")}
@@ -482,7 +481,7 @@ export function CvEditor(props: CvEditorProps) {
             size="sm"
             className="@4xl:hidden"
             onClick={() => setPreviewOpen(true)}
-            icon={<HugeiconsFileTextIcon size={18} />}
+            icon={<HugeiconsFileTextIcon />}
           >
             {t("preview")}
           </Button>

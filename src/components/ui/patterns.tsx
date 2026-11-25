@@ -81,7 +81,7 @@ export function UndoLine({
       <Button
         variant="quiet"
         size="sm"
-        icon={<HugeiconsUndoIcon size={18} />}
+        icon={<HugeiconsUndoIcon />}
         onClick={onUndo}
         className="ms-auto -me-2 text-violet"
       >
@@ -150,7 +150,7 @@ export function MarkedChange({
         <Button
           size="sm"
           variant="secondary"
-          icon={<HugeiconsCheckIcon size={18} />}
+          icon={<HugeiconsCheckIcon />}
           onClick={onAccept}
         >
           {acceptLabel}
@@ -158,7 +158,7 @@ export function MarkedChange({
         <Button
           size="sm"
           variant="quiet"
-          icon={<HugeiconsXIcon size={18} />}
+          icon={<HugeiconsXIcon />}
           onClick={onReject}
         >
           {rejectLabel}

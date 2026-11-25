@@ -23,19 +23,19 @@ import { Tooltip } from "./tooltip";
  * pressed (scale 0.98 + darker fill), disabled, loading (keeps its width,
  * ignores clicks, announces busy). Labels wrap instead of clipping (French).
  *
- * Sizes (0020, heights from 0028): lg 40 px for single-task screens, md 32 px
- * (the default), sm 24 px for inline row actions. Touch raises all three to
- * 44 px through the tokens. Radius follows the size (0022). Never mix sizes
+ * Sizes (0020; 0029 sets them by font size): lg 16 px text → 40 px for
+ * single-task screens, md 14 px → 35 px (the default), sm 12 px → 30 px for
+ * inline row actions. Touch raises all three to 44 px through the tokens. Radius follows the size (0022). Never mix sizes
  * in a group.
  *
- * Spacing (0028) lives in components.css (`.jb-button`): padding, gap and
- * icon size come from the label's line box and cap height, so text, text +
- * icon and icon-only buttons are spaced by one rule. Don't add padding or
- * gap at call sites.
+ * Spacing follows the type-spacing skill (0029): `.jb-type` in
+ * components.css sets padding, gap and icon size from the label's line box
+ * and cap height, so text, text + icon and icon-only buttons share one rule.
+ * Don't add padding or gap at call sites.
  */
 export const buttonVariants = cva(
   [
-    "jb-button relative inline-flex shrink-0 cursor-pointer items-center justify-center text-center font-semibold select-none",
+    "jb-type jb-button relative inline-flex shrink-0 cursor-pointer items-center justify-center text-center font-semibold select-none",
     "transition-[background-color,border-color,color,scale] duration-(--dur-exit) ease-standard hover-fine:duration-(--dur-fast)",
     "active:scale-(--press-scale) active:duration-(--dur-fast)",
     "data-disabled:cursor-not-allowed data-disabled:active:scale-100",
@@ -71,7 +71,7 @@ export const buttonVariants = cva(
         sm: "jb-button-sm rounded-control-sm",
       },
       iconOnly: {
-        true: "jb-button-icon-only",
+        true: "jb-type-square",
         false: "",
       },
       fullWidth: {
@@ -92,7 +92,7 @@ export const buttonVariants = cva(
 function ButtonIcon({ icon }: { icon: ReactNode }) {
   if (icon == null || icon === false) return null;
   return (
-    <span className="jb-button-icon" aria-hidden="true">
+    <span className="jb-type-icon" aria-hidden="true">
       {icon}
     </span>
   );
@@ -148,7 +148,7 @@ export function Button({
     >
       <span
         className={cn(
-          "jb-button-content transition-opacity duration-(--dur-fast)",
+          "jb-type-content transition-opacity duration-(--dur-fast)",
           loading && "opacity-0",
         )}
       >
@@ -218,7 +218,7 @@ export function IconButton({
       }}
       {...props}
     >
-      <span className="jb-button-icon">
+      <span className="jb-type-icon">
         {loading ? <Spinner delay="none" /> : icon}
       </span>
     </ButtonPrimitive>
@@ -254,7 +254,7 @@ export function ButtonLink({
       )}
       {...props}
     >
-      <span className="jb-button-content">
+      <span className="jb-type-content">
         <ButtonIcon icon={icon} />
         {children}
       </span>

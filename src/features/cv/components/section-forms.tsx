@@ -219,7 +219,7 @@ function LinksField({
         variant="quiet"
         size="sm"
         className="self-start"
-        icon={<HugeiconsPlusIcon size={18} />}
+        icon={<HugeiconsPlusIcon />}
         disabled={links.length >= 10}
         onClick={() =>
           setLinks([...links, { id: crypto.randomUUID(), label: "", url: "" }])
@@ -437,7 +437,7 @@ export function SectionForm({
       <Button
         variant={entries.length === 0 ? "secondary" : "quiet"}
         className="self-start"
-        icon={<HugeiconsPlusIcon size={18} />}
+        icon={<HugeiconsPlusIcon />}
         disabled={entries.length >= 50}
         onClick={() => {
           if (openId) close(openId);

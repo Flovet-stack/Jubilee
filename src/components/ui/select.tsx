@@ -14,6 +14,7 @@ import {
   controlClasses,
   controlHeight,
   controlRadius,
+  fieldSpacing,
 } from "./field";
 
 export type SelectItem = {
@@ -85,8 +86,8 @@ export function Select({
           controlClasses,
           controlHeight[size],
           controlRadius[size],
-          "group/trigger flex cursor-pointer items-center justify-between gap-2 pe-2 text-start",
-          size === "sm" ? "ps-2.5" : "ps-3",
+          fieldSpacing[size],
+          "jb-field-box group/trigger flex cursor-pointer items-center justify-between text-start",
           "data-popup-open:shadow-[inset_0_0_0_1px_var(--violet)] data-readonly:cursor-default",
           className,
         )}
@@ -95,7 +96,7 @@ export function Select({
           placeholder={placeholder}
           className="min-w-0 truncate data-placeholder:text-ink-subtle"
         />
-        <SelectPrimitive.Icon className="flex text-ink-muted transition-[rotate] duration-(--dur-base) ease-standard group-data-popup-open/trigger:rotate-180 motion-reduce:transition-none">
+        <SelectPrimitive.Icon className="jb-type-icon text-ink-muted transition-[rotate] duration-(--dur-base) ease-standard group-data-popup-open/trigger:rotate-180 motion-reduce:transition-none">
           <HugeiconsChevronDownIcon />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
@@ -117,7 +118,7 @@ export function Select({
           >
             <SelectPrimitive.List className="max-h-[min(var(--available-height),20rem)] scroll-py-1 overflow-y-auto overscroll-contain p-1">
               {items.length === 0 && emptyText ? (
-                <div className="px-3 py-3 text-sm text-ink-muted">
+                <div className="jb-type text-sm text-ink-muted">
                   {emptyText}
                 </div>
               ) : null}
@@ -127,7 +128,7 @@ export function Select({
                   value={item.value}
                   disabled={item.disabled}
                   className={cn(
-                    "grid min-h-11 cursor-pointer grid-cols-[1fr_20px] items-center gap-3 rounded-mark px-3 py-2 text-base outline-none select-none",
+                    "jb-type flex min-h-11 cursor-pointer items-center justify-between rounded-mark text-base outline-none select-none",
                     "data-highlighted:bg-wash-hover data-selected:font-semibold",
                     "data-disabled:cursor-not-allowed data-disabled:text-ink-subtle",
                   )}
@@ -135,7 +136,7 @@ export function Select({
                   <SelectPrimitive.ItemText className="min-w-0">
                     {item.label}
                   </SelectPrimitive.ItemText>
-                  <SelectPrimitive.ItemIndicator className="flex text-violet">
+                  <SelectPrimitive.ItemIndicator className="jb-type-icon text-violet">
                     <HugeiconsCheckIcon />
                   </SelectPrimitive.ItemIndicator>
                 </SelectPrimitive.Item>

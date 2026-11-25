@@ -286,7 +286,7 @@ export function BulletsField({
         variant="quiet"
         size="sm"
         className="self-start"
-        icon={<HugeiconsPlusIcon size={18} />}
+        icon={<HugeiconsPlusIcon />}
         onClick={() => {
           focusLast.current = true;
           onChange([...items, ""]);
@@ -327,14 +327,14 @@ export function RowActions({
       <IconButton
         size="sm"
         label={labels.up}
-        icon={<HugeiconsChevronUpIcon size={18} />}
+        icon={<HugeiconsChevronUpIcon />}
         onClick={onUp}
         disabled={!onUp}
       />
       <IconButton
         size="sm"
         label={labels.down}
-        icon={<HugeiconsChevronDownIcon size={18} />}
+        icon={<HugeiconsChevronDownIcon />}
         onClick={onDown}
         disabled={!onDown}
       />
@@ -342,7 +342,7 @@ export function RowActions({
         <IconButton
           size="sm"
           label={labels.remove}
-          icon={<HugeiconsTrashIcon size={18} />}
+          icon={<HugeiconsTrashIcon />}
           onClick={onRemove}
         />
       ) : null}
@@ -417,7 +417,7 @@ export function ItemsField({
               <IconButton
                 size="sm"
                 label={removeLabel(item)}
-                icon={<HugeiconsXIcon size={16} />}
+                icon={<HugeiconsXIcon />}
                 onClick={() =>
                   onChange(items.filter((other) => other !== item))
                 }

@@ -71,15 +71,15 @@ function ToastList() {
           </div>
           <ToastPrimitive.Action
             className={cn(
-              "-my-1.5 inline-flex min-h-(--control-h-sm) shrink-0 cursor-pointer items-center rounded-control-sm px-3 text-sm font-bold text-violet",
+              "jb-type -my-1.5 inline-flex min-h-(--control-h-sm) shrink-0 cursor-pointer items-center rounded-control-sm text-xs font-bold text-violet",
               "transition-colors duration-(--dur-exit) active:bg-wash-press hover-fine:bg-wash-hover hover-fine:duration-(--dur-fast)",
             )}
           />
           <ToastPrimitive.Close
             aria-label={data?.closeLabel}
-            className="-my-2 -me-2 inline-flex size-(--control-h-sm) shrink-0 cursor-pointer items-center justify-center rounded-control-sm text-ink-muted transition-colors duration-(--dur-exit) hover-fine:bg-wash-hover hover-fine:text-ink"
+            className="jb-type jb-type-square -my-2 -me-2 inline-flex min-h-(--control-h-sm) min-w-(--control-h-sm) shrink-0 cursor-pointer items-center justify-center rounded-control-sm text-xs text-ink-muted transition-colors duration-(--dur-exit) hover-fine:bg-wash-hover hover-fine:text-ink"
           >
-            <HugeiconsXIcon size={18} />
+            <HugeiconsXIcon />
           </ToastPrimitive.Close>
         </ToastPrimitive.Content>
       </ToastPrimitive.Root>

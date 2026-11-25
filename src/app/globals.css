@@ -100,12 +100,12 @@
 
 /* ── 3. Component and motion tokens (0009) ──────────────────────────── */
 :root {
-  /* Control heights (0020; mouse values from 0028): lg for single-task
-     screens, md the default, sm for inline row actions. Each equals a
-     button's line box plus 2 × --py. Touch raises all three to 44 px. */
+  /* Control heights (0020; 0029): lg for single-task screens, md the
+     default, sm for inline row actions. Each is 2.5 × the button's font
+     size (16, 14, 12 px). Touch raises all three to 44 px. */
   --control-h-lg: 40px;
-  --control-h: 32px;
-  --control-h-sm: 24px;
+  --control-h: 35px;
+  --control-h-sm: 30px;
   --icon-ui: 20px;
   --icon-nav: 24px;
   --focus-ring: 2px solid var(--violet);

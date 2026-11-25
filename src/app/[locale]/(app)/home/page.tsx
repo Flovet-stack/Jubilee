@@ -68,7 +68,7 @@ async function CvList({ locale }: { locale: Locale }) {
     <ButtonLink
       href={`/${locale}/cvs/new`}
       variant={result.ok && cvs.length === 0 ? "secondary" : "primary"}
-      icon={<HugeiconsPlusIcon size={20} />}
+      icon={<HugeiconsPlusIcon />}
     >
       {t("create")}
     </ButtonLink>
