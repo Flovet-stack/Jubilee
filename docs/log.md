@@ -379,3 +379,10 @@ One dated entry per task: what was built, the review score, and what was left.
 
 - Widened the four questions (why this user opens it, how they use it, what they want next, what we leave out) from "before any idea, screen, component or interaction" to every decision, design and detail, however small. Added them to decision entries (Step 2), ground rules, Workflow B and Workflow C. Same change in the global skill (`~/.claude/skills/product-team`).
 - No spec (tooling only). Not reviewed (no spec to score against).
+
+## 2026-11-25: Resumes page and five-row sidebar list (spec 20, decision 0032)
+
+- Sidebar shows at most 5 resumes; from 6, "View all resumes (N)" links to the new `/cvs` page. Removed the sidebar filter field and bottom fade.
+- New Resumes page: one Create button, search from 6 resumes (accent-insensitive) with a live count, rows "Headline | Name" with "Edited …", empty/error/no-match states.
+- Checked in the browser on the 12-resume test account: 375/390 px and 1440 px, light and dark, en-us/en-gb/fr-fr.
+- Reviewer 87/100; must-fix ("Edited just now") applied afterwards. Full `pnpm check` passed before that fix; not re-run after it (skipped at Flovet's request).

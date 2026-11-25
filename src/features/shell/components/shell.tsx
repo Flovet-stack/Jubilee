@@ -18,6 +18,7 @@ import {
 import { JubileeIcon } from "@/components/brand/jubilee-icon";
 import { JubileeLogo } from "@/components/brand/jubilee-logo";
 import {
+  HugeiconsArrowRightIcon,
   HugeiconsBellIcon,
   HugeiconsBriefcaseBusinessIcon,
   HugeiconsCircleCheckIcon,
@@ -58,8 +59,7 @@ import {
   pathWithoutLocale,
   cvRowText,
   type CvRowText,
-  CV_LIST_VISIBLE,
-  matchesCv,
+  sidebarCvs,
 } from "../logic";
 import { LanguageIcon, LogOutIcon, MoonIcon } from "./menu-icons";
 import { SidebarPanelIcon } from "./sidebar-panel-icon";
@@ -93,8 +93,8 @@ export type ShellLabels = {
     error: string;
     retry: string;
     untitled: string;
-    filter: string;
-    noMatch: string;
+    /** "View all resumes ({count})"; `{count}` is replaced. */
+    viewAll: string;
   };
 };
 
@@ -840,7 +840,7 @@ export function CvSection(props: CvSectionProps) {
     />
   );
 
-  const list = (inPopover: boolean) => {
+  const list = () => {
     if (props.state === "loading") {
       return (
         <div className="flex flex-col gap-2 px-2.5 py-1" aria-hidden="true">
@@ -878,7 +878,7 @@ export function CvSection(props: CvSectionProps) {
         </div>
       );
     }
-    return <CvList cvs={props.cvs} inPopover={inPopover} />;
+    return <CvList cvs={props.cvs} />;
   };
 
   if (collapsed) {
@@ -917,7 +917,7 @@ export function CvSection(props: CvSectionProps) {
                 <Popover.Title className="px-2.5 pt-1 text-sm font-semibold text-ink-muted">
                   {labels.cvs.title}
                 </Popover.Title>
-                {list(true)}
+                {list()}
               </Popover.Popup>
             </Popover.Positioner>
           </Popover.Portal>
@@ -938,62 +938,53 @@ export function CvSection(props: CvSectionProps) {
         </h2>
         {props.state === "ok" && props.cvs.length > 0 ? add : null}
       </div>
-      {list(false)}
+      {list()}
     </section>
   );
 }
 
 /**
- * The saved CVs, newest edit first. Past CV_LIST_VISIBLE rows the list
- * scrolls inside its section (fading at the edge that has more) and a
- * filter box appears, so 50 CVs never push Help and the account away.
+ * The saved CVs, newest edit first: at most five (0032). With more, a
+ * "View all resumes (N)" row links to the Resumes page.
  */
-function CvList({ cvs, inPopover }: { cvs: ShellCv[]; inPopover: boolean }) {
+function CvList({ cvs }: { cvs: ShellCv[] }) {
   const { locale, labels } = useShell();
   const pathname = usePathname();
-  const [query, setQuery] = useState("");
-  const rows = cvs.map((cv) => ({
-    cv,
-    text: cvRowText(cv, labels.cvs.untitled),
-  }));
-  const many = rows.length > CV_LIST_VISIBLE;
-  const shown = many ? rows.filter((row) => matchesCv(row.text, query)) : rows;
+  const { shown, total, viewAll } = sidebarCvs(cvs);
+  const allHref = `/${locale}/cvs`;
+  const onAll = pathname === allHref;
 
   return (
-    <div className="flex min-h-0 flex-col gap-1">
-      {many ? (
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.currentTarget.value)}
-          placeholder={labels.cvs.filter}
-          aria-label={labels.cvs.filter}
-          className="mx-1 h-8 rounded-control-sm bg-well px-2.5 text-sm text-ink outline-none placeholder:text-ink-subtle focus-visible:shadow-[inset_0_0_0_1px_var(--violet)] pointer-coarse:h-11"
-        />
+    <ul className="flex flex-col gap-0.5">
+      {shown.map((cv) => {
+        const href = `/${locale}/cvs/${cv.id}`;
+        return (
+          <li key={cv.id}>
+            <CvRow
+              href={href}
+              current={pathname === href}
+              text={cvRowText(cv, labels.cvs.untitled)}
+            />
+          </li>
+        );
+      })}
+      {viewAll ? (
+        <li>
+          <Link
+            href={allHref}
+            aria-current={onAll ? "page" : undefined}
+            className={cn(rowClasses(onAll, false), "text-sm")}
+          >
+            <span className="jb-type-icon">
+              <HugeiconsArrowRightIcon />
+            </span>
+            <span className="flex-1 truncate">
+              {labels.cvs.viewAll.replace("{count}", String(total))}
+            </span>
+          </Link>
+        </li>
       ) : null}
-      {shown.length === 0 ? (
-        <p className="px-2.5 py-1 text-sm text-ink-muted" role="status">
-          {labels.cvs.noMatch}
-        </p>
-      ) : (
-        <ul
-          className={cn(
-            "flex flex-col gap-0.5 overflow-y-auto overscroll-contain",
-            inPopover ? "max-h-80" : "max-h-[calc(8*2.25rem)]",
-            many && "jb-scroll-fade",
-          )}
-        >
-          {shown.map(({ cv, text }) => {
-            const href = `/${locale}/cvs/${cv.id}`;
-            return (
-              <li key={cv.id}>
-                <CvRow href={href} current={pathname === href} text={text} />
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
+    </ul>
   );
 }
 

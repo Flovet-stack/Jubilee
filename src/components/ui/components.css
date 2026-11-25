@@ -392,15 +392,6 @@
       animation: none;
     }
   }
-
-  /* A list that scrolls fades at the bottom, so more rows are implied. */
-  .jb-scroll-fade {
-    mask-image: linear-gradient(
-      to bottom,
-      #000 calc(100% - 1.5rem),
-      transparent
-    );
-  }
 }
 
 @keyframes jb-marquee {
