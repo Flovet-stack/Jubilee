@@ -109,6 +109,21 @@
       "volunteer": {
         "tips": ["Write it like a job: role, organisation, dates, results."]
       }
+    },
+    "list": {
+      "metaTitle": "CVs",
+      "title": "CVs",
+      "create": "Create CV",
+      "reassure": "Start from your LinkedIn or from scratch.",
+      "search": "Search your CVs",
+      "count": "{count, plural, =0 {No CVs} one {# CV} other {# CVs}}",
+      "noMatch": "No CV matches that search.",
+      "clear": "Clear search",
+      "edited": "Edited {when}",
+      "untitled": "Untitled CV",
+      "error": "We couldn't load your CVs.",
+      "retry": "Try again",
+      "justNow": "Edited just now"
     }
   },
   "shell": {
@@ -118,8 +133,7 @@
       "create": "Create CV",
       "error": "We couldn't load your CVs.",
       "untitled": "Untitled CV",
-      "filter": "Find a CV",
-      "noMatch": "No CV matches."
+      "viewAll": "View all CVs ({count})"
     },
     "pages": {
       "jobs": {

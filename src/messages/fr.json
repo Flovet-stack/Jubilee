@@ -665,6 +665,21 @@
         "custom": "Autres"
       },
       "present": "aujourd’hui"
+    },
+    "list": {
+      "metaTitle": "CV",
+      "title": "CV",
+      "create": "Créer un CV",
+      "reassure": "Partez de votre LinkedIn ou d'une page blanche.",
+      "search": "Rechercher dans vos CV",
+      "count": "{count, plural, =0 {Aucun CV} one {# CV} other {# CV}}",
+      "noMatch": "Aucun CV ne correspond à cette recherche.",
+      "clear": "Effacer la recherche",
+      "edited": "Modifié {when}",
+      "untitled": "CV sans titre",
+      "error": "Nous n'avons pas pu charger vos CV.",
+      "retry": "Réessayer",
+      "justNow": "Modifié à l'instant"
     }
   },
   "shell": {
@@ -695,8 +710,7 @@
       "error": "Impossible de charger vos CV.",
       "retry": "Réessayer",
       "untitled": "CV sans titre",
-      "filter": "Trouver un CV",
-      "noMatch": "Aucun CV ne correspond."
+      "viewAll": "Voir tous les CV ({count})"
     },
     "pages": {
       "jobs": {

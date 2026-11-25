@@ -73,8 +73,32 @@ export function cvRowText(
   };
 }
 
-/** Rows shown before the list scrolls and a filter box appears. */
-export const CV_LIST_VISIBLE = 8;
+/** Resumes the sidebar shows; past this, a "View all" link (0031). */
+export const CV_SIDEBAR_MAX = 5;
+
+/** The page shows its search from this many resumes (0031). */
+export const CV_SEARCH_FROM = CV_SIDEBAR_MAX + 1;
+
+/** The sidebar's rows, and whether the "View all (N)" link shows. */
+export function sidebarCvs<T>(cvs: readonly T[]): {
+  shown: T[];
+  total: number;
+  viewAll: boolean;
+} {
+  return {
+    shown: cvs.slice(0, CV_SIDEBAR_MAX),
+    total: cvs.length,
+    viewAll: cvs.length > CV_SIDEBAR_MAX,
+  };
+}
+
+/**
+ * Under a minute ago, or a time slightly ahead of the server clock, reads
+ * "just now" rather than "12 seconds ago" or "in 2 seconds".
+ */
+export function editedJustNow(updatedAt: Date, now: Date): boolean {
+  return now.getTime() - updatedAt.getTime() < 60_000;
+}
 
 /** Case- and accent-insensitive match on headline, name or title. */
 export function matchesCv(text: CvRowText, query: string): boolean {

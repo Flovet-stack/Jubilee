@@ -663,6 +663,21 @@
         "custom": "Other"
       },
       "present": "Present"
+    },
+    "list": {
+      "metaTitle": "Resumes",
+      "title": "Resumes",
+      "create": "Create resume",
+      "reassure": "Start from your LinkedIn or from scratch.",
+      "search": "Search your resumes",
+      "count": "{count, plural, =0 {No resumes} one {# resume} other {# resumes}}",
+      "noMatch": "No resume matches that search.",
+      "clear": "Clear search",
+      "edited": "Edited {when}",
+      "untitled": "Untitled resume",
+      "error": "We couldn't load your resumes.",
+      "retry": "Try again",
+      "justNow": "Edited just now"
     }
   },
   "shell": {
@@ -693,8 +708,7 @@
       "error": "We couldn't load your resumes.",
       "retry": "Try again",
       "untitled": "Untitled resume",
-      "filter": "Find a resume",
-      "noMatch": "No resume matches."
+      "viewAll": "View all resumes ({count})"
     },
     "pages": {
       "jobs": {

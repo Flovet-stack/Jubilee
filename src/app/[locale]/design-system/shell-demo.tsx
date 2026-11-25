@@ -82,8 +82,7 @@ export function ShellDemo() {
       error: t("cvs.error"),
       retry: t("cvs.retry"),
       untitled: t("cvs.untitled"),
-      filter: t("cvs.filter"),
-      noMatch: t("cvs.noMatch"),
+      viewAll: t.raw("cvs.viewAll") as string,
     },
   };
   const states = [
@@ -94,7 +93,7 @@ export function ShellDemo() {
       cvs: { state: "ok", cvs: SAMPLE_CVS },
     },
     {
-      caption: "Many CVs (filter)",
+      caption: "Many CVs (five + View all)",
       collapsed: false,
       name: "Amina",
       cvs: { state: "ok", cvs: MANY_CVS },

@@ -69,8 +69,7 @@ export async function AppShell({
       error: t("cvs.error"),
       retry: t("cvs.retry"),
       untitled: t("cvs.untitled"),
-      filter: t("cvs.filter"),
-      noMatch: t("cvs.noMatch"),
+      viewAll: t.raw("cvs.viewAll") as string,
     },
   };
 

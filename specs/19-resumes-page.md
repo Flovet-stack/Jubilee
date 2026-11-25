@@ -1,6 +1,6 @@
 # 19: Resumes page and a five-row sidebar list
 
-Status: Not started · Written: 2026-11-25
+Status: Built, in review (reviewer 87/100; its one must-fix, "Edited just now", applied but not re-graded; checks after that fix not run) · Written: 2026-11-25
 
 ## Goal
 

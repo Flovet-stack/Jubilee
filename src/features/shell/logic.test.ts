@@ -2,7 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import {
   activeNav,
+  CV_SEARCH_FROM,
   cvRowText,
+  editedJustNow,
+  sidebarCvs,
   matchesCv,
   parseCollapsed,
   pathInLocale,
@@ -69,6 +72,42 @@ describe("cvRowText", () => {
     expect(
       cvRowText({ headline: "Amina", name: "Amina", title: "" }, untitled).full,
     ).toBe("Amina");
+  });
+});
+
+describe("sidebarCvs (0031)", () => {
+  const list = (n: number) => Array.from({ length: n }, (_, i) => i);
+  it("shows every resume and no link up to five", () => {
+    expect(sidebarCvs(list(0))).toEqual({
+      shown: [],
+      total: 0,
+      viewAll: false,
+    });
+    expect(sidebarCvs(list(5))).toEqual({
+      shown: list(5),
+      total: 5,
+      viewAll: false,
+    });
+  });
+  it("caps at five and offers View all from six", () => {
+    expect(sidebarCvs(list(6))).toEqual({
+      shown: list(5),
+      total: 6,
+      viewAll: true,
+    });
+    expect(sidebarCvs(list(12)).total).toBe(12);
+    expect(CV_SEARCH_FROM).toBe(6);
+  });
+});
+
+describe("editedJustNow", () => {
+  const now = new Date("2026-11-25T12:00:00Z");
+  it("is true under a minute and for a time slightly ahead", () => {
+    expect(editedJustNow(new Date("2026-11-25T11:59:30Z"), now)).toBe(true);
+    expect(editedJustNow(new Date("2026-11-25T12:00:02Z"), now)).toBe(true);
+  });
+  it("is false from a minute", () => {
+    expect(editedJustNow(new Date("2026-11-25T11:59:00Z"), now)).toBe(false);
   });
 });
 

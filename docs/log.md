@@ -349,3 +349,10 @@ One dated entry per task: what was built, the review score, and what was left.
   - two plain ones.
 - **Found while adding them:** `cvs.title` can't be empty (check constraint), so the "Untitled" fallback only guards against bad data.
 - Checks: `pnpm check` (267 tests, build).
+
+## 2026-11-25: Resumes page and five-row sidebar list (spec 19, decision 0031)
+
+- Sidebar shows at most 5 resumes; from 6, "View all resumes (N)" links to the new `/cvs` page. Removed the sidebar filter field and bottom fade.
+- New Resumes page: one Create button, search from 6 resumes (accent-insensitive) with a live count, rows "Headline | Name" with "Edited …", empty/error/no-match states.
+- Checked in the browser on the 12-resume test account: 375/390 px and 1440 px, light and dark, en-us/en-gb/fr-fr.
+- Reviewer 87/100; must-fix ("Edited just now") applied afterwards. Full `pnpm check` passed before that fix; not re-run after it (skipped at Flovet's request).
