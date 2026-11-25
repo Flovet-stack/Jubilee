@@ -28,6 +28,13 @@ export type CvSummary = {
   updatedAt: string;
 };
 
+/** A CV in a list: its summary plus who it's for, from its basics. */
+export type CvListItem = CvSummary & {
+  /** "" when not filled in yet. */
+  headline: string;
+  name: string;
+};
+
 export type CvDocument = CvSummary & {
   template: string | null;
   content: CvContent;
@@ -83,13 +90,15 @@ function toDocument(row: Row): Result<CvDocument> {
 }
 
 /** The user's master CVs, most recently edited first. Empty when none. */
-export async function listCvs(): Promise<Result<CvSummary[]>> {
+export async function listCvs(): Promise<Result<CvListItem[]>> {
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
 
   const { data, error } = await supabase
     .from("cvs")
-    .select("id, title, language, market, updated_at")
+    .select(
+      "id, title, language, market, updated_at, headline:content->basics->>headline, name:content->basics->>name",
+    )
     .order("updated_at", { ascending: false });
   if (error) return fail(errorFromDatabase(error));
 
@@ -100,6 +109,8 @@ export async function listCvs(): Promise<Result<CvSummary[]>> {
       language: asLanguage(row.language),
       market: asMarket(row.market),
       updatedAt: row.updated_at,
+      headline: (row.headline ?? "").trim(),
+      name: (row.name ?? "").trim(),
     })),
   );
 }

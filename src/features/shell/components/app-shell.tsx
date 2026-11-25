@@ -68,6 +68,9 @@ export async function AppShell({
       reassure: t("cvs.reassure"),
       error: t("cvs.error"),
       retry: t("cvs.retry"),
+      untitled: t("cvs.untitled"),
+      filter: t("cvs.filter"),
+      noMatch: t("cvs.noMatch"),
     },
   };
 
@@ -98,6 +101,8 @@ async function SavedCvs() {
       cvs={result.value.map((cv) => ({
         id: cv.id,
         title: cv.title,
+        headline: cv.headline,
+        name: cv.name,
         tag: `${cv.language.toUpperCase()} · ${cv.market}`,
       }))}
     />

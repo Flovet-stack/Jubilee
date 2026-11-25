@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { activeNav, parseCollapsed, pathInLocale } from "./logic";
+import {
+  activeNav,
+  cvRowText,
+  matchesCv,
+  parseCollapsed,
+  pathInLocale,
+} from "./logic";
 
 describe("activeNav (0027)", () => {
   it("marks the link for its path in any locale", () => {
@@ -34,5 +40,47 @@ describe("parseCollapsed", () => {
     expect(parseCollapsed(undefined)).toBe(false);
     expect(parseCollapsed("")).toBe(false);
     expect(parseCollapsed("true; drop")).toBe(false);
+  });
+});
+
+describe("cvRowText", () => {
+  const untitled = "Untitled resume";
+  it("shows the headline, then the name", () => {
+    expect(
+      cvRowText(
+        { headline: "Data analyst", name: "Amina Diallo", title: "CV" },
+        untitled,
+      ).full,
+    ).toBe("Data analyst | Amina Diallo");
+  });
+  it("falls back to the title, then to untitled, and drops a blank name", () => {
+    expect(
+      cvRowText({ headline: " ", name: "", title: "My CV" }, untitled),
+    ).toEqual({
+      primary: "My CV",
+      secondary: "",
+      full: "My CV",
+    });
+    expect(
+      cvRowText({ headline: "", name: "", title: "" }, untitled).primary,
+    ).toBe(untitled);
+  });
+  it("doesn't repeat a name that equals the headline", () => {
+    expect(
+      cvRowText({ headline: "Amina", name: "Amina", title: "" }, untitled).full,
+    ).toBe("Amina");
+  });
+});
+
+describe("matchesCv", () => {
+  const text = cvRowText(
+    { headline: "Chargée de communication", name: "Amina Diallo", title: "" },
+    "x",
+  );
+  it("matches any part, ignoring case and accents", () => {
+    expect(matchesCv(text, "chargee")).toBe(true);
+    expect(matchesCv(text, "DIALLO")).toBe(true);
+    expect(matchesCv(text, "  ")).toBe(true);
+    expect(matchesCv(text, "engineer")).toBe(false);
   });
 });

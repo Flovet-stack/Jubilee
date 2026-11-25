@@ -693,7 +693,10 @@
       "create": "Créer un CV",
       "reassure": "Partez de votre LinkedIn ou d'une page blanche.",
       "error": "Impossible de charger vos CV.",
-      "retry": "Réessayer"
+      "retry": "Réessayer",
+      "untitled": "CV sans titre",
+      "filter": "Trouver un CV",
+      "noMatch": "Aucun CV ne correspond."
     },
     "pages": {
       "jobs": {

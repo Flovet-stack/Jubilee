@@ -116,7 +116,10 @@
       "title": "Saved CVs",
       "short": "CVs",
       "create": "Create CV",
-      "error": "We couldn't load your CVs."
+      "error": "We couldn't load your CVs.",
+      "untitled": "Untitled CV",
+      "filter": "Find a CV",
+      "noMatch": "No CV matches."
     },
     "pages": {
       "jobs": {
