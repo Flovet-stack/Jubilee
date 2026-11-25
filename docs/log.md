@@ -333,6 +333,23 @@ One dated entry per task: what was built, the review score, and what was left.
   - the sidebar list refreshes on the next navigation, not while you type a new headline in the editor;
   - phone width not checked.
 
+## 2026-11-25: Saved-CV rows without the language tag (Flovet's review)
+
+- Removed the language and market tag from each saved-CV row. It doesn't tell two CVs apart when both have the same title and language. What should tell them apart is left for a later decision.
+- **Test data:** added 11 resumes to the test account in Supabase (12 in total), each copied from the existing CV with different basics:
+  - a duplicate of the existing CV;
+  - a long headline;
+  - no headline;
+  - no headline and no name;
+  - no name;
+  - a name equal to the headline;
+  - French accents;
+  - a whitespace-only headline;
+  - a long name;
+  - two plain ones.
+- **Found while adding them:** `cvs.title` can't be empty (check constraint), so the "Untitled" fallback only guards against bad data.
+- Checks: `pnpm check` (267 tests, build).
+
 ## 2026-11-25: Product-team skill, four questions on every decision
 
 - Widened the four questions (why this user opens it, how they use it, what they want next, what we leave out) from "before any idea, screen, component or interaction" to every decision, design and detail, however small. Added them to decision entries (Step 2), ground rules, Workflow B and Workflow C. Same change in the global skill (`~/.claude/skills/product-team`).

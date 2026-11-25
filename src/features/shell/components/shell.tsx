@@ -104,7 +104,6 @@ export type ShellCv = {
   /** From the CV's basics; "" when not filled in yet. */
   headline: string;
   name: string;
-  tag: string;
 };
 
 /* ------------------------------------------------------------------ */
@@ -988,12 +987,7 @@ function CvList({ cvs, inPopover }: { cvs: ShellCv[]; inPopover: boolean }) {
             const href = `/${locale}/cvs/${cv.id}`;
             return (
               <li key={cv.id}>
-                <CvRow
-                  href={href}
-                  current={pathname === href}
-                  text={text}
-                  tag={cv.tag}
-                />
+                <CvRow href={href} current={pathname === href} text={text} />
               </li>
             );
           })}
@@ -1013,19 +1007,17 @@ function CvRow({
   href,
   current,
   text,
-  tag,
 }: {
   href: string;
   current: boolean;
   text: CvRowText;
-  tag: string;
 }) {
   const [play, setPlay] = useState(false);
   return (
     <Link
       href={href}
       aria-current={current ? "page" : undefined}
-      aria-label={`${text.full}, ${tag}`}
+      aria-label={text.full}
       title={text.full}
       className={cn(rowClasses(current, false), "text-sm")}
       onPointerEnter={(event) => {
@@ -1051,9 +1043,6 @@ function CvRow({
           </>
         ) : null}
       </Marquee>
-      <span className="shrink-0 text-xs font-semibold text-ink-subtle">
-        {tag}
-      </span>
     </Link>
   );
 }
