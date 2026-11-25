@@ -316,3 +316,28 @@ One dated entry per task: what was built, the review score, and what was left.
   - stage-saved #adb3ae, and a neutral scrim.
 - Violet stays only where it means something: the action colour, the focus ring and the tint (selected backgrounds).
 - Checks: `pnpm check`, including the contrast tests. Home at 1440 px in dark, in the browser.
+
+## 2026-11-25: CV editor in two panes, top bar, review without AI (spec 19, decision 0031)
+
+- **Research and decision:** Flovet asked for a redesign of the editor. Research covered Reactive Resume's AI docs, the Rezi Score, Enhancv feedback, web.dev AI patterns, and Teal's "Improve with AI" (search summary only; the page returned 403). Decision 0031 was approved: two panes, a top bar, and review flags on sections. The flags come in phase 1 without AI; "Suggest a rewrite" waits for an AI provider decision.
+- **Top bar:**
+  - a back button;
+  - the name, renamed by clicking it (Enter saves, Escape cancels, focus returns to the name);
+  - the automatic name "{headline} · {name}", which follows the content until the user renames it;
+  - a More menu with Duplicate (`duplicateCv`, which removes a half-made copy) and Delete (a dialog, then Home).
+  - Both actions call `refresh()`, so the sidebar updates. Export and Find jobs aren't shown until #15 and feature 7.
+- **Two panes:**
+  - **Left:** the section list with entries under each section. With a mouse, an entry's actions show on hover and focus; on touch they're always visible. Edit opens the section's form at that entry, in place of the list.
+  - **Right:** Preview and Review tabs. While a form is open, a Guidance tab comes first and is selected.
+  - **Narrow windows:** the same tabs in the sheet.
+- **Review:** `review.ts` holds 8 pure checks. Findings show in the Review tab with "Go to it", and as muted markers and lines on the list. There's no score, and nothing is sent anywhere.
+- **Checks:** `pnpm check` passes (275 tests, build). In the browser:
+  - 1440 px in light and dark;
+  - 390 px, including the sheet;
+  - fr-fr;
+  - rename, duplicate and delete on a test resume, which was then deleted.
+- **Reviewer:** 84, then 95/100 after fixes (Guidance back in the sheet as 0031 says, focus after a rename, row states, icon sizes, error copy by code, labels, tests).
+- **Left:**
+  - not yet run: a screen reader pass, a 50-entry section, a long French name in the bar;
+  - the section row's `px-3 py-2` predates this task and isn't type spacing;
+  - pre-existing: the `Date.now()` prerender error from `AppLayout`, and "Create a CV" doesn't refresh the sidebar.

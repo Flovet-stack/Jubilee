@@ -416,9 +416,9 @@
       "optional": "(optional)",
       "preview": "Preview",
       "previewLabel": "Preview of your resume",
-      "closePreview": "Close preview",
+      "closePreview": "Close resume views",
       "sectionsLabel": "Sections",
-      "allSections": "All sections",
+      "allSections": "Back to sections",
       "addSection": "Add a section",
       "notStarted": "Not started",
       "hidden": "Hidden",
@@ -556,6 +556,46 @@
       "loadError": {
         "title": "This resume cannot be opened",
         "body": "Its content could not be read. Your other resumes are not affected."
+      },
+      "rename": "Rename “{title}”",
+      "more": "More actions",
+      "duplicate": "Duplicate",
+      "delete": "Delete",
+      "copyTitle": "{title} (copy)",
+      "deleteDialog": {
+        "title": "Delete this resume?",
+        "body": "“{title}” and its history will be deleted. You can’t undo this.",
+        "confirm": "Delete resume",
+        "cancel": "Keep it"
+      },
+      "actionError": "That didn’t work. Check your connection and try again.",
+      "editEntry": "Edit {entry}",
+      "tabs": {
+        "label": "Resume views",
+        "preview": "Preview",
+        "review": "Review",
+        "guidance": "Guidance"
+      },
+      "review": {
+        "summary": "{count, plural, =0 {Nothing to fix} one {# thing to look at} other {# things to look at}}",
+        "intro": "Plain checks on what recruiters look for. Nothing is sent anywhere.",
+        "clear": "Read it through once more before you send it.",
+        "goTo": "Go to it",
+        "marker": "{count, plural, one {# thing to look at} other {# things to look at}}",
+        "findings": {
+          "contactReach": "Add an email or phone so recruiters can reach you.",
+          "noHeadline": "Add a headline: the job title you’re aiming for.",
+          "noSummary": "Write a short summary: 2 or 3 lines on who you are and what you want next.",
+          "longSummary": "Shorten the summary to 3 or 4 lines.",
+          "noBullets": "Add 2 to 5 bullets on what you did and what came of it.",
+          "bulletsWithoutNumbers": "{count, plural, one {# bullet has} other {# bullets have}} no number. Add one where you have it.",
+          "longBullets": "{count, plural, one {# bullet runs} other {# bullets run}} over 2 lines. Keep each to 1 or 2.",
+          "noDates": "Add when you started."
+        }
+      },
+      "actionErrors": {
+        "notFound": "This resume no longer exists. Go back to Home.",
+        "signedOut": "You’ve been signed out. Sign in again, then try once more."
       }
     },
     "guidance": {
