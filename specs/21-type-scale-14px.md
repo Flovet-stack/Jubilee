@@ -1,6 +1,6 @@
 # 21: 14 px base and type sizes by role
 
-Status: Not started · Written: 2026-11-26
+Status: Built, in review (reviewer 84/100; its four role fixes applied, not re-graded; CV paper and editor screenshots not taken) · Written: 2026-11-26
 
 ## Goal
 

@@ -56,8 +56,8 @@ const components = readFileSync(
 
 describe("type spacing (0029)", () => {
   it.each([
-    ["jb-button-lg", "--text-base"],
-    ["jb-button-md", "--text-sm"],
+    ["jb-button-lg", "--text-md"],
+    ["jb-button-md", "--text-base"],
     ["jb-button-sm", "--text-xs"],
   ])(".%s sets the size by its font size (%s)", (name, token) => {
     expect(block(components, `.${name} {`)).toContain(

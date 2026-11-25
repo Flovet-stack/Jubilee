@@ -36,7 +36,7 @@ export function Well({
       {title || actions ? (
         <div className="flex min-h-8 flex-wrap items-center justify-between gap-x-4 gap-y-1 px-1">
           {title ? (
-            <Heading className="text-base font-bold text-ink">{title}</Heading>
+            <Heading className="text-lg font-bold text-ink">{title}</Heading>
           ) : null}
           {actions}
         </div>

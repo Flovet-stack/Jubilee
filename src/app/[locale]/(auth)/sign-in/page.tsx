@@ -47,7 +47,7 @@ export default async function SignInPage({
       <div className="flex w-full max-w-[400px] flex-col gap-8">
         <div className="flex flex-col items-center gap-4 text-center">
           <JubileeIcon height={40} />
-          <h1 className="text-2xl font-bold text-ink">{t("title")}</h1>
+          <h1 className="text-3xl font-bold text-ink">{t("title")}</h1>
         </div>
         <Suspense fallback={<OptionsSkeleton />}>
           <SignInOptions locale={locale} searchParams={searchParams} />

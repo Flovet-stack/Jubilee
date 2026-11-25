@@ -64,15 +64,15 @@ const COLOURS = [
   ["danger", "Danger"],
 ] as const;
 
+// Roles from 0033: one size per role, 14 px base.
 const TYPE = [
-  ["text-4xl", "40 · Page title"],
-  ["text-3xl", "32 · Screen title"],
-  ["text-2xl", "24 · Section"],
-  ["text-xl", "20 · Card title"],
-  ["text-lg", "18 · Lead"],
-  ["text-base", "16 · Body"],
-  ["text-sm", "14 · Meta and labels"],
-  ["text-xs", "12 · Fine print"],
+  ["text-3xl", "32 · Display: marketing hero, sign-in"],
+  ["text-2xl", "24 · Page title: one per app page"],
+  ["text-lg", "18 · Section title: wells, cards, dialogs"],
+  ["text-md", "16 · Subsection title, reading text, fields on touch"],
+  ["text-base", "14 · Body: UI text, rows, nav, buttons, labels"],
+  ["text-sm", "13 · Secondary: hints, muted details"],
+  ["text-xs", "12 · Caption: timestamps, counts, badges"],
 ] as const;
 
 const SPACE = [4, 8, 12, 16, 24, 32, 48, 64, 96, 128];
@@ -110,8 +110,8 @@ export function Gallery({ fontVariables }: { fontVariables: string }) {
       <ToastProvider>
         <div className="mx-auto flex w-full max-w-(--container-content) flex-col gap-16 px-4 py-12 sm:px-6 lg:px-8">
           <header className="flex flex-col gap-3">
-            <h1 className="text-3xl sm:text-4xl">Design system</h1>
-            <p className="max-w-(--container-reading) text-lg text-ink-muted">
+            <h1 className="text-3xl">Design system</h1>
+            <p className="max-w-(--container-reading) text-md text-ink-muted">
               Every token and component in every state. Decisions 0007, 0008,
               0009, 0020 (sizes) and 0022 (radius); guide in
               docs/design/design-system.md. Switch your system theme to see
@@ -155,7 +155,7 @@ function Section({
   return (
     <section className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl">{title}</h2>
+        <h2 className="text-lg">{title}</h2>
         {intro ? (
           <p className="max-w-(--container-reading) text-ink-muted">{intro}</p>
         ) : null}
@@ -191,7 +191,7 @@ function Foundations() {
                 style={{ background: `var(--${token})` }}
               />
               <span className="flex flex-col">
-                <span className="text-sm font-semibold">{name}</span>
+                <span className="text-base font-semibold">{name}</span>
                 <code className="text-xs text-ink-muted">--{token}</code>
               </span>
             </Card>
@@ -205,7 +205,7 @@ function Foundations() {
             {TYPE.map(([size, label]) => (
               <p
                 key={size}
-                className={`${size} ${size.match(/xl|lg/) ? "font-bold tracking-[-0.01em]" : ""} truncate`}
+                className={`${size} ${size.match(/xl|lg/) ? "font-bold tracking-[-0.01em]" : ""}`}
               >
                 {label}
               </p>
@@ -261,7 +261,7 @@ function Foundations() {
               key={token}
               className="grid gap-1 px-4 py-3 not-first:shadow-[inset_0_1px_0_var(--line)] sm:grid-cols-[12rem_1fr_1fr]"
             >
-              <code className="text-sm font-semibold">{token}</code>
+              <code className="text-base font-semibold">{token}</code>
               <code className="text-sm text-ink-muted">{value}</code>
               <span className="text-sm text-ink-muted">{use}</span>
             </div>
@@ -1054,7 +1054,7 @@ function DenseScreen() {
                 />
               </div>
             </div>
-            <p className="max-w-(--container-reading) text-sm text-ink">
+            <p className="max-w-(--container-reading) text-base text-ink">
               {job.summary}
             </p>
           </Card>
@@ -1095,7 +1095,7 @@ function IconSet() {
               <button
                 key={name}
                 type="button"
-                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-card bg-card px-3 py-3 text-start text-sm shadow-[inset_0_0_0_1px_var(--line)] transition-[box-shadow] duration-(--dur-exit) hover-fine:shadow-[inset_0_0_0_1px_var(--field)] hover-fine:duration-(--dur-fast)"
+                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-card bg-card px-3 py-3 text-start text-base shadow-[inset_0_0_0_1px_var(--line)] transition-[box-shadow] duration-(--dur-exit) hover-fine:shadow-[inset_0_0_0_1px_var(--field)] hover-fine:duration-(--dur-fast)"
               >
                 <Component size={20} />
                 <span className="min-w-0 truncate">{label}</span>

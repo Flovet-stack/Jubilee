@@ -99,7 +99,7 @@ export function FieldSet({
     >
       <legend
         className={cn(
-          "mb-2 text-sm font-semibold text-ink",
+          "mb-2 text-base font-semibold text-ink",
           disabled && "text-ink-subtle",
         )}
       >
@@ -130,7 +130,7 @@ export function FieldSet({
 
 /** Shared control look: inputs, textareas and select triggers. */
 export const controlClasses = cn(
-  "w-full min-w-0 bg-card text-base text-ink shadow-[inset_0_0_0_1px_var(--field)]",
+  "w-full min-w-0 bg-card text-(length:--text-field) text-ink shadow-[inset_0_0_0_1px_var(--field)]",
   "transition-[box-shadow,background-color] duration-(--dur-exit) hover-fine:duration-(--dur-fast)",
   "placeholder:text-ink-subtle",
   "hover-fine:shadow-[inset_0_0_0_1px_var(--ink-muted)]",
@@ -141,8 +141,8 @@ export const controlClasses = cn(
 );
 
 /**
- * Control sizes (0020) and their radius (0022). Text stays 16 px at every
- * size so iOS doesn't zoom into a focused field.
+ * Control sizes (0020) and their radius (0022). Text is --text-field at every size:
+ * 14 px with a mouse, 16 px on touch so iOS never zooms (0033).
  */
 export type ControlSize = "lg" | "md" | "sm";
 
@@ -152,7 +152,7 @@ export const controlHeight: Record<ControlSize, string> = {
   sm: "h-(--control-h-sm)",
 };
 
-/** Type spacing for fields (0029): 16 px text, padding from the height. */
+/** Type spacing for fields (0029): --text-field text, padding from the height. */
 export const fieldSpacing: Record<ControlSize, string> = {
   lg: "jb-field jb-field-lg",
   md: "jb-field jb-field-md",

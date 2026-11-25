@@ -440,7 +440,7 @@ export function CvEditor(props: CvEditorProps) {
                     </span>
                     <span
                       className={cn(
-                        "shrink-0 text-sm",
+                        "shrink-0 text-base",
                         done ? "text-ink" : "text-ink-muted",
                       )}
                     >
@@ -488,7 +488,7 @@ export function CvEditor(props: CvEditorProps) {
                         <button
                           type="button"
                           onClick={() => open(s, entry.id)}
-                          className="jb-type flex min-h-11 min-w-0 flex-1 flex-col items-start justify-center rounded-control text-start text-sm text-ink active:bg-wash-press hover-fine:bg-wash-hover"
+                          className="jb-type flex min-h-11 min-w-0 flex-1 flex-col items-start justify-center rounded-control text-start text-base text-ink active:bg-wash-press hover-fine:bg-wash-hover"
                         >
                           <span className="w-full truncate">{label}</span>
                           {entryFindings.map((f) => (
@@ -584,7 +584,7 @@ export function CvEditor(props: CvEditorProps) {
         id="cv-step-title"
         ref={formTop}
         tabIndex={-1}
-        className="text-2xl outline-none"
+        className="text-lg outline-none"
       >
         {stepName(current)}
       </h2>
@@ -922,7 +922,7 @@ function ReviewPanel({
                 >
                   <div className="flex min-w-0 flex-1 basis-56 flex-col gap-0.5">
                     {where ? (
-                      <span className="truncate text-sm font-semibold text-ink">
+                      <span className="truncate text-base font-semibold text-ink">
                         {where}
                       </span>
                     ) : null}

@@ -67,7 +67,7 @@ export function FieldsDemo() {
   return (
     <section className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl">Phone, date and password fields</h2>
+        <h2 className="text-lg">Phone, date and password fields</h2>
         <p className="max-w-(--container-reading) text-ink-muted">
           Spec 13, decision 0021. Copy from the message files in this page’s
           language ({languageTag}). Errors show when a field loses focus or its

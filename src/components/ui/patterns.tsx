@@ -71,7 +71,7 @@ export function UndoLine({
     <p
       role="status"
       className={cn(
-        "flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1 rounded-card bg-tint px-3 text-sm text-ink",
+        "flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1 rounded-card bg-tint px-3 text-base text-ink",
         "transition-opacity duration-(--dur-base) ease-enter starting:opacity-0",
         className,
       )}
