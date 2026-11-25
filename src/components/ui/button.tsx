@@ -29,7 +29,7 @@ import { Tooltip } from "./tooltip";
  * in a group.
  *
  * Spacing follows the type-spacing skill (0029): `.jb-type` in
- * components.css sets padding, gap and icon size from the label's line box
+ * components.css sets padding, gap and icon size (1.125em, 0030) from the label's line box
  * and cap height, so text, text + icon and icon-only buttons share one rule.
  * Don't add padding or gap at call sites.
  */
@@ -88,7 +88,7 @@ export const buttonVariants = cva(
   },
 );
 
-/** Wraps an icon so it is one line box square, --py from its neighbours. */
+/** Wraps an icon: --icon square (1.125em), as far from its neighbours as from the top. */
 function ButtonIcon({ icon }: { icon: ReactNode }) {
   if (icon == null || icon === false) return null;
   return (
@@ -105,7 +105,7 @@ type ButtonBaseProps = Omit<ButtonPrimitive.Props, "className"> &
     loading?: boolean;
     /** Read while loading, e.g. "Sending". Defaults to the visible label. */
     loadingLabel?: string;
-    /** An icon before the label (decorative; sized to the line box). */
+    /** An icon before the label (decorative; sized by the type, 0030). */
     icon?: ReactNode;
     /** An icon after the label, e.g. a chevron or external-link. */
     iconEnd?: ReactNode;
@@ -229,7 +229,7 @@ export function IconButton({
 
 type ButtonLinkProps = ComponentProps<typeof Link> &
   Omit<VariantProps<typeof buttonVariants>, "iconOnly"> & {
-    /** An icon before the label (decorative; sized to the line box). */
+    /** An icon before the label (decorative; sized by the type, 0030). */
     icon?: ReactNode;
   };
 

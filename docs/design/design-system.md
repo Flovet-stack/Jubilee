@@ -72,11 +72,11 @@ All in `src/components/ui/`, icons in `src/components/icons/`. Labels and messag
 
 | Size | Mouse | Touch | Radius | Button text / icon | Use for                                                               |
 | ---- | ----- | ----- | ------ | ------------------ | --------------------------------------------------------------------- |
-| `lg` | 40 px | 44 px | 8 px   | 16 px / 24 px      | The main action and fields of a single-task screen (sign-in, landing) |
-| `md` | 35 px | 44 px | 6 px   | 14 px / 21 px      | The default, everywhere else, including the CV editor                 |
-| `sm` | 30 px | 44 px | 4 px   | 12 px / 18 px      | Inline row actions in dense lists ("Edit", "Remove")                  |
+| `lg` | 40 px | 44 px | 8 px   | 16 px / 18 px      | The main action and fields of a single-task screen (sign-in, landing) |
+| `md` | 35 px | 44 px | 6 px   | 14 px / 15.75 px   | The default, everywhere else, including the CV editor                 |
+| `sm` | 30 px | 44 px | 4 px   | 12 px / 13.5 px    | Inline row actions in dense lists ("Edit", "Remove")                  |
 
-**Type spacing (0029).** Every control (buttons, fields, select and menu rows, tabs, badges, tooltips, toast actions, sidebar items) follows the `type-spacing` skill: `line-height: 1.5`, `--py: 0.5em`, `--px: --py + (1lh − 1cap) / 2`, gap `--px`, icons `1lh` square sitting `--py` from the edge and from the text. A size is a font size (height = 2.5em). Fields keep 16 px text and take `--py` from their height. Use the `jb-type` / `jb-field` / `jb-button` classes in `components.css`; never padding or gap utilities on a control.
+**Type spacing (0029).** Every control (buttons, fields, select and menu rows, tabs, badges, tooltips, toast actions, sidebar items) follows the `type-spacing` skill: `line-height: 1.5`, `--py: 0.5em`, `--px: --py + (1lh − 1cap) / 2`, gap `--px`, icons `1.125em` (0030) sitting as far from the edge and the text as from the top (`--py + --icon-inset`). A size is a font size (height = 2.5em). Fields keep 16 px text and take `--py` from their height. Use the `jb-type` / `jb-field` / `jb-button` classes in `components.css`; never padding or gap utilities on a control.
 
 - One size per form and per button group; never mix sizes in a group.
 - Field text stays 16 px at every size, so iOS doesn't zoom.

@@ -277,7 +277,7 @@ export function PhoneField({
                       key={item.code}
                       value={item}
                       className={cn(
-                        "jb-type grid min-h-11 cursor-pointer grid-cols-[20px_1fr_auto_1lh] items-center rounded-mark text-base outline-none select-none",
+                        "jb-type grid min-h-11 cursor-pointer grid-cols-[20px_1fr_auto_var(--icon)] items-center rounded-mark text-base outline-none select-none",
                         "data-highlighted:bg-wash-hover data-selected:font-semibold",
                       )}
                     >
@@ -286,9 +286,9 @@ export function PhoneField({
                       <span className="text-sm text-ink-muted tabular-nums">
                         {item.dial}
                       </span>
-                      {/* A grid cell, not a flex row: the 1lh column already places it, so
-                          the pull to --py is dropped. */}
-                      <Combobox.ItemIndicator className="jb-type-icon mx-0 text-violet">
+                      {/* A grid cell: only the end pull applies, so the check sits
+                          --py + --icon-inset from the edge like any row icon. */}
+                      <Combobox.ItemIndicator className="jb-type-icon ms-0 justify-self-end text-violet">
                         <HugeiconsCheckIcon />
                       </Combobox.ItemIndicator>
                     </Combobox.Item>

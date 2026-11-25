@@ -174,8 +174,9 @@
  * Type spacing (0029; the rule is in .claude/skills/type-spacing). Any
  * padded box holding text and/or icons: --py is half the font size,
  * --px adds back the empty space above and below the capitals, so the
- * visible text sits evenly. Icons are one line box square and sit --py
- * from the edge and from the text. A control's size is its font size
+ * visible text sits evenly. Icons are 1.125em (0030) and sit as far from
+ * the edge and the text as from the top: --py plus the leftover line box
+ * around them (--icon-inset). A control's size is its font size
  * (height = 2.5em). Touch raises the minimum to 44 px through the tokens
  * (0020); padding never changes, the extra height centres the content.
  */
@@ -185,30 +186,38 @@
   .jb-type {
     --py: 0.5em;
     --px: calc(var(--py) + (1lh - 1cap) / 2);
+    --icon: 1.125em;
+    --icon-inset: calc((1lh - var(--icon)) / 2);
     --tw-leading: 1.5;
     line-height: 1.5;
     padding: var(--py) var(--px);
     gap: var(--px);
   }
 
+  /* An icon next to text: --icon square, pulled to --py + --icon-inset
+     from the edge and from the text (the same as its distance to the top). */
   .jb-type-icon {
     display: inline-flex;
     flex-shrink: 0;
-    width: 1lh;
-    height: 1lh;
-    margin-inline: calc(var(--py) - var(--px));
+    width: var(--icon);
+    height: var(--icon);
+    margin-inline: calc(var(--py) - var(--px) + var(--icon-inset));
   }
 
-  .jb-type-icon svg,
+  .jb-type-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
   .jb-type-square > svg {
-    width: 1lh;
-    height: 1lh;
+    width: var(--icon);
+    height: var(--icon);
     flex-shrink: 0;
   }
 
-  /* Icon only: square, --py on every side. */
+  /* Icon only: square, the same distance on every side. */
   .jb-type.jb-type-square {
-    padding: var(--py);
+    padding: calc(var(--py) + var(--icon-inset));
   }
 
   .jb-type-square .jb-type-icon {
@@ -227,6 +236,8 @@
   .jb-field {
     --py: calc((var(--field-h) - 1lh) / 2);
     --px: calc(var(--py) + (1lh - 1cap) / 2);
+    --icon: 1.125em;
+    --icon-inset: calc((1lh - var(--icon)) / 2);
     font-size: var(--text-base);
     --tw-leading: 1.5;
     line-height: 1.5;
@@ -249,20 +260,22 @@
     gap: var(--px);
   }
 
-  /* A start icon over the input: --py from the edge and from the text. */
+  /* A start icon over the input: as far from the edge and from the text
+     as from the top. */
   .jb-field-icon {
     position: absolute;
-    inset-inline-start: var(--py);
+    inset-inline-start: calc(var(--py) + var(--icon-inset));
     display: flex;
-    width: 1lh;
-    height: 1lh;
+    width: var(--icon);
+    height: var(--icon);
   }
 
   .jb-field-icon svg {
-    width: 1lh;
-    height: 1lh;
+    width: 100%;
+    height: 100%;
   }
 
+  /* 2 × (--py + --icon-inset) + --icon reduces to this. */
   .jb-field-box.jb-field-has-icon {
     padding-inline-start: calc(2 * var(--py) + 1lh);
   }
@@ -284,7 +297,7 @@
   }
 
   /* The end control takes the field's type and --py, so its icon matches
-     the start icon: 1lh square, --py from the edge. It fills the slot. */
+     the start icon in size and distance from the edge. It fills the slot. */
   .jb-field-end .jb-type.jb-type-square {
     --py: inherit;
     font-size: var(--text-base);
@@ -331,24 +344,17 @@
   @supports not ((height: 1lh) and (height: 1cap)) {
     .jb-type {
       --px: calc(var(--py) + 0.38em);
+      --icon-inset: calc((1.5em - var(--icon)) / 2);
     }
 
     .jb-field {
       --py: calc((var(--field-h) - 1.5em) / 2);
       --px: calc(var(--py) + 0.38em);
+      --icon-inset: calc((1.5em - var(--icon)) / 2);
     }
 
     .jb-field-box.jb-field-has-icon {
       padding-inline-start: calc(2 * var(--py) + 1.5em);
-    }
-
-    .jb-type-icon,
-    .jb-type-icon svg,
-    .jb-type-square > svg,
-    .jb-field-icon,
-    .jb-field-icon svg {
-      width: 1.5em;
-      height: 1.5em;
     }
   }
 }
