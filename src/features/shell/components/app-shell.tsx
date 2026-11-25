@@ -103,7 +103,6 @@ async function SavedCvs() {
         title: cv.title,
         headline: cv.headline,
         name: cv.name,
-        tag: `${cv.language.toUpperCase()} · ${cv.market}`,
       }))}
     />
   );

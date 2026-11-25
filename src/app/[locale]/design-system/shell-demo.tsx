@@ -14,21 +14,18 @@ const SAMPLE_CVS = [
     title: "Resume",
     headline: "Marketing coordinator",
     name: "Amina Diallo",
-    tag: "EN · US",
   },
   {
     id: "b",
     title: "CV",
     headline: "Chargée de communication digitale et événementielle",
     name: "Amina Diallo",
-    tag: "FR · FR",
   },
   {
     id: "c",
     title: "Product marketing draft",
     headline: "",
     name: "",
-    tag: "EN · US",
   },
 ];
 
@@ -37,7 +34,6 @@ const MANY_CVS = Array.from({ length: 14 }, (_, i) => ({
   title: "Resume",
   headline: ["Data analyst", "Product manager", "UX researcher"][i % 3] ?? "",
   name: "Amina Diallo",
-  tag: i % 2 ? "FR · FR" : "EN · US",
 }));
 
 /** The app shell sidebar of spec 15 in each state, with its real copy. */
