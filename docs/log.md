@@ -268,3 +268,14 @@ One dated entry per task: what was built, the review score, and what was left.
 - Measured on `/design-system`: icon → edge = icon → top = `--py` at every size; start and end icons in a field match (24 px at 5.5 px); badges 25.2 px at line-height 1.5; all 126 controls at least 44 px on touch.
 - Reviewer: 81, then 96/100 after fixes (Tailwind `text-sm` line-height override, badge icon, a padded "⋯" button, fixed icon sizes, end slot, tests).
 - Flovet approved the 0029 amendment (sidebar rows 40 px with a mouse, superseding 0027's 36 px; avatars and text links exempt). Spec 17 Done (96/100).
+
+## 2026-11-25: Sidebar polish (Flovet's review of spec 15)
+
+- The sidebar now shows the real logo from `docs/design/brand/logo/jubilee-logo.svg` (new `JubileeLogo`), or the icon in the collapsed rail.
+- New `--desk` token for the shell background: #fafafa in light; dark keeps the well colour. Contrast tests added for ink and ink-muted on the desk.
+- Sidebar rows:
+  - grey (`ink-muted`, about 8:1);
+  - the current page in ink (black) on a wash, no longer violet;
+  - medium weight, with icons at a 1.75 px stroke.
+- The account button is now a standard row: 40 px, 6 px radius and the same type spacing, with the avatar in the icon slot.
+- Checks: `pnpm check`. Measured in the browser at 1440 px.

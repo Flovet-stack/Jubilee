@@ -20,6 +20,7 @@
 
   --page: #ffffff;
   --well: #f4f4f6;
+  --desk: #fafafa; /* the app shell's background around the window (0027) */
   --card: #ffffff;
   --line: #e5e4ea;
   --tint: #f3f0ff;
@@ -70,6 +71,7 @@
 
     --page: #0e0d1f;
     --well: #121126;
+    --desk: #121126;
     --card: #1b1a33;
     --line: #2f2d4a;
     --tint: #252148;
@@ -145,6 +147,7 @@
 @theme inline {
   --color-page: var(--page);
   --color-well: var(--well);
+  --color-desk: var(--desk);
   --color-card: var(--card);
   --color-line: var(--line);
   --color-tint: var(--tint);

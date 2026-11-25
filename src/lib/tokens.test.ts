@@ -66,6 +66,8 @@ const pairs: [string, string, number][] = [
   ["ink", "tint", TEXT],
   ["ink-muted", "card", TEXT],
   ["ink-muted", "well", TEXT],
+  ["ink", "desk", TEXT],
+  ["ink-muted", "desk", TEXT],
   ["ink-subtle", "card", TEXT],
   ["ink-subtle", "well", TEXT],
   ["ink-subtle", "tint", TEXT],
