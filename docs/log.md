@@ -307,3 +307,12 @@ One dated entry per task: what was built, the review score, and what was left.
   - other dark tokens (page, well, line, tint) are still violet-tinted;
   - sign out still not run;
   - phone width not checked.
+
+## 2026-11-25: Neutral dark palette (Flovet's review)
+
+- Dark tokens moved off violet to neutral greys in the same family as the new desk (#0e120e) and card (#060d08):
+  - page #0a0f0b, well #141a15, line #262d27, field #7c837d;
+  - ink #f1f3f1, ink-muted #b3bab4, ink-subtle #929993;
+  - stage-saved #adb3ae, and a neutral scrim.
+- Violet stays only where it means something: the action colour, the focus ring and the tint (selected backgrounds).
+- Checks: `pnpm check`, including the contrast tests. Home at 1440 px in dark, in the browser.
