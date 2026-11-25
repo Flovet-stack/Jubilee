@@ -95,7 +95,19 @@
       "loadError": {
         "title": "This CV cannot be opened",
         "body": "Its content could not be read. Your other CVs are not affected."
-      }
+      },
+      "rename": "Rename “{title}”",
+      "deleteDialog": {
+        "title": "Delete this CV?",
+        "confirm": "Delete CV"
+      },
+      "tabs": {
+        "label": "CV views"
+      },
+      "actionErrors": {
+        "notFound": "This CV no longer exists. Go back to Home."
+      },
+      "closePreview": "Close CV views"
     },
     "guidance": {
       "summary": {
