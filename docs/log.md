@@ -276,3 +276,43 @@ One dated entry per task: what was built, the review score, and what was left.
 - Measured on `/design-system`: icons 18 / 15.75 / 13.5 px (1.125 ×); icon to edge = top = text (11 px at lg); icon-only square; field start and end icons 18 px at 8.5 px; phone list check 11 px from the edge; all 126 controls at least 44 px on touch.
 - Checks pass (259 tests, build). Reviewer: 97/100; its phone-list and comment findings fixed.
 - Left: the `/design-system` icon intro still says "20 px in UI, 24 px in navigation", and `--icon-ui` / `--icon-nav` look unused. Both predate this task.
+
+## 2026-11-25: Sidebar polish (Flovet's review of spec 15)
+
+- The sidebar now shows the real logo from `docs/design/brand/logo/jubilee-logo.svg` (new `JubileeLogo`), or the icon in the collapsed rail.
+- New `--desk` token for the shell background: #fafafa in light; dark keeps the well colour. Contrast tests added for ink and ink-muted on the desk.
+- Sidebar rows:
+  - grey (`ink-muted`, about 8:1);
+  - the current page in ink (black) on a wash, no longer violet;
+  - medium weight, with icons at a 1.75 px stroke.
+- The account button is now a standard row: 40 px, 6 px radius and the same type spacing, with the avatar in the icon slot.
+- Checks: `pnpm check`. Measured in the browser at 1440 px.
+
+## 2026-11-25: Account menu and dark colours (Flovet's review)
+
+- **Account menu** is now a popover laid out like Flovet's reference:
+  - photo, name and plan badge ("Free" until the pass ships), with no email;
+  - a dark mode switch;
+  - Settings;
+  - Language as a three-way switch (EN-US / EN-GB / FR) with arrow keys;
+  - Sign out in red;
+  - a footer with the version and a link to the terms.
+  - No "Need help?": Help is already in the sidebar.
+  - Shadow from the new `--shadow-menu` token, with Flovet's two values.
+- **Dark mode switch:** saves light or dark in this browser only (localStorage). A small `<head>` script applies it before paint; with no choice saved, the system setting still wins. CSS dark tokens now apply under `:root[data-theme="dark"]` and skip `data-theme="light"`.
+- **Dark colours:** the desk is now #0e120e and the card / content window #060d08. Dark contrast tests pass.
+- Three static icons drawn in-house: moon, language, log out.
+- **Checks:** `pnpm check`. In the browser: menu layout, shadow values, the dark switch, the new dark colours, and the saved theme surviving a reload.
+- **Left:**
+  - other dark tokens (page, well, line, tint) are still violet-tinted;
+  - sign out still not run;
+  - phone width not checked.
+
+## 2026-11-25: Neutral dark palette (Flovet's review)
+
+- Dark tokens moved off violet to neutral greys in the same family as the new desk (#0e120e) and card (#060d08):
+  - page #0a0f0b, well #141a15, line #262d27, field #7c837d;
+  - ink #f1f3f1, ink-muted #b3bab4, ink-subtle #929993;
+  - stage-saved #adb3ae, and a neutral scrim.
+- Violet stays only where it means something: the action colour, the focus ring and the tint (selected backgrounds).
+- Checks: `pnpm check`, including the contrast tests. Home at 1440 px in dark, in the browser.

@@ -15,10 +15,10 @@ import {
 } from "react";
 
 import { JubileeIcon } from "@/components/brand/jubilee-icon";
+import { JubileeLogo } from "@/components/brand/jubilee-logo";
 import {
   HugeiconsBellIcon,
   HugeiconsBriefcaseBusinessIcon,
-  HugeiconsCheckIcon,
   HugeiconsCircleCheckIcon,
   HugeiconsCircleQuestionMarkIcon,
   HugeiconsFileTextIcon,
@@ -32,7 +32,7 @@ import {
 } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink, IconButton } from "@/components/ui/button";
-import { Menu, type MenuEntry } from "@/components/ui/menu";
+import { Switch } from "@/components/ui/switch";
 import { Avatar } from "@/components/ui/feedback";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -43,6 +43,8 @@ import {
   type Locale,
 } from "@/i18n/locales";
 import { site } from "@/lib/site";
+import { isDarkNow, saveTheme } from "@/lib/theme";
+import pkg from "../../../../package.json";
 import { cn } from "@/lib/utils";
 
 import {
@@ -54,6 +56,7 @@ import {
   pathInLocale,
   pathWithoutLocale,
 } from "../logic";
+import { LanguageIcon, LogOutIcon, MoonIcon } from "./menu-icons";
 import { SidebarPanelIcon } from "./sidebar-panel-icon";
 
 export type ShellLabels = {
@@ -71,6 +74,11 @@ export type ShellLabels = {
   account: string;
   settings: string;
   signOut: string;
+  plan: string;
+  darkMode: string;
+  language: string;
+  terms: string;
+  localeShort: Record<Locale, string>;
   localeNames: Record<Locale, string>;
   cvs: {
     title: string;
@@ -207,7 +215,7 @@ export function ShellFrame({
 
   return (
     <TooltipProvider>
-      <div className="flex min-h-dvh flex-col bg-well lg:h-dvh lg:min-h-0 lg:flex-row lg:gap-2 lg:overflow-hidden lg:p-2">
+      <div className="flex min-h-dvh flex-col bg-desk lg:h-dvh lg:min-h-0 lg:flex-row lg:gap-2 lg:overflow-hidden lg:p-2">
         {/* Desktop sidebar */}
         <ShellContext.Provider value={{ locale, labels, collapsed, signOut }}>
           <aside
@@ -229,7 +237,7 @@ export function ShellFrame({
         <ShellContext.Provider
           value={{ locale, labels, collapsed: false, signOut }}
         >
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-1 border-b border-line bg-well px-2 lg:hidden">
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-1 border-b border-line bg-desk px-2 lg:hidden">
             <DialogPrimitive.Root open={sheetOpen} onOpenChange={setSheetOpen}>
               <DialogPrimitive.Trigger
                 render={
@@ -245,7 +253,7 @@ export function ShellFrame({
                 <DialogPrimitive.Popup
                   aria-label={labels.sidebar}
                   className={cn(
-                    "fixed inset-y-0 start-0 z-50 flex w-[min(18rem,calc(100vw-3rem))] flex-col overflow-y-auto overscroll-contain bg-well pb-[env(safe-area-inset-bottom)] shadow-float outline-none",
+                    "fixed inset-y-0 start-0 z-50 flex w-[min(18rem,calc(100vw-3rem))] flex-col overflow-y-auto overscroll-contain bg-desk pb-[env(safe-area-inset-bottom)] shadow-float outline-none",
                     "transition-[translate,opacity] duration-250 ease-enter",
                     "data-ending-style:-translate-x-full data-ending-style:duration-(--dur-exit) data-ending-style:ease-exit data-starting-style:-translate-x-full",
                     "motion-reduce:data-ending-style:translate-x-0 motion-reduce:data-ending-style:opacity-0 motion-reduce:data-starting-style:translate-x-0 motion-reduce:data-starting-style:opacity-0",
@@ -341,12 +349,16 @@ function SidebarContents({
           href={`/${locale}/home`}
           aria-label={labels.home}
           className={cn(
-            "flex min-h-11 min-w-0 flex-1 items-center gap-2 rounded-control px-2 text-lg font-bold text-ink outline-none focus-visible:shadow-[0_0_0_2px_var(--violet)]",
+            "flex min-h-11 min-w-0 flex-1 items-center rounded-control px-2 text-ink outline-none focus-visible:shadow-[0_0_0_2px_var(--violet)]",
             collapsed && "flex-none justify-center px-0",
           )}
         >
-          <JubileeIcon height={28} />
-          {collapsed ? null : <span aria-hidden="true">{labels.appName}</span>}
+          {/* The real logo files (0010, 0019): the full logo, or the mark in the rail. */}
+          {collapsed ? (
+            <JubileeIcon height={28} />
+          ) : (
+            <JubileeLogo height={22} />
+          )}
         </Link>
         {inSheet ? null : <Notifications />}
         {onToggle ? (
@@ -356,7 +368,7 @@ function SidebarContents({
             aria-expanded={!collapsed}
             icon={<SidebarPanelIcon />}
             onClick={onToggle}
-            className="text-ink-muted"
+            className="text-ink-muted [&_svg]:stroke-[1.75]"
           />
         ) : null}
       </div>
@@ -430,11 +442,14 @@ function RowLabel({
 const rowClasses = (active: boolean, collapsed: boolean) =>
   cn(
     // Type spacing (0029): 16 px text sets a 40 px row; touch keeps 44.
-    "jb-type flex w-full min-w-0 items-center rounded-control text-start text-base text-ink outline-none select-none",
+    // Grey (ink-muted, 8:1 on the desk) for every row; the current page in
+    // ink on a wash. Medium weight, and icons at 1.75 px to match it.
+    "jb-type flex w-full min-w-0 items-center rounded-control text-start text-base font-medium text-ink-muted outline-none select-none",
+    "[&_svg]:stroke-[1.75]",
     "pointer-coarse:min-h-11",
     "transition-colors duration-(--dur-fast) hover-fine:bg-wash-hover",
     "focus-visible:shadow-[0_0_0_2px_var(--violet)]",
-    active && "bg-wash-hover font-semibold text-violet",
+    active && "bg-wash-hover font-semibold text-ink",
     collapsed && "jb-type-square relative size-11 min-h-11 justify-center",
   );
 
@@ -457,14 +472,7 @@ function NavLink({
       aria-label={collapsed ? label : undefined}
       className={rowClasses(active, collapsed)}
     >
-      <span
-        className={cn(
-          "jb-type-icon",
-          active ? "text-violet" : "text-ink-muted",
-        )}
-      >
-        {ICONS[navKey]}
-      </span>
+      <span className="jb-type-icon">{ICONS[navKey]}</span>
       <RowLabel collapsed={collapsed} className="flex-1">
         {label}
       </RowLabel>
@@ -496,7 +504,7 @@ function RowLink({
       aria-label={collapsed ? label : undefined}
       className={rowClasses(false, collapsed)}
     >
-      <span className="jb-type-icon text-ink-muted">{icon}</span>
+      <span className="jb-type-icon">{icon}</span>
       <RowLabel collapsed={collapsed}>{label}</RowLabel>
     </a>
   );
@@ -522,7 +530,7 @@ function Notifications() {
           label={labels.notifications}
           tooltip={false}
           icon={<HugeiconsBellIcon />}
-          className="text-ink-muted"
+          className="text-ink-muted [&_svg]:stroke-[1.75]"
         />
       }
     />
@@ -572,77 +580,225 @@ function AccountMenu({ name }: { name: string | null }) {
   const { locale, labels, collapsed, signOut } = useShell();
   const router = useRouter();
   const pathname = usePathname();
-  const [, startTransition] = useTransition();
+  const [pending, startTransition] = useTransition();
+  const [dark, setDark] = useState(false);
   const shown = name ?? labels.account;
-
-  const switchTo = (next: Locale) => {
-    rememberLocale(next);
-    router.push(pathInLocale(pathname, next));
-  };
-
-  const items: MenuEntry[] = [
-    {
-      label: labels.settings,
-      icon: <HugeiconsSettingsIcon />,
-      onSelect: () => router.push(`/${locale}/settings`),
-    },
-    { type: "separator" },
-    ...locales.map((l): MenuEntry => ({
-      label: <span lang={localeTag(l)}>{labels.localeNames[l]}</span>,
-      icon: l === locale ? <HugeiconsCheckIcon /> : <span />,
-      onSelect: () => {
-        if (l !== locale) switchTo(l);
-      },
-    })),
-    { type: "separator" },
-    {
-      label: labels.signOut,
-      onSelect: () =>
-        startTransition(async () => {
-          const data = new FormData();
-          data.set("locale", locale);
-          await signOut(data);
-        }),
-    },
-  ];
 
   const trigger = (
     <button
       type="button"
       aria-label={collapsed ? shown : undefined}
-      className={cn(
-        rowClasses(false, collapsed),
-        "min-h-12",
-        collapsed && "min-h-11",
-      )}
+      className={rowClasses(false, collapsed)}
     >
-      {name ? (
-        <span aria-hidden="true" className="flex">
-          <Avatar name={name} size="sm" />
-        </span>
-      ) : (
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-tint text-violet">
-          <HugeiconsUserIcon size={18} />
-        </span>
-      )}
-      <RowLabel
-        collapsed={collapsed}
-        className="flex-1 font-semibold"
-        title={shown}
-      >
+      {/* Same box, radius and spacing as the other rows: the avatar takes
+          the icon slot (1lh), so the row is the same height. */}
+      <span aria-hidden="true" className="jb-type-icon">
+        {name ? (
+          <Avatar name={name} size="sm" className="size-full text-xs" />
+        ) : (
+          <HugeiconsUserIcon />
+        )}
+      </span>
+      <RowLabel collapsed={collapsed} className="flex-1" title={shown}>
         {shown}
       </RowLabel>
     </button>
   );
 
-  const menu = <Menu trigger={trigger} items={items} align="start" />;
-  // In the rail the name shows on hover and focus, like the links.
-  return collapsed ? (
-    <Tooltip content={shown} side="right">
-      <span className="flex">{menu}</span>
-    </Tooltip>
-  ) : (
-    menu
+  // Menu rows: 44 px on every pointer (0029 rows exception).
+  const row =
+    "jb-type flex min-h-11 w-full cursor-pointer items-center rounded-mark text-start text-base text-ink outline-none select-none hover-fine:bg-wash-hover focus-visible:shadow-[inset_0_0_0_2px_var(--violet)] [&_svg]:stroke-[1.75]";
+
+  return (
+    <Popover.Root
+      onOpenChange={(open) => {
+        if (open) setDark(isDarkNow());
+      }}
+    >
+      {collapsed ? (
+        <Tooltip content={shown} side="right">
+          <Popover.Trigger render={trigger} />
+        </Tooltip>
+      ) : (
+        <Popover.Trigger render={trigger} />
+      )}
+      <Popover.Portal>
+        <Popover.Positioner
+          side={collapsed ? "right" : "top"}
+          align="start"
+          sideOffset={8}
+          collisionPadding={16}
+          className="z-50 outline-none"
+        >
+          <Popover.Popup
+            aria-label={labels.account}
+            className={cn(
+              "flex w-[min(20rem,var(--available-width))] flex-col rounded-box border border-line bg-card p-2 text-ink shadow-menu outline-none",
+              "origin-(--transform-origin) transition-[opacity,scale] duration-(--dur-base) ease-enter",
+              "data-starting-style:scale-(--pop-scale) data-starting-style:opacity-0",
+              "data-ending-style:scale-(--pop-scale) data-ending-style:opacity-0 data-ending-style:duration-(--dur-exit) data-ending-style:ease-exit",
+            )}
+          >
+            {/* Who: photo, name, plan. No email: they know it. */}
+            <div className="flex items-center gap-3 p-2">
+              {name ? (
+                <Avatar name={name} size="md" className="rounded-control" />
+              ) : (
+                <span className="jb-type flex size-10 items-center justify-center rounded-control bg-tint text-violet">
+                  <span className="jb-type-icon">
+                    <HugeiconsUserIcon />
+                  </span>
+                </span>
+              )}
+              <div className="flex min-w-0 flex-col items-start gap-1">
+                <Popover.Title className="max-w-full truncate text-base font-semibold">
+                  {shown}
+                </Popover.Title>
+                <Badge tone="violet">{labels.plan}</Badge>
+              </div>
+            </div>
+            <Divider />
+
+            <Switch
+              label={
+                <span className="flex items-center gap-(--px)">
+                  <span className="jb-type-icon text-ink-muted [&_svg]:stroke-[1.75]">
+                    <MoonIcon />
+                  </span>
+                  {labels.darkMode}
+                </span>
+              }
+              checked={dark}
+              onCheckedChange={(next) => {
+                setDark(next);
+                saveTheme(next ? "dark" : "light");
+              }}
+              className="jb-type rounded-mark"
+            />
+            <Divider />
+
+            <Link href={`/${locale}/settings`} className={row}>
+              <span className="jb-type-icon text-ink-muted">
+                <HugeiconsSettingsIcon />
+              </span>
+              {labels.settings}
+            </Link>
+            <div className="jb-type flex min-h-11 items-center">
+              <span className="jb-type-icon text-ink-muted">
+                <LanguageIcon />
+              </span>
+              <span className="flex-1 text-base">{labels.language}</span>
+              <LocaleSwitch
+                current={locale}
+                label={labels.language}
+                short={labels.localeShort}
+                names={labels.localeNames}
+                onPick={(next) => {
+                  rememberLocale(next);
+                  router.push(pathInLocale(pathname, next));
+                }}
+              />
+            </div>
+            <Divider />
+
+            <button
+              type="button"
+              disabled={pending}
+              className={cn(row, "text-danger hover-fine:bg-wash-danger")}
+              onClick={() =>
+                startTransition(async () => {
+                  const data = new FormData();
+                  data.set("locale", locale);
+                  await signOut(data);
+                })
+              }
+            >
+              <span className="jb-type-icon">
+                <LogOutIcon />
+              </span>
+              {labels.signOut}
+            </button>
+
+            <p className="px-2 pt-2 pb-1 text-sm text-ink-subtle">
+              v{pkg.version} ·{" "}
+              <Link
+                href={`/${locale}/terms`}
+                className="underline-offset-2 hover-fine:text-ink hover-fine:underline"
+              >
+                {labels.terms}
+              </Link>
+            </p>
+          </Popover.Popup>
+        </Popover.Positioner>
+      </Popover.Portal>
+    </Popover.Root>
+  );
+}
+
+function Divider() {
+  return <hr className="my-1 border-line" />;
+}
+
+/**
+ * Three-way language switch (en-us, en-gb, fr-fr). A radio group: arrow
+ * keys move between the options, and the current one is announced.
+ */
+function LocaleSwitch({
+  current,
+  label,
+  short,
+  names,
+  onPick,
+}: {
+  current: Locale;
+  label: string;
+  short: Record<Locale, string>;
+  names: Record<Locale, string>;
+  onPick: (locale: Locale) => void;
+}) {
+  return (
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className="flex rounded-control bg-well p-0.5"
+    >
+      {locales.map((l, index) => {
+        const on = l === current;
+        return (
+          <button
+            key={l}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            aria-label={names[l]}
+            title={names[l]}
+            lang={localeTag(l)}
+            tabIndex={on ? 0 : -1}
+            onClick={() => {
+              if (!on) onPick(l);
+            }}
+            onKeyDown={(event) => {
+              const forward = ["ArrowRight", "ArrowDown"].includes(event.key);
+              const back = ["ArrowLeft", "ArrowUp"].includes(event.key);
+              if (!forward && !back) return;
+              event.preventDefault();
+              const step = forward ? 1 : locales.length - 1;
+              const next = locales[(index + step) % locales.length];
+              if (next) onPick(next);
+            }}
+            className={cn(
+              "jb-type jb-type-badge min-h-8 rounded-control-sm text-xs font-semibold whitespace-nowrap outline-none pointer-coarse:min-h-11",
+              "focus-visible:shadow-[inset_0_0_0_2px_var(--violet)]",
+              on
+                ? "bg-card text-ink shadow-thumb"
+                : "text-ink-muted hover-fine:text-ink",
+            )}
+          >
+            {short[l]}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -668,7 +824,7 @@ export function CvSection(props: CvSectionProps) {
       icon={<HugeiconsPlusIcon />}
       size="sm"
       tooltip={collapsed}
-      className="text-ink-muted"
+      className="text-ink-muted [&_svg]:stroke-[1.75]"
       render={<Link href={newHref} />}
       nativeButton={false}
     />
@@ -756,7 +912,7 @@ export function CvSection(props: CvSectionProps) {
                   label={labels.cvs.short}
                   tooltip={false}
                   icon={<HugeiconsFileTextIcon />}
-                  className="text-ink-muted"
+                  className="text-ink-muted [&_svg]:stroke-[1.75]"
                 />
               }
             />
@@ -832,7 +988,7 @@ export function SidebarPreview({
       >
         <div
           className={cn(
-            "flex h-[40rem] overflow-y-auto rounded-box bg-well",
+            "flex h-[40rem] overflow-y-auto rounded-box bg-desk",
             collapsed ? "w-14" : "w-62",
           )}
         >

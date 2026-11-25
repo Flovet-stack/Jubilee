@@ -44,6 +44,15 @@ export function ShellDemo() {
     account: t("account"),
     settings: t("settings"),
     signOut: t("signOut"),
+    plan: t("plan"),
+    darkMode: t("darkMode"),
+    language: t("language"),
+    terms: t("terms"),
+    localeShort: {
+      "en-us": t("localeShort.en-us"),
+      "en-gb": t("localeShort.en-gb"),
+      "fr-fr": t("localeShort.fr-fr"),
+    },
     localeNames: Object.fromEntries(
       locales.map((l) => [l, tl(`names.${l}`)]),
     ) as Record<Locale, string>,
