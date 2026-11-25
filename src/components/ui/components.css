@@ -358,3 +358,58 @@
     }
   }
 }
+
+/* Saved-CV rows (spec 15 follow-up): a fade where the text is cut off, and
+   a marquee to its end while hovered or focused. Reduced motion: no
+   movement; the full text stays in the row's title. */
+@layer components {
+  .jb-marquee {
+    display: block;
+    mask-image: linear-gradient(to right, #000 calc(100% - 1.5em), transparent);
+  }
+
+  .jb-marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .jb-marquee[data-moving] {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 1em,
+      #000 calc(100% - 1.5em),
+      transparent
+    );
+  }
+
+  .jb-marquee[data-moving] .jb-marquee-text {
+    animation: jb-marquee var(--marquee-duration) linear infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jb-marquee[data-moving] .jb-marquee-text {
+      animation: none;
+    }
+  }
+
+  /* A list that scrolls fades at the bottom, so more rows are implied. */
+  .jb-scroll-fade {
+    mask-image: linear-gradient(
+      to bottom,
+      #000 calc(100% - 1.5rem),
+      transparent
+    );
+  }
+}
+
+@keyframes jb-marquee {
+  0%,
+  15% {
+    transform: translateX(0);
+  }
+  85%,
+  100% {
+    transform: translateX(calc(-1 * var(--marquee-distance)));
+  }
+}

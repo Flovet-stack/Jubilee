@@ -10,6 +10,7 @@ import {
   useContext,
   useEffect,
   useId,
+  useRef,
   useState,
   useTransition,
 } from "react";
@@ -55,6 +56,10 @@ import {
   type NavKey,
   pathInLocale,
   pathWithoutLocale,
+  cvRowText,
+  type CvRowText,
+  CV_LIST_VISIBLE,
+  matchesCv,
 } from "../logic";
 import { LanguageIcon, LogOutIcon, MoonIcon } from "./menu-icons";
 import { SidebarPanelIcon } from "./sidebar-panel-icon";
@@ -87,13 +92,18 @@ export type ShellLabels = {
     reassure: string;
     error: string;
     retry: string;
+    untitled: string;
+    filter: string;
+    noMatch: string;
   };
 };
 
 export type ShellCv = {
   id: string;
   title: string;
-  tag: string;
+  /** From the CV's basics; "" when not filled in yet. */
+  headline: string;
+  name: string;
 };
 
 /* ------------------------------------------------------------------ */
@@ -868,37 +878,7 @@ export function CvSection(props: CvSectionProps) {
         </div>
       );
     }
-    return (
-      <ul
-        className={cn(
-          "flex flex-col gap-0.5 overflow-y-auto overscroll-contain",
-          inPopover ? "max-h-80" : "max-h-[calc(8*2.625rem)]",
-        )}
-      >
-        {props.cvs.map((cv) => {
-          const href = `/${locale}/cvs/${cv.id}`;
-          const current = pathname === href;
-          return (
-            <li key={cv.id}>
-              <Link
-                href={href}
-                aria-current={current ? "page" : undefined}
-                className={rowClasses(current, false)}
-                title={cv.title}
-              >
-                <span className="jb-type-icon text-ink-muted">
-                  <HugeiconsFileTextIcon />
-                </span>
-                <span className="min-w-0 flex-1 truncate">{cv.title}</span>
-                <span className="shrink-0 text-xs font-semibold text-ink-subtle">
-                  {cv.tag}
-                </span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    );
+    return <CvList cvs={props.cvs} inPopover={inPopover} />;
   };
 
   if (collapsed) {
@@ -960,6 +940,158 @@ export function CvSection(props: CvSectionProps) {
       </div>
       {list(false)}
     </section>
+  );
+}
+
+/**
+ * The saved CVs, newest edit first. Past CV_LIST_VISIBLE rows the list
+ * scrolls inside its section (fading at the edge that has more) and a
+ * filter box appears, so 50 CVs never push Help and the account away.
+ */
+function CvList({ cvs, inPopover }: { cvs: ShellCv[]; inPopover: boolean }) {
+  const { locale, labels } = useShell();
+  const pathname = usePathname();
+  const [query, setQuery] = useState("");
+  const rows = cvs.map((cv) => ({
+    cv,
+    text: cvRowText(cv, labels.cvs.untitled),
+  }));
+  const many = rows.length > CV_LIST_VISIBLE;
+  const shown = many ? rows.filter((row) => matchesCv(row.text, query)) : rows;
+
+  return (
+    <div className="flex min-h-0 flex-col gap-1">
+      {many ? (
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.currentTarget.value)}
+          placeholder={labels.cvs.filter}
+          aria-label={labels.cvs.filter}
+          className="mx-1 h-8 rounded-control-sm bg-well px-2.5 text-sm text-ink outline-none placeholder:text-ink-subtle focus-visible:shadow-[inset_0_0_0_1px_var(--violet)] pointer-coarse:h-11"
+        />
+      ) : null}
+      {shown.length === 0 ? (
+        <p className="px-2.5 py-1 text-sm text-ink-muted" role="status">
+          {labels.cvs.noMatch}
+        </p>
+      ) : (
+        <ul
+          className={cn(
+            "flex flex-col gap-0.5 overflow-y-auto overscroll-contain",
+            inPopover ? "max-h-80" : "max-h-[calc(8*2.25rem)]",
+            many && "jb-scroll-fade",
+          )}
+        >
+          {shown.map(({ cv, text }) => {
+            const href = `/${locale}/cvs/${cv.id}`;
+            return (
+              <li key={cv.id}>
+                <CvRow href={href} current={pathname === href} text={text} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/**
+ * One saved CV: "Headline | Name" in a slightly smaller size than the
+ * links, so more of it fits. When it's cut off, hovering with a mouse or
+ * focusing with the keyboard scrolls the text once to its end and back
+ * (a marquee); reduced motion and touch get the full text in `title`.
+ */
+function CvRow({
+  href,
+  current,
+  text,
+}: {
+  href: string;
+  current: boolean;
+  text: CvRowText;
+}) {
+  const [play, setPlay] = useState(false);
+  return (
+    <Link
+      href={href}
+      aria-current={current ? "page" : undefined}
+      aria-label={text.full}
+      title={text.full}
+      className={cn(rowClasses(current, false), "text-sm")}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setPlay(true);
+      }}
+      onPointerLeave={() => setPlay(false)}
+      onFocus={(event) => {
+        if (event.currentTarget.matches(":focus-visible")) setPlay(true);
+      }}
+      onBlur={() => setPlay(false)}
+    >
+      <span className="jb-type-icon">
+        <HugeiconsFileTextIcon />
+      </span>
+      <Marquee play={play} className="flex-1">
+        {text.primary}
+        {text.secondary ? (
+          <>
+            <span aria-hidden="true" className="mx-1.5 text-line">
+              |
+            </span>
+            <span className="font-normal">{text.secondary}</span>
+          </>
+        ) : null}
+      </Marquee>
+    </Link>
+  );
+}
+
+/**
+ * Text that ends in a fade when it doesn't fit, and scrolls to its end
+ * while `play` is on. Measured on play, so it only moves when cut off;
+ * the speed is constant (about 40 px a second), whatever the length.
+ */
+function Marquee({
+  play,
+  className,
+  children,
+}: {
+  play: boolean;
+  className?: string;
+  children: ReactNode;
+}) {
+  const box = useRef<HTMLSpanElement>(null);
+  const [distance, setDistance] = useState(0);
+
+  useEffect(() => {
+    const el = box.current;
+    if (!play || !el) return;
+    const inner = el.firstElementChild as HTMLElement | null;
+    const overflow = inner ? inner.scrollWidth - el.clientWidth : 0;
+    const frame = requestAnimationFrame(() =>
+      setDistance(Math.max(0, overflow)),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [play]);
+
+  const moving = play && distance > 0;
+  return (
+    <span
+      ref={box}
+      className={cn("jb-marquee min-w-0 overflow-hidden", className)}
+      data-moving={moving || undefined}
+      style={
+        moving
+          ? ({
+              "--marquee-distance": `${distance}px`,
+              "--marquee-duration": `${Math.max(2, distance / 40 + 1.5)}s`,
+            } as React.CSSProperties)
+          : undefined
+      }
+    >
+      <span className="jb-marquee-text">{children}</span>
+    </span>
   );
 }
 

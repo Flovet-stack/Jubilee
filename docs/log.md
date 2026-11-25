@@ -317,6 +317,39 @@ One dated entry per task: what was built, the review score, and what was left.
 - Violet stays only where it means something: the action colour, the focus ring and the tint (selected backgrounds).
 - Checks: `pnpm check`, including the contrast tests. Home at 1440 px in dark, in the browser.
 
+## 2026-11-25: Saved-CV rows: headline, name, marquee, many CVs (Flovet's review)
+
+- **Rows:** read "Headline | Full name", taken from each CV's basics. `listCvs` selects only those two JSON fields, never the whole document.
+- **Text size:** rows are one step smaller (14 px, 35 px rows), so more of the name fits. Cut-off text fades at the end.
+- **Marquee:** hovering with a mouse, or focusing with the keyboard, scrolls cut-off text to its end and back at about 40 px/s. It only moves when the text doesn't fit. Reduced motion and touch don't move; the full text is in the row's title and accessible name.
+- **Edge cases handled:**
+  - **No headline:** the row falls back to the CV's title, then to "Untitled resume / CV".
+  - **Name:** a blank name is dropped, and a name equal to the headline isn't repeated.
+  - **More than 8 CVs:** the list scrolls inside its section with a bottom fade, and a filter box appears. The filter ignores case and accents, and shows "No resume matches" when nothing fits. Help and the account stay pinned.
+  - **Same headline twice:** the language and market tag still tells the rows apart.
+- **Tests:** `cvRowText` and `matchesCv`.
+- **Design system:** a "Many CVs" state on `/design-system`.
+- **Left:**
+  - the sidebar list refreshes on the next navigation, not while you type a new headline in the editor;
+  - phone width not checked.
+
+## 2026-11-25: Saved-CV rows without the language tag (Flovet's review)
+
+- Removed the language and market tag from each saved-CV row. It doesn't tell two CVs apart when both have the same title and language. What should tell them apart is left for a later decision.
+- **Test data:** added 11 resumes to the test account in Supabase (12 in total), each copied from the existing CV with different basics:
+  - a duplicate of the existing CV;
+  - a long headline;
+  - no headline;
+  - no headline and no name;
+  - no name;
+  - a name equal to the headline;
+  - French accents;
+  - a whitespace-only headline;
+  - a long name;
+  - two plain ones.
+- **Found while adding them:** `cvs.title` can't be empty (check constraint), so the "Untitled" fallback only guards against bad data.
+- Checks: `pnpm check` (267 tests, build).
+
 ## 2026-11-25: CV editor in two panes, top bar, review without AI (spec 19, decision 0031)
 
 - **Research and decision:** Flovet asked for a redesign of the editor. Research covered Reactive Resume's AI docs, the Rezi Score, Enhancv feedback, web.dev AI patterns, and Teal's "Improve with AI" (search summary only; the page returned 403). Decision 0031 was approved: two panes, a top bar, and review flags on sections. The flags come in phase 1 without AI; "Suggest a rewrite" waits for an AI provider decision.

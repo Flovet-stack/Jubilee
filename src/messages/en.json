@@ -731,7 +731,10 @@
       "create": "Create resume",
       "reassure": "Start from your LinkedIn or from scratch.",
       "error": "We couldn't load your resumes.",
-      "retry": "Try again"
+      "retry": "Try again",
+      "untitled": "Untitled resume",
+      "filter": "Find a resume",
+      "noMatch": "No resume matches."
     },
     "pages": {
       "jobs": {

@@ -9,14 +9,32 @@ import {
 import { isLocale, locales, type Locale } from "@/i18n/locales";
 
 const SAMPLE_CVS = [
-  { id: "a", title: "Marketing coordinator", tag: "EN · US" },
+  {
+    id: "a",
+    title: "Resume",
+    headline: "Marketing coordinator",
+    name: "Amina Diallo",
+  },
   {
     id: "b",
-    title: "Chargée de communication digitale et événementielle",
-    tag: "FR · FR",
+    title: "CV",
+    headline: "Chargée de communication digitale et événementielle",
+    name: "Amina Diallo",
   },
-  { id: "c", title: "Product marketing", tag: "EN · US" },
+  {
+    id: "c",
+    title: "Product marketing draft",
+    headline: "",
+    name: "",
+  },
 ];
+
+const MANY_CVS = Array.from({ length: 14 }, (_, i) => ({
+  id: `m${i}`,
+  title: "Resume",
+  headline: ["Data analyst", "Product manager", "UX researcher"][i % 3] ?? "",
+  name: "Amina Diallo",
+}));
 
 /** The app shell sidebar of spec 15 in each state, with its real copy. */
 export function ShellDemo() {
@@ -63,6 +81,9 @@ export function ShellDemo() {
       reassure: t("cvs.reassure"),
       error: t("cvs.error"),
       retry: t("cvs.retry"),
+      untitled: t("cvs.untitled"),
+      filter: t("cvs.filter"),
+      noMatch: t("cvs.noMatch"),
     },
   };
   const states = [
@@ -71,6 +92,12 @@ export function ShellDemo() {
       collapsed: false,
       name: "Amina",
       cvs: { state: "ok", cvs: SAMPLE_CVS },
+    },
+    {
+      caption: "Many CVs (filter)",
+      collapsed: false,
+      name: "Amina",
+      cvs: { state: "ok", cvs: MANY_CVS },
     },
     {
       caption: "No CVs yet",
