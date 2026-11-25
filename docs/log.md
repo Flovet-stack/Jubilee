@@ -386,3 +386,11 @@ One dated entry per task: what was built, the review score, and what was left.
 - New Resumes page: one Create button, search from 6 resumes (accent-insensitive) with a live count, rows "Headline | Name" with "Edited …", empty/error/no-match states.
 - Checked in the browser on the 12-resume test account: 375/390 px and 1440 px, light and dark, en-us/en-gb/fr-fr.
 - Reviewer 87/100; must-fix ("Edited just now") applied afterwards. Full `pnpm check` passed before that fix; not re-run after it (skipped at Flovet's request).
+
+## 2026-11-26: 14 px base and type sizes by role (spec 21, decision 0033)
+
+- Tokens: 12 caption, 13 secondary, 14 body (base), new 16 `text-md`, 18 section, 24 page title, 32 display; `text-xl` and `text-4xl` removed.
+- Fields use `--text-field`: 14 px with a mouse, 16 px on touch (iOS zoom). Buttons lg 16, md 14, sm 12.
+- Every size mapped to its role: app page titles 24, dialog/legal/well titles 18, legal body 16/1.6, badges 12, muted hints 13.
+- `pnpm check` passed (283 tests, build). Browser: /cvs body 14, h1 24, field 14 mouse / 16 touch; privacy page at 390 dark.
+- Reviewer 84/100; its four must-fixes (sign-in display size, editor step heading, design-system headings and intro) applied, not re-graded.

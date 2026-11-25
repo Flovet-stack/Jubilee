@@ -52,7 +52,9 @@ export function RadioGroup({
           .join(" ") || undefined
       }
     >
-      <legend className="mb-2 text-sm font-semibold text-ink">{legend}</legend>
+      <legend className="mb-2 text-base font-semibold text-ink">
+        {legend}
+      </legend>
       {hint ? (
         <p id={`${id}-hint`} className="-mt-2 text-sm text-ink-muted">
           {hint}

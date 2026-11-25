@@ -32,13 +32,13 @@ export default async function NewCvPage({
     <main className="mx-auto flex w-full max-w-(--container-reading) flex-1 flex-col gap-8 px-4 py-8 sm:px-6 sm:py-12">
       <Link
         href={`/${locale}/home`}
-        className="flex min-h-11 items-center gap-1 self-start text-sm font-semibold text-violet"
+        className="flex min-h-11 items-center gap-1 self-start text-base font-semibold text-violet"
       >
         <HugeiconsArrowLeftIcon size={18} />
         {t("back")}
       </Link>
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">{t("title")}</h1>
+        <h1 className="text-2xl font-bold">{t("title")}</h1>
         <p className="text-ink-muted">{t("intro")}</p>
       </div>
       <NextIntlClientProvider

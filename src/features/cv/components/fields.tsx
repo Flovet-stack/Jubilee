@@ -235,7 +235,7 @@ export function BulletsField({
       className="flex flex-col gap-3"
       aria-describedby={hint ? `${groupId}-hint` : undefined}
     >
-      <legend className="text-sm font-semibold text-ink">{label}</legend>
+      <legend className="text-base font-semibold text-ink">{label}</legend>
       {hint ? (
         <p id={`${groupId}-hint`} className="-mt-1 text-sm text-ink-muted">
           {hint}
@@ -411,7 +411,7 @@ export function ItemsField({
           {items.map((item) => (
             <li
               key={item}
-              className="flex items-center gap-1 rounded-mark bg-well py-1 ps-3 pe-1 text-sm text-ink shadow-[inset_0_0_0_1px_var(--line)]"
+              className="flex items-center gap-1 rounded-mark bg-well py-1 ps-3 pe-1 text-base text-ink shadow-[inset_0_0_0_1px_var(--line)]"
             >
               {item}
               <IconButton

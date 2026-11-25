@@ -51,7 +51,7 @@ async function Greeting({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "auth.home" });
   const name = await getGreetingName(locale);
   return (
-    <h1 className="text-3xl font-bold text-ink sm:text-4xl">
+    <h1 className="text-2xl font-bold text-ink">
       {name ? t("greeting", { name }) : t("greetingNoName")}
     </h1>
   );

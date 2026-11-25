@@ -34,7 +34,7 @@ export async function PlaceholderPage({
   const t = await getTranslations({ locale, namespace: `shell.pages.${page}` });
   return (
     <main className="mx-auto flex w-full max-w-[640px] flex-col gap-2 px-4 py-10 sm:px-6 lg:py-16">
-      <h1 className="text-3xl font-bold text-ink">{t("title")}</h1>
+      <h1 className="text-2xl font-bold text-ink">{t("title")}</h1>
       <p className="text-ink-muted">{t("body")}</p>
     </main>
   );

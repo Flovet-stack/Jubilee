@@ -138,7 +138,7 @@ const calendarClasses = {
   week: "",
   day: "p-0 text-center",
   day_button: cn(
-    "inline-flex size-10 cursor-pointer items-center justify-center rounded-control text-sm tabular-nums",
+    "inline-flex size-10 cursor-pointer items-center justify-center rounded-control text-base tabular-nums",
     "transition-colors duration-(--dur-exit) hover-fine:bg-wash-hover hover-fine:duration-(--dur-fast)",
     "focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-violet",
     "disabled:cursor-not-allowed disabled:text-ink-subtle disabled:hover-fine:bg-transparent",
