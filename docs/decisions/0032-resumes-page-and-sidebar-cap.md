@@ -1,10 +1,10 @@
-# 0031: A Resumes page, and five resumes in the sidebar
+# 0032: A Resumes page, and five resumes in the sidebar
 
 - **Status:** Approved
 - **Proposed:** 2026-11-25 by the product team (roles: Product, UX, UI, Copy, Frontend)
 - **Approved:** 2026-11-25 by Flovet
 - **Supersedes:** the long-list part of 0027 (the sidebar's scrolling list, bottom fade and filter field, added after spec 15)
-- **Specs:** specs/19-resumes-page.md
+- **Specs:** specs/20-resumes-page.md
 
 ## Context
 

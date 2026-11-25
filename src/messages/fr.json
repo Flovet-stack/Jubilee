@@ -416,9 +416,9 @@
       "optional": "(facultatif)",
       "preview": "Aperçu",
       "previewLabel": "Aperçu de votre CV",
-      "closePreview": "Fermer l’aperçu",
+      "closePreview": "Fermer les vues du CV",
       "sectionsLabel": "Sections",
-      "allSections": "Toutes les sections",
+      "allSections": "Retour aux sections",
       "addSection": "Ajouter une section",
       "notStarted": "Pas commencé",
       "hidden": "Masquée",
@@ -556,6 +556,46 @@
       "loadError": {
         "title": "Ce CV ne peut pas être ouvert",
         "body": "Son contenu n’a pas pu être lu. Vos autres CV ne sont pas concernés."
+      },
+      "rename": "Renommer « {title} »",
+      "more": "Plus d’actions",
+      "duplicate": "Dupliquer",
+      "delete": "Supprimer",
+      "copyTitle": "{title} (copie)",
+      "deleteDialog": {
+        "title": "Supprimer ce CV ?",
+        "body": "« {title} » et son historique seront supprimés. Vous ne pourrez pas revenir en arrière.",
+        "confirm": "Supprimer le CV",
+        "cancel": "Le garder"
+      },
+      "actionError": "Ça n’a pas marché. Vérifiez votre connexion et réessayez.",
+      "editEntry": "Modifier {entry}",
+      "tabs": {
+        "label": "Vues du CV",
+        "preview": "Aperçu",
+        "review": "Relecture",
+        "guidance": "Conseils"
+      },
+      "review": {
+        "summary": "{count, plural, =0 {Rien à corriger} one {# point à revoir} other {# points à revoir}}",
+        "intro": "Des vérifications simples sur ce que regardent les recruteurs. Rien n’est envoyé.",
+        "clear": "Relisez-le une dernière fois avant de l’envoyer.",
+        "goTo": "Y aller",
+        "marker": "{count, plural, one {# point à revoir} other {# points à revoir}}",
+        "findings": {
+          "contactReach": "Ajoutez un e-mail ou un téléphone pour que les recruteurs puissent vous joindre.",
+          "noHeadline": "Ajoutez un titre : le poste que vous visez.",
+          "noSummary": "Écrivez un court résumé : 2 ou 3 lignes sur qui vous êtes et ce que vous cherchez.",
+          "longSummary": "Raccourcissez le résumé à 3 ou 4 lignes.",
+          "noBullets": "Ajoutez 2 à 5 puces sur ce que vous avez fait et le résultat.",
+          "bulletsWithoutNumbers": "{count, plural, one {# puce n’a} other {# puces n’ont}} aucun chiffre. Ajoutez-en un quand vous l’avez.",
+          "longBullets": "{count, plural, one {# puce dépasse} other {# puces dépassent}} 2 lignes. Tenez chacune en 1 ou 2.",
+          "noDates": "Ajoutez votre date de début."
+        }
+      },
+      "actionErrors": {
+        "notFound": "Ce CV n’existe plus. Revenez à l’accueil.",
+        "signedOut": "Vous avez été déconnecté. Reconnectez-vous, puis réessayez."
       }
     },
     "guidance": {

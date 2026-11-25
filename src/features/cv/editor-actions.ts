@@ -1,5 +1,6 @@
 "use server";
 
+import { refresh } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { toLocale } from "@/features/auth/logic";
@@ -7,6 +8,8 @@ import { toLocale } from "@/features/auth/logic";
 import {
   addRevision,
   createCv,
+  deleteCvDocument,
+  duplicateCv,
   renameCvDocument,
   saveContent,
 } from "./actions";
@@ -56,4 +59,27 @@ export async function renameCvAction(
   title: string,
 ): Promise<Result<{ title: string; updatedAt: string }>> {
   return renameCvDocument({ kind: "cv", id }, title);
+}
+
+/** "Duplicate" in the editor's More menu (0031 §1): opens the copy. */
+export async function duplicateCvAction(
+  id: string,
+  title: string,
+  locale: string,
+): Promise<{ error: CvError }> {
+  const result = await duplicateCv(id, title);
+  if (!result.ok) return { error: result.error };
+  refresh();
+  redirect(`/${toLocale(locale)}/cvs/${result.value.id}`);
+}
+
+/** "Delete" in the editor's More menu, after its dialog (0031 §1). */
+export async function deleteCvAction(
+  id: string,
+  locale: string,
+): Promise<{ error: CvError }> {
+  const result = await deleteCvDocument({ kind: "cv", id });
+  if (!result.ok) return { error: result.error };
+  refresh();
+  redirect(`/${toLocale(locale)}/home`);
 }

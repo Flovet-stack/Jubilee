@@ -19,7 +19,7 @@ export type CvIndexItem = {
 };
 
 /**
- * The Resumes page list (0031): a search from six resumes, a live count,
+ * The Resumes page list (0032): a search from six resumes, a live count,
  * and one link per resume to its editor.
  */
 export function CvIndex({

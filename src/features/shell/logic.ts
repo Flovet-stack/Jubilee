@@ -73,10 +73,10 @@ export function cvRowText(
   };
 }
 
-/** Resumes the sidebar shows; past this, a "View all" link (0031). */
+/** Resumes the sidebar shows; past this, a "View all" link (0032). */
 export const CV_SIDEBAR_MAX = 5;
 
-/** The page shows its search from this many resumes (0031). */
+/** The page shows its search from this many resumes (0032). */
 export const CV_SEARCH_FROM = CV_SIDEBAR_MAX + 1;
 
 /** The sidebar's rows, and whether the "View all (N)" link shows. */

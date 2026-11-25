@@ -21,7 +21,7 @@ export async function generateMetadata({
   return { title: t("metaTitle"), robots: { index: false, follow: false } };
 }
 
-/** Every resume, a search, and the way to create one (0031, spec 19). */
+/** Every resume, a search, and the way to create one (0032, spec 20). */
 export default async function CvsPage({ params }: PageProps<"/[locale]/cvs">) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();

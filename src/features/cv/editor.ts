@@ -204,6 +204,33 @@ export function defaultTitle(name: string, word: string): string {
   return trimmed ? `${trimmed} ${word}` : word;
 }
 
+/** The automatic CV name (0031 §1): "{headline} · {name}", else the name, else the word. */
+export function cvName(
+  basics: { headline: string; name: string },
+  word: string,
+): string {
+  return (
+    [basics.headline.trim(), basics.name.trim()].filter(Boolean).join(" · ") ||
+    word
+  );
+}
+
+/**
+ * True while the title is still an automatic one for these basics, so it
+ * should follow the content. Spec 14's "{name} Resume" counts as automatic.
+ */
+export function followsContent(
+  title: string,
+  basics: { headline: string; name: string },
+  word: string,
+): boolean {
+  return (
+    title === word ||
+    title === cvName(basics, word) ||
+    title === defaultTitle(basics.name, word)
+  );
+}
+
 type Path = (string | number)[];
 
 function valueAt(root: unknown, path: Path): unknown {

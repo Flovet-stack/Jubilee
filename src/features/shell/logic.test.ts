@@ -75,7 +75,7 @@ describe("cvRowText", () => {
   });
 });
 
-describe("sidebarCvs (0031)", () => {
+describe("sidebarCvs (0032)", () => {
   const list = (n: number) => Array.from({ length: n }, (_, i) => i);
   it("shows every resume and no link up to five", () => {
     expect(sidebarCvs(list(0))).toEqual({

@@ -1,4 +1,4 @@
-# 19: Resumes page and a five-row sidebar list
+# 20: Resumes page and a five-row sidebar list
 
 Status: Built, in review (reviewer 87/100; its one must-fix, "Edited just now", applied but not re-graded; checks after that fix not run) · Written: 2026-11-25
 
@@ -8,11 +8,11 @@ Keep the sidebar short and steady, and give Amina one place that holds every res
 
 ## User lens
 
-The full lens is in [0031](../docs/decisions/0031-resumes-page-and-sidebar-cap.md#user-lens). In short: she comes to find one CV fast or to start a new one; she scans before she types; she goes next to the editor or to create; we leave out thumbnails, folders, sort, bulk actions, row menus and "coming soon" create options.
+The full lens is in [0032](../docs/decisions/0032-resumes-page-and-sidebar-cap.md#user-lens). In short: she comes to find one CV fast or to start a new one; she scans before she types; she goes next to the editor or to create; we leave out thumbnails, folders, sort, bulk actions, row menus and "coming soon" create options.
 
 ## Decisions
 
-Implements [0031](../docs/decisions/0031-resumes-page-and-sidebar-cap.md). Builds on [0027](../docs/decisions/0027-app-shell-and-sidebar.md) (shell), [0007](../docs/decisions/0007-visual-foundations.md) (one violet action), [0017](../docs/decisions/0017-regional-locales-and-cv-naming.md) (resume / CV), [0029](../docs/decisions/0029-type-spacing-for-every-control.md) and [0030](../docs/decisions/0030-icon-size-from-font-size.md) (control spacing).
+Implements [0032](../docs/decisions/0032-resumes-page-and-sidebar-cap.md). Builds on [0027](../docs/decisions/0027-app-shell-and-sidebar.md) (shell), [0007](../docs/decisions/0007-visual-foundations.md) (one violet action), [0017](../docs/decisions/0017-regional-locales-and-cv-naming.md) (resume / CV), [0029](../docs/decisions/0029-type-spacing-for-every-control.md) and [0030](../docs/decisions/0030-icon-size-from-font-size.md) (control spacing).
 
 ## Acceptance criteria
 

@@ -109,6 +109,34 @@ export async function saveContent(
   return fail({ code: row ? "conflict" : "not_found" });
 }
 
+/**
+ * A copy of a master CV (0031 §1, "Duplicate"): same language, market and
+ * content, under the given title. Content ids only need to be unique inside
+ * one document, so the content is copied as is. A failed copy is removed.
+ */
+export async function duplicateCv(
+  id: string,
+  title: string,
+): Promise<Result<{ id: string }>> {
+  const source = await getCvDocument({ kind: "cv", id });
+  if (!source.ok) return source;
+  const created = await createCv({
+    title: title.trim().slice(0, 120),
+    language: source.value.language,
+    market: source.value.market,
+  });
+  if (!created.ok) return created;
+  const saved = await saveContent(
+    { kind: "cv", id: created.value.id },
+    source.value.content,
+  );
+  if (!saved.ok) {
+    await deleteCvDocument({ kind: "cv", id: created.value.id });
+    return saved;
+  }
+  return created;
+}
+
 /** Renames a CV or version. */
 export async function renameCvDocument(
   target: CvTarget,

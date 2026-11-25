@@ -944,7 +944,7 @@ export function CvSection(props: CvSectionProps) {
 }
 
 /**
- * The saved CVs, newest edit first: at most five (0031). With more, a
+ * The saved CVs, newest edit first: at most five (0032). With more, a
  * "View all resumes (N)" row links to the Resumes page.
  */
 function CvList({ cvs }: { cvs: ShellCv[] }) {
