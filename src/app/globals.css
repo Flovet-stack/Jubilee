@@ -100,11 +100,12 @@
 
 /* ── 3. Component and motion tokens (0009) ──────────────────────────── */
 :root {
-  /* Control heights (0020): lg for single-task screens, md the default,
-     sm for inline row actions. Touch raises md and sm to 44 px (below). */
-  --control-h-lg: 48px;
-  --control-h: 40px;
-  --control-h-sm: 32px;
+  /* Control heights (0020; mouse values from 0028): lg for single-task
+     screens, md the default, sm for inline row actions. Each equals a
+     button's line box plus 2 × --py. Touch raises all three to 44 px. */
+  --control-h-lg: 40px;
+  --control-h: 32px;
+  --control-h-sm: 24px;
   --icon-ui: 20px;
   --icon-nav: 24px;
   --focus-ring: 2px solid var(--violet);
@@ -134,6 +135,7 @@
 /* Touch never goes below 44 px (0020; WCAG 2.5.5, NN/g 1 cm targets). */
 @media (pointer: coarse) {
   :root {
+    --control-h-lg: 44px;
     --control-h: 44px;
     --control-h-sm: 44px;
   }

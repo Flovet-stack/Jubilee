@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 /**
- * Guards decisions 0020 (control heights, 44 px on touch) and 0022 (radius by
+ * Guards decisions 0020 and 0028 (control heights, 44 px on touch) and 0022 (radius by
  * size) by reading the real tokens in globals.css.
  */
 const css = readFileSync(
@@ -32,16 +32,16 @@ function px(source: string, name: string): number | undefined {
 
 const touch = block(block(css, "@media (pointer: coarse)"), ":root");
 
-describe("control heights (0020)", () => {
+describe("control heights (0020, 0028)", () => {
   it.each([
-    ["control-h-lg", 48],
-    ["control-h", 40],
-    ["control-h-sm", 32],
+    ["control-h-lg", 40],
+    ["control-h", 32],
+    ["control-h-sm", 24],
   ])("--%s is %i px with a mouse", (name, value) => {
     expect(px(css, name)).toBe(value);
   });
 
-  it.each(["control-h", "control-h-sm"])(
+  it.each(["control-h-lg", "control-h", "control-h-sm"])(
     "--%s is at least 44 px on touch",
     (name) => {
       expect(px(touch, name)).toBeGreaterThanOrEqual(44);

@@ -222,7 +222,9 @@ export function PhoneField({
             className={cn(
               buttonVariants({ variant: "secondary", size }),
               controlRadius[size],
-              "shrink-0 gap-1.5 px-2.5 font-medium tabular-nums",
+              // Spacing comes from .jb-button (0028); the dial code keeps the
+              // field's 16 px text so it reads as part of the number.
+              "shrink-0 text-(length:--text-base) font-medium tabular-nums",
               "data-popup-open:shadow-[inset_0_0_0_1px_var(--violet)]",
             )}
           >

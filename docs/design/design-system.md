@@ -66,15 +66,17 @@ All in `src/components/ui/`, icons in `src/components/icons/`. Labels and messag
 | `Tabs`                                                  | `tabs.tsx`                    | Peer views of one thing               | meta count, disabled tab, scrolls on narrow screens                                                                                                                                                |
 | `EmptyState`, `UndoLine`, `MarkedChange`, `ReviewPanel` | `patterns.tsx`                | Jubilee patterns from 0008            | empty with one action; undo in place; AI change with reason + accept/reject; final-action summary                                                                                                  |
 
-### Sizes (0020)
+### Sizes (0020, heights from 0028)
 
 `Button`, `IconButton`, `Input`, `Textarea` and `Select` take `size`:
 
-| Size | Mouse | Touch | Radius | Use for                                                               |
-| ---- | ----- | ----- | ------ | --------------------------------------------------------------------- |
-| `lg` | 48 px | 48 px | 8 px   | The main action and fields of a single-task screen (sign-in, landing) |
-| `md` | 40 px | 44 px | 6 px   | The default, everywhere else, including the CV editor                 |
-| `sm` | 32 px | 44 px | 4 px   | Inline row actions in dense lists ("Edit", "Remove")                  |
+| Size | Mouse | Touch | Radius | Button text / icon | Use for                                                               |
+| ---- | ----- | ----- | ------ | ------------------ | --------------------------------------------------------------------- |
+| `lg` | 40 px | 44 px | 8 px   | 16 px / 24 px      | The main action and fields of a single-task screen (sign-in, landing) |
+| `md` | 32 px | 44 px | 6 px   | 14 px / 20 px      | The default, everywhere else, including the CV editor                 |
+| `sm` | 24 px | 44 px | 4 px   | 14 px / 16 px      | Inline row actions in dense lists ("Edit", "Remove")                  |
+
+**Button spacing (0028).** A button's height is its line box plus 2 × `--py` (8, 6, 4 px). Side padding is `--py + (1lh − 1cap) / 2`, so the capitals sit evenly; the gap between icon and label is the same. Icons are one line box square and sit `--py` from the edge and from the label. Icon-only buttons are padded `--py` on every side. All of it lives in `.jb-button` in `components.css`: pass `icon` / `iconEnd`, never padding or gap.
 
 - One size per form and per button group; never mix sizes in a group.
 - Field text stays 16 px at every size, so iOS doesn't zoom.

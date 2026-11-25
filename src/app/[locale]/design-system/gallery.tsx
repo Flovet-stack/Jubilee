@@ -99,9 +99,9 @@ const COUNTRIES = [
 ];
 
 const SIZES = [
-  ["lg", "lg · 48 px · single-task screens"],
-  ["md", "md · 40 px (44 on touch) · the default"],
-  ["sm", "sm · 32 px (44 on touch) · inline row actions"],
+  ["lg", "lg · 40 px (44 on touch) · single-task screens"],
+  ["md", "md · 32 px (44 on touch) · the default"],
+  ["sm", "sm · 24 px (44 on touch) · inline row actions"],
 ] as const;
 
 export function Gallery({ fontVariables }: { fontVariables: string }) {
