@@ -42,7 +42,7 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
         >
           <TooltipPrimitive.Popup
             className={cn(
-              "max-w-64 rounded-card bg-ink px-2.5 py-1.5 text-sm font-medium text-page shadow-float",
+              "jb-type max-w-64 rounded-card bg-ink text-sm font-medium text-page shadow-float",
               "origin-(--transform-origin) transition-[opacity,scale] duration-(--dur-fast) ease-enter",
               "data-starting-style:scale-(--pop-scale) data-starting-style:opacity-0",
               "data-ending-style:scale-(--pop-scale) data-ending-style:opacity-0 data-ending-style:duration-(--dur-exit) data-ending-style:ease-exit",

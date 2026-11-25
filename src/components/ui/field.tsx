@@ -152,6 +152,13 @@ export const controlHeight: Record<ControlSize, string> = {
   sm: "h-(--control-h-sm)",
 };
 
+/** Type spacing for fields (0029): 16 px text, padding from the height. */
+export const fieldSpacing: Record<ControlSize, string> = {
+  lg: "jb-field jb-field-lg",
+  md: "jb-field jb-field-md",
+  sm: "jb-field jb-field-sm",
+};
+
 export const controlRadius: Record<ControlSize, string> = {
   lg: "rounded-control-lg",
   md: "rounded-control",
@@ -180,9 +187,14 @@ export function Input({
   ...props
 }: InputProps) {
   return (
-    <span className="relative flex w-full min-w-0 items-center">
+    <span
+      className={cn(
+        "relative flex w-full min-w-0 items-center",
+        fieldSpacing[size],
+      )}
+    >
       {icon ? (
-        <span className="pointer-events-none absolute start-3 flex text-ink-muted">
+        <span className="jb-field-icon pointer-events-none text-ink-muted">
           {icon}
         </span>
       ) : null}
@@ -191,16 +203,14 @@ export function Input({
           controlClasses,
           controlHeight[size],
           controlRadius[size],
-          size === "sm" ? "px-2.5" : "px-3",
-          icon ? "ps-10" : undefined,
-          end ? (size === "lg" ? "pe-12" : "pe-11") : undefined,
+          "jb-field-box",
+          icon && "jb-field-has-icon",
+          end && "jb-field-has-end",
           className,
         )}
         {...props}
       />
-      {end ? (
-        <span className="absolute end-0.5 flex items-center">{end}</span>
-      ) : null}
+      {end ? <span className="jb-field-end">{end}</span> : null}
     </span>
   );
 }
@@ -253,8 +263,9 @@ export function Textarea({
         className={cn(
           controlClasses,
           controlRadius[size],
-          "field-sizing-content max-h-80 min-h-28 resize-y leading-normal",
-          size === "sm" ? "px-2.5 py-2" : "px-3 py-2.5",
+          "field-sizing-content max-h-80 min-h-28 resize-y",
+          fieldSpacing[size],
+          "jb-field-box",
           className,
         )}
       />

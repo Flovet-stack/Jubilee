@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 /**
- * Guards decisions 0020 and 0028 (control heights, 44 px on touch) and 0022 (radius by
+ * Guards decisions 0020, 0028 and 0029 (control heights, 44 px on touch) and 0022 (radius by
  * size) by reading the real tokens in globals.css.
  */
 const css = readFileSync(
@@ -32,11 +32,11 @@ function px(source: string, name: string): number | undefined {
 
 const touch = block(block(css, "@media (pointer: coarse)"), ":root");
 
-describe("control heights (0020, 0028)", () => {
+describe("control heights (0020, 0029)", () => {
   it.each([
     ["control-h-lg", 40],
-    ["control-h", 32],
-    ["control-h-sm", 24],
+    ["control-h", 35],
+    ["control-h-sm", 30],
   ])("--%s is %i px with a mouse", (name, value) => {
     expect(px(css, name)).toBe(value);
   });
@@ -47,6 +47,31 @@ describe("control heights (0020, 0028)", () => {
       expect(px(touch, name)).toBeGreaterThanOrEqual(44);
     },
   );
+});
+
+const components = readFileSync(
+  fileURLToPath(new URL("../components/ui/components.css", import.meta.url)),
+  "utf8",
+);
+
+describe("type spacing (0029)", () => {
+  it.each([
+    ["jb-button-lg", "--text-base"],
+    ["jb-button-md", "--text-sm"],
+    ["jb-button-sm", "--text-xs"],
+  ])(".%s sets the size by its font size (%s)", (name, token) => {
+    expect(block(components, `.${name} {`)).toContain(
+      `--btn-text: var(${token})`,
+    );
+  });
+
+  it("keeps the formula from the notes", () => {
+    const box = block(components, ".jb-type {");
+    expect(box).toContain("--py: 0.5em");
+    expect(box).toContain("--px: calc(var(--py) + (1lh - 1cap) / 2)");
+    expect(box).toContain("line-height: 1.5");
+    expect(box).toContain("--tw-leading: 1.5");
+  });
 });
 
 describe("radius by size (0022)", () => {

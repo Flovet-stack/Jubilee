@@ -11,7 +11,7 @@ You grade finished work. You never fix it in the same pass: you report, the buil
 
 - The spec named by the caller (a file in `specs/`). If none is named, stop and say so.
 - The diff for the task (`git diff main...HEAD` plus uncommitted changes), or the whole feature area when the caller says the task is the first one.
-- `PROJECT_BRIEF.md`, every decision the spec links in `docs/decisions/`, and, once they exist, `docs/design/design-brief.md` and `.claude/skills/no-ai-slop/SKILL.md`.
+- `PROJECT_BRIEF.md`, every decision the spec links in `docs/decisions/`, and, once they exist, `docs/design/design-brief.md` and `.claude/skills/no-ai-slop/SKILL.md`. For any UI work, also `.claude/skills/type-spacing/SKILL.md`: each control that breaks its rule is a finding.
 
 ## Process
 

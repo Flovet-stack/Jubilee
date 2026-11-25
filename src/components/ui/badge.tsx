@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
  * mean something come with an icon or a word that says it.
  */
 const badgeVariants = cva(
-  "inline-flex max-w-full min-w-0 items-center gap-1.5 rounded-full px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap",
+  "jb-type jb-type-badge inline-flex max-w-full min-w-0 items-center rounded-full text-sm font-semibold whitespace-nowrap",
   {
     variants: {
       tone: {
@@ -37,7 +37,7 @@ type BadgeProps = VariantProps<typeof badgeVariants> & {
 export function Badge({ tone, icon, title, className, children }: BadgeProps) {
   return (
     <span title={title} className={cn(badgeVariants({ tone }), className)}>
-      {icon ? <span className="flex shrink-0">{icon}</span> : null}
+      {icon ? <span className="jb-type-icon">{icon}</span> : null}
       <span className="min-w-0 truncate">{children}</span>
     </span>
   );
@@ -121,7 +121,7 @@ export function StageBadge({ stage, label, className }: StageBadgeProps) {
     <span
       data-stage={stage}
       className={cn(
-        "inline-flex max-w-full items-center gap-1.5 rounded-full px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap",
+        "jb-type jb-type-badge inline-flex max-w-full items-center rounded-full text-sm font-semibold whitespace-nowrap",
         stageClasses[stage],
         className,
       )}

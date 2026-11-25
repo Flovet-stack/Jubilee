@@ -171,56 +171,27 @@
 }
 
 /*
- * Button spacing from the type (0028). The height is the line box plus
- * 2 × --py; --px adds back the empty space above and below the capitals, so
- * the visible label sits evenly. An icon is one line box square and sits
- * --py from the edge and from the label. Touch raises the minimum to 44 px
- * through the tokens (0020); the padding never changes, the extra
- * height centres the content.
+ * Type spacing (0029; the rule is in .claude/skills/type-spacing). Any
+ * padded box holding text and/or icons: --py is half the font size,
+ * --px adds back the empty space above and below the capitals, so the
+ * visible text sits evenly. Icons are one line box square and sit --py
+ * from the edge and from the text. A control's size is its font size
+ * (height = 2.5em). Touch raises the minimum to 44 px through the tokens
+ * (0020); padding never changes, the extra height centres the content.
  */
 @layer components {
-  .jb-button {
+  /* --tw-leading makes Tailwind's text-sm / text-xs keep 1.5 too: those
+     utilities set line-height and would otherwise win over this layer. */
+  .jb-type {
+    --py: 0.5em;
     --px: calc(var(--py) + (1lh - 1cap) / 2);
-    min-height: var(--btn-h);
+    --tw-leading: 1.5;
+    line-height: 1.5;
     padding: var(--py) var(--px);
     gap: var(--px);
-    font-size: var(--btn-text);
-    line-height: var(--btn-lh);
   }
 
-  .jb-button-lg {
-    --btn-h: var(--control-h-lg);
-    --btn-text: var(--text-base);
-    --btn-lh: 24px;
-    --py: 8px;
-    --px-fallback: 14px;
-  }
-
-  .jb-button-md {
-    --btn-h: var(--control-h);
-    --btn-text: var(--text-sm);
-    --btn-lh: 20px;
-    --py: 6px;
-    --px-fallback: 11px;
-  }
-
-  .jb-button-sm {
-    --btn-h: var(--control-h-sm);
-    --btn-text: var(--text-sm);
-    --btn-lh: 16px;
-    --py: 4px;
-    --px-fallback: 7px;
-  }
-
-  /* Label, icons and the gap between them; hidden while loading. */
-  .jb-button-content {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--px);
-  }
-
-  .jb-button-icon {
+  .jb-type-icon {
     display: inline-flex;
     flex-shrink: 0;
     width: 1lh;
@@ -228,35 +199,156 @@
     margin-inline: calc(var(--py) - var(--px));
   }
 
-  .jb-button-icon svg,
-  .jb-button-icon-only > svg {
+  .jb-type-icon svg,
+  .jb-type-square > svg {
     width: 1lh;
     height: 1lh;
     flex-shrink: 0;
   }
 
   /* Icon only: square, --py on every side. */
-  .jb-button-icon-only {
-    min-width: var(--btn-h);
+  .jb-type.jb-type-square {
     padding: var(--py);
   }
 
-  .jb-button-icon-only .jb-button-icon {
+  .jb-type-square .jb-type-icon {
     margin-inline: 0;
   }
 
-  /* Browsers without lh or cap (Firefox before 120, Safari before 17.2):
-     fixed values worked out for Plus Jakarta Sans. */
+  /* Badges are labels, not targets (0029): a thin --py. */
+  .jb-type.jb-type-badge {
+    --py: 0.15em;
+  }
+
+  /* Fields keep 16 px text (iOS zoom, 0020) and the height of their size,
+     so --py comes from the height; --px and icons follow the formula.
+     `.jb-field` sits on the element that holds the variables (the input's
+     wrapper, or the trigger itself); `.jb-field-box` pads the box. */
+  .jb-field {
+    --py: calc((var(--field-h) - 1lh) / 2);
+    --px: calc(var(--py) + (1lh - 1cap) / 2);
+    font-size: var(--text-base);
+    --tw-leading: 1.5;
+    line-height: 1.5;
+  }
+
+  .jb-field-lg {
+    --field-h: var(--control-h-lg);
+  }
+
+  .jb-field-md {
+    --field-h: var(--control-h);
+  }
+
+  .jb-field-sm {
+    --field-h: var(--control-h-sm);
+  }
+
+  .jb-field-box {
+    padding: var(--py) var(--px);
+    gap: var(--px);
+  }
+
+  /* A start icon over the input: --py from the edge and from the text. */
+  .jb-field-icon {
+    position: absolute;
+    inset-inline-start: var(--py);
+    display: flex;
+    width: 1lh;
+    height: 1lh;
+  }
+
+  .jb-field-icon svg {
+    width: 1lh;
+    height: 1lh;
+  }
+
+  .jb-field-box.jb-field-has-icon {
+    padding-inline-start: calc(2 * var(--py) + 1lh);
+  }
+
+  /* An end control (clear, reveal, calendar) in a square slot as tall as
+     the field: it sits as far from the end edge as from the top. */
+  .jb-field-end {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--field-h);
+  }
+
+  .jb-field-box.jb-field-has-end {
+    padding-inline-end: var(--field-h);
+  }
+
+  /* The end control takes the field's type and --py, so its icon matches
+     the start icon: 1lh square, --py from the edge. It fills the slot. */
+  .jb-field-end .jb-type.jb-type-square {
+    --py: inherit;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    min-width: var(--field-h);
+    min-height: var(--field-h);
+  }
+
+  /* Buttons: the same box; the size is the font size (lg 16, md 14, sm 12). */
+  .jb-button {
+    min-height: var(--btn-h);
+    font-size: var(--btn-text);
+  }
+
+  .jb-button-lg {
+    --btn-h: var(--control-h-lg);
+    --btn-text: var(--text-base);
+  }
+
+  .jb-button-md {
+    --btn-h: var(--control-h);
+    --btn-text: var(--text-sm);
+  }
+
+  .jb-button-sm {
+    --btn-h: var(--control-h-sm);
+    --btn-text: var(--text-xs);
+  }
+
+  .jb-button.jb-type-square {
+    min-width: var(--btn-h);
+  }
+
+  /* Label and icons inside a button; hidden while loading. */
+  .jb-type-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: inherit;
+  }
+
+  /* Without lh or cap (Firefox before 120, Safari before 17.2): Plus
+     Jakarta Sans has a 0.744em cap height, so (1.5em - 0.744em) / 2. */
   @supports not ((height: 1lh) and (height: 1cap)) {
-    .jb-button {
-      --px: var(--px-fallback);
+    .jb-type {
+      --px: calc(var(--py) + 0.38em);
     }
 
-    .jb-button-icon,
-    .jb-button-icon svg,
-    .jb-button-icon-only > svg {
-      width: var(--btn-lh);
-      height: var(--btn-lh);
+    .jb-field {
+      --py: calc((var(--field-h) - 1.5em) / 2);
+      --px: calc(var(--py) + 0.38em);
+    }
+
+    .jb-field-box.jb-field-has-icon {
+      padding-inline-start: calc(2 * var(--py) + 1.5em);
+    }
+
+    .jb-type-icon,
+    .jb-type-icon svg,
+    .jb-type-square > svg,
+    .jb-field-icon,
+    .jb-field-icon svg {
+      width: 1.5em;
+      height: 1.5em;
     }
   }
 }
