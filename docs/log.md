@@ -332,3 +332,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - **Left:**
   - the sidebar list refreshes on the next navigation, not while you type a new headline in the editor;
   - phone width not checked.
+
+## 2026-11-25: Product-team skill, four questions on every decision
+
+- Widened the four questions (why this user opens it, how they use it, what they want next, what we leave out) from "before any idea, screen, component or interaction" to every decision, design and detail, however small. Added them to decision entries (Step 2), ground rules, Workflow B and Workflow C. Same change in the global skill (`~/.claude/skills/product-team`).
+- No spec (tooling only). Not reviewed (no spec to score against).
