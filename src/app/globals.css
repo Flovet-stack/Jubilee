@@ -63,16 +63,20 @@
     0 1px 2px rgb(29 26 68 / 0.06), 0 8px 24px rgb(29 26 68 / 0.08);
   --shadow-float: 0 12px 32px rgb(29 26 68 / 0.18);
   --shadow-thumb: 0 1px 2px rgb(29 26 68 / 0.24); /* switch thumb */
+  /* The account menu (Flovet, 2026-11-25). */
+  --shadow-menu: 0 7.3px 10.96px 0 #0000000a, 0 2px 4px 0 #00000016;
 }
 
+/* Dark follows the system unless the user picked a theme in the account
+   menu (data-theme on <html>, set before paint by the root layout). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
 
     --page: #0e0d1f;
     --well: #121126;
-    --desk: #121126;
-    --card: #1b1a33;
+    --desk: #0e120e;
+    --card: #060d08;
     --line: #2f2d4a;
     --tint: #252148;
     --field: #7f7c98;
@@ -98,6 +102,39 @@
     --scrim: rgb(5 4 14 / 0.64);
     --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page: #0e0d1f;
+  --well: #121126;
+  --desk: #0e120e;
+  --card: #060d08;
+  --line: #2f2d4a;
+  --tint: #252148;
+  --field: #7f7c98;
+  --ink: #f1f0f8;
+  --ink-muted: #b7b4cc;
+  --ink-subtle: #9592ad;
+  --violet: #a48cff;
+  --violet-press: #c3b4ff;
+  --on-violet: #120d2e;
+  --pink: #f08cb8;
+  --success: #5fd39a;
+  --danger: #ff7b7b;
+
+  --stage-saved: #aeacc2;
+  --stage-applied: #8fb0ff;
+  --stage-interview: #f39ad3;
+  --stage-rejected: #b2aaa5;
+
+  --provider: #131314;
+  --provider-line: #8e918f;
+  --provider-ink: #e3e3e3;
+
+  --scrim: rgb(5 4 14 / 0.64);
+  --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
 }
 
 /* ── 3. Component and motion tokens (0009) ──────────────────────────── */
@@ -182,6 +219,7 @@
   --shadow-paper: var(--shadow-paper);
   --shadow-float: var(--shadow-float);
   --shadow-thumb: var(--shadow-thumb);
+  --shadow-menu: var(--shadow-menu);
 
   --ease-standard: var(--ease-standard);
   --ease-enter: var(--ease-enter);

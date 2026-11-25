@@ -287,3 +287,23 @@ One dated entry per task: what was built, the review score, and what was left.
   - medium weight, with icons at a 1.75 px stroke.
 - The account button is now a standard row: 40 px, 6 px radius and the same type spacing, with the avatar in the icon slot.
 - Checks: `pnpm check`. Measured in the browser at 1440 px.
+
+## 2026-11-25: Account menu and dark colours (Flovet's review)
+
+- **Account menu** is now a popover laid out like Flovet's reference:
+  - photo, name and plan badge ("Free" until the pass ships), with no email;
+  - a dark mode switch;
+  - Settings;
+  - Language as a three-way switch (EN-US / EN-GB / FR) with arrow keys;
+  - Sign out in red;
+  - a footer with the version and a link to the terms.
+  - No "Need help?": Help is already in the sidebar.
+  - Shadow from the new `--shadow-menu` token, with Flovet's two values.
+- **Dark mode switch:** saves light or dark in this browser only (localStorage). A small `<head>` script applies it before paint; with no choice saved, the system setting still wins. CSS dark tokens now apply under `:root[data-theme="dark"]` and skip `data-theme="light"`.
+- **Dark colours:** the desk is now #0e120e and the card / content window #060d08. Dark contrast tests pass.
+- Three static icons drawn in-house: moon, language, log out.
+- **Checks:** `pnpm check`. In the browser: menu layout, shadow values, the dark switch, the new dark colours, and the saved theme surviving a reload.
+- **Left:**
+  - other dark tokens (page, well, line, tint) are still violet-tinted;
+  - sign out still not run;
+  - phone width not checked.

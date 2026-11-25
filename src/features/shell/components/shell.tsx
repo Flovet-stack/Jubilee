@@ -19,7 +19,6 @@ import { JubileeLogo } from "@/components/brand/jubilee-logo";
 import {
   HugeiconsBellIcon,
   HugeiconsBriefcaseBusinessIcon,
-  HugeiconsCheckIcon,
   HugeiconsCircleCheckIcon,
   HugeiconsCircleQuestionMarkIcon,
   HugeiconsFileTextIcon,
@@ -33,7 +32,7 @@ import {
 } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink, IconButton } from "@/components/ui/button";
-import { Menu, type MenuEntry } from "@/components/ui/menu";
+import { Switch } from "@/components/ui/switch";
 import { Avatar } from "@/components/ui/feedback";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -44,6 +43,8 @@ import {
   type Locale,
 } from "@/i18n/locales";
 import { site } from "@/lib/site";
+import { isDarkNow, saveTheme } from "@/lib/theme";
+import pkg from "../../../../package.json";
 import { cn } from "@/lib/utils";
 
 import {
@@ -55,6 +56,7 @@ import {
   pathInLocale,
   pathWithoutLocale,
 } from "../logic";
+import { LanguageIcon, LogOutIcon, MoonIcon } from "./menu-icons";
 import { SidebarPanelIcon } from "./sidebar-panel-icon";
 
 export type ShellLabels = {
@@ -72,6 +74,11 @@ export type ShellLabels = {
   account: string;
   settings: string;
   signOut: string;
+  plan: string;
+  darkMode: string;
+  language: string;
+  terms: string;
+  localeShort: Record<Locale, string>;
   localeNames: Record<Locale, string>;
   cvs: {
     title: string;
@@ -573,39 +580,9 @@ function AccountMenu({ name }: { name: string | null }) {
   const { locale, labels, collapsed, signOut } = useShell();
   const router = useRouter();
   const pathname = usePathname();
-  const [, startTransition] = useTransition();
+  const [pending, startTransition] = useTransition();
+  const [dark, setDark] = useState(false);
   const shown = name ?? labels.account;
-
-  const switchTo = (next: Locale) => {
-    rememberLocale(next);
-    router.push(pathInLocale(pathname, next));
-  };
-
-  const items: MenuEntry[] = [
-    {
-      label: labels.settings,
-      icon: <HugeiconsSettingsIcon />,
-      onSelect: () => router.push(`/${locale}/settings`),
-    },
-    { type: "separator" },
-    ...locales.map((l): MenuEntry => ({
-      label: <span lang={localeTag(l)}>{labels.localeNames[l]}</span>,
-      icon: l === locale ? <HugeiconsCheckIcon /> : <span />,
-      onSelect: () => {
-        if (l !== locale) switchTo(l);
-      },
-    })),
-    { type: "separator" },
-    {
-      label: labels.signOut,
-      onSelect: () =>
-        startTransition(async () => {
-          const data = new FormData();
-          data.set("locale", locale);
-          await signOut(data);
-        }),
-    },
-  ];
 
   const trigger = (
     <button
@@ -628,14 +605,200 @@ function AccountMenu({ name }: { name: string | null }) {
     </button>
   );
 
-  const menu = <Menu trigger={trigger} items={items} align="start" />;
-  // In the rail the name shows on hover and focus, like the links.
-  return collapsed ? (
-    <Tooltip content={shown} side="right">
-      <span className="flex">{menu}</span>
-    </Tooltip>
-  ) : (
-    menu
+  // Menu rows: 44 px on every pointer (0029 rows exception).
+  const row =
+    "jb-type flex min-h-11 w-full cursor-pointer items-center rounded-mark text-start text-base text-ink outline-none select-none hover-fine:bg-wash-hover focus-visible:shadow-[inset_0_0_0_2px_var(--violet)] [&_svg]:stroke-[1.75]";
+
+  return (
+    <Popover.Root
+      onOpenChange={(open) => {
+        if (open) setDark(isDarkNow());
+      }}
+    >
+      {collapsed ? (
+        <Tooltip content={shown} side="right">
+          <Popover.Trigger render={trigger} />
+        </Tooltip>
+      ) : (
+        <Popover.Trigger render={trigger} />
+      )}
+      <Popover.Portal>
+        <Popover.Positioner
+          side={collapsed ? "right" : "top"}
+          align="start"
+          sideOffset={8}
+          collisionPadding={16}
+          className="z-50 outline-none"
+        >
+          <Popover.Popup
+            aria-label={labels.account}
+            className={cn(
+              "flex w-[min(20rem,var(--available-width))] flex-col rounded-box border border-line bg-card p-2 text-ink shadow-menu outline-none",
+              "origin-(--transform-origin) transition-[opacity,scale] duration-(--dur-base) ease-enter",
+              "data-starting-style:scale-(--pop-scale) data-starting-style:opacity-0",
+              "data-ending-style:scale-(--pop-scale) data-ending-style:opacity-0 data-ending-style:duration-(--dur-exit) data-ending-style:ease-exit",
+            )}
+          >
+            {/* Who: photo, name, plan. No email: they know it. */}
+            <div className="flex items-center gap-3 p-2">
+              {name ? (
+                <Avatar name={name} size="md" className="rounded-control" />
+              ) : (
+                <span className="jb-type flex size-10 items-center justify-center rounded-control bg-tint text-violet">
+                  <span className="jb-type-icon">
+                    <HugeiconsUserIcon />
+                  </span>
+                </span>
+              )}
+              <div className="flex min-w-0 flex-col items-start gap-1">
+                <Popover.Title className="max-w-full truncate text-base font-semibold">
+                  {shown}
+                </Popover.Title>
+                <Badge tone="violet">{labels.plan}</Badge>
+              </div>
+            </div>
+            <Divider />
+
+            <Switch
+              label={
+                <span className="flex items-center gap-(--px)">
+                  <span className="jb-type-icon text-ink-muted [&_svg]:stroke-[1.75]">
+                    <MoonIcon />
+                  </span>
+                  {labels.darkMode}
+                </span>
+              }
+              checked={dark}
+              onCheckedChange={(next) => {
+                setDark(next);
+                saveTheme(next ? "dark" : "light");
+              }}
+              className="jb-type rounded-mark"
+            />
+            <Divider />
+
+            <Link href={`/${locale}/settings`} className={row}>
+              <span className="jb-type-icon text-ink-muted">
+                <HugeiconsSettingsIcon />
+              </span>
+              {labels.settings}
+            </Link>
+            <div className="jb-type flex min-h-11 items-center">
+              <span className="jb-type-icon text-ink-muted">
+                <LanguageIcon />
+              </span>
+              <span className="flex-1 text-base">{labels.language}</span>
+              <LocaleSwitch
+                current={locale}
+                label={labels.language}
+                short={labels.localeShort}
+                names={labels.localeNames}
+                onPick={(next) => {
+                  rememberLocale(next);
+                  router.push(pathInLocale(pathname, next));
+                }}
+              />
+            </div>
+            <Divider />
+
+            <button
+              type="button"
+              disabled={pending}
+              className={cn(row, "text-danger hover-fine:bg-wash-danger")}
+              onClick={() =>
+                startTransition(async () => {
+                  const data = new FormData();
+                  data.set("locale", locale);
+                  await signOut(data);
+                })
+              }
+            >
+              <span className="jb-type-icon">
+                <LogOutIcon />
+              </span>
+              {labels.signOut}
+            </button>
+
+            <p className="px-2 pt-2 pb-1 text-sm text-ink-subtle">
+              v{pkg.version} ·{" "}
+              <Link
+                href={`/${locale}/terms`}
+                className="underline-offset-2 hover-fine:text-ink hover-fine:underline"
+              >
+                {labels.terms}
+              </Link>
+            </p>
+          </Popover.Popup>
+        </Popover.Positioner>
+      </Popover.Portal>
+    </Popover.Root>
+  );
+}
+
+function Divider() {
+  return <hr className="my-1 border-line" />;
+}
+
+/**
+ * Three-way language switch (en-us, en-gb, fr-fr). A radio group: arrow
+ * keys move between the options, and the current one is announced.
+ */
+function LocaleSwitch({
+  current,
+  label,
+  short,
+  names,
+  onPick,
+}: {
+  current: Locale;
+  label: string;
+  short: Record<Locale, string>;
+  names: Record<Locale, string>;
+  onPick: (locale: Locale) => void;
+}) {
+  return (
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className="flex rounded-control bg-well p-0.5"
+    >
+      {locales.map((l, index) => {
+        const on = l === current;
+        return (
+          <button
+            key={l}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            aria-label={names[l]}
+            title={names[l]}
+            lang={localeTag(l)}
+            tabIndex={on ? 0 : -1}
+            onClick={() => {
+              if (!on) onPick(l);
+            }}
+            onKeyDown={(event) => {
+              const forward = ["ArrowRight", "ArrowDown"].includes(event.key);
+              const back = ["ArrowLeft", "ArrowUp"].includes(event.key);
+              if (!forward && !back) return;
+              event.preventDefault();
+              const step = forward ? 1 : locales.length - 1;
+              const next = locales[(index + step) % locales.length];
+              if (next) onPick(next);
+            }}
+            className={cn(
+              "jb-type jb-type-badge min-h-8 rounded-control-sm text-xs font-semibold whitespace-nowrap outline-none pointer-coarse:min-h-11",
+              "focus-visible:shadow-[inset_0_0_0_2px_var(--violet)]",
+              on
+                ? "bg-card text-ink shadow-thumb"
+                : "text-ink-muted hover-fine:text-ink",
+            )}
+          >
+            {short[l]}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 

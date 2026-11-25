@@ -10,6 +10,7 @@ import { jakarta } from "@/lib/fonts";
 import { site } from "@/lib/site";
 
 import "../globals.css";
+import { THEME_SCRIPT } from "@/lib/theme";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -41,7 +42,12 @@ export default async function LocaleLayout({
     <html
       lang={localeTag(locale)}
       className={`${jakarta.variable} h-full antialiased`}
+      // The theme script sets data-theme before React hydrates.
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
