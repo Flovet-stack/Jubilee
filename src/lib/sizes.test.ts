@@ -72,6 +72,14 @@ describe("type spacing (0029)", () => {
     expect(box).toContain("line-height: 1.5");
     expect(box).toContain("--tw-leading: 1.5");
   });
+
+  it("sizes icons at about 110 % of the text (0030)", () => {
+    for (const start of [".jb-type {", ".jb-field {"]) {
+      const box = block(components, start);
+      expect(box).toContain("--icon: 1.125em");
+      expect(box).toContain("--icon-inset: calc((1lh - var(--icon)) / 2)");
+    }
+  });
 });
 
 describe("radius by size (0022)", () => {

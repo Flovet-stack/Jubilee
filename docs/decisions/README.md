@@ -18,37 +18,38 @@ The product team researches every product, UX, UI and architecture decision for 
 
 ## Index
 
-| #    | Decision                                                                                                                                            | Status                              |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                                                                                      | Approved                            |
-| 0002 | [Project structure](0002-project-structure.md)                                                                                                      | Approved                            |
-| 0003 | [Internationalisation](0003-internationalisation.md)                                                                                                | Superseded by 0017                  |
-| 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                                                                     | Approved                            |
-| 0005 | [Target markets and rollout order](0005-launch-markets.md)                                                                                          | Approved                            |
-| 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md)                                                                      | Approved                            |
-| 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                                                                   | Approved                            |
-| 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                                                         | Approved                            |
-| 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md)                                       | Approved                            |
-| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                                                             | Approved                            |
-| 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                                                                  | Approved                            |
-| 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                                                        | Approved                            |
-| 0013 | [Sign-in page refresh and word spacing](0013-sign-in-page-refresh-and-word-spacing.md)                                                              | Approved                            |
-| 0014 | [Terms of service page](0014-terms-of-service-page.md)                                                                                              | Approved                            |
-| 0015 | [Keep the font's default word spacing](0015-keep-default-word-spacing.md)                                                                           | Approved                            |
-| 0016 | [CV data model and PDF rendering](0016-cv-data-model-and-pdf-rendering.md)                                                                          | Approved                            |
-| 0017 | [Regional locales and what we call a CV](0017-regional-locales-and-cv-naming.md) (supersedes 0003)                                                  | Approved                            |
-| 0018 | [Locale ids are the lowercase URL segments](0018-locale-ids-are-url-segments.md) (supersedes one sentence of 0017)                                  | Approved                            |
-| 0019 | [Logo icon redrawn as a staircase of dots ("the steps")](0019-logo-icon-staircase.md)                                                               | Approved                            |
-| 0020 | [Control sizes by screen type and pointer](0020-control-sizes-and-density.md) (supersedes 0009's control heights; mouse heights superseded by 0028) | Approved                            |
-| 0021 | [Phone, date and password fields](0021-phone-date-and-password-fields.md)                                                                           | Approved                            |
-| 0022 | [Corner radius by size](0022-corner-radius-by-size.md) (supersedes 0007's control and card radius)                                                  | Approved                            |
-| 0023 | [Run `pnpm check` on every pull request](0023-pull-request-checks.md)                                                                               | Approved                            |
-| 0024 | [CV builder: guided editor, live preview and autosave](0024-cv-builder-editor.md)                                                                   | Approved                            |
-| 0025 | [The first CV template and its typography](0025-first-cv-template-and-typography.md) (partly superseded by 0026)                                    | Approved                            |
-| 0026 | [CV entry layout in four corners, tighter body lines](0026-cv-entry-layout.md)                                                                      | Approved                            |
-| 0027 | [App shell and collapsible sidebar](0027-app-shell-and-sidebar.md) (row size superseded by 0029)                                                    | Approved                            |
-| 0028 | [Button spacing from the type, shorter controls on mouse](0028-button-spacing-from-type.md) (supersedes 0020's mouse heights)                       | Approved (sizes superseded by 0029) |
-| 0029 | [Type spacing for every control, sizes set by font size](0029-type-spacing-for-every-control.md) (supersedes 0028's sizes)                          | Approved                            |
+| #    | Decision                                                                                                                                            | Status                                  |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| 0001 | [Stack and tooling](0001-stack-and-tooling.md)                                                                                                      | Approved                                |
+| 0002 | [Project structure](0002-project-structure.md)                                                                                                      | Approved                                |
+| 0003 | [Internationalisation](0003-internationalisation.md)                                                                                                | Superseded by 0017                      |
+| 0004 | [Auth, database and environment](0004-auth-database-and-env.md)                                                                                     | Approved                                |
+| 0005 | [Target markets and rollout order](0005-launch-markets.md)                                                                                          | Approved                                |
+| 0006 | [Account data and the email sign-in code](0006-account-data-and-email-code.md)                                                                      | Approved                                |
+| 0007 | [Visual foundations](0007-visual-foundations.md) (iconography superseded by 0009)                                                                   | Approved                                |
+| 0008 | [Interaction, disclosure, explicitness and space](0008-interaction-disclosure-and-space.md)                                                         | Approved                                |
+| 0009 | [Design system: tokens, components, animated icons and motion](0009-design-system-components-icons-motion.md)                                       | Approved                                |
+| 0010 | [Logo and brand identity ("the path")](0010-logo-and-brand-identity.md)                                                                             | Approved                                |
+| 0011 | [Privacy policy page](0011-privacy-policy-page.md)                                                                                                  | Approved                                |
+| 0012 | [Sign-in flow and screens](0012-sign-in-flow-and-screens.md)                                                                                        | Approved                                |
+| 0013 | [Sign-in page refresh and word spacing](0013-sign-in-page-refresh-and-word-spacing.md)                                                              | Approved                                |
+| 0014 | [Terms of service page](0014-terms-of-service-page.md)                                                                                              | Approved                                |
+| 0015 | [Keep the font's default word spacing](0015-keep-default-word-spacing.md)                                                                           | Approved                                |
+| 0016 | [CV data model and PDF rendering](0016-cv-data-model-and-pdf-rendering.md)                                                                          | Approved                                |
+| 0017 | [Regional locales and what we call a CV](0017-regional-locales-and-cv-naming.md) (supersedes 0003)                                                  | Approved                                |
+| 0018 | [Locale ids are the lowercase URL segments](0018-locale-ids-are-url-segments.md) (supersedes one sentence of 0017)                                  | Approved                                |
+| 0019 | [Logo icon redrawn as a staircase of dots ("the steps")](0019-logo-icon-staircase.md)                                                               | Approved                                |
+| 0020 | [Control sizes by screen type and pointer](0020-control-sizes-and-density.md) (supersedes 0009's control heights; mouse heights superseded by 0028) | Approved                                |
+| 0021 | [Phone, date and password fields](0021-phone-date-and-password-fields.md)                                                                           | Approved                                |
+| 0022 | [Corner radius by size](0022-corner-radius-by-size.md) (supersedes 0007's control and card radius)                                                  | Approved                                |
+| 0023 | [Run `pnpm check` on every pull request](0023-pull-request-checks.md)                                                                               | Approved                                |
+| 0024 | [CV builder: guided editor, live preview and autosave](0024-cv-builder-editor.md)                                                                   | Approved                                |
+| 0025 | [The first CV template and its typography](0025-first-cv-template-and-typography.md) (partly superseded by 0026)                                    | Approved                                |
+| 0026 | [CV entry layout in four corners, tighter body lines](0026-cv-entry-layout.md)                                                                      | Approved                                |
+| 0027 | [App shell and collapsible sidebar](0027-app-shell-and-sidebar.md) (row size superseded by 0029)                                                    | Approved                                |
+| 0028 | [Button spacing from the type, shorter controls on mouse](0028-button-spacing-from-type.md) (supersedes 0020's mouse heights)                       | Approved (sizes superseded by 0029)     |
+| 0029 | [Type spacing for every control, sizes set by font size](0029-type-spacing-for-every-control.md) (supersedes 0028's sizes)                          | Approved (icon size superseded by 0030) |
+| 0030 | [Icons sized from the font size, not the line box](0030-icon-size-from-font-size.md) (supersedes 0029's icon size)                                  | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

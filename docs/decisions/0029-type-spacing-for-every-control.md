@@ -1,6 +1,6 @@
 # 0029: Type spacing for every control, sizes set by font size
 
-- **Status:** Approved
+- **Status:** Approved (icon size superseded by 0030)
 - **Proposed:** 2026-11-25 by the product team (roles: UI, Frontend)
 - **Approved:** 2026-11-25 by Flovet (in chat: "Font sets size" and "Skill + CLAUDE.md line")
 - **Amendment (Approved 2026-11-25 by Flovet, in chat: "Approve, push to PR"):** sidebar items 40 px with a mouse / 44 px on touch, superseding 0027's 36 px rows and 20 px icons; avatars and text/back links exempt.

@@ -269,6 +269,14 @@ One dated entry per task: what was built, the review score, and what was left.
 - Reviewer: 81, then 96/100 after fixes (Tailwind `text-sm` line-height override, badge icon, a padded "⋯" button, fixed icon sizes, end slot, tests).
 - Flovet approved the 0029 amendment (sidebar rows 40 px with a mouse, superseding 0027's 36 px; avatars and text links exempt). Spec 17 Done (96/100).
 
+## 2026-11-25: Icon size from the font size (spec 18, decision 0030)
+
+- Icons in controls were 150 % of the text (`1lh` at `line-height: 1.5`). Research: IBM Carbon pairs 16–20 px icons with 14–16 px text (1.0–1.25 ×); Atlassian uses 16 px icons with 14 px text (about 1.14 ×). Flovet chose 1.125em (about 110 %).
+- `--icon: 1.125em` and `--icon-inset: (1lh − --icon) / 2` on `.jb-type` and `.jb-field`. The inset is added at the icon's sides too, so an icon still sits as far from the edge and the text as from the top. Heights unchanged.
+- Measured on `/design-system`: icons 18 / 15.75 / 13.5 px (1.125 ×); icon to edge = top = text (11 px at lg); icon-only square; field start and end icons 18 px at 8.5 px; phone list check 11 px from the edge; all 126 controls at least 44 px on touch.
+- Checks pass (259 tests, build). Reviewer: 97/100; its phone-list and comment findings fixed.
+- Left: the `/design-system` icon intro still says "20 px in UI, 24 px in navigation", and `--icon-ui` / `--icon-nav` look unused. Both predate this task.
+
 ## 2026-11-25: Sidebar polish (Flovet's review of spec 15)
 
 - The sidebar now shows the real logo from `docs/design/brand/logo/jubilee-logo.svg` (new `JubileeLogo`), or the icon in the collapsed rail.
