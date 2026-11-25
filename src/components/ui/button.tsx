@@ -23,13 +23,19 @@ import { Tooltip } from "./tooltip";
  * pressed (scale 0.98 + darker fill), disabled, loading (keeps its width,
  * ignores clicks, announces busy). Labels wrap instead of clipping (French).
  *
- * Sizes (0020): lg 48 px for single-task screens, md 40 px (the default),
- * sm 32 px for inline row actions. Touch raises md and sm to 44 px through
- * the tokens. Radius follows the size (0022). Never mix sizes in a group.
+ * Sizes (0020, heights from 0028): lg 40 px for single-task screens, md 32 px
+ * (the default), sm 24 px for inline row actions. Touch raises all three to
+ * 44 px through the tokens. Radius follows the size (0022). Never mix sizes
+ * in a group.
+ *
+ * Spacing (0028) lives in components.css (`.jb-button`): padding, gap and
+ * icon size come from the label's line box and cap height, so text, text +
+ * icon and icon-only buttons are spaced by one rule. Don't add padding or
+ * gap at call sites.
  */
 export const buttonVariants = cva(
   [
-    "relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 text-center font-semibold select-none",
+    "jb-button relative inline-flex shrink-0 cursor-pointer items-center justify-center text-center font-semibold select-none",
     "transition-[background-color,border-color,color,scale] duration-(--dur-exit) ease-standard hover-fine:duration-(--dur-fast)",
     "active:scale-(--press-scale) active:duration-(--dur-fast)",
     "data-disabled:cursor-not-allowed data-disabled:active:scale-100",
@@ -60,12 +66,12 @@ export const buttonVariants = cva(
         ],
       },
       size: {
-        lg: "min-h-(--control-h-lg) rounded-control-lg px-5 py-2 text-base",
-        md: "min-h-(--control-h) rounded-control px-4 py-1.5 text-base",
-        sm: "min-h-(--control-h-sm) rounded-control-sm px-3 py-1 text-sm [&_svg]:size-4",
+        lg: "jb-button-lg rounded-control-lg",
+        md: "jb-button-md rounded-control",
+        sm: "jb-button-sm rounded-control-sm",
       },
       iconOnly: {
-        true: "px-0 py-0",
+        true: "jb-button-icon-only",
         false: "",
       },
       fullWidth: {
@@ -73,11 +79,6 @@ export const buttonVariants = cva(
         false: "",
       },
     },
-    compoundVariants: [
-      { iconOnly: true, size: "lg", className: "size-(--control-h-lg)" },
-      { iconOnly: true, size: "md", className: "size-(--control-h)" },
-      { iconOnly: true, size: "sm", className: "size-(--control-h-sm)" },
-    ],
     defaultVariants: {
       variant: "secondary",
       size: "md",
@@ -87,6 +88,16 @@ export const buttonVariants = cva(
   },
 );
 
+/** Wraps an icon so it is one line box square, --py from its neighbours. */
+function ButtonIcon({ icon }: { icon: ReactNode }) {
+  if (icon == null || icon === false) return null;
+  return (
+    <span className="jb-button-icon" aria-hidden="true">
+      {icon}
+    </span>
+  );
+}
+
 type ButtonBaseProps = Omit<ButtonPrimitive.Props, "className"> &
   Omit<VariantProps<typeof buttonVariants>, "iconOnly"> & {
     className?: string;
@@ -94,7 +105,7 @@ type ButtonBaseProps = Omit<ButtonPrimitive.Props, "className"> &
     loading?: boolean;
     /** Read while loading, e.g. "Sending". Defaults to the visible label. */
     loadingLabel?: string;
-    /** An icon before the label (20 px, decorative). */
+    /** An icon before the label (decorative; sized to the line box). */
     icon?: ReactNode;
     /** An icon after the label, e.g. a chevron or external-link. */
     iconEnd?: ReactNode;
@@ -137,13 +148,13 @@ export function Button({
     >
       <span
         className={cn(
-          "inline-flex items-center justify-center gap-2 transition-opacity duration-(--dur-fast)",
+          "jb-button-content transition-opacity duration-(--dur-fast)",
           loading && "opacity-0",
         )}
       >
-        {icon}
+        <ButtonIcon icon={icon} />
         {children}
-        {iconEnd}
+        <ButtonIcon icon={iconEnd} />
       </span>
       {loading ? (
         <span className="absolute inset-0 flex items-center justify-center">
@@ -207,7 +218,9 @@ export function IconButton({
       }}
       {...props}
     >
-      {loading ? <Spinner delay="none" /> : icon}
+      <span className="jb-button-icon">
+        {loading ? <Spinner delay="none" /> : icon}
+      </span>
     </ButtonPrimitive>
   );
   if (!tooltip) return button;
@@ -216,7 +229,7 @@ export function IconButton({
 
 type ButtonLinkProps = ComponentProps<typeof Link> &
   Omit<VariantProps<typeof buttonVariants>, "iconOnly"> & {
-    /** An icon before the label (20 px, decorative). */
+    /** An icon before the label (decorative; sized to the line box). */
     icon?: ReactNode;
   };
 
@@ -241,8 +254,10 @@ export function ButtonLink({
       )}
       {...props}
     >
-      {icon}
-      {children}
+      <span className="jb-button-content">
+        <ButtonIcon icon={icon} />
+        {children}
+      </span>
     </Link>
   );
 }

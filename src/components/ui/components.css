@@ -169,3 +169,94 @@
       scale(var(--scale));
   }
 }
+
+/*
+ * Button spacing from the type (0028). The height is the line box plus
+ * 2 × --py; --px adds back the empty space above and below the capitals, so
+ * the visible label sits evenly. An icon is one line box square and sits
+ * --py from the edge and from the label. Touch raises the minimum to 44 px
+ * through the tokens (0020); the padding never changes, the extra
+ * height centres the content.
+ */
+@layer components {
+  .jb-button {
+    --px: calc(var(--py) + (1lh - 1cap) / 2);
+    min-height: var(--btn-h);
+    padding: var(--py) var(--px);
+    gap: var(--px);
+    font-size: var(--btn-text);
+    line-height: var(--btn-lh);
+  }
+
+  .jb-button-lg {
+    --btn-h: var(--control-h-lg);
+    --btn-text: var(--text-base);
+    --btn-lh: 24px;
+    --py: 8px;
+    --px-fallback: 14px;
+  }
+
+  .jb-button-md {
+    --btn-h: var(--control-h);
+    --btn-text: var(--text-sm);
+    --btn-lh: 20px;
+    --py: 6px;
+    --px-fallback: 11px;
+  }
+
+  .jb-button-sm {
+    --btn-h: var(--control-h-sm);
+    --btn-text: var(--text-sm);
+    --btn-lh: 16px;
+    --py: 4px;
+    --px-fallback: 7px;
+  }
+
+  /* Label, icons and the gap between them; hidden while loading. */
+  .jb-button-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--px);
+  }
+
+  .jb-button-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 1lh;
+    height: 1lh;
+    margin-inline: calc(var(--py) - var(--px));
+  }
+
+  .jb-button-icon svg,
+  .jb-button-icon-only > svg {
+    width: 1lh;
+    height: 1lh;
+    flex-shrink: 0;
+  }
+
+  /* Icon only: square, --py on every side. */
+  .jb-button-icon-only {
+    min-width: var(--btn-h);
+    padding: var(--py);
+  }
+
+  .jb-button-icon-only .jb-button-icon {
+    margin-inline: 0;
+  }
+
+  /* Browsers without lh or cap (Firefox before 120, Safari before 17.2):
+     fixed values worked out for Plus Jakarta Sans. */
+  @supports not ((height: 1lh) and (height: 1cap)) {
+    .jb-button {
+      --px: var(--px-fallback);
+    }
+
+    .jb-button-icon,
+    .jb-button-icon svg,
+    .jb-button-icon-only > svg {
+      width: var(--btn-lh);
+      height: var(--btn-lh);
+    }
+  }
+}

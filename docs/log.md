@@ -251,3 +251,11 @@ One dated entry per task: what was built, the review score, and what was left.
   - the screenshot matrix at 390 and 1440 in both themes is partial;
   - Escape-return and the sheet's focus trap weren't demonstrated;
   - the `Date.now()` prerender warning from the `(app)` guard predates this work.
+
+## 2026-11-25: Button spacing from the type (spec 16, decision 0028)
+
+- Decision 0028 approved, then revised by Flovet before merge: controls are 40 / 32 / 24 px with a mouse (lg / md / sm), 44 px on touch for all three. Supersedes 0020's mouse heights.
+- `.jb-button` in `components.css`: `--px = --py + (1lh − 1cap) / 2`, gap `--px`, icons one line box square with `margin-inline: --py − --px`; icon-only padded `--py`. Fixed-px fallback without `lh`/`cap`. `Button`, `IconButton`, `ButtonLink` and `buttonVariants` users all pick it up; the phone field's country trigger lost its spacing override.
+- Measured on `/design-system`: heights 40/32/24; icon to edge = icon to top = 8/6/4 px; icon-only square; inputs match at 16 px text; fallback gives the same; touch 44 px everywhere.
+- Reviewer: 94/100. Its findings (phone trigger override, untested fallback and field heights) were fixed or measured afterwards.
+- Left: `sm` fields are 24 px with 16 px text, so they're tight on mouse; watch the CV editor rows.
