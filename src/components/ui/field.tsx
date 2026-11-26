@@ -130,7 +130,8 @@ export function FieldSet({
 
 /** Shared control look: inputs, textareas and select triggers. */
 export const controlClasses = cn(
-  "w-full min-w-0 bg-card text-(length:--text-field) text-ink shadow-[inset_0_0_0_1px_var(--field)]",
+  // Recessed well (0036); the --field ring inside it keeps 3:1.
+  "jb-surface w-full min-w-0 bg-field-well text-(length:--text-field) text-ink shadow-recessed",
   "transition-[box-shadow,background-color] duration-(--dur-exit) hover-fine:duration-(--dur-fast)",
   "placeholder:text-ink-subtle",
   "hover-fine:shadow-[inset_0_0_0_1px_var(--ink-muted)]",

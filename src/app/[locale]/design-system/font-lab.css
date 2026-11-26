@@ -8,6 +8,11 @@ html[data-font-pair="figtree-geist"] {
   --font-heading-trial: var(--font-trial-figtree);
 }
 
+html[data-font-pair="geist"] {
+  --font-sans: var(--font-trial-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-heading-trial: var(--font-trial-geist);
+}
+
 html[data-font-pair="vietnam-lexend"] {
   --font-sans: var(--font-trial-lexend), ui-sans-serif, system-ui, sans-serif;
   --font-heading-trial: var(--font-trial-be-vietnam);
@@ -15,4 +20,12 @@ html[data-font-pair="vietnam-lexend"] {
 
 html[data-font-pair] :is(h1, h2, h3, h4) {
   font-family: var(--font-heading-trial), var(--font-sans);
+}
+
+/* Radius trial (0036): pill corners on controls; cards and wells keep
+   theirs. Set by RadiusSwitcher on <html>, this page only. */
+html[data-radius-trial="pill"] {
+  --radius-control-sm: 9999px;
+  --radius-control: 9999px;
+  --radius-control-lg: 9999px;
 }

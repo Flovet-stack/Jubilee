@@ -1,6 +1,6 @@
 # 24: Layered control surfaces, and the Geist and radius trial
 
-Status: Not started · Written: 2026-11-26
+Status: Built, in review (reviewer 84/100; its must-fixes applied, not re-graded; 390 px and sidebar screenshots not taken; the Geist option shares the existing font lab's saved choice) · Written: 2026-11-26
 
 ## Goal
 

@@ -433,3 +433,12 @@
     transform: translateX(var(--from, 0));
   }
 }
+
+/* Layered surfaces (0036) draw their edges with shadows, which forced
+   colors (Windows High Contrast) removes: give them a real edge there. */
+@media (forced-colors: active) {
+  .jb-surface {
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+}

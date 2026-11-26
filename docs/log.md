@@ -427,3 +427,11 @@ One dated entry per task: what was built, the review score, and what was left.
 - Fixed: on touch, tapping Language closed the menu (the pressed row unmounted and looked like an outside press).
 - `pnpm check` passed (289 tests, build). Browser: 1440 px dark (menu, keyboard path, collapsed rail), 390 px light fr-fr (sheet, menu, language panel).
 - Reviewer 78 → 88/100; its last must-fix (height animation) was built after, not re-graded.
+
+## 2026-11-26: Layered control surfaces, Geist and radius trial (spec 24, decision 0036)
+
+- New tokens `--control`, `--control-hover`, `--control-press`, `--control-active`, `--field-well` and shadows `--shadow-raised`, `--shadow-primary`, `--shadow-primary-press`, `--shadow-recessed` (light and both dark blocks).
+- Primary: violet with a top glow, bottom shade, inner and darker-violet outer rings. Secondary and quiet-on-hover: raised. Fields: recessed well, keeping the `--field` ring for 3:1. Sidebar active row: raised tab. No CSS borders; forced-colors gets a 1 px ButtonBorder outline.
+- Design-system page: "Geist" in the font switcher and a Radius switch (ours / pill, not saved).
+- `pnpm check` passed. Browser: 1440 px dark (buttons, fields) and light (secondary values); trial CSS checked by setting its attributes.
+- Reviewer 84/100; must-fixes (radius not saved, focus-ring 3:1 tests) applied, not re-graded.

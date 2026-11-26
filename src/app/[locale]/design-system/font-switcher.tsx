@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { Select } from "@/components/ui/select";
 
 const PAIRS = [
   { value: "current", label: "Plus Jakarta Sans (current)" },
+  { value: "geist", label: "Geist (0036 trial)" },
   { value: "figtree-geist", label: "Figtree headings + Geist body" },
   { value: "vietnam-lexend", label: "Be Vietnam Pro headings + Lexend body" },
 ];
@@ -60,6 +61,40 @@ export function FontSwitcher({ fontVariables }: { fontVariables: string }) {
       items={PAIRS}
       value={pair}
       onValueChange={(value) => setPair(value ?? "current")}
+      className="w-full sm:w-96"
+    />
+  );
+}
+
+const RADII = [
+  { value: "ours", label: "Radius: ours (0022)" },
+  { value: "pill", label: "Radius: pill (0036 trial)" },
+];
+
+/**
+ * Dev-only radius trial (0036): pill corners on controls, this page only,
+ * not saved. The attribute sits on <html> like the font trial, so portalled
+ * menus and dialogs follow; it's removed when the page unmounts.
+ */
+export function RadiusSwitcher() {
+  const [radius, setRadius] = useState("ours");
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (radius === "pill") html.dataset.radiusTrial = "pill";
+    else delete html.dataset.radiusTrial;
+    return () => {
+      delete html.dataset.radiusTrial;
+    };
+  }, [radius]);
+
+  return (
+    <Select
+      aria-label="Corner radius"
+      placeholder="Corner radius"
+      items={RADII}
+      value={radius}
+      onValueChange={(value) => setRadius(value ?? "ours")}
       className="w-full sm:w-96"
     />
   );
