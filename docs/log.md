@@ -412,3 +412,9 @@ One dated entry per task: what was built, the review score, and what was left.
 - Flovet's values: desk #171717, content window and cards #161616, borders #232323 (`--desk`, `--card`, `--line` in both dark blocks of `globals.css`).
 - Page #171717 (same as the desk) and wells #1c1c1c, so no green tint remains in the surfaces.
 - Token contrast tests pass (56). Checked /cvs and /privacy at 1440 px dark.
+
+## 2026-11-26: Darker dark content window, neutral dark greys
+
+- Dark `--card` (content window, cards) #161616 → #131313, a shade darker (Flovet).
+- Removed the last green tint from dark tokens: ink #f2f2f2, ink-muted #b6b6b6, ink-subtle #969696, field #808080, stage-saved #b0b0b0, scrim rgb(3 3 3 / 0.64).
+- Token contrast tests pass (56). Checked /cvs at 1440 px dark.

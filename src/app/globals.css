@@ -76,13 +76,13 @@
     --page: #171717;
     --well: #1c1c1c;
     --desk: #171717;
-    --card: #161616;
+    --card: #131313;
     --line: #232323;
     --tint: #252148;
-    --field: #7c837d;
-    --ink: #f1f3f1;
-    --ink-muted: #b3bab4;
-    --ink-subtle: #929993;
+    --field: #808080;
+    --ink: #f2f2f2;
+    --ink-muted: #b6b6b6;
+    --ink-subtle: #969696;
     --violet: #a48cff;
     --violet-press: #c3b4ff;
     --on-violet: #120d2e;
@@ -90,7 +90,7 @@
     --success: #5fd39a;
     --danger: #ff7b7b;
 
-    --stage-saved: #adb3ae;
+    --stage-saved: #b0b0b0;
     --stage-applied: #8fb0ff;
     --stage-interview: #f39ad3;
     --stage-rejected: #b2aaa5;
@@ -99,7 +99,7 @@
     --provider-line: #8e918f;
     --provider-ink: #e3e3e3;
 
-    --scrim: rgb(2 5 3 / 0.64);
+    --scrim: rgb(3 3 3 / 0.64);
     --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
   }
 }
@@ -110,13 +110,13 @@
   --page: #171717;
   --well: #1c1c1c;
   --desk: #171717;
-  --card: #161616;
+  --card: #131313;
   --line: #232323;
   --tint: #252148;
-  --field: #7c837d;
-  --ink: #f1f3f1;
-  --ink-muted: #b3bab4;
-  --ink-subtle: #929993;
+  --field: #808080;
+  --ink: #f2f2f2;
+  --ink-muted: #b6b6b6;
+  --ink-subtle: #969696;
   --violet: #a48cff;
   --violet-press: #c3b4ff;
   --on-violet: #120d2e;
@@ -124,7 +124,7 @@
   --success: #5fd39a;
   --danger: #ff7b7b;
 
-  --stage-saved: #adb3ae;
+  --stage-saved: #b0b0b0;
   --stage-applied: #8fb0ff;
   --stage-interview: #f39ad3;
   --stage-rejected: #b2aaa5;
@@ -133,7 +133,7 @@
   --provider-line: #8e918f;
   --provider-ink: #e3e3e3;
 
-  --scrim: rgb(2 5 3 / 0.64);
+  --scrim: rgb(3 3 3 / 0.64);
   --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
 }
 
