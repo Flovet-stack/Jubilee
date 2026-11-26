@@ -434,3 +434,15 @@ One dated entry per task: what was built, the review score, and what was left.
 - New `--menu-line` for the dividers, set so its contrast with `--menu` matches `--desk` against `--line` (dark 1.14:1): dark #292929, light #e9e8ee.
 - Fixed: the forced-dark theme block had no `--menu`, so the menu was white when dark mode was switched on by hand.
 - Token tests pass (62); lint and typecheck pass. Checked at 1440 px dark.
+
+## 2026-11-26: Decision 0036, a swappable AI layer (Proposed)
+
+- Researched providers (Anthropic, OpenAI, Gemini, Mistral, Groq, OpenRouter, Vercel AI Gateway), the Vercel AI SDK, data terms, EU processing and the EU AI Act. Logged 0036 as Proposed.
+- Revised the same day on Flovet's input: the Vercel AI SDK with a per-task router in `src/lib/ai/` (seven tasks, each routed to a `provider:model` with fallbacks); evals decide when a task moves to a cheaper model; every task starts on Claude Haiku 5.5; free tiers get test data only.
+- Maps the MVP: AI in features 2, 4, 5, 6, 10; light in 7; optional in 1; none in 3, 8, 9.
+- Left: Flovet to approve 0036, the starting model, the two packages and the env var, and the daily caps. Mistral's terms and EU hosting are unverified.
+
+## 2026-11-26: Decision 0036 approved
+
+- Flovet approved 0036 (in chat), with Claude Haiku 5.5 as the starting model for every task. Status line, index and brief updated. Renumbered from 0034, which main had taken for the Grid Auditor decision.
+- Left: write the AI foundation spec (router, registry, routing table, usage log, caps, eval script, privacy page). Before building: Flovet to approve adding `ai`, `@ai-sdk/anthropic` and `ANTHROPIC_API_KEY`, create a Console API key in a Jubilee workspace, and set the daily caps.
