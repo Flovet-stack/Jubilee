@@ -394,3 +394,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - Every size mapped to its role: app page titles 24, dialog/legal/well titles 18, legal body 16/1.6, badges 12, muted hints 13.
 - `pnpm check` passed (283 tests, build). Browser: /cvs body 14, h1 24, field 14 mouse / 16 touch; privacy page at 390 dark.
 - Reviewer 84/100; its four must-fixes (sign-in display size, editor step heading, design-system headings and intro) applied, not re-graded.
+
+## 2026-11-26: Dark mode greys for the shell
+
+- Flovet's values: desk #171717, content window and cards #161616, borders #232323 (`--desk`, `--card`, `--line` in both dark blocks of `globals.css`).
+- Token contrast tests pass (56). Checked on /cvs at 1440 px dark. Page and well stay #0a0f0b and #141a15.
