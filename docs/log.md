@@ -487,3 +487,11 @@ One dated entry per task: what was built, the review score, and what was left.
   - the output isn't tagged;
   - the unsaved-edits toast hasn't been run in the browser;
   - the pre-existing `Date.now()` prerender error from `AppLayout`.
+
+## 2026-11-27: Softer field border, lighter field fill, plan pill beside the name
+
+- Dark `--field` (field border) #808080 → #686868: the softest grey that keeps 3:1 on every surface a field sits on (WCAG 1.4.11). Light stays #8b8999, already at the floor.
+- `--field-well` a touch lighter: dark #0f0f0f → #141414, light #f7f7f8 → #fafafb.
+- Account menu: the plan pill sits beside the first name; Free is a grey (neutral) pill. Each future tier gets its own tone.
+- The account button shows a pointer cursor.
+- Token tests (82), lint and typecheck pass. Checked at 1440 px dark.
