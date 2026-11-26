@@ -671,7 +671,7 @@ function AccountMenu({ name }: { name: string | null }) {
     <button
       type="button"
       aria-label={collapsed ? shown : undefined}
-      className={rowClasses(false, collapsed)}
+      className={cn(rowClasses(false, collapsed), "cursor-pointer")}
     >
       {/* Same box, radius and spacing as the other rows: the avatar takes
           the icon slot (1lh), so the row is the same height. */}
@@ -788,14 +788,18 @@ function AccountMenu({ name }: { name: string | null }) {
                           </span>
                         </span>
                       )}
-                      <div className="flex min-w-0 flex-col items-start gap-1">
+                      {/* Name, then the plan as a pill beside it. Each tier
+                          gets its own tone once tiers exist; Free is grey. */}
+                      <div className="flex min-w-0 items-center gap-2">
                         <Popover.Title
-                          className="max-w-full truncate text-base font-semibold"
+                          className="min-w-0 truncate text-base font-semibold"
                           title={shown}
                         >
                           {shown}
                         </Popover.Title>
-                        <Badge tone="violet">{labels.plan}</Badge>
+                        <Badge tone="neutral" className="shrink-0">
+                          {labels.plan}
+                        </Badge>
                       </div>
                     </div>
                     <Divider />
