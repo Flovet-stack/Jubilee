@@ -9,7 +9,14 @@ import { z } from "zod";
 export const env = createEnv({
   // `next typegen` loads next.config.ts, but type generation never reads env.
   skipValidation: process.env.npm_lifecycle_event === "typecheck",
-  server: {},
+  server: {
+    // Optional: without it, AI tasks return "unavailable" (0036, spec 26).
+    // Read only in src/lib/ai/.
+    ANTHROPIC_API_KEY: z.string().min(1).optional(),
+    // Optional: Groq, the default AI provider while Jubilee has test users
+    // only (0041). Read only in src/lib/ai/.
+    GROQ_API_KEY: z.string().min(1).optional(),
+  },
   client: {
     NEXT_PUBLIC_SITE_URL: z.url().transform((url) => url.replace(/\/+$/, "")),
     NEXT_PUBLIC_SUPABASE_URL: z.url(),

@@ -14,7 +14,7 @@
       },
       "ai": {
         "blocks": {
-          "2": "When AI features arrive (tailoring your CV, writing letters), this section will say which provider is used and what it sees, before those features touch your data. AI will never add experience you don't have, and nothing will be sent to an employer without your approval."
+          "0": "When you use an AI feature, such as importing your LinkedIn profile or tailoring your CV to a job, Jubilee sends the CV and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models."
         }
       }
     }

@@ -1,0 +1,5 @@
+Analyste de données H/F - Paris (CDI)
+Fictive Mobility recherche un ou une analyste de données pour son équipe produit.
+Missions : suivre les indicateurs d'usage, construire des tableaux de bord, mener des tests A/B.
+Profil : 2 à 4 ans d'expérience, SQL et Python indispensables, Tableau ou Power BI, anglais professionnel.
+Avantages : télétravail 2 jours par semaine, carte restaurant.

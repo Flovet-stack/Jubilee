@@ -1,0 +1,16 @@
+Jordan Avery
+Data Analyst | jordan.avery@example.com | +1 (555) 010-2233 | 48 Maple Lane, Springfield
+
+Experience
+Data Analyst, Northwind Traders (2021 - present)
+- Built weekly sales dashboards in Power BI used by 40 store managers.
+- Cut report preparation time from two days to three hours with Python and SQL.
+
+Junior Analyst, Contoso Retail (2019 - 2021)
+- Cleaned and joined point-of-sale data from 12 regions.
+
+Education
+BSc Statistics, State University of Springfield (2019)
+
+Skills
+SQL, Python (pandas), Power BI, Excel, A/B testing

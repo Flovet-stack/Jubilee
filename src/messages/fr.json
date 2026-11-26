@@ -73,11 +73,12 @@
       "processors": {
         "title": "Qui d’autre les traite",
         "blocks": [
-          "Deux entreprises travaillent pour Jubilee afin de faire fonctionner le service, et uniquement pour cela :",
+          "Quatre entreprises travaillent pour Jubilee afin de faire fonctionner le service, et uniquement pour cela :",
           {
             "list": [
               "Supabase stocke votre compte et gère la connexion.",
-              "Vercel héberge le site et l’application."
+              "Vercel héberge le site et l’application.",
+              "Groq et Anthropic font fonctionner les fonctionnalités d’IA (voir « IA et décisions automatisées »)."
             ]
           },
           "Si vous choisissez de vous connecter avec Google ou LinkedIn, ils nous transmettent votre nom, votre adresse e-mail et votre photo de profil. Ils agissent selon leurs propres politiques de confidentialité, et non pour le compte de Jubilee.",
@@ -119,9 +120,10 @@
       "ai": {
         "title": "IA et décisions automatisées",
         "blocks": [
-          "Jubilee n’utilise pas encore l’IA sur vos données et ne prend aucune décision automatisée vous concernant.",
-          "Nous n’utilisons pas vos données pour entraîner des modèles d’IA.",
-          "Quand les fonctionnalités d’IA arriveront (adaptation du CV, rédaction de lettres), cette section indiquera quel prestataire est utilisé et ce qu’il voit, avant qu’elles ne traitent vos données. L’IA n’ajoutera jamais d’expérience que vous n’avez pas, et rien ne sera envoyé à un employeur sans votre accord."
+          "Quand vous utilisez une fonctionnalité d’IA, par exemple l’import de votre profil LinkedIn ou l’adaptation de votre CV à une offre, Jubilee envoie le texte du CV et de l’offre que vous avez choisis à Groq, qui fait fonctionner des modèles d’IA ouverts, ou, si Groq n’est pas disponible, à Anthropic, qui fait fonctionner les modèles Claude.",
+          "Nous retirons d’abord votre adresse e-mail, votre numéro de téléphone et votre adresse postale. Les deux traitent le texte aux États-Unis et ne l’utilisent pas pour entraîner leurs modèles.",
+          "Pour chaque requête d’IA, nous gardons une courte trace (la fonctionnalité, sa taille et son coût), pas le texte lui-même, afin de fixer des limites quotidiennes équitables.",
+          "L’IA ne fait que proposer des modifications, et vous acceptez ou refusez chacune d’elles. Elle n’ajoute jamais d’expérience que vous n’avez pas, Jubilee ne prend aucune décision automatisée vous concernant, et rien n’est envoyé à un employeur sans votre accord."
         ]
       },
       "cookies": {
@@ -789,5 +791,12 @@
     "plan": "Gratuit",
     "darkMode": "Mode sombre",
     "language": "Langue"
+  },
+  "ai": {
+    "errors": {
+      "limit": "Vous avez utilisé vos requêtes d’IA du jour. Elles reviennent demain.",
+      "unavailable": "Les fonctionnalités d’IA ne sont pas disponibles pour le moment. Votre travail est enregistré, vous pourrez réessayer plus tard.",
+      "failed": "Cela n’a pas fonctionné cette fois. Votre travail est enregistré, réessayez dans un instant."
+    }
   }
 }

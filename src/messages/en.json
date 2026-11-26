@@ -73,11 +73,12 @@
       "processors": {
         "title": "Who else handles it",
         "blocks": [
-          "Two companies work for Jubilee to run the service, and only for that:",
+          "Four companies work for Jubilee to run the service, and only for that:",
           {
             "list": [
               "Supabase stores your account and runs sign-in.",
-              "Vercel hosts the website and app."
+              "Vercel hosts the website and app.",
+              "Groq and Anthropic run the AI features (see “AI and automated decisions”)."
             ]
           },
           "If you choose to sign in with Google or LinkedIn, they send us your name, email address and profile photo. They act under their own privacy policies, not for Jubilee.",
@@ -119,9 +120,10 @@
       "ai": {
         "title": "AI and automated decisions",
         "blocks": [
-          "Jubilee doesn't use AI on your data yet, and makes no automated decisions about you.",
-          "We don't use your data to train AI models.",
-          "When AI features arrive (tailoring your resume, writing letters), this section will say which provider is used and what it sees, before those features touch your data. AI will never add experience you don't have, and nothing will be sent to an employer without your approval."
+          "When you use an AI feature, such as importing your LinkedIn profile or tailoring your resume to a job, Jubilee sends the resume and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models.",
+          "We remove your email address, phone number and street address first. Both process the text in the US and don't use it to train their models.",
+          "For each AI request we keep a short record (which feature, its size and its cost), not the text itself, so we can set fair daily limits.",
+          "AI only suggests changes, and you accept or reject each one. It never adds experience you don't have, Jubilee makes no automated decisions about you, and nothing is sent to an employer without your approval."
         ]
       },
       "cookies": {
@@ -787,5 +789,12 @@
     "plan": "Free",
     "darkMode": "Dark mode",
     "language": "Language"
+  },
+  "ai": {
+    "errors": {
+      "limit": "You've used today's AI requests. They reset tomorrow.",
+      "unavailable": "AI features aren't available right now. Your work is saved, so you can try again later.",
+      "failed": "That didn't work this time. Your work is saved, so try again in a moment."
+    }
   }
 }
