@@ -480,7 +480,7 @@ One dated entry per task: what was built, the review score, and what was left.
   - no hard-coded fallback file name;
   - a long name keeps "- CV";
   - the spec text matches the route.
-  - The over-long URL test found clipping, so words over 40 characters now break after `/ ? & =`, and react-pdf draws a "-" there. This exception to 0025 is waiting for Flovet's confirmation.
+  - The over-long URL test found clipping, so words over 40 characters now break after `/ ? & =`, and react-pdf draws a "-" there. Flovet confirmed this exception to 0025 in chat.
 - **Left:**
   - nobody has looked at the PDF layout here (no rasteriser), so the samples were sent to Flovet;
   - no download test on a real phone;

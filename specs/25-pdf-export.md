@@ -70,7 +70,7 @@ Other formats, print, share links, a file-name field, downloads outside the edit
 
 - **Font:** Carlito passed the extraction test in English and French (accents, œ, « »). No switch to Liberation Sans.
 - **Size and time:** 24–29 KB per file (react-pdf embeds only the glyphs used). In dev, warm renders take 0.7–1.9 s per CV across the 12 test CVs. The first, cold render took 9.7 s while the route compiled.
-- **Over-long words:** with whole words only, a 140-character URL ran past the right margin and its end was clipped. Words over 40 characters may now break after `/`, `?`, `&` or `=`. react-pdf always draws a "-" at a break, and that can't be turned off, so a wrapped URL reads "…segment/-a-very…". This is an exception to 0025's "no hyphenation", for over-long words only, and Flovet is asked to confirm it.
+- **Over-long words:** with whole words only, a 140-character URL ran past the right margin and its end was clipped. Words over 40 characters may now break after `/`, `?`, `&` or `=`. react-pdf always draws a "-" at a break, and that can't be turned off, so a wrapped URL reads "…segment/-a-very…". This is an exception to 0025's "no hyphenation", for over-long words only. Flovet confirmed it in chat (2026-11-26).
 - **Tagging:** the output isn't tagged. It has no `StructTreeRoot` or `MarkInfo`, but it does set `/Lang`. Noted, not fixed (out of scope).
 - **Mobile download:** blob download wasn't tried on a real iPhone or Android phone. Only the browser pane at 390 px was checked.
 
