@@ -691,9 +691,10 @@ function AccountMenu({ name }: { name: string | null }) {
     </button>
   );
 
-  // Flush rows (0035): edge to edge, padding from the type (0029), 44 px.
+  // Menu rows (0035): inset from the edges with a radius; padding from
+  // the type (0029), 44 px.
   const row =
-    "jb-type flex min-h-11 w-full cursor-pointer items-center text-start text-base text-ink outline-none select-none hover-fine:bg-wash-hover focus-visible:shadow-[inset_0_0_0_2px_var(--violet)] [&_svg]:stroke-[1.75]";
+    "jb-type flex min-h-11 w-full cursor-pointer items-center rounded-control text-start text-base text-ink outline-none select-none hover-fine:bg-wash-hover focus-visible:shadow-[inset_0_0_0_2px_var(--violet)] [&_svg]:stroke-[1.75]";
 
   const pick = (next: Locale) => {
     setOpen(false);
@@ -768,7 +769,7 @@ function AccountMenu({ name }: { name: string | null }) {
                   <div
                     key="main"
                     data-panel="main"
-                    className="jb-menu-panel flex flex-col"
+                    className="jb-menu-panel flex flex-col py-1 [&>:not(hr)]:mx-1 [&>:not(hr)]:w-auto"
                   >
                     {/* Who: photo, name, plan. No email: they know it. */}
                     <div className="jb-type flex items-center gap-3">
@@ -813,7 +814,7 @@ function AccountMenu({ name }: { name: string | null }) {
                         setDark(next);
                         saveTheme(next ? "dark" : "light");
                       }}
-                      className="jb-type py-0 hover-fine:bg-wash-hover"
+                      className="jb-type rounded-control py-0 hover-fine:bg-wash-hover"
                     />
                     <Divider />
 
@@ -884,7 +885,7 @@ function AccountMenu({ name }: { name: string | null }) {
                   <div
                     key="language"
                     data-panel="language"
-                    className="jb-menu-panel flex flex-col"
+                    className="jb-menu-panel flex flex-col py-1 [&>:not(hr)]:mx-1 [&>:not(hr)]:w-auto"
                     role="group"
                     aria-label={labels.language}
                   >
@@ -946,7 +947,8 @@ function AccountMenu({ name }: { name: string | null }) {
 }
 
 function Divider() {
-  return <hr className="border-line" />;
+  // Dividers stay edge to edge; the rows sit inset (0035 follow-up).
+  return <hr className="my-1 border-menu-line" />;
 }
 
 /* ------------------------------------------------------------------ */
