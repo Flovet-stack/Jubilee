@@ -387,7 +387,7 @@ One dated entry per task: what was built, the review score, and what was left.
 - Checked in the browser on the 12-resume test account: 375/390 px and 1440 px, light and dark, en-us/en-gb/fr-fr.
 - Reviewer 87/100; must-fix ("Edited just now") applied afterwards. Full `pnpm check` passed before that fix; not re-run after it (skipped at Flovet's request).
 
-## 2026-11-26: Grid Auditor overlay (spec 21, decision 0033)
+## 2026-11-26: Grid Auditor overlay (spec 22, decision 0034)
 
 - Vendored `grid-auditor` 0.1.0 (`vendor/grid-auditor-0.1.0.tgz`, `file:` dependency). `pnpm-workspace.yaml` excludes it from `minimumReleaseAge`, because pnpm 11 can't find it on npm and the frozen install fails otherwise.
 - `src/components/grid-auditor.tsx`, rendered once in the locale layout: always on in dev. In production it needs `NEXT_PUBLIC_GRID_AUDITOR=true` plus `?grid=1`, which is kept in localStorage until `?grid=0`. The library loads only through a dynamic import. Flag validated in `src/env.ts`, documented in `.env.example`.

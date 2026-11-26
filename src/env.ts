@@ -16,7 +16,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().min(1),
     // Optional: DNS verification needs nothing here.
     NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: z.string().min(1).optional(),
-    // Optional: lets ?grid=1 load the grid-auditor overlay in production (0033).
+    // Optional: lets ?grid=1 load the grid-auditor overlay in production (0034).
     NEXT_PUBLIC_GRID_AUDITOR: z.enum(["true", "false"]).optional(),
   },
   experimental__runtimeEnv: {

@@ -1,4 +1,4 @@
-# 21: Grid Auditor overlay
+# 22: Grid Auditor overlay
 
 Status: Done (98/100) · Written: 2026-11-26
 
@@ -8,12 +8,12 @@ Flovet can check any Jubilee page against the design grid with `grid-auditor`, i
 
 ## Decisions
 
-Implements [0033](../docs/decisions/0033-grid-auditor-dev-overlay.md). Builds on [0001](../docs/decisions/0001-stack-and-tooling.md) (pnpm) and [0004](../docs/decisions/0004-auth-database-and-env.md) (`src/env.ts`, `.env.example`).
+Implements [0034](../docs/decisions/0034-grid-auditor-dev-overlay.md). Builds on [0001](../docs/decisions/0001-stack-and-tooling.md) (pnpm) and [0004](../docs/decisions/0004-auth-database-and-env.md) (`src/env.ts`, `.env.example`).
 
 ## Acceptance criteria
 
 1. `vendor/grid-auditor-0.1.0.tgz` is committed and `package.json` has `grid-auditor` as a `file:` dependency; `pnpm install --frozen-lockfile` works.
-2. `src/components/grid-auditor.tsx` follows 0033: client component, renders `null`, loading rules, `?grid=1` / `?grid=0`, dynamic import only, cancel flag and `destroy()` on cleanup.
+2. `src/components/grid-auditor.tsx` follows 0034: client component, renders `null`, loading rules, `?grid=1` / `?grid=0`, dynamic import only, cancel flag and `destroy()` on cleanup.
 3. `<GridAuditor />` is rendered once in `src/app/[locale]/layout.tsx`, inside `<body>`.
 4. `.env.example` has `NEXT_PUBLIC_GRID_AUDITOR=true` with a comment; `src/env.ts` validates it as optional `"true" | "false"`.
 5. `next dev`: the page loads, Shift+G toggles the grid, Ctrl/Cmd+Shift+G opens the panel, no console errors or hydration warnings.

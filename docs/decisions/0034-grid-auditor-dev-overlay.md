@@ -1,9 +1,9 @@
-# 0033: Grid Auditor overlay, always in dev, opt-in in production
+# 0034: Grid Auditor overlay, always in dev, opt-in in production
 
 - **Status:** Approved
 - **Proposed:** 2026-11-26 by Flovet (brief in chat)
 - **Approved:** 2026-11-26 by Flovet (in chat)
-- **Specs:** specs/21-grid-auditor.md
+- **Specs:** specs/22-grid-auditor.md
 
 ## Context
 

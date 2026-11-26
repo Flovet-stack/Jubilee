@@ -5,6 +5,6 @@ allowBuilds:
   sharp: false
   unrs-resolver: false
 
-# grid-auditor is a vendored tarball (decision 0033), not on npm, so its release age can't be checked.
+# grid-auditor is a vendored tarball (decision 0034), not on npm, so its release age can't be checked.
 minimumReleaseAgeExclude:
   - grid-auditor

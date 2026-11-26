@@ -6,7 +6,7 @@ const STORAGE_KEY = "grid-auditor";
 
 /**
  * Reads and updates the production opt-in: `?grid=1` saves it, `?grid=0`
- * removes it (decision 0033). Blocked storage counts as off.
+ * removes it (decision 0034). Blocked storage counts as off.
  */
 function optedIn(): boolean {
   const param = new URLSearchParams(window.location.search).get("grid");
@@ -21,12 +21,12 @@ function optedIn(): boolean {
 
 function isEnabled(): boolean {
   if (process.env.NODE_ENV === "development") return true;
-  // Read directly so Next inlines it; importing `@/env` would ship zod to every page (0033).
+  // Read directly so Next inlines it; importing `@/env` would ship zod to every page (0034).
   if (process.env.NEXT_PUBLIC_GRID_AUDITOR !== "true") return false;
   return optedIn();
 }
 
-/** Loads the grid-auditor overlay on demand (decision 0033). Renders nothing. */
+/** Loads the grid-auditor overlay on demand (decision 0034). Renders nothing. */
 export function GridAuditor() {
   useEffect(() => {
     if (!isEnabled()) return;
