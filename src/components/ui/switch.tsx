@@ -12,6 +12,8 @@ type SwitchProps = Omit<
   label: ReactNode;
   description?: ReactNode;
   className?: string;
+  /** "sm" sizes the switch from the row's type (0035): track 20 × 34. */
+  size?: "md" | "sm";
 };
 
 /**
@@ -24,6 +26,7 @@ export function Switch({
   label,
   description,
   className,
+  size = "md",
   ...props
 }: SwitchProps) {
   return (
@@ -41,7 +44,8 @@ export function Switch({
       </span>
       <SwitchPrimitive.Root
         className={cn(
-          "group/switch relative inline-flex h-7 w-12 shrink-0 items-center rounded-full bg-field p-1",
+          "group/switch relative inline-flex shrink-0 items-center rounded-full bg-field",
+          size === "sm" ? "h-5 w-[34px] p-0.75" : "h-7 w-12 p-1",
           "transition-[background-color,scale] duration-(--dur-base) ease-standard active:scale-(--press-scale)",
           "data-checked:bg-violet hover-fine:bg-ink-muted hover-fine:data-checked:bg-[color-mix(in_oklab,var(--violet)_88%,var(--ink))]",
           "data-disabled:bg-line data-disabled:data-checked:bg-ink-subtle",
@@ -50,9 +54,12 @@ export function Switch({
       >
         <SwitchPrimitive.Thumb
           className={cn(
-            "size-5 rounded-full bg-card shadow-thumb",
+            "rounded-full bg-card shadow-thumb",
+            size === "sm"
+              ? "size-3.5 data-checked:translate-x-3.5"
+              : "size-5 data-checked:translate-x-5",
             "transition-[translate,background-color] duration-(--dur-base) ease-standard",
-            "data-checked:translate-x-5 data-checked:bg-on-violet",
+            "data-checked:bg-on-violet",
           )}
         />
       </SwitchPrimitive.Root>

@@ -1,5 +1,5 @@
 /**
- * The downloaded PDF's name (decision 0035): "{name} - {word}.pdf", where the
+ * The downloaded PDF's name (decision 0038): "{name} - {word}.pdf", where the
  * word ("Resume", "CV") follows the CV's language and market. Pure, so it's
  * unit-tested and shared by the route and the PDF's title.
  */

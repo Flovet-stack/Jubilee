@@ -734,6 +734,7 @@
     }
   },
   "shell": {
+    "back": "Retour",
     "appName": "Jubilee",
     "home": "Jubilee, accueil",
     "sidebar": "Principal",
@@ -787,12 +788,6 @@
     },
     "plan": "Gratuit",
     "darkMode": "Mode sombre",
-    "language": "Langue",
-    "terms": "Conditions d'utilisation",
-    "localeShort": {
-      "en-us": "EN-US",
-      "en-gb": "EN-GB",
-      "fr-fr": "FR"
-    }
+    "language": "Langue"
   }
 }

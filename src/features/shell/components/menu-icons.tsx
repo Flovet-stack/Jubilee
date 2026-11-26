@@ -50,3 +50,36 @@ export function LogOutIcon() {
     </Glyph>
   );
 }
+
+/** Up and down chevrons: the account button opens a menu (0035). */
+export function UnfoldIcon() {
+  return (
+    <Glyph>
+      <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+    </Glyph>
+  );
+}
+
+export function ChevronRightGlyph() {
+  return (
+    <Glyph>
+      <path d="M9 6l6 6-6 6" />
+    </Glyph>
+  );
+}
+
+export function ChevronLeftGlyph() {
+  return (
+    <Glyph>
+      <path d="M15 6l-6 6 6 6" />
+    </Glyph>
+  );
+}
+
+export function CheckGlyph() {
+  return (
+    <Glyph>
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </Glyph>
+  );
+}

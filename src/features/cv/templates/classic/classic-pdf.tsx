@@ -21,7 +21,7 @@ const text = (size: number, lineHeight: number): Style => ({
 
 export type ClassicPdfProps = {
   tree: CvTree;
-  /** Document metadata (0035): no product name anywhere. */
+  /** Document metadata (0038): no product name anywhere. */
   meta: { title: string; author: string };
 };
 

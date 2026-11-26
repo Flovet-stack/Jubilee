@@ -21,6 +21,8 @@
   --page: #ffffff;
   --well: #f4f4f6;
   --desk: #fafafa; /* the app shell's background around the window (0027) */
+  --menu: #ffffff; /* account menu: one step lighter than the desk (0035) */
+  --menu-line: #e9e8ee; /* menu dividers: menu-to-line contrast = desk-to-line */
   --card: #ffffff;
   --line: #e5e4ea;
   --tint: #f3f0ff;
@@ -65,6 +67,27 @@
   --shadow-thumb: 0 1px 2px rgb(29 26 68 / 0.24); /* switch thumb */
   /* The account menu (Flovet, 2026-11-25). */
   --shadow-menu: 0 7.3px 10.96px 0 #0000000a, 0 2px 4px 0 #00000016;
+  /* Layered control surfaces (0037): edges and light come from shadows,
+     not borders. Fields keep a --field ring for 3:1 (WCAG 1.4.11). */
+  --control: #ffffff;
+  --control-hover: #f5f5f6;
+  --control-press: #ececee;
+  --control-active: #ffffff;
+  --field-well: #f7f7f8;
+  --shadow-raised:
+    0 0 0 1px rgb(0 0 0 / 0.08), 0 1px 2px 0 rgb(0 0 0 / 0.06),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.9);
+  --shadow-primary:
+    0 2px 4px 0 rgb(42 42 42 / 0.16),
+    0 0 0 1px color-mix(in oklab, var(--violet), black 30%),
+    inset 0 4px 6px 0 rgb(255 255 255 / 0.2),
+    inset 0 0 0 1px rgb(255 255 255 / 0.15),
+    inset 0 -8px 14px 0 rgb(0 0 0 / 0.15);
+  --shadow-primary-press:
+    0 0 0 1px color-mix(in oklab, var(--violet), black 30%),
+    inset 0 0 0 1px rgb(255 255 255 / 0.1), inset 0 -8px 14px 0 rgb(0 0 0 / 0.2);
+  --shadow-recessed:
+    inset 0 0 0 1px var(--field), inset 0 1px 2px 0 rgb(0 0 0 / 0.06);
 }
 
 /* Dark follows the system unless the user picked a theme in the account
@@ -76,6 +99,28 @@
     --page: #171717;
     --well: #1c1c1c;
     --desk: #171717;
+    --control: #1e1e1e;
+    --control-hover: #252525;
+    --control-press: #191919;
+    --control-active: #2a2a2a;
+    --field-well: #0f0f0f;
+    --shadow-raised:
+      0 0 0 1px rgb(0 0 0 / 0.4), inset 0 1px 0 0 rgb(255 255 255 / 0.1),
+      inset 0 0 0 1px rgb(255 255 255 / 0.06);
+    --shadow-primary:
+      0 4px 4px 0 rgb(0 0 0 / 0.32),
+      0 0 0 1px color-mix(in oklab, var(--violet), black 60%),
+      inset 0 4px 6px 0 rgb(255 255 255 / 0.2),
+      inset 0 0 0 1px rgb(255 255 255 / 0.15),
+      inset 0 -8px 14px 0 rgb(0 0 0 / 0.15);
+    --shadow-primary-press:
+      0 0 0 1px color-mix(in oklab, var(--violet), black 60%),
+      inset 0 0 0 1px rgb(255 255 255 / 0.1),
+      inset 0 -8px 14px 0 rgb(0 0 0 / 0.22);
+    --shadow-recessed:
+      inset 0 0 0 1px var(--field), inset 0 1px 2px 0 rgb(0 0 0 / 0.5);
+    --menu: #1f1f1f;
+    --menu-line: #292929;
     --card: #131313;
     --line: #232323;
     --tint: #252148;
@@ -110,6 +155,28 @@
   --page: #171717;
   --well: #1c1c1c;
   --desk: #171717;
+  --menu: #1f1f1f;
+  --menu-line: #292929;
+  --control: #1e1e1e;
+  --control-hover: #252525;
+  --control-press: #191919;
+  --control-active: #2a2a2a;
+  --field-well: #0f0f0f;
+  --shadow-raised:
+    0 0 0 1px rgb(0 0 0 / 0.4), inset 0 1px 0 0 rgb(255 255 255 / 0.1),
+    inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  --shadow-primary:
+    0 4px 4px 0 rgb(0 0 0 / 0.32),
+    0 0 0 1px color-mix(in oklab, var(--violet), black 60%),
+    inset 0 4px 6px 0 rgb(255 255 255 / 0.2),
+    inset 0 0 0 1px rgb(255 255 255 / 0.15),
+    inset 0 -8px 14px 0 rgb(0 0 0 / 0.15);
+  --shadow-primary-press:
+    0 0 0 1px color-mix(in oklab, var(--violet), black 60%),
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    inset 0 -8px 14px 0 rgb(0 0 0 / 0.22);
+  --shadow-recessed:
+    inset 0 0 0 1px var(--field), inset 0 1px 2px 0 rgb(0 0 0 / 0.5);
   --card: #131313;
   --line: #232323;
   --tint: #252148;
@@ -185,6 +252,13 @@
   --color-page: var(--page);
   --color-well: var(--well);
   --color-desk: var(--desk);
+  --color-control: var(--control);
+  --color-control-hover: var(--control-hover);
+  --color-control-press: var(--control-press);
+  --color-control-active: var(--control-active);
+  --color-field-well: var(--field-well);
+  --color-menu: var(--menu);
+  --color-menu-line: var(--menu-line);
   --color-card: var(--card);
   --color-line: var(--line);
   --color-tint: var(--tint);
@@ -220,6 +294,10 @@
   --shadow-float: var(--shadow-float);
   --shadow-thumb: var(--shadow-thumb);
   --shadow-menu: var(--shadow-menu);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-primary: var(--shadow-primary);
+  --shadow-primary-press: var(--shadow-primary-press);
+  --shadow-recessed: var(--shadow-recessed);
 
   --ease-standard: var(--ease-standard);
   --ease-enter: var(--ease-enter);

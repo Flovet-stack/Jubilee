@@ -1,4 +1,4 @@
-# 23: PDF export
+# 25: PDF export
 
 Status: Done (93/100, 2026-11-26; reviewer fixes applied after grading) · Written: 2026-11-26 · Issue: #15
 
@@ -8,11 +8,11 @@ Amina downloads her CV as a PDF an ATS can read, from the editor, in one click. 
 
 ## User lens
 
-The lens is in [0035](../docs/decisions/0035-pdf-download-flow.md): she has an application form open and needs a file with her name on it, often on a phone.
+The lens is in [0038](../docs/decisions/0038-pdf-download-flow.md): she has an application form open and needs a file with her name on it, often on a phone.
 
 ## Decisions
 
-Implements [0035](../docs/decisions/0035-pdf-download-flow.md) and the PDF parts of [0016](../docs/decisions/0016-cv-data-model-and-pdf-rendering.md) and [0025](../docs/decisions/0025-first-cv-template-and-typography.md). Reads only the semantic tree from [0024](../docs/decisions/0024-cv-builder-editor.md) §3, with the four corners from [0026](../docs/decisions/0026-cv-entry-layout.md). The menu item goes in [0031](../docs/decisions/0031-cv-editor-two-panes-and-review.md)'s More menu. Locales and file words follow [0017](../docs/decisions/0017-regional-locales-and-cv-naming.md). Controls are spaced by [0029](../docs/decisions/0029-type-spacing-for-every-control.md).
+Implements [0038](../docs/decisions/0038-pdf-download-flow.md) and the PDF parts of [0016](../docs/decisions/0016-cv-data-model-and-pdf-rendering.md) and [0025](../docs/decisions/0025-first-cv-template-and-typography.md). Reads only the semantic tree from [0024](../docs/decisions/0024-cv-builder-editor.md) §3, with the four corners from [0026](../docs/decisions/0026-cv-entry-layout.md). The menu item goes in [0031](../docs/decisions/0031-cv-editor-two-panes-and-review.md)'s More menu. Locales and file words follow [0017](../docs/decisions/0017-regional-locales-and-cv-naming.md). Controls are spaced by [0029](../docs/decisions/0029-type-spacing-for-every-control.md).
 
 ## Acceptance criteria
 
@@ -20,7 +20,7 @@ Implements [0035](../docs/decisions/0035-pdf-download-flow.md) and the PDF parts
 2. **Fonts:** `Carlito-Regular.ttf` and `Carlito-Bold.ttf` are committed in `src/features/cv/templates/classic/fonts/` next to `OFL.txt`. The PDF registers them from disk, with hyphenation off (the whole word is returned).
 3. **Template:** `templates/classic/classic-pdf.tsx` renders a `CvTree` with react-pdf using only `constants.ts`. It follows 0025 and 0026: page size from `tree.paper`, 54 pt margins, one column, no page header or footer, the four corners, bullets with a hanging indent, and section headings in uppercase with a rule. Entries don't split across pages where they fit on one (`wrap={false}` on the corners block); headings never sit alone at the foot of a page (`minPresenceAhead`).
 4. **Metadata:** `title` is the file name without `.pdf`, `author` is the name, `language` is the CV's language. `creator` and `producer` are set to the name (or "") so nothing says Jubilee.
-5. **File name:** a pure `pdfFileName(...)` in `src/features/cv/` gives "{name} - {word}.pdf", falling back to the CV's title, then to the word alone. It removes the characters 0035 lists, collapses spaces and caps the base at 100 characters. A pure `contentDisposition(name)` gives the ASCII `filename` (accents folded, other non-ASCII dropped) plus `filename*=UTF-8''…`. The word comes from `cv.document.fileWord.{US,FR}` in the CV's language's messages: en "Resume" / "CV", fr "CV" / "CV".
+5. **File name:** a pure `pdfFileName(...)` in `src/features/cv/` gives "{name} - {word}.pdf", falling back to the CV's title, then to the word alone. It removes the characters 0038 lists, collapses spaces and caps the base at 100 characters. A pure `contentDisposition(name)` gives the ASCII `filename` (accents folded, other non-ASCII dropped) plus `filename*=UTF-8''…`. The word comes from `cv.document.fileWord.{US,FR}` in the CV's language's messages: en "Resume" / "CV", fr "CV" / "CV".
 6. **Route:** `GET /api/cvs/[id]/pdf` (`src/app/api/cvs/[id]/pdf/route.ts`, Node runtime) reads the CV with `getCvDocument` (RLS), builds the tree and passes it to `renderCvPdf` in `src/features/cv/pdf.tsx`, which only renders. The route:
    - returns 401 when signed out, 404 for a bad id, another user's CV or a missing one, and 500 for any other failure;
    - on success, sends `application/pdf`, `Content-Disposition: attachment`, `Content-Length` and `Cache-Control: private, no-store`.

@@ -274,7 +274,7 @@ export function CvEditor(props: CvEditorProps) {
       }
     });
 
-  /* ── Download PDF (0035) ──────────────────────────────────────────── */
+  /* ── Download PDF (0038) ──────────────────────────────────────────── */
   const [moreOpen, setMoreOpen] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const downloadingRef = useRef(false);

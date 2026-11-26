@@ -15,7 +15,7 @@ import { Tooltip } from "./tooltip";
  * 0020 sizes, 0022 radius).
  *
  * - primary: the one violet action on a screen.
- * - secondary: card fill + field border.
+ * - secondary: raised control surface (0037).
  * - quiet: text only, for low-stakes actions next to a primary.
  * - danger: destructive final actions; the label names the target (0008 §1b).
  *
@@ -35,8 +35,8 @@ import { Tooltip } from "./tooltip";
  */
 export const buttonVariants = cva(
   [
-    "jb-type jb-button relative inline-flex shrink-0 cursor-pointer items-center justify-center text-center font-semibold select-none",
-    "transition-[background-color,border-color,color,scale] duration-(--dur-exit) ease-standard hover-fine:duration-(--dur-fast)",
+    "jb-type jb-button jb-surface relative inline-flex shrink-0 cursor-pointer items-center justify-center text-center font-semibold select-none",
+    "transition-[background-color,box-shadow,color,scale] duration-(--dur-exit) ease-standard hover-fine:duration-(--dur-fast)",
     "active:scale-(--press-scale) active:duration-(--dur-fast)",
     "data-disabled:cursor-not-allowed data-disabled:active:scale-100",
     "[&_svg]:pointer-events-none",
@@ -45,18 +45,20 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          "bg-violet text-on-violet",
-          "hover-fine:bg-[color-mix(in_oklab,var(--violet)_88%,var(--ink))] active:bg-violet-press",
+          // Layered (0037): top glow and bottom shade read as a gradient.
+          "bg-violet text-on-violet shadow-primary",
+          "hover-fine:bg-[color-mix(in_oklab,var(--violet)_88%,var(--ink))] active:bg-violet-press active:shadow-primary-press",
           "data-disabled:bg-well data-disabled:text-ink-subtle data-disabled:shadow-[inset_0_0_0_1px_var(--line)]",
         ],
         secondary: [
-          "bg-card text-ink shadow-[inset_0_0_0_1px_var(--field)]",
-          "hover-fine:bg-[color-mix(in_oklab,var(--card),var(--ink)_6%)] active:bg-[color-mix(in_oklab,var(--card),var(--ink)_12%)]",
+          // Raised (0037): lit top edge and a soft outer ring, no border.
+          "bg-control text-ink shadow-raised",
+          "hover-fine:bg-control-hover active:bg-control-press",
           "data-disabled:bg-well data-disabled:text-ink-subtle data-disabled:shadow-[inset_0_0_0_1px_var(--line)]",
         ],
         quiet: [
           "bg-transparent text-ink",
-          "hover-fine:bg-wash-hover active:bg-wash-press",
+          "hover-fine:bg-control-hover hover-fine:shadow-raised active:bg-control-press",
           "data-disabled:text-ink-subtle data-disabled:bg-transparent",
         ],
         danger: [

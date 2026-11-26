@@ -7,7 +7,7 @@ import { CARLITO, ClassicPdf } from "./templates/classic/classic-pdf";
 import type { CvTree } from "./tree";
 
 /**
- * Renders a CV tree to PDF bytes on the server (decisions 0016, 0025, 0035).
+ * Renders a CV tree to PDF bytes on the server (decisions 0016, 0025, 0038).
  * No database or request here, so tests call it directly; the route reads
  * the CV and sends the file.
  */

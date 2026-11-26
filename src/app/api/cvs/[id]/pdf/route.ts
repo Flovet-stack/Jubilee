@@ -6,7 +6,7 @@ import { getCvDocument } from "@/features/cv/queries";
 import { buildCvTree } from "@/features/cv/tree";
 
 /**
- * The CV as a PDF (spec 23, decision 0035). RLS limits the read to the
+ * The CV as a PDF (spec 25, decision 0038). RLS limits the read to the
  * owner, so another user's CV is "not found". Rendered on every request and
  * never stored. Node is the default runtime, which react-pdf needs.
  */

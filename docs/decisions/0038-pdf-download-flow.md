@@ -1,10 +1,10 @@
-# 0035: PDF download: one menu item, a file named after the person
+# 0038: PDF download: one menu item, a file named after the person
 
 - **Status:** Approved
 - **Proposed:** 2026-11-26 by the product team (roles: Product, UX, Copy, Frontend, Backend, Tech Lead)
 - **Approved:** 2026-11-26 by Flovet (in chat)
 - **Builds on:** 0016 (react-pdf on the server, pdf.js extraction test), 0025 (Classic template, Carlito, page size by market), 0024 §3 (one semantic tree), 0031 (Export lives in the editor's More menu), 0017 (CV language and market are separate from the UI locale)
-- **Specs:** specs/23-pdf-export.md
+- **Specs:** specs/25-pdf-export.md
 
 ## Context
 

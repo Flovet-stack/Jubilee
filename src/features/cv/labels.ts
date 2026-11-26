@@ -18,7 +18,7 @@ export async function cvLabels(language: CvLanguage): Promise<CvLabels> {
   return { headings, present };
 }
 
-/** "Resume" or "CV" for the file name (0035), by language and market. */
+/** "Resume" or "CV" for the file name (0038), by language and market. */
 export async function cvFileWord(
   language: CvLanguage,
   market: CvMarket,

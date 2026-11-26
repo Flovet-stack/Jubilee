@@ -9,7 +9,7 @@ import type { CvContent, CvLanguage, CvMarket, SectionKind } from "./schemas";
 import { buildCvTree, treeText, type CvTree } from "./tree";
 
 /**
- * The ATS check from decision 0016 (spec 23): the PDF's text, extracted with
+ * The ATS check from decision 0016 (spec 25): the PDF's text, extracted with
  * pdf.js as a parser would, holds every string of the tree in reading order,
  * with accents intact.
  */
@@ -231,7 +231,7 @@ function expectInOrder(text: string, tree: CvTree) {
   }
 }
 
-describe("CV PDF (spec 23)", () => {
+describe("CV PDF (spec 25)", () => {
   it.each([
     ["en", "US"],
     ["fr", "FR"],
@@ -259,7 +259,7 @@ describe("CV PDF (spec 23)", () => {
     expect(fr.pages[0]?.height).toBeCloseTo(841.89, 1);
   }, 30_000);
 
-  it("names the file after the person and never names Jubilee (0035)", async () => {
+  it("names the file after the person and never names Jubilee (0038)", async () => {
     const { bytes, fileName } = await render("en", "US");
     expect(fileName).toBe("Amina Diallo - Resume.pdf");
     const { info } = await extract(bytes);
@@ -305,7 +305,7 @@ describe("CV PDF (spec 23)", () => {
       right = Math.max(right, (item.transform[4] as number) + item.width);
     }
     await task.destroy();
-    // react-pdf marks the break with "-" (spec 23, Results); nothing is lost.
+    // react-pdf marks the break with "-" (spec 25, Results); nothing is lost.
     expect(text.replace(/\s+/g, "").replace(/([/?&=])-/g, "$1")).toContain(url);
     expect(right).toBeLessThanOrEqual(612 - 54 + 0.5);
   }, 30_000);

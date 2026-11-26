@@ -404,3 +404,41 @@
     transform: translateX(calc(-1 * var(--marquee-distance)));
   }
 }
+
+/* Account menu panels (0035): the new panel slides in from the side it
+   comes from and fades. No movement under reduced motion. */
+@layer components {
+  .jb-menu-panel {
+    animation: jb-menu-panel var(--dur-base) var(--ease-enter);
+  }
+
+  .jb-menu-panel[data-panel="language"] {
+    --from: 0.75rem;
+  }
+
+  .jb-menu-panel[data-panel="main"] {
+    --from: -0.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jb-menu-panel {
+      animation: none;
+    }
+  }
+}
+
+@keyframes jb-menu-panel {
+  from {
+    opacity: 0;
+    transform: translateX(var(--from, 0));
+  }
+}
+
+/* Layered surfaces (0037) draw their edges with shadows, which forced
+   colors (Windows High Contrast) removes: give them a real edge there. */
+@media (forced-colors: active) {
+  .jb-surface {
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+}

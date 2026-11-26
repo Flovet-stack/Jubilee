@@ -419,9 +419,45 @@ One dated entry per task: what was built, the review score, and what was left.
 - Removed the last green tint from dark tokens: ink #f2f2f2, ink-muted #b6b6b6, ink-subtle #969696, field #808080, stage-saved #b0b0b0, scrim rgb(3 3 3 / 0.64).
 - Token contrast tests pass (56). Checked /cvs at 1440 px dark.
 
-## 2026-11-26: PDF export (spec 23, decision 0035)
+## 2026-11-26: Sidebar header and flush account menu (spec 23, decision 0035)
 
-- **Decision 0035** (approved): Download PDF is the first item in the editor's More menu. It saves pending edits first, then fetches the file. The file is named "{name} - Resume/CV.pdf", with the word set by the CV's language and market. The metadata doesn't mention Jubilee.
+- Account button: up/down chevron. Collapsed rail: the logo mark is the expand button; the separate toggle is gone. Logo 18 px, mark 20 px.
+- Account menu: new `--menu` token (#ffffff / #1f1f1f), no inner padding, rows and dividers edge to edge, as wide as the sidebar content (232 px). Order: name and plan, Dark mode (small switch 34 × 20), Settings, Language, Sign out. Version and Terms footer removed.
+- Language opens a panel in the same menu (back row + full language names, check on the current one); slide-and-fade content and height animation, off under reduced motion. Keyboard: → opens, ← / Escape back, Escape again closes.
+- Fixed: on touch, tapping Language closed the menu (the pressed row unmounted and looked like an outside press).
+- `pnpm check` passed (289 tests, build). Browser: 1440 px dark (menu, keyboard path, collapsed rail), 390 px light fr-fr (sheet, menu, language panel).
+- Reviewer 78 → 88/100; its last must-fix (height animation) was built after, not re-graded.
+
+## 2026-11-26: Account menu rows inset, lighter dividers
+
+- Rows sit 4 px in from the menu's edges with `--radius-control`; dividers stay edge to edge (Flovet).
+- New `--menu-line` for the dividers, set so its contrast with `--menu` matches `--desk` against `--line` (dark 1.14:1): dark #292929, light #e9e8ee.
+- Fixed: the forced-dark theme block had no `--menu`, so the menu was white when dark mode was switched on by hand.
+- Token tests pass (62); lint and typecheck pass. Checked at 1440 px dark.
+
+## 2026-11-26: Decision 0036, a swappable AI layer (Proposed)
+
+- Researched providers (Anthropic, OpenAI, Gemini, Mistral, Groq, OpenRouter, Vercel AI Gateway), the Vercel AI SDK, data terms, EU processing and the EU AI Act. Logged 0036 as Proposed.
+- Revised the same day on Flovet's input: the Vercel AI SDK with a per-task router in `src/lib/ai/` (seven tasks, each routed to a `provider:model` with fallbacks); evals decide when a task moves to a cheaper model; every task starts on Claude Haiku 5.5; free tiers get test data only.
+- Maps the MVP: AI in features 2, 4, 5, 6, 10; light in 7; optional in 1; none in 3, 8, 9.
+- Left: Flovet to approve 0036, the starting model, the two packages and the env var, and the daily caps. Mistral's terms and EU hosting are unverified.
+
+## 2026-11-26: Decision 0036 approved
+
+- Flovet approved 0036 (in chat), with Claude Haiku 5.5 as the starting model for every task. Status line, index and brief updated. Renumbered from 0034, which main had taken for the Grid Auditor decision.
+- Left: write the AI foundation spec (router, registry, routing table, usage log, caps, eval script, privacy page). Before building: Flovet to approve adding `ai`, `@ai-sdk/anthropic` and `ANTHROPIC_API_KEY`, create a Console API key in a Jubilee workspace, and set the daily caps.
+
+## 2026-11-26: Layered control surfaces, Geist and radius trial (spec 24, decision 0037)
+
+- New tokens `--control`, `--control-hover`, `--control-press`, `--control-active`, `--field-well` and shadows `--shadow-raised`, `--shadow-primary`, `--shadow-primary-press`, `--shadow-recessed` (light and both dark blocks).
+- Primary: violet with a top glow, bottom shade, inner and darker-violet outer rings. Secondary and quiet-on-hover: raised. Fields: recessed well, keeping the `--field` ring for 3:1. Sidebar active row: raised tab. No CSS borders; forced-colors gets a 1 px ButtonBorder outline.
+- Design-system page: "Geist" in the font switcher and a Radius switch (ours / pill, not saved).
+- `pnpm check` passed. Browser: 1440 px dark (buttons, fields) and light (secondary values); trial CSS checked by setting its attributes.
+- Reviewer 84/100; must-fixes (radius not saved, focus-ring 3:1 tests) applied, not re-graded.
+
+## 2026-11-26: PDF export (spec 25, decision 0038)
+
+- **Decision 0038** (approved): Download PDF is the first item in the editor's More menu. It saves pending edits first, then fetches the file. The file is named "{name} - Resume/CV.pdf", with the word set by the CV's language and market. The metadata doesn't mention Jubilee.
 - **Built:**
   - `GET /api/cvs/[id]/pdf`: RLS read, 401/404/500, `private, no-store`, never stored.
   - The Classic template in react-pdf (`classic-pdf.tsx`), from the same tree and constants as the preview.

@@ -9,7 +9,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
-  // The CV PDF route reads its fonts from disk (spec 23), so ship them with it.
+  // The CV PDF route reads its fonts from disk (spec 25), so ship them with it.
   outputFileTracingIncludes: {
     "/api/cvs/*/pdf": ["src/features/cv/templates/classic/fonts/*.ttf"],
   },

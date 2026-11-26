@@ -19,7 +19,7 @@ const call = (id: string) =>
 const failWith = (code: CvError["code"]) =>
   getCvDocument.mockResolvedValue({ ok: false, error: { code } });
 
-describe("GET /api/cvs/[id]/pdf (spec 23)", () => {
+describe("GET /api/cvs/[id]/pdf (spec 25)", () => {
   beforeEach(() => getCvDocument.mockReset());
 
   it("is 404 for an id that can't be a CV, without reading", async () => {

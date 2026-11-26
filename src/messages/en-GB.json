@@ -139,6 +139,7 @@
     }
   },
   "shell": {
+    "back": "Back",
     "cvs": {
       "title": "Saved CVs",
       "short": "CVs",
