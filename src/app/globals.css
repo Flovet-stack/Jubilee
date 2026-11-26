@@ -73,11 +73,11 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --page: #0a0f0b;
-    --well: #141a15;
-    --desk: #0e120e;
-    --card: #060d08;
-    --line: #262d27;
+    --page: #171717;
+    --well: #1c1c1c;
+    --desk: #171717;
+    --card: #161616;
+    --line: #232323;
     --tint: #252148;
     --field: #7c837d;
     --ink: #f1f3f1;
@@ -107,11 +107,11 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --page: #0a0f0b;
-  --well: #141a15;
-  --desk: #0e120e;
-  --card: #060d08;
-  --line: #262d27;
+  --page: #171717;
+  --well: #1c1c1c;
+  --desk: #171717;
+  --card: #161616;
+  --line: #232323;
   --tint: #252148;
   --field: #7c837d;
   --ink: #f1f3f1;

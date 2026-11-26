@@ -406,3 +406,9 @@ One dated entry per task: what was built, the review score, and what was left.
   - 390 px and 1440 px.
 - Format, lint, typecheck, tests (283) and the build pass. One earlier test run had a single file fail under machine load; the re-run was clean.
 - Reviewer 98/100; its one suggestion (`.catch` on the import) applied afterwards.
+
+## 2026-11-26: Dark mode greys for the shell
+
+- Flovet's values: desk #171717, content window and cards #161616, borders #232323 (`--desk`, `--card`, `--line` in both dark blocks of `globals.css`).
+- Page #171717 (same as the desk) and wells #1c1c1c, so no green tint remains in the surfaces.
+- Token contrast tests pass (56). Checked /cvs and /privacy at 1440 px dark.
