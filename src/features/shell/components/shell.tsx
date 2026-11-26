@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   createContext,
+  useCallback,
   type ReactNode,
   useContext,
   useEffect,
@@ -46,7 +47,6 @@ import {
 } from "@/i18n/locales";
 import { site } from "@/lib/site";
 import { isDarkNow, saveTheme } from "@/lib/theme";
-import pkg from "../../../../package.json";
 import { cn } from "@/lib/utils";
 
 import {
@@ -61,7 +61,15 @@ import {
   type CvRowText,
   sidebarCvs,
 } from "../logic";
-import { LanguageIcon, LogOutIcon, MoonIcon } from "./menu-icons";
+import {
+  CheckGlyph,
+  ChevronLeftGlyph,
+  ChevronRightGlyph,
+  LanguageIcon,
+  LogOutIcon,
+  MoonIcon,
+  UnfoldIcon,
+} from "./menu-icons";
 import { SidebarPanelIcon } from "./sidebar-panel-icon";
 
 export type ShellLabels = {
@@ -82,8 +90,7 @@ export type ShellLabels = {
   plan: string;
   darkMode: string;
   language: string;
-  terms: string;
-  localeShort: Record<Locale, string>;
+  back: string;
   localeNames: Record<Locale, string>;
   cvs: {
     title: string;
@@ -355,27 +362,41 @@ function SidebarContents({
           inSheet && "pe-12",
         )}
       >
-        <Link
-          href={`/${locale}/home`}
-          aria-label={labels.home}
-          className={cn(
-            "flex min-h-11 min-w-0 flex-1 items-center rounded-control px-2 text-ink outline-none focus-visible:shadow-[0_0_0_2px_var(--violet)]",
-            collapsed && "flex-none justify-center px-0",
-          )}
-        >
-          {/* The real logo files (0010, 0019): the full logo, or the mark in the rail. */}
-          {collapsed ? (
-            <JubileeIcon height={28} />
-          ) : (
-            <JubileeLogo height={22} />
-          )}
-        </Link>
-        {inSheet ? null : <Notifications />}
-        {onToggle ? (
+        {collapsed && onToggle ? (
+          // Collapsed rail: the mark is the expand button (0035).
+          <Tooltip content={labels.expand} side="right">
+            <button
+              type="button"
+              aria-label={labels.expand}
+              aria-expanded={false}
+              onClick={onToggle}
+              className="flex size-11 items-center justify-center rounded-control text-ink outline-none focus-visible:shadow-[0_0_0_2px_var(--violet)] hover-fine:bg-wash-hover"
+            >
+              <JubileeIcon height={20} />
+            </button>
+          </Tooltip>
+        ) : (
+          <Link
+            href={`/${locale}/home`}
+            aria-label={labels.home}
+            className={cn(
+              "flex min-h-11 min-w-0 flex-1 items-center rounded-control px-2 text-ink outline-none focus-visible:shadow-[0_0_0_2px_var(--violet)]",
+              collapsed && "flex-none justify-center px-0",
+            )}
+          >
+            {/* The real logo files (0010, 0019), sized to the rows (0035). */}
+            {collapsed ? (
+              <JubileeIcon height={20} />
+            ) : (
+              <JubileeLogo height={18} />
+            )}
+          </Link>
+        )}
+        {inSheet || collapsed ? null : <Notifications />}
+        {onToggle && !collapsed ? (
           <IconButton
-            label={collapsed ? labels.expand : labels.collapse}
-            tooltip={collapsed}
-            aria-expanded={!collapsed}
+            label={labels.collapse}
+            aria-expanded
             icon={<SidebarPanelIcon />}
             onClick={onToggle}
             className="text-ink-muted [&_svg]:stroke-[1.75]"
@@ -592,7 +613,57 @@ function AccountMenu({ name }: { name: string | null }) {
   const pathname = usePathname();
   const [pending, startTransition] = useTransition();
   const [dark, setDark] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [panel, setPanel] = useState<"main" | "language">("main");
+  const popupRef = useRef<HTMLDivElement>(null);
+  const focusAfterSwap = useRef<"back" | "language" | null>(null);
+  const [height, setHeight] = useState<number | null>(null);
+
+  // Measure the current panel so the popup can animate between heights.
+  // A callback ref: the content mounts with the portal, after `open` flips.
+  const contentRef = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return;
+    const observer = new ResizeObserver(() => setHeight(node.offsetHeight));
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
   const shown = name ?? labels.account;
+
+  // After the panels swap (0035), focus the back row, or Language when
+  // coming back, so keyboard and screen reader users follow the change.
+  useEffect(() => {
+    const target = focusAfterSwap.current;
+    if (!target || !popupRef.current) return;
+    focusAfterSwap.current = null;
+    popupRef.current
+      .querySelector<HTMLElement>(`[data-menu-focus="${target}"]`)
+      ?.focus();
+  }, [panel]);
+
+  const goTo = (next: "main" | "language") => {
+    focusAfterSwap.current = next === "language" ? "back" : "language";
+    setPanel(next);
+  };
+
+  // Up and Down move between the rows, like a menu.
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+    const rows = Array.from(
+      popupRef.current?.querySelectorAll<HTMLElement>("[data-menu-row]") ?? [],
+    );
+    if (rows.length === 0) return;
+    event.preventDefault();
+    const at = rows.indexOf(document.activeElement as HTMLElement);
+    const step = event.key === "ArrowDown" ? 1 : -1;
+    rows[(at + step + rows.length) % rows.length]?.focus();
+  };
+
+  const backOnLeft = (event: React.KeyboardEvent) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo("main");
+    }
+  };
 
   const trigger = (
     <button
@@ -612,17 +683,52 @@ function AccountMenu({ name }: { name: string | null }) {
       <RowLabel collapsed={collapsed} className="flex-1" title={shown}>
         {shown}
       </RowLabel>
+      {collapsed ? null : (
+        <span aria-hidden="true" className="jb-type-icon text-ink-subtle">
+          <UnfoldIcon />
+        </span>
+      )}
     </button>
   );
 
-  // Menu rows: 44 px on every pointer (0029 rows exception).
+  // Flush rows (0035): edge to edge, padding from the type (0029), 44 px.
   const row =
-    "jb-type flex min-h-11 w-full cursor-pointer items-center rounded-mark text-start text-base text-ink outline-none select-none hover-fine:bg-wash-hover focus-visible:shadow-[inset_0_0_0_2px_var(--violet)] [&_svg]:stroke-[1.75]";
+    "jb-type flex min-h-11 w-full cursor-pointer items-center text-start text-base text-ink outline-none select-none hover-fine:bg-wash-hover focus-visible:shadow-[inset_0_0_0_2px_var(--violet)] [&_svg]:stroke-[1.75]";
+
+  const pick = (next: Locale) => {
+    setOpen(false);
+    if (next === locale) return;
+    rememberLocale(next);
+    router.push(pathInLocale(pathname, next));
+  };
 
   return (
     <Popover.Root
-      onOpenChange={(open) => {
-        if (open) setDark(isDarkNow());
+      open={open}
+      onOpenChange={(next, details) => {
+        // Escape in the language panel goes back first (0035).
+        if (!next && details.reason === "escape-key" && panel === "language") {
+          details.cancel();
+          goTo("main");
+          return;
+        }
+        // Swapping panels removes the row that was pressed, so the press
+        // looks like it landed outside: it didn't, keep the menu open.
+        const target = details.event?.target;
+        if (
+          !next &&
+          details.reason === "outside-press" &&
+          target instanceof Node &&
+          !target.isConnected
+        ) {
+          details.cancel();
+          return;
+        }
+        setOpen(next);
+        if (next) {
+          setDark(isDarkNow());
+          setPanel("main");
+        }
       }}
     >
       {collapsed ? (
@@ -635,109 +741,203 @@ function AccountMenu({ name }: { name: string | null }) {
       <Popover.Portal>
         <Popover.Positioner
           side={collapsed ? "right" : "top"}
-          align="start"
+          align={collapsed ? "end" : "start"}
           sideOffset={8}
           collisionPadding={16}
           className="z-50 outline-none"
         >
           <Popover.Popup
+            ref={popupRef}
             aria-label={labels.account}
+            onKeyDown={onKeyDown}
             className={cn(
-              "flex w-[min(20rem,var(--available-width))] flex-col rounded-box border border-line bg-card p-2 text-ink shadow-menu outline-none",
+              // As wide as the sidebar's content (w-62 minus its gutters).
+              "flex w-[min(14.5rem,var(--available-width))] flex-col overflow-hidden rounded-card border border-line bg-menu text-ink shadow-menu outline-none",
               "origin-(--transform-origin) transition-[opacity,scale] duration-(--dur-base) ease-enter",
               "data-starting-style:scale-(--pop-scale) data-starting-style:opacity-0",
               "data-ending-style:scale-(--pop-scale) data-ending-style:opacity-0 data-ending-style:duration-(--dur-exit) data-ending-style:ease-exit",
             )}
           >
-            {/* Who: photo, name, plan. No email: they know it. */}
-            <div className="flex items-center gap-3 p-2">
-              {name ? (
-                <Avatar name={name} size="md" className="rounded-control" />
-              ) : (
-                <span className="jb-type flex size-10 items-center justify-center rounded-control bg-tint text-violet">
-                  <span className="jb-type-icon">
-                    <HugeiconsUserIcon />
-                  </span>
-                </span>
-              )}
-              <div className="flex min-w-0 flex-col items-start gap-1">
-                <Popover.Title className="max-w-full truncate text-base font-semibold">
-                  {shown}
-                </Popover.Title>
-                <Badge tone="violet">{labels.plan}</Badge>
+            {/* The popup's height follows the panel (0035). */}
+            <div
+              className="overflow-hidden duration-(--dur-base) ease-enter motion-safe:transition-[height]"
+              style={height == null ? undefined : { height }}
+            >
+              <div ref={contentRef}>
+                {panel === "main" ? (
+                  <div
+                    key="main"
+                    data-panel="main"
+                    className="jb-menu-panel flex flex-col"
+                  >
+                    {/* Who: photo, name, plan. No email: they know it. */}
+                    <div className="jb-type flex items-center gap-3">
+                      {name ? (
+                        <Avatar
+                          name={name}
+                          size="md"
+                          className="shrink-0 rounded-control"
+                        />
+                      ) : (
+                        <span className="flex size-10 shrink-0 items-center justify-center rounded-control bg-tint text-violet">
+                          <span className="size-5">
+                            <HugeiconsUserIcon />
+                          </span>
+                        </span>
+                      )}
+                      <div className="flex min-w-0 flex-col items-start gap-1">
+                        <Popover.Title
+                          className="max-w-full truncate text-base font-semibold"
+                          title={shown}
+                        >
+                          {shown}
+                        </Popover.Title>
+                        <Badge tone="violet">{labels.plan}</Badge>
+                      </div>
+                    </div>
+                    <Divider />
+
+                    <Switch
+                      size="sm"
+                      data-menu-row
+                      label={
+                        <span className="flex items-center gap-(--px)">
+                          <span className="jb-type-icon text-ink-muted [&_svg]:stroke-[1.75]">
+                            <MoonIcon />
+                          </span>
+                          {labels.darkMode}
+                        </span>
+                      }
+                      checked={dark}
+                      onCheckedChange={(next) => {
+                        setDark(next);
+                        saveTheme(next ? "dark" : "light");
+                      }}
+                      className="jb-type py-0 hover-fine:bg-wash-hover"
+                    />
+                    <Divider />
+
+                    <Link
+                      href={`/${locale}/settings`}
+                      data-menu-row
+                      className={row}
+                      onClick={() => setOpen(false)}
+                    >
+                      <span className="jb-type-icon text-ink-muted">
+                        <HugeiconsSettingsIcon />
+                      </span>
+                      {labels.settings}
+                    </Link>
+                    <button
+                      type="button"
+                      data-menu-row
+                      data-menu-focus="language"
+                      aria-haspopup="true"
+                      className={row}
+                      onClick={() => goTo("language")}
+                      onKeyDown={(event) => {
+                        if (event.key === "ArrowRight") {
+                          event.preventDefault();
+                          goTo("language");
+                        }
+                      }}
+                    >
+                      <span className="jb-type-icon text-ink-muted">
+                        <LanguageIcon />
+                      </span>
+                      <span className="flex-1">{labels.language}</span>
+                      <span className="max-w-24 truncate text-sm text-ink-muted">
+                        {labels.localeNames[locale]}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="jb-type-icon text-ink-subtle"
+                      >
+                        <ChevronRightGlyph />
+                      </span>
+                    </button>
+                    <Divider />
+
+                    <button
+                      type="button"
+                      data-menu-row
+                      disabled={pending}
+                      className={cn(
+                        row,
+                        "text-danger hover-fine:bg-wash-danger",
+                      )}
+                      onClick={() =>
+                        startTransition(async () => {
+                          const data = new FormData();
+                          data.set("locale", locale);
+                          await signOut(data);
+                        })
+                      }
+                    >
+                      <span className="jb-type-icon">
+                        <LogOutIcon />
+                      </span>
+                      {labels.signOut}
+                    </button>
+                  </div>
+                ) : (
+                  <div
+                    key="language"
+                    data-panel="language"
+                    className="jb-menu-panel flex flex-col"
+                    role="group"
+                    aria-label={labels.language}
+                  >
+                    <button
+                      type="button"
+                      data-menu-row
+                      data-menu-focus="back"
+                      aria-label={`${labels.back}: ${labels.language}`}
+                      className={cn(row, "font-semibold")}
+                      onClick={() => goTo("main")}
+                      onKeyDown={backOnLeft}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="jb-type-icon text-ink-muted"
+                      >
+                        <ChevronLeftGlyph />
+                      </span>
+                      {labels.language}
+                    </button>
+                    <Divider />
+                    {locales.map((l) => {
+                      const on = l === locale;
+                      return (
+                        <button
+                          key={l}
+                          type="button"
+                          data-menu-row
+                          lang={localeTag(l)}
+                          aria-current={on ? "true" : undefined}
+                          className={row}
+                          onClick={() => pick(l)}
+                          onKeyDown={backOnLeft}
+                        >
+                          <span className="min-w-0 flex-1 truncate">
+                            {labels.localeNames[l]}
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className={cn(
+                              "jb-type-icon text-violet",
+                              !on && "invisible",
+                            )}
+                          >
+                            <CheckGlyph />
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
-            <Divider />
-
-            <Switch
-              label={
-                <span className="flex items-center gap-(--px)">
-                  <span className="jb-type-icon text-ink-muted [&_svg]:stroke-[1.75]">
-                    <MoonIcon />
-                  </span>
-                  {labels.darkMode}
-                </span>
-              }
-              checked={dark}
-              onCheckedChange={(next) => {
-                setDark(next);
-                saveTheme(next ? "dark" : "light");
-              }}
-              className="jb-type rounded-mark"
-            />
-            <Divider />
-
-            <Link href={`/${locale}/settings`} className={row}>
-              <span className="jb-type-icon text-ink-muted">
-                <HugeiconsSettingsIcon />
-              </span>
-              {labels.settings}
-            </Link>
-            <div className="jb-type flex min-h-11 items-center">
-              <span className="jb-type-icon text-ink-muted">
-                <LanguageIcon />
-              </span>
-              <span className="flex-1 text-base">{labels.language}</span>
-              <LocaleSwitch
-                current={locale}
-                label={labels.language}
-                short={labels.localeShort}
-                names={labels.localeNames}
-                onPick={(next) => {
-                  rememberLocale(next);
-                  router.push(pathInLocale(pathname, next));
-                }}
-              />
-            </div>
-            <Divider />
-
-            <button
-              type="button"
-              disabled={pending}
-              className={cn(row, "text-danger hover-fine:bg-wash-danger")}
-              onClick={() =>
-                startTransition(async () => {
-                  const data = new FormData();
-                  data.set("locale", locale);
-                  await signOut(data);
-                })
-              }
-            >
-              <span className="jb-type-icon">
-                <LogOutIcon />
-              </span>
-              {labels.signOut}
-            </button>
-
-            <p className="px-2 pt-2 pb-1 text-sm text-ink-subtle">
-              v{pkg.version} ·{" "}
-              <Link
-                href={`/${locale}/terms`}
-                className="underline-offset-2 hover-fine:text-ink hover-fine:underline"
-              >
-                {labels.terms}
-              </Link>
-            </p>
           </Popover.Popup>
         </Popover.Positioner>
       </Popover.Portal>
@@ -746,70 +946,7 @@ function AccountMenu({ name }: { name: string | null }) {
 }
 
 function Divider() {
-  return <hr className="my-1 border-line" />;
-}
-
-/**
- * Three-way language switch (en-us, en-gb, fr-fr). A radio group: arrow
- * keys move between the options, and the current one is announced.
- */
-function LocaleSwitch({
-  current,
-  label,
-  short,
-  names,
-  onPick,
-}: {
-  current: Locale;
-  label: string;
-  short: Record<Locale, string>;
-  names: Record<Locale, string>;
-  onPick: (locale: Locale) => void;
-}) {
-  return (
-    <div
-      role="radiogroup"
-      aria-label={label}
-      className="flex rounded-control bg-well p-0.5"
-    >
-      {locales.map((l, index) => {
-        const on = l === current;
-        return (
-          <button
-            key={l}
-            type="button"
-            role="radio"
-            aria-checked={on}
-            aria-label={names[l]}
-            title={names[l]}
-            lang={localeTag(l)}
-            tabIndex={on ? 0 : -1}
-            onClick={() => {
-              if (!on) onPick(l);
-            }}
-            onKeyDown={(event) => {
-              const forward = ["ArrowRight", "ArrowDown"].includes(event.key);
-              const back = ["ArrowLeft", "ArrowUp"].includes(event.key);
-              if (!forward && !back) return;
-              event.preventDefault();
-              const step = forward ? 1 : locales.length - 1;
-              const next = locales[(index + step) % locales.length];
-              if (next) onPick(next);
-            }}
-            className={cn(
-              "jb-type jb-type-badge min-h-8 rounded-control-sm text-xs font-semibold whitespace-nowrap outline-none pointer-coarse:min-h-11",
-              "focus-visible:shadow-[inset_0_0_0_2px_var(--violet)]",
-              on
-                ? "bg-card text-ink shadow-thumb"
-                : "text-ink-muted hover-fine:text-ink",
-            )}
-          >
-            {short[l]}
-          </button>
-        );
-      })}
-    </div>
-  );
+  return <hr className="border-line" />;
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,6 +1,6 @@
 # 23: Sidebar header and the flush account menu
 
-Status: Not started · Written: 2026-11-26
+Status: Built, in review (reviewer 88/100 before the height animation was added; not re-graded after; dark 390 px screenshots not taken) · Written: 2026-11-26
 
 ## Goal
 

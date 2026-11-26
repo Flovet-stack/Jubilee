@@ -418,3 +418,12 @@ One dated entry per task: what was built, the review score, and what was left.
 - Dark `--card` (content window, cards) #161616 → #131313, a shade darker (Flovet).
 - Removed the last green tint from dark tokens: ink #f2f2f2, ink-muted #b6b6b6, ink-subtle #969696, field #808080, stage-saved #b0b0b0, scrim rgb(3 3 3 / 0.64).
 - Token contrast tests pass (56). Checked /cvs at 1440 px dark.
+
+## 2026-11-26: Sidebar header and flush account menu (spec 23, decision 0035)
+
+- Account button: up/down chevron. Collapsed rail: the logo mark is the expand button; the separate toggle is gone. Logo 18 px, mark 20 px.
+- Account menu: new `--menu` token (#ffffff / #1f1f1f), no inner padding, rows and dividers edge to edge, as wide as the sidebar content (232 px). Order: name and plan, Dark mode (small switch 34 × 20), Settings, Language, Sign out. Version and Terms footer removed.
+- Language opens a panel in the same menu (back row + full language names, check on the current one); slide-and-fade content and height animation, off under reduced motion. Keyboard: → opens, ← / Escape back, Escape again closes.
+- Fixed: on touch, tapping Language closed the menu (the pressed row unmounted and looked like an outside press).
+- `pnpm check` passed (289 tests, build). Browser: 1440 px dark (menu, keyboard path, collapsed rail), 390 px light fr-fr (sheet, menu, language panel).
+- Reviewer 78 → 88/100; its last must-fix (height animation) was built after, not re-graded.
