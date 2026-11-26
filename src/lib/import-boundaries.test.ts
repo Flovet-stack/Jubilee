@@ -35,3 +35,34 @@ describe("Supabase import boundary", () => {
     );
   });
 }, 60_000);
+
+// Decision 0036: only src/lib/ai may use the AI SDK; features call runTask.
+const aiSource = `import { generateText } from "ai";
+import { anthropic } from "@ai-sdk/anthropic";
+export const x = [generateText, anthropic];
+`;
+
+async function aiRuleIds(filePath: string) {
+  const [result] = await eslint.lintText(aiSource, { filePath });
+  return (result?.messages ?? []).map((m) => m.ruleId);
+}
+
+describe("AI SDK import boundary", () => {
+  it("fails a feature action that imports the AI SDK", async () => {
+    expect(await aiRuleIds("src/features/cv/actions.ts")).toContain(
+      "no-restricted-imports",
+    );
+  });
+
+  it("fails a component that imports the AI SDK", async () => {
+    expect(await aiRuleIds("src/components/example.tsx")).toContain(
+      "no-restricted-imports",
+    );
+  });
+
+  it("allows src/lib/ai", async () => {
+    expect(await aiRuleIds("src/lib/ai/run-task-core.ts")).not.toContain(
+      "no-restricted-imports",
+    );
+  });
+}, 300_000);

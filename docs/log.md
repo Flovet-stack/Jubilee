@@ -460,3 +460,11 @@ One dated entry per task: what was built, the review score, and what was left.
 - Wrote spec 25 implementing 0036: `runTask`, routing table, registry, usage log table with RLS, daily limits, eval script, privacy page update.
 - Flovet approved (in chat): `ai` and `@ai-sdk/anthropic`, `ANTHROPIC_API_KEY`, the `ai_usage` table, and daily limits of 10 (free) and 100 (pass).
 - Key saved to the local `.env.local` only; it was pasted in chat, so rotate it before launch.
+
+## 2026-11-26: Spec 25 built, AI foundation (in review)
+
+- `src/lib/ai/`: `runTask` (validate, strip contact details, daily limit, routed model and fallbacks, output schema, one usage row per attempt), routing table (all seven tasks on Claude Haiku 5.5), provider registry, Anthropic prompt caching, pricing, limits (10 free, 100 pass; everyone free until #35).
+- `ai_usage` table with RLS and `log_ai_usage`; tested on the real project inside a rolled-back transaction (own rows only, direct inserts blocked, nothing kept). Not applied yet.
+- `ANTHROPIC_API_KEY` (optional, server only), `ai` and `@ai-sdk/anthropic` pinned; lint rule keeps the AI SDK inside `src/lib/ai`. Privacy page names Anthropic (en, en-GB, fr); `ai.errors` copy.
+- `pnpm check` passed without the key; 28 AI tests. `pnpm ai:eval cv.import` reached Anthropic but the account has no credit, so no live pass yet.
+- Reviewer 86/100; deviations recorded in the spec, fallback logging and the address matcher fixed after. Left: add API credit, rerun the eval, re-grade, apply the migration.

@@ -1,6 +1,6 @@
 # 25: AI foundation
 
-Status: Ready · Written: 2026-11-26
+Status: Built, in review (reviewer 86/100; live eval blocked on Anthropic credit) · Written: 2026-11-26
 
 ## Goal
 
@@ -110,3 +110,11 @@ It also builds on:
 - `pnpm ai:eval cv.import` runs once against the real key, and its output (pass, tokens, cost) is pasted in the PR.
 - Screenshots of the privacy page's AI section at 390 px and 1440 px in English and French.
 - Reviewer skill at 90 or more.
+
+## Build notes (deviations, with reasons)
+
+- `ai_usage.user_id` references `public.profiles(id)`, like every other table; profiles cascade from `auth.users`, so deleting an account still deletes the rows.
+- `run-task.ts` is split into `run-task-core.ts` (the logic, with its dependencies passed in so tests mock them) and `index.ts` (the public `runTask`, wired to the real registry, limits and usage log).
+- Writes go through `log_ai_usage`, a security-definer function granted to signed-in users. It pins `user_id` to `auth.uid()`, so a client can only add rows against its own limit; there is no service-role key in the app.
+- `pnpm ai:eval [task]` runs `scripts/ai-eval.ts` through Vitest (`vitest.eval.config.ts`) from a small Node launcher, for TypeScript and the `@/` paths without a new dependency.
+- One usage row per model attempt (not per `runTask`), so a failing provider shows in the log before its fallback succeeds.

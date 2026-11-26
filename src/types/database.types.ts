@@ -14,6 +14,56 @@ export type Database = {
   };
   public: {
     Tables: {
+      ai_usage: {
+        Row: {
+          cost_usd: number;
+          created_at: string;
+          error_reason: string | null;
+          id: string;
+          input_tokens: number;
+          model: string;
+          ok: boolean;
+          output_tokens: number;
+          provider: string;
+          task: string;
+          user_id: string;
+        };
+        Insert: {
+          cost_usd?: number;
+          created_at?: string;
+          error_reason?: string | null;
+          id?: string;
+          input_tokens?: number;
+          model: string;
+          ok: boolean;
+          output_tokens?: number;
+          provider: string;
+          task: string;
+          user_id: string;
+        };
+        Update: {
+          cost_usd?: number;
+          created_at?: string;
+          error_reason?: string | null;
+          id?: string;
+          input_tokens?: number;
+          model?: string;
+          ok?: boolean;
+          output_tokens?: number;
+          provider?: string;
+          task?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "ai_usage_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       cv_revisions: {
         Row: {
           content: Json;
@@ -208,6 +258,19 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      log_ai_usage: {
+        Args: {
+          p_cost_usd: number;
+          p_error_reason?: string;
+          p_input_tokens: number;
+          p_model: string;
+          p_ok: boolean;
+          p_output_tokens: number;
+          p_provider: string;
+          p_task: string;
+        };
+        Returns: undefined;
+      };
       restore_cv_revision: {
         Args: {
           restored_content: Json;

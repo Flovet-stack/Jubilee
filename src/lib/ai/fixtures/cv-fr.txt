@@ -1,0 +1,16 @@
+Camille Martin
+Analyste de données | camille.martin@example.fr | 06 12 34 56 78 | 15 rue des Lilas, 69003 Lyon
+
+Expérience
+Analyste de données, Société Exemple (2020 - aujourd'hui)
+- Conception de tableaux de bord Tableau pour la direction commerciale.
+- Automatisation des rapports mensuels en Python, soit 20 heures gagnées par mois.
+
+Stagiaire data, Banque Fictive (2019 - 2020)
+- Analyse des réclamations clients avec SQL.
+
+Formation
+Master Statistique et science des données, Université Exemple (2020)
+
+Compétences
+SQL, Python, Tableau, R, anglais courant
