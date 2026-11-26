@@ -13,6 +13,9 @@ export const env = createEnv({
     // Optional: without it, AI tasks return "unavailable" (0036, spec 25).
     // Read only in src/lib/ai/.
     ANTHROPIC_API_KEY: z.string().min(1).optional(),
+    // Optional: Groq's free tier, for `pnpm ai:eval --provider groq` only
+    // (0038). Never registered for runTask.
+    GROQ_API_KEY: z.string().min(1).optional(),
   },
   client: {
     NEXT_PUBLIC_SITE_URL: z.url().transform((url) => url.replace(/\/+$/, "")),

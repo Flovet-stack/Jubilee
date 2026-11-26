@@ -10,7 +10,7 @@ import {
 
 import { costUsd } from "./pricing";
 import { redactDeep } from "./redact";
-import { type ModelRef, providerOf, ROUTES } from "./routing";
+import { type ModelRef, providerOf, type Route, ROUTES } from "./routing";
 import { TASKS, type TaskId, type TaskInput, type TaskOutput } from "./tasks";
 
 export type AiFailure = "limit" | "unavailable" | "failed";
@@ -36,6 +36,8 @@ export type RunTaskDeps = {
   dailyLimit: (userId: string) => Promise<number>;
   countOkToday: (userId: string) => Promise<number>;
   log: (row: UsageRow) => Promise<void>;
+  /** The eval script swaps the routing table (decision 0038); the app never does. */
+  routes?: Record<TaskId, Route>;
 };
 
 type Usage = { inputTokens?: number; outputTokens?: number } | undefined;
@@ -82,7 +84,7 @@ export async function runTaskWith<T extends TaskId>(
   { userId }: { userId: string },
 ): Promise<AiResult<TaskOutput<T>>> {
   const task = TASKS[taskId];
-  const route = ROUTES[taskId];
+  const route = (deps.routes ?? ROUTES)[taskId];
 
   const prepared = task.prepare(input, redactDeep);
   if (!prepared) return { ok: false, reason: "failed" };

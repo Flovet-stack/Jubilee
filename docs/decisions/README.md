@@ -57,6 +57,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0035 | [Sidebar header and a flush account menu with a language submenu](0035-sidebar-header-and-account-menu.md) (supersedes parts of 0027)               | Approved                                |
 | 0036 | [A swappable AI layer, routed per task, starting on Claude](0036-ai-provider-and-integration.md)                                                    | Approved                                |
 | 0037 | [Layered control surfaces, and a Geist and radius trial](0037-layered-control-surfaces-and-geist-trial.md)                                          | Approved                                |
+| 0038 | [Groq's free tier for AI evals, made-up data only](0038-groq-free-tier-for-ai-evals.md)                                                             | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

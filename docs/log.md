@@ -468,3 +468,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - `ANTHROPIC_API_KEY` (optional, server only), `ai` and `@ai-sdk/anthropic` pinned; lint rule keeps the AI SDK inside `src/lib/ai`. Privacy page names Anthropic (en, en-GB, fr); `ai.errors` copy.
 - `pnpm check` passed without the key; 28 AI tests. `pnpm ai:eval cv.import` reached Anthropic but the account has no credit, so no live pass yet.
 - Reviewer 86/100; deviations recorded in the spec, fallback logging and the address matcher fixed after. Left: add API credit, rerun the eval, re-grade, apply the migration.
+
+## 2026-11-26: Decision 0038, Groq free tier for evals; eval run
+
+- The Anthropic key works but the account has no API credit (a Claude Pro plan doesn't pay for API calls). Flovet chose a free provider for testing: 0038, Groq's free tier, made-up fixtures only, never registered for `runTask`.
+- Added `@ai-sdk/groq` 4.0.87 (pinned) and an optional `GROQ_API_KEY`; `pnpm ai:eval --provider groq` runs every task on `openai/gpt-oss-120b`.
+- Result: 7 of 8 cases pass. `email.followup` fails each run: Groq's JSON mode rejects its placeholder prompt; its feature spec writes the real prompt and schema.
+- Both keys were pasted in chat: rotate them before launch.
