@@ -14,6 +14,8 @@ export type MenuEntry =
       disabled?: boolean;
       /** Danger: destructive; it still opens its own confirmation or undo. */
       tone?: "default" | "danger";
+      /** Keeps the menu open after a press, for an item that shows progress. */
+      keepOpen?: boolean;
     }
   | { type: "separator" };
 
@@ -22,6 +24,9 @@ type MenuProps = {
   trigger: ReactElement;
   items: MenuEntry[];
   align?: "start" | "end";
+  /** Controlled open state, for a menu that closes when its work is done. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 /**
@@ -29,9 +34,18 @@ type MenuProps = {
  * 200 ms and leaves in 150 ms. Arrow keys move the highlight with no
  * animation; type-ahead works. Items are ≥ 44 px tall.
  */
-export function Menu({ trigger, items, align = "start" }: MenuProps) {
+export function Menu({
+  trigger,
+  items,
+  align = "start",
+  open,
+  onOpenChange,
+}: MenuProps) {
   return (
-    <MenuPrimitive.Root>
+    <MenuPrimitive.Root
+      open={open}
+      onOpenChange={onOpenChange ? (next) => onOpenChange(next) : undefined}
+    >
       <MenuPrimitive.Trigger render={trigger} />
       <MenuPrimitive.Portal>
         <MenuPrimitive.Positioner
@@ -59,6 +73,7 @@ export function Menu({ trigger, items, align = "start" }: MenuProps) {
                 <MenuPrimitive.Item
                   key={index}
                   disabled={entry.disabled}
+                  closeOnClick={!entry.keepOpen}
                   onClick={entry.onSelect}
                   className={cn(
                     "jb-type flex min-h-11 cursor-pointer items-center rounded-mark text-base outline-none select-none",

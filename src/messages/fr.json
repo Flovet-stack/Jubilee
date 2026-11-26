@@ -559,6 +559,13 @@
       },
       "rename": "Renommer « {title} »",
       "more": "Plus d’actions",
+      "pdf": {
+        "download": "Télécharger en PDF",
+        "preparing": "Préparation…",
+        "failed": "Le PDF n’a pas pu être créé. Réessayez.",
+        "unsaved": "Certaines modifications ne sont pas encore enregistrées. Corrigez-les, puis téléchargez à nouveau.",
+        "retry": "Réessayer"
+      },
       "duplicate": "Dupliquer",
       "delete": "Supprimer",
       "copyTitle": "{title} (copie)",
@@ -704,7 +711,11 @@
         "volunteer": "Bénévolat",
         "custom": "Autres"
       },
-      "present": "aujourd’hui"
+      "present": "aujourd’hui",
+      "fileWord": {
+        "US": "CV",
+        "FR": "CV"
+      }
     },
     "list": {
       "metaTitle": "CV",

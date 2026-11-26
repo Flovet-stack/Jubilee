@@ -9,6 +9,10 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  // The CV PDF route reads its fonts from disk (spec 23), so ship them with it.
+  outputFileTracingIncludes: {
+    "/api/cvs/*/pdf": ["src/features/cv/templates/classic/fonts/*.ttf"],
+  },
   experimental: {
     // The root layout sits under `[locale]`, so unmatched URLs need a 404
     // that renders without it (app/global-not-found.tsx).

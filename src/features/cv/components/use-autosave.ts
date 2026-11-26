@@ -136,6 +136,12 @@ export function useAutosave({
     return inFlight.current;
   }, [run]);
 
+  /** Saves now and says whether every edit is saved (for a download, 0035). */
+  const saveAll = useCallback(async () => {
+    await flush();
+    return !stopped.current && !dirty();
+  }, [dirty, flush]);
+
   /** Every edit goes through here. */
   const update = useCallback(
     (recipe: (current: CvContent) => CvContent) => {
@@ -199,5 +205,5 @@ export function useAutosave({
     [],
   );
 
-  return { content, update, flush, rename, status, heldBack };
+  return { content, update, flush, saveAll, rename, status, heldBack };
 }
