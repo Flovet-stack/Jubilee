@@ -398,4 +398,5 @@ One dated entry per task: what was built, the review score, and what was left.
 ## 2026-11-26: Dark mode greys for the shell
 
 - Flovet's values: desk #171717, content window and cards #161616, borders #232323 (`--desk`, `--card`, `--line` in both dark blocks of `globals.css`).
-- Token contrast tests pass (56). Checked on /cvs at 1440 px dark. Page and well stay #0a0f0b and #141a15.
+- Page #171717 (same as the desk) and wells #1c1c1c, so no green tint remains in the surfaces.
+- Token contrast tests pass (56). Checked /cvs and /privacy at 1440 px dark.

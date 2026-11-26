@@ -73,8 +73,8 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --page: #0a0f0b;
-    --well: #141a15;
+    --page: #171717;
+    --well: #1c1c1c;
     --desk: #171717;
     --card: #161616;
     --line: #232323;
@@ -107,8 +107,8 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --page: #0a0f0b;
-  --well: #141a15;
+  --page: #171717;
+  --well: #1c1c1c;
   --desk: #171717;
   --card: #161616;
   --line: #232323;
