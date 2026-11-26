@@ -1,10 +1,10 @@
 # 0036: Layered control surfaces, and a Geist and radius trial on the design-system page
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-26 by the product team (roles: UI, UX, Frontend)
-- **Approved:**
+- **Approved:** 2026-11-26 by Flovet
 - **Supersedes:** the flat button, field and sidebar-row surfaces of 0007 and 0027 (sizes, spacing and radius unchanged: 0022, 0029, 0030)
-- **Specs:**
+- **Specs:** specs/24-layered-control-surfaces.md
 
 ## Context
 
