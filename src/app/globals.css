@@ -22,6 +22,7 @@
   --well: #f4f4f6;
   --desk: #fafafa; /* the app shell's background around the window (0027) */
   --menu: #ffffff; /* account menu: one step lighter than the desk (0035) */
+  --menu-line: #e9e8ee; /* menu dividers: menu-to-line contrast = desk-to-line */
   --card: #ffffff;
   --line: #e5e4ea;
   --tint: #f3f0ff;
@@ -78,6 +79,7 @@
     --well: #1c1c1c;
     --desk: #171717;
     --menu: #1f1f1f;
+    --menu-line: #292929;
     --card: #131313;
     --line: #232323;
     --tint: #252148;
@@ -112,6 +114,8 @@
   --page: #171717;
   --well: #1c1c1c;
   --desk: #171717;
+  --menu: #1f1f1f;
+  --menu-line: #292929;
   --card: #131313;
   --line: #232323;
   --tint: #252148;
@@ -188,6 +192,7 @@
   --color-well: var(--well);
   --color-desk: var(--desk);
   --color-menu: var(--menu);
+  --color-menu-line: var(--menu-line);
   --color-card: var(--card);
   --color-line: var(--line);
   --color-tint: var(--tint);

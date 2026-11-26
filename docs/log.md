@@ -427,3 +427,10 @@ One dated entry per task: what was built, the review score, and what was left.
 - Fixed: on touch, tapping Language closed the menu (the pressed row unmounted and looked like an outside press).
 - `pnpm check` passed (289 tests, build). Browser: 1440 px dark (menu, keyboard path, collapsed rail), 390 px light fr-fr (sheet, menu, language panel).
 - Reviewer 78 → 88/100; its last must-fix (height animation) was built after, not re-graded.
+
+## 2026-11-26: Account menu rows inset, lighter dividers
+
+- Rows sit 4 px in from the menu's edges with `--radius-control`; dividers stay edge to edge (Flovet).
+- New `--menu-line` for the dividers, set so its contrast with `--menu` matches `--desk` against `--line` (dark 1.14:1): dark #292929, light #e9e8ee.
+- Fixed: the forced-dark theme block had no `--menu`, so the menu was white when dark mode was switched on by hand.
+- Token tests pass (62); lint and typecheck pass. Checked at 1440 px dark.
