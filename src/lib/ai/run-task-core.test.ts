@@ -57,7 +57,7 @@ function deps(overrides: Partial<Deps> = {}) {
 
 const user = { userId: "user-1" };
 
-describe("runTask (decision 0036, spec 25)", () => {
+describe("runTask (decision 0036, spec 26)", () => {
   it("routes to the task's model and returns its validated output", async () => {
     const seen: string[] = [];
     const { deps: d, model } = deps();

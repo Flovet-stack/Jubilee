@@ -8,11 +8,9 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/feedback";
 import { ToastProvider } from "@/components/ui/toast";
 import { CvEditor } from "@/features/cv/components/cv-editor";
+import { cvLabels } from "@/features/cv/labels";
 import { getCvDocument } from "@/features/cv/queries";
-import type { CvLanguage } from "@/features/cv/schemas";
-import type { CvLabels } from "@/features/cv/tree";
 import { localeTag, type Locale } from "@/i18n/locales";
-import { loadMessages } from "@/i18n/messages";
 import { routing } from "@/i18n/routing";
 
 export async function generateMetadata({
@@ -22,17 +20,6 @@ export async function generateMetadata({
   if (!hasLocale(routing.locales, locale)) return {};
   const t = await getTranslations({ locale, namespace: "cv.editor" });
   return { title: t("metaTitle"), robots: { index: false, follow: false } };
-}
-
-/**
- * The words printed on the CV come from the CV's language, not the UI's, so
- * they're read from that language's message file directly (next-intl's
- * request config always follows the page's locale).
- */
-async function cvLabels(language: CvLanguage): Promise<CvLabels> {
-  const messages = await loadMessages(language === "fr" ? "fr-fr" : "en-us");
-  const { headings, present } = messages.cv.document;
-  return { headings, present };
 }
 
 /** The CV editor (spec 14). Another user's CV is "not found" (RLS). */

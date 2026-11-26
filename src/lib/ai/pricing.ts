@@ -6,7 +6,7 @@ import type { ModelRef } from "./routing";
 export const PRICES: Record<string, { input: number; output: number }> = {
   "anthropic:claude-haiku-5-5": { input: 0.1, output: 0.5 },
   "anthropic:claude-sonnet-5-5": { input: 2, output: 10 },
-  // Free tier, evals only (decision 0038).
+  // Free tier, evals only (decision 0040).
   "groq:openai/gpt-oss-120b": { input: 0, output: 0 },
 };
 

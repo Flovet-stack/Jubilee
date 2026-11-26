@@ -455,13 +455,13 @@ One dated entry per task: what was built, the review score, and what was left.
 - `pnpm check` passed. Browser: 1440 px dark (buttons, fields) and light (secondary values); trial CSS checked by setting its attributes.
 - Reviewer 84/100; must-fixes (radius not saved, focus-ring 3:1 tests) applied, not re-graded.
 
-## 2026-11-26: Spec 25, AI foundation (Ready)
+## 2026-11-26: Spec 26, AI foundation (Ready)
 
-- Wrote spec 25 implementing 0036: `runTask`, routing table, registry, usage log table with RLS, daily limits, eval script, privacy page update.
+- Wrote spec 26 implementing 0036: `runTask`, routing table, registry, usage log table with RLS, daily limits, eval script, privacy page update.
 - Flovet approved (in chat): `ai` and `@ai-sdk/anthropic`, `ANTHROPIC_API_KEY`, the `ai_usage` table, and daily limits of 10 (free) and 100 (pass).
 - Key saved to the local `.env.local` only; it was pasted in chat, so rotate it before launch.
 
-## 2026-11-26: Spec 25 built, AI foundation (in review)
+## 2026-11-26: Spec 26 built, AI foundation (in review)
 
 - `src/lib/ai/`: `runTask` (validate, strip contact details, daily limit, routed model and fallbacks, output schema, one usage row per attempt), routing table (all seven tasks on Claude Haiku 5.5), provider registry, Anthropic prompt caching, pricing, limits (10 free, 100 pass; everyone free until #35).
 - `ai_usage` table with RLS and `log_ai_usage`; tested on the real project inside a rolled-back transaction (own rows only, direct inserts blocked, nothing kept). Not applied yet.
@@ -469,21 +469,66 @@ One dated entry per task: what was built, the review score, and what was left.
 - `pnpm check` passed without the key; 28 AI tests. `pnpm ai:eval cv.import` reached Anthropic but the account has no credit, so no live pass yet.
 - Reviewer 86/100; deviations recorded in the spec, fallback logging and the address matcher fixed after. Left: add API credit, rerun the eval, re-grade, apply the migration.
 
-## 2026-11-26: Decision 0038, Groq free tier for evals; eval run
+## 2026-11-26: Decision 0040, Groq free tier for evals; eval run
 
-- The Anthropic key works but the account has no API credit (a Claude Pro plan doesn't pay for API calls). Flovet chose a free provider for testing: 0038, Groq's free tier, made-up fixtures only, never registered for `runTask`.
+- The Anthropic key works but the account has no API credit (a Claude Pro plan doesn't pay for API calls). Flovet chose a free provider for testing: 0040, Groq's free tier, made-up fixtures only, never registered for `runTask`.
 - Added `@ai-sdk/groq` 4.0.87 (pinned) and an optional `GROQ_API_KEY`; `pnpm ai:eval --provider groq` runs every task on `openai/gpt-oss-120b`.
 - Result: 7 of 8 cases pass. `email.followup` fails each run: Groq's JSON mode rejects its placeholder prompt; its feature spec writes the real prompt and schema.
 - Both keys were pasted in chat: rotate them before launch.
 
-## 2026-11-26: Spec 25 done (92/100); ai_usage applied
+## 2026-11-26: Spec 26 done (92/100); ai_usage applied
 
 - Applied the `ai_usage` migration to the live project (recorded as 20261126214949; file renamed to match).
 - Reviewer re-grade 92/100, no must-fixes. Before any AI feature ships: its eval must pass on its routed model (Haiku needs API credit).
 
-## 2026-11-26: Decision 0039, Groq as the default while testing
+## 2026-11-26: Decision 0041, Groq as the default while testing
 
 - Flovet: run the whole system on Groq for now (test users only) and make switching models modular. Providers are now one map (`src/lib/ai/providers/index.ts`); `routing.ts` has `DEFAULT_MODEL` = `groq:openai/gpt-oss-120b`, Haiku as fallback; a task can override its own model.
-- Privacy page names Groq and Anthropic (en, en-GB, fr). 0038 superseded for routing.
+- Privacy page names Groq and Anthropic (en, en-GB, fr). 0040 superseded for routing.
 - `pnpm ai:eval` on the routing table: 7 of 8 pass (`email.followup` waits for its real prompt).
 - Left: set `GROQ_API_KEY` in Vercel for test deployments; a production-routes decision before real users.
+
+## 2026-11-26: PDF export (spec 25, decision 0038)
+
+- **Decision 0038** (approved): Download PDF is the first item in the editor's More menu. It saves pending edits first, then fetches the file. The file is named "{name} - Resume/CV.pdf", with the word set by the CV's language and market. The metadata doesn't mention Jubilee.
+- **Built:**
+  - `GET /api/cvs/[id]/pdf`: RLS read, 401/404/500, `private, no-store`, never stored.
+  - The Classic template in react-pdf (`classic-pdf.tsx`), from the same tree and constants as the preview.
+  - Carlito TTFs, traced into the route with `outputFileTracingIncludes`.
+  - `file-name.ts`: an ASCII `filename` plus a UTF-8 `filename*`.
+  - `labels.ts`, shared with the editor page.
+  - The menu item: "Preparing…" with the menu kept open, then an error toast with Try again. `Menu` gains `keepOpen` and a controlled `open`.
+- **Dependencies:** `@react-pdf/renderer` 4.9.1 and `pdfjs-dist` 6.5.438 (dev).
+- **Tests:**
+  - pdf.js text extraction in English and French: every tree string in order, accents, œ and « » intact.
+  - Page size by market, metadata, an empty CV, and an over-long URL.
+  - File-name and header cases, and the route's 401/404/500.
+- **Browser:**
+  - All 12 test CVs return 200; another user's id returns 404.
+  - 1440 px en-us: menu, "Preparing…", the download and its name.
+  - 390 px fr-fr: menu and failure toast.
+  - Files are 24–29 KB. Warm renders take 0.7–1.9 s in dev.
+- **Reviewer:** 93/100. Fixes applied afterwards:
+  - a retry from the toast shows progress;
+  - no hard-coded fallback file name;
+  - a long name keeps "- CV";
+  - the spec text matches the route.
+  - The over-long URL test found clipping, so words over 40 characters now break after `/ ? & =`, and react-pdf draws a "-" there. Flovet confirmed this exception to 0025 in chat.
+- **Left:**
+  - nobody has looked at the PDF layout here (no rasteriser), so the samples were sent to Flovet;
+  - no download test on a real phone;
+  - the output isn't tagged;
+  - the unsaved-edits toast hasn't been run in the browser;
+  - the pre-existing `Date.now()` prerender error from `AppLayout`.
+
+## 2026-11-27: Softer field border, lighter field fill, plan pill beside the name
+
+- Dark `--field` (field border) #808080 → #686868: the softest grey that keeps 3:1 on every surface a field sits on (WCAG 1.4.11). Light stays #8b8999, already at the floor.
+- `--field-well` a touch lighter: dark #0f0f0f → #141414, light #f7f7f8 → #fafafb.
+- Account menu: the plan pill sits beside the first name; Free is a grey (neutral) pill. Each future tier gets its own tone.
+- The account button shows a pointer cursor.
+- Token tests (82), lint and typecheck pass. Checked at 1440 px dark.
+
+## 2026-11-27: AI work renumbered after merging main
+
+- Main took decision 0038 (PDF download) and spec 25 (PDF export), so the AI work became decisions 0040 (Groq for evals, superseded) and 0041 (Groq default while testing) and spec 26 (AI foundation). References updated.

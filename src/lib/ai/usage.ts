@@ -21,7 +21,7 @@ export async function countOkToday(userId: string): Promise<number> {
 /**
  * One row per call, through log_ai_usage, which writes it for the signed-in
  * user. Two calls at the limit at once may both pass: an off-by-one we accept
- * rather than lock the table (spec 25).
+ * rather than lock the table (spec 26).
  */
 export async function logUsage(usage: UsageRow): Promise<void> {
   const supabase = await createClient();

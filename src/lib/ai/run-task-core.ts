@@ -36,7 +36,7 @@ export type RunTaskDeps = {
   dailyLimit: (userId: string) => Promise<number>;
   countOkToday: (userId: string) => Promise<number>;
   log: (row: UsageRow) => Promise<void>;
-  /** The eval script swaps the routing table (decision 0038); the app never does. */
+  /** The eval script swaps the routing table (decision 0040); the app never does. */
   routes?: Record<TaskId, Route>;
 };
 

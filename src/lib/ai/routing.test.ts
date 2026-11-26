@@ -13,7 +13,7 @@ const { stripContactDetails, REDACTED } = await import("./redact");
 const { startOfUtcDay } = await import("./limits");
 
 describe("routing table (0036 rules 2, 3)", () => {
-  it("routes every task to the default model, Haiku as fallback (0039)", () => {
+  it("routes every task to the default model, Haiku as fallback (0041)", () => {
     expect(Object.keys(ROUTES).sort()).toEqual([...TASK_IDS].sort());
     for (const route of Object.values(ROUTES)) {
       expect(route.model).toBe(DEFAULT_MODEL);

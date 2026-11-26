@@ -1,11 +1,11 @@
 /**
- * `pnpm ai:eval [task]` (decision 0036 rule 7, spec 25): runs each task on the
+ * `pnpm ai:eval [task]` (decision 0036 rule 7, spec 26): runs each task on the
  * made-up fixtures with the real model and prints pass or fail against its
  * output schema, with tokens and cost. Never part of `pnpm check`. Nothing
  * is written to the database.
  *
  * Without a flag it runs the routing table. `--provider groq` or
- * `--provider anthropic` runs every task on that provider (0038). Made-up
+ * `--provider anthropic` runs every task on that provider (0040). Made-up
  * fixtures only.
  */
 import { readFileSync } from "node:fs";
@@ -57,7 +57,7 @@ if (only && !TASK_IDS.includes(only as TaskId)) {
 const tasks = only ? [only as TaskId] : [...TASK_IDS];
 
 // `--provider <id>` runs every task on that provider's eval model instead
-// of the routing table (decision 0038); without it, the real routes run.
+// of the routing table (decision 0040); without it, the real routes run.
 const EVAL_MODELS: Record<string, string> = {
   anthropic: "claude-haiku-5-5",
   groq: "openai/gpt-oss-120b",

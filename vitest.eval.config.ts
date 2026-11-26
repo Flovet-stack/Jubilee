@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "vitest/config";
 
-// `pnpm ai:eval [task]` (spec 25): calls the real model, so it costs money
+// `pnpm ai:eval [task]` (spec 26): calls the real model, so it costs money
 // and is never part of `pnpm check`.
 if (existsSync(".env.local")) process.loadEnvFile(".env.local");
 

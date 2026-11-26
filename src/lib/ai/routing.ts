@@ -20,7 +20,7 @@ export type Route = {
  * provider in providers/index.ts can be named, as long as it has a key and
  * a price in pricing.ts.
  *
- * Today (decision 0039): Groq's `gpt-oss-120b` for every task while Jubilee
+ * Today (decision 0041): Groq's `gpt-oss-120b` for every task while Jubilee
  * has test users only, with Claude Haiku 5.5 as the fallback when its key is
  * set. Before real users join, a decision picks the production routes.
  */

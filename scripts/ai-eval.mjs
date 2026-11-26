@@ -2,7 +2,7 @@
 // "@/" paths and TypeScript), passing the task to run, if one is named.
 import { spawnSync } from "node:child_process";
 
-// `pnpm ai:eval [task] [--provider anthropic|groq]` (groq: decision 0038).
+// `pnpm ai:eval [task] [--provider anthropic|groq]` (groq: decision 0040).
 const args = process.argv.slice(2);
 const at = args.indexOf("--provider");
 const provider = at === -1 ? "" : (args[at + 1] ?? "");

@@ -10,11 +10,11 @@ export const env = createEnv({
   // `next typegen` loads next.config.ts, but type generation never reads env.
   skipValidation: process.env.npm_lifecycle_event === "typecheck",
   server: {
-    // Optional: without it, AI tasks return "unavailable" (0036, spec 25).
+    // Optional: without it, AI tasks return "unavailable" (0036, spec 26).
     // Read only in src/lib/ai/.
     ANTHROPIC_API_KEY: z.string().min(1).optional(),
     // Optional: Groq, the default AI provider while Jubilee has test users
-    // only (0039). Read only in src/lib/ai/.
+    // only (0041). Read only in src/lib/ai/.
     GROQ_API_KEY: z.string().min(1).optional(),
   },
   client: {

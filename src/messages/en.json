@@ -561,6 +561,13 @@
       },
       "rename": "Rename “{title}”",
       "more": "More actions",
+      "pdf": {
+        "download": "Download PDF",
+        "preparing": "Preparing…",
+        "failed": "We couldn’t make the PDF. Try again.",
+        "unsaved": "Some changes aren’t saved yet. Fix them, then download again.",
+        "retry": "Try again"
+      },
       "duplicate": "Duplicate",
       "delete": "Delete",
       "copyTitle": "{title} (copy)",
@@ -704,7 +711,11 @@
         "volunteer": "Volunteering",
         "custom": "Other"
       },
-      "present": "Present"
+      "present": "Present",
+      "fileWord": {
+        "US": "Resume",
+        "FR": "CV"
+      }
     },
     "list": {
       "metaTitle": "Resumes",

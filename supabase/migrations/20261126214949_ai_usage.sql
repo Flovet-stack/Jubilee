@@ -1,4 +1,4 @@
--- One row per AI call (decision 0036, spec 25): which task, which model,
+-- One row per AI call (decision 0036, spec 26): which task, which model,
 -- tokens and cost. Never the text sent or received. Users read their own
 -- rows; rows are written only through log_ai_usage, which pins user_id to
 -- the caller, so the client can't write rows for anyone else.
