@@ -454,3 +454,9 @@ One dated entry per task: what was built, the review score, and what was left.
 - Design-system page: "Geist" in the font switcher and a Radius switch (ours / pill, not saved).
 - `pnpm check` passed. Browser: 1440 px dark (buttons, fields) and light (secondary values); trial CSS checked by setting its attributes.
 - Reviewer 84/100; must-fixes (radius not saved, focus-ring 3:1 tests) applied, not re-graded.
+
+## 2026-11-26: Spec 25, AI foundation (Ready)
+
+- Wrote spec 25 implementing 0036: `runTask`, routing table, registry, usage log table with RLS, daily limits, eval script, privacy page update.
+- Flovet approved (in chat): `ai` and `@ai-sdk/anthropic`, `ANTHROPIC_API_KEY`, the `ai_usage` table, and daily limits of 10 (free) and 100 (pass).
+- Key saved to the local `.env.local` only; it was pasted in chat, so rotate it before launch.
