@@ -454,3 +454,36 @@ One dated entry per task: what was built, the review score, and what was left.
 - Design-system page: "Geist" in the font switcher and a Radius switch (ours / pill, not saved).
 - `pnpm check` passed. Browser: 1440 px dark (buttons, fields) and light (secondary values); trial CSS checked by setting its attributes.
 - Reviewer 84/100; must-fixes (radius not saved, focus-ring 3:1 tests) applied, not re-graded.
+
+## 2026-11-26: PDF export (spec 25, decision 0038)
+
+- **Decision 0038** (approved): Download PDF is the first item in the editor's More menu. It saves pending edits first, then fetches the file. The file is named "{name} - Resume/CV.pdf", with the word set by the CV's language and market. The metadata doesn't mention Jubilee.
+- **Built:**
+  - `GET /api/cvs/[id]/pdf`: RLS read, 401/404/500, `private, no-store`, never stored.
+  - The Classic template in react-pdf (`classic-pdf.tsx`), from the same tree and constants as the preview.
+  - Carlito TTFs, traced into the route with `outputFileTracingIncludes`.
+  - `file-name.ts`: an ASCII `filename` plus a UTF-8 `filename*`.
+  - `labels.ts`, shared with the editor page.
+  - The menu item: "Preparing…" with the menu kept open, then an error toast with Try again. `Menu` gains `keepOpen` and a controlled `open`.
+- **Dependencies:** `@react-pdf/renderer` 4.9.1 and `pdfjs-dist` 6.5.438 (dev).
+- **Tests:**
+  - pdf.js text extraction in English and French: every tree string in order, accents, œ and « » intact.
+  - Page size by market, metadata, an empty CV, and an over-long URL.
+  - File-name and header cases, and the route's 401/404/500.
+- **Browser:**
+  - All 12 test CVs return 200; another user's id returns 404.
+  - 1440 px en-us: menu, "Preparing…", the download and its name.
+  - 390 px fr-fr: menu and failure toast.
+  - Files are 24–29 KB. Warm renders take 0.7–1.9 s in dev.
+- **Reviewer:** 93/100. Fixes applied afterwards:
+  - a retry from the toast shows progress;
+  - no hard-coded fallback file name;
+  - a long name keeps "- CV";
+  - the spec text matches the route.
+  - The over-long URL test found clipping, so words over 40 characters now break after `/ ? & =`, and react-pdf draws a "-" there. Flovet confirmed this exception to 0025 in chat.
+- **Left:**
+  - nobody has looked at the PDF layout here (no rasteriser), so the samples were sent to Flovet;
+  - no download test on a real phone;
+  - the output isn't tagged;
+  - the unsaved-edits toast hasn't been run in the browser;
+  - the pre-existing `Date.now()` prerender error from `AppLayout`.

@@ -16,6 +16,7 @@ import {
   HugeiconsBadgeAlertIcon,
   HugeiconsChevronRightIcon,
   HugeiconsCopyIcon,
+  HugeiconsDownloadIcon,
   HugeiconsFileTextIcon,
   HugeiconsPencilIcon,
   HugeiconsPlusIcon,
@@ -44,6 +45,7 @@ import {
   stepStatus,
 } from "../editor";
 import { deleteCvAction, duplicateCvAction } from "../editor-actions";
+import { fileNameFromDisposition } from "../file-name";
 import type { CvError } from "../logic";
 import { type Finding, reviewCv } from "../review";
 import {
@@ -112,11 +114,12 @@ export function CvEditor(props: CvEditorProps) {
   const { id, language, market, locale, languageTag, labels, homeHref } = props;
   const t = useTranslations("cv.editor");
   const toast = useToast();
-  const { content, update, flush, rename, status, heldBack } = useAutosave({
-    id,
-    initialContent: props.initialContent,
-    initialUpdatedAt: props.initialUpdatedAt,
-  });
+  const { content, update, flush, saveAll, rename, status, heldBack } =
+    useAutosave({
+      id,
+      initialContent: props.initialContent,
+      initialUpdatedAt: props.initialUpdatedAt,
+    });
 
   const [step, setStep] = useState<EditorStep>({ type: "contact" });
   const [openEntry, setOpenEntry] = useState<string | undefined>();
@@ -271,12 +274,82 @@ export function CvEditor(props: CvEditorProps) {
       }
     });
 
+  /* ── Download PDF (0038) ──────────────────────────────────────────── */
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const downloadingRef = useRef(false);
+
+  const downloadPdf = async () => {
+    if (downloadingRef.current) return;
+    downloadingRef.current = true;
+    setDownloading(true);
+    // A retry from the toast reopens the menu, so "Preparing…" is seen.
+    setMoreOpen(true);
+    try {
+      // The file must match the screen: save first, and stop if we can't.
+      if (!(await saveAll())) {
+        setMoreOpen(false);
+        toast({ title: t("pdf.unsaved"), closeLabel: t("dismiss") });
+        return;
+      }
+      const response = await fetch(`/api/cvs/${id}/pdf`, {
+        cache: "no-store",
+      }).catch(() => null);
+      if (!response?.ok) {
+        setMoreOpen(false);
+        if (response?.status === 401) failed("unauthenticated");
+        else if (response?.status === 404) failed("not_found");
+        else
+          toast({
+            title: t("pdf.failed"),
+            closeLabel: t("dismiss"),
+            action: {
+              label: t("pdf.retry"),
+              onClick: () => void downloadPdf(),
+            },
+          });
+        return;
+      }
+      const blob = await response.blob();
+      const name =
+        fileNameFromDisposition(response.headers.get("Content-Disposition")) ??
+        `${savedTitle.current}.pdf`;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = name;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      // Give the browser time to start reading the file before freeing it.
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      setMoreOpen(false);
+    } catch {
+      setMoreOpen(false);
+      toast({
+        title: t("pdf.failed"),
+        closeLabel: t("dismiss"),
+        action: { label: t("pdf.retry"), onClick: () => void downloadPdf() },
+      });
+    } finally {
+      downloadingRef.current = false;
+      setDownloading(false);
+    }
+  };
+
   const moreItems: MenuEntry[] = [
+    {
+      label: downloading ? t("pdf.preparing") : t("pdf.download"),
+      icon: <HugeiconsDownloadIcon />,
+      onSelect: () => void downloadPdf(),
+      disabled: downloading || pending,
+      keepOpen: true,
+    },
     {
       label: t("duplicate"),
       icon: <HugeiconsCopyIcon />,
       onSelect: duplicate,
-      disabled: pending,
+      disabled: pending || downloading,
     },
     { type: "separator" },
     {
@@ -786,6 +859,8 @@ export function CvEditor(props: CvEditorProps) {
             align="end"
             trigger={<IconButton label={t("more")} icon={<MoreIcon />} />}
             items={moreItems}
+            open={moreOpen}
+            onOpenChange={setMoreOpen}
           />
         </header>
 
