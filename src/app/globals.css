@@ -21,6 +21,7 @@
   --page: #ffffff;
   --well: #f4f4f6;
   --desk: #fafafa; /* the app shell's background around the window (0027) */
+  --menu: #ffffff; /* account menu: one step lighter than the desk (0035) */
   --card: #ffffff;
   --line: #e5e4ea;
   --tint: #f3f0ff;
@@ -76,6 +77,7 @@
     --page: #171717;
     --well: #1c1c1c;
     --desk: #171717;
+    --menu: #1f1f1f;
     --card: #131313;
     --line: #232323;
     --tint: #252148;
@@ -185,6 +187,7 @@
   --color-page: var(--page);
   --color-well: var(--well);
   --color-desk: var(--desk);
+  --color-menu: var(--menu);
   --color-card: var(--card);
   --color-line: var(--line);
   --color-tint: var(--tint);
