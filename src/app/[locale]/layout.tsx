@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { GridAuditor } from "@/components/grid-auditor";
 import { env } from "@/env";
 import { localeTag } from "@/i18n/locales";
 import { routing } from "@/i18n/routing";
@@ -48,7 +49,10 @@ export default async function LocaleLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        <GridAuditor />
+      </body>
     </html>
   );
 }

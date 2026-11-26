@@ -52,6 +52,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0030 | [Icons sized from the font size, not the line box](0030-icon-size-from-font-size.md) (supersedes 0029's icon size)                                  | Approved                                |
 | 0031 | [CV editor in two panes, a top bar, and review flags on sections](0031-cv-editor-two-panes-and-review.md) (supersedes parts of 0024 §2–3)           | Approved                                |
 | 0032 | [A Resumes page, and five resumes in the sidebar](0032-resumes-page-and-sidebar-cap.md)                                                             | Approved                                |
+| 0033 | [Grid Auditor overlay, always in dev, opt-in in production](0033-grid-auditor-dev-overlay.md)                                                       | Approved                                |
 
 ## Still to decide (before the specs that need them)
 
