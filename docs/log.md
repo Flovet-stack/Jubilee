@@ -480,3 +480,10 @@ One dated entry per task: what was built, the review score, and what was left.
 
 - Applied the `ai_usage` migration to the live project (recorded as 20261126214949; file renamed to match).
 - Reviewer re-grade 92/100, no must-fixes. Before any AI feature ships: its eval must pass on its routed model (Haiku needs API credit).
+
+## 2026-11-26: Decision 0039, Groq as the default while testing
+
+- Flovet: run the whole system on Groq for now (test users only) and make switching models modular. Providers are now one map (`src/lib/ai/providers/index.ts`); `routing.ts` has `DEFAULT_MODEL` = `groq:openai/gpt-oss-120b`, Haiku as fallback; a task can override its own model.
+- Privacy page names Groq and Anthropic (en, en-GB, fr). 0038 superseded for routing.
+- `pnpm ai:eval` on the routing table: 7 of 8 pass (`email.followup` waits for its real prompt).
+- Left: set `GROQ_API_KEY` in Vercel for test deployments; a production-routes decision before real users.

@@ -1,9 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
-vi.mock("@/env", () => ({ env: { ANTHROPIC_API_KEY: undefined } }));
+vi.mock("@/env", () => ({
+  env: { ANTHROPIC_API_KEY: undefined, GROQ_API_KEY: undefined },
+}));
 
-const { ROUTES } = await import("./routing");
+const { DEFAULT_MODEL, ROUTES } = await import("./routing");
 const { TASK_IDS } = await import("./tasks");
 const { PRICES, costUsd } = await import("./pricing");
 const { assertRoutesKnown, languageModel } = await import("./registry");
@@ -11,10 +13,11 @@ const { stripContactDetails, REDACTED } = await import("./redact");
 const { startOfUtcDay } = await import("./limits");
 
 describe("routing table (0036 rules 2, 3)", () => {
-  it("routes every task, all to Claude Haiku 5.5 to start", () => {
+  it("routes every task to the default model, Haiku as fallback (0039)", () => {
     expect(Object.keys(ROUTES).sort()).toEqual([...TASK_IDS].sort());
     for (const route of Object.values(ROUTES)) {
-      expect(route.model).toBe("anthropic:claude-haiku-5-5");
+      expect(route.model).toBe(DEFAULT_MODEL);
+      expect(route.fallbacks).toEqual(["anthropic:claude-haiku-5-5"]);
     }
   });
 
@@ -30,13 +33,14 @@ describe("routing table (0036 rules 2, 3)", () => {
   it("fails on a route to an unknown provider", () => {
     const routes = {
       ...ROUTES,
-      "cv.import": { ...ROUTES["cv.import"], model: "groq:llama" as const },
+      "cv.import": { ...ROUTES["cv.import"], model: "mistral:small" as const },
     };
     expect(() => assertRoutesKnown(routes)).toThrow(/unknown provider/);
   });
 
   it("registers no model without a key", () => {
     expect(languageModel("anthropic:claude-haiku-5-5")).toBeUndefined();
+    expect(languageModel("groq:openai/gpt-oss-120b")).toBeUndefined();
   });
 });
 

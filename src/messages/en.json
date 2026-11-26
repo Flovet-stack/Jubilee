@@ -73,12 +73,12 @@
       "processors": {
         "title": "Who else handles it",
         "blocks": [
-          "Three companies work for Jubilee to run the service, and only for that:",
+          "Four companies work for Jubilee to run the service, and only for that:",
           {
             "list": [
               "Supabase stores your account and runs sign-in.",
               "Vercel hosts the website and app.",
-              "Anthropic runs the AI features (see “AI and automated decisions”)."
+              "Groq and Anthropic run the AI features (see “AI and automated decisions”)."
             ]
           },
           "If you choose to sign in with Google or LinkedIn, they send us your name, email address and profile photo. They act under their own privacy policies, not for Jubilee.",
@@ -120,8 +120,8 @@
       "ai": {
         "title": "AI and automated decisions",
         "blocks": [
-          "When you use an AI feature, such as importing your LinkedIn profile or tailoring your resume to a job, Jubilee sends the resume and job text you chose to Anthropic, which runs the Claude models.",
-          "We remove your email address, phone number and street address first. Anthropic processes the text in the US under its EU terms and doesn't use it to train its models.",
+          "When you use an AI feature, such as importing your LinkedIn profile or tailoring your resume to a job, Jubilee sends the resume and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models.",
+          "We remove your email address, phone number and street address first. Both process the text in the US and don't use it to train their models.",
           "For each AI request we keep a short record (which feature, its size and its cost), not the text itself, so we can set fair daily limits.",
           "AI only suggests changes, and you accept or reject each one. It never adds experience you don't have, Jubilee makes no automated decisions about you, and nothing is sent to an employer without your approval."
         ]

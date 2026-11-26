@@ -9,22 +9,24 @@ import {
 import { env } from "@/env";
 
 import {
-  anthropicInstructions,
-  anthropicProvider,
-} from "./providers/anthropic";
+  type AiProvider,
+  isProviderId,
+  PROVIDERS,
+  type ProviderId,
+} from "./providers";
 import { type ModelRef, providerOf, ROUTES } from "./routing";
 
-/** Every provider the layer can build. Routes may name only these. */
-export const KNOWN_PROVIDERS: readonly string[] = ["anthropic"];
+/** Each provider's key, from the validated env (server only). */
+const KEYS: Record<ProviderId, string | undefined> = {
+  anthropic: env.ANTHROPIC_API_KEY,
+  groq: env.GROQ_API_KEY,
+};
 
 /** Throws if a route names a provider the layer can't build (0036 rule 3). */
-export function assertRoutesKnown(
-  routes: typeof ROUTES = ROUTES,
-  known: readonly string[] = KNOWN_PROVIDERS,
-) {
+export function assertRoutesKnown(routes: typeof ROUTES = ROUTES) {
   for (const [task, route] of Object.entries(routes)) {
     for (const ref of [route.model, ...route.fallbacks]) {
-      if (!known.includes(providerOf(ref))) {
+      if (!isProviderId(providerOf(ref))) {
         throw new Error(`AI route ${task} names an unknown provider: ${ref}`);
       }
     }
@@ -35,24 +37,32 @@ export function assertRoutesKnown(
 assertRoutesKnown();
 
 function buildRegistry() {
-  const anthropic = anthropicProvider(env.ANTHROPIC_API_KEY);
   // Only providers whose key is set are registered (0036 rule 3).
-  return anthropic ? createProviderRegistry({ anthropic }) : undefined;
+  const providers: Record<string, AiProvider> = {};
+  for (const id of Object.keys(PROVIDERS) as ProviderId[]) {
+    const key = KEYS[id];
+    if (key) providers[id] = PROVIDERS[id].create(key);
+  }
+  return {
+    ids: new Set(Object.keys(providers)),
+    registry: createProviderRegistry(providers),
+  };
 }
 
-let registry: ReturnType<typeof buildRegistry> | null = null;
-
-function isAnthropicRef(ref: ModelRef): ref is `anthropic:${string}` {
-  return providerOf(ref) === "anthropic";
-}
+let built: ReturnType<typeof buildRegistry> | null = null;
 
 /** The model for a `provider:model` ref, or undefined without its key. */
 export function languageModel(ref: ModelRef): LanguageModel | undefined {
-  if (!isAnthropicRef(ref)) return undefined;
-  registry ??= buildRegistry();
-  return registry?.languageModel(ref);
+  built ??= buildRegistry();
+  if (!built.ids.has(providerOf(ref))) return undefined;
+  return built.registry.languageModel(ref);
 }
 
+/** A task's instructions, with the provider's own options if it has any. */
 export function instructionsFor(ref: ModelRef, text: string): Instructions {
-  return providerOf(ref) === "anthropic" ? anthropicInstructions(text) : text;
+  const id = providerOf(ref);
+  if (!isProviderId(id)) return text;
+  const entry: { instructions?: (text: string) => Instructions } =
+    PROVIDERS[id];
+  return entry.instructions?.(text) ?? text;
 }

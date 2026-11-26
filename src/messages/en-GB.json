@@ -14,7 +14,7 @@
       },
       "ai": {
         "blocks": {
-          "0": "When you use an AI feature, such as importing your LinkedIn profile or tailoring your CV to a job, Jubilee sends the CV and job text you chose to Anthropic, which runs the Claude models."
+          "0": "When you use an AI feature, such as importing your LinkedIn profile or tailoring your CV to a job, Jubilee sends the CV and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models."
         }
       }
     }

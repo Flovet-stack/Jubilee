@@ -118,3 +118,4 @@ It also builds on:
 - Writes go through `log_ai_usage`, a security-definer function granted to signed-in users. It pins `user_id` to `auth.uid()`, so a client can only add rows against its own limit; there is no service-role key in the app.
 - `pnpm ai:eval [task]` runs `scripts/ai-eval.ts` through Vitest (`vitest.eval.config.ts`) from a small Node launcher, for TypeScript and the `@/` paths without a new dependency.
 - One usage row per model attempt (not per `runTask`), so a failing provider shows in the log before its fallback succeeds.
+- After review (decision 0039): providers are one map in `providers/index.ts`, and `routing.ts` has `DEFAULT_MODEL` (Groq's `gpt-oss-120b`) with Haiku as fallback, so switching every task is one line. The privacy page names Groq and Anthropic. Eval on the routing table: 7 of 8 pass; `email.followup` waits for its real prompt.

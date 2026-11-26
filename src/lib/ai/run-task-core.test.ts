@@ -8,6 +8,17 @@ const { ROUTES } = await import("./routing");
 const { DAILY_LIMIT } = await import("./limits");
 type Deps = import("./run-task-core").RunTaskDeps;
 type UsageRow = import("./run-task-core").UsageRow;
+type Route = import("./routing").Route;
+
+/** Tests pin their own table, so they don't depend on today's routes. */
+function table(model: Route["model"], fallbacks: Route["fallbacks"] = []) {
+  return Object.fromEntries(
+    Object.entries(ROUTES).map(([task, route]) => [
+      task,
+      { ...route, model, fallbacks },
+    ]),
+  ) as Record<keyof typeof ROUTES, Route>;
+}
 
 function answer(text: string, input = 1000, output = 200) {
   return {
@@ -39,6 +50,7 @@ function deps(overrides: Partial<Deps> = {}) {
     log: async (row) => {
       rows.push(row);
     },
+    routes: table("anthropic:claude-haiku-5-5"),
   };
   return { deps: { ...base, ...overrides }, rows, model };
 }
@@ -62,7 +74,7 @@ describe("runTask (decision 0036, spec 25)", () => {
       user,
     );
     expect(result).toEqual({ ok: true, data: { text: "done" } });
-    expect(seen).toEqual([ROUTES["cv.import"].model]);
+    expect(seen).toEqual(["anthropic:claude-haiku-5-5"]);
     expect(model.doGenerateCalls[0]?.temperature).toBe(0);
   });
 
@@ -111,21 +123,15 @@ describe("runTask (decision 0036, spec 25)", () => {
       doGenerate: answer(JSON.stringify({ text: "from backup" })),
     });
     const { deps: d, rows } = deps({
-      model: (ref) => (ref === "anthropic:claude-haiku-5-5" ? failing : backup),
+      model: (ref) => (ref === "groq:openai/gpt-oss-120b" ? failing : backup),
+      routes: table("groq:openai/gpt-oss-120b", ["anthropic:claude-haiku-5-5"]),
     });
-    const route = ROUTES["job.extract"];
-    const original = route.fallbacks;
-    route.fallbacks = ["anthropic:claude-sonnet-5-5"];
-    try {
-      const result = await runTaskWith(d, "job.extract", { text: "Ad" }, user);
-      expect(result).toEqual({ ok: true, data: { text: "from backup" } });
-      expect(rows).toMatchObject([
-        { model: "claude-haiku-5-5", ok: false, errorReason: "overloaded" },
-        { model: "claude-sonnet-5-5", ok: true },
-      ]);
-    } finally {
-      route.fallbacks = original;
-    }
+    const result = await runTaskWith(d, "job.extract", { text: "Ad" }, user);
+    expect(result).toEqual({ ok: true, data: { text: "from backup" } });
+    expect(rows).toMatchObject([
+      { provider: "groq", ok: false, errorReason: "overloaded" },
+      { provider: "anthropic", model: "claude-haiku-5-5", ok: true },
+    ]);
   });
 
   it("returns failed when the output doesn't match its schema", async () => {

@@ -58,6 +58,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0036 | [A swappable AI layer, routed per task, starting on Claude](0036-ai-provider-and-integration.md)                                                    | Approved                                |
 | 0037 | [Layered control surfaces, and a Geist and radius trial](0037-layered-control-surfaces-and-geist-trial.md)                                          | Approved                                |
 | 0038 | [Groq's free tier for AI evals, made-up data only](0038-groq-free-tier-for-ai-evals.md)                                                             | Approved                                |
+| 0039 | [Groq as the default AI provider while Jubilee has test users only](0039-groq-default-while-testing.md)                                             | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

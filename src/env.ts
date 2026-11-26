@@ -13,8 +13,8 @@ export const env = createEnv({
     // Optional: without it, AI tasks return "unavailable" (0036, spec 25).
     // Read only in src/lib/ai/.
     ANTHROPIC_API_KEY: z.string().min(1).optional(),
-    // Optional: Groq's free tier, for `pnpm ai:eval --provider groq` only
-    // (0038). Never registered for runTask.
+    // Optional: Groq, the default AI provider while Jubilee has test users
+    // only (0039). Read only in src/lib/ai/.
     GROQ_API_KEY: z.string().min(1).optional(),
   },
   client: {

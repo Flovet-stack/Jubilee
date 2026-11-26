@@ -4,20 +4,18 @@
  * output schema, with tokens and cost. Never part of `pnpm check`. Nothing
  * is written to the database.
  *
- * `--provider anthropic` (default) needs ANTHROPIC_API_KEY and costs money.
- * `--provider groq` needs GROQ_API_KEY and runs every task on Groq's free
- * tier (decision 0038): made-up fixtures only, never real user data.
+ * Without a flag it runs the routing table. `--provider groq` or
+ * `--provider anthropic` runs every task on that provider (0038). Made-up
+ * fixtures only.
  */
 import { readFileSync } from "node:fs";
 
-import { createGroq } from "@ai-sdk/groq";
-import type { LanguageModel } from "ai";
+import type { Instructions, LanguageModel } from "ai";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-const { anthropicInstructions, anthropicProvider } =
-  await import("@/lib/ai/providers/anthropic");
+const { isProviderId, PROVIDERS } = await import("@/lib/ai/providers");
 const { runTaskWith } = await import("@/lib/ai/run-task-core");
 const { ROUTES } = await import("@/lib/ai/routing");
 const { TASK_IDS } = await import("@/lib/ai/tasks");
@@ -25,6 +23,8 @@ const { TASK_IDS } = await import("@/lib/ai/tasks");
 type TaskId = (typeof TASK_IDS)[number];
 type UsageRow = import("@/lib/ai/run-task-core").UsageRow;
 type Route = import("@/lib/ai/routing").Route;
+type ModelRef = import("@/lib/ai/routing").ModelRef;
+type AiProvider = import("@/lib/ai/providers").AiProvider;
 
 const fixture = (name: string) =>
   readFileSync(
@@ -56,45 +56,51 @@ if (only && !TASK_IDS.includes(only as TaskId)) {
 }
 const tasks = only ? [only as TaskId] : [...TASK_IDS];
 
-const GROQ_MODEL = "openai/gpt-oss-120b";
-const provider = process.env.AI_EVAL_PROVIDER || "anthropic";
-if (provider !== "anthropic" && provider !== "groq") {
-  throw new Error(`Unknown provider "${provider}". One of: anthropic, groq`);
+// `--provider <id>` runs every task on that provider's eval model instead
+// of the routing table (decision 0038); without it, the real routes run.
+const EVAL_MODELS: Record<string, string> = {
+  anthropic: "claude-haiku-5-5",
+  groq: "openai/gpt-oss-120b",
+};
+const override = process.env.AI_EVAL_PROVIDER || "";
+if (override && !EVAL_MODELS[override]) {
+  throw new Error(
+    `Unknown provider "${override}". One of: ${Object.keys(EVAL_MODELS).join(", ")}`,
+  );
 }
 
-const anthropic = anthropicProvider(process.env.ANTHROPIC_API_KEY);
-const groqKey = process.env.GROQ_API_KEY;
-const groq = groqKey ? createGroq({ apiKey: groqKey }) : undefined;
+const KEYS: Record<string, string | undefined> = {
+  anthropic: process.env.ANTHROPIC_API_KEY,
+  groq: process.env.GROQ_API_KEY,
+};
+const built: Record<string, AiProvider> = {};
+for (const [id, entry] of Object.entries(PROVIDERS)) {
+  const key = KEYS[id];
+  if (key) built[id] = entry.create(key);
+}
 
-/** Groq: every task on one free model, same limits otherwise (0038). */
-const onGroq = (route: Route): Route => ({
-  ...route,
-  model: `groq:${GROQ_MODEL}`,
-  fallbacks: [],
-});
-const routes: Record<TaskId, Route> =
-  provider === "groq"
-    ? {
-        "cv.import": onGroq(ROUTES["cv.import"]),
-        "job.extract": onGroq(ROUTES["job.extract"]),
-        "cv.tailor": onGroq(ROUTES["cv.tailor"]),
-        "letter.write": onGroq(ROUTES["letter.write"]),
-        "cv.translate": onGroq(ROUTES["cv.translate"]),
-        "cv.rewrite": onGroq(ROUTES["cv.rewrite"]),
-        "email.followup": onGroq(ROUTES["email.followup"]),
-      }
-    : ROUTES;
+const evalModel: ModelRef = `${override}:${EVAL_MODELS[override] ?? ""}`;
+const routes: Record<TaskId, Route> = { ...ROUTES };
+if (override) {
+  for (const task of TASK_IDS) {
+    routes[task] = { ...ROUTES[task], model: evalModel, fallbacks: [] };
+  }
+}
 
 function model(ref: string): LanguageModel | undefined {
-  const id = ref.slice(ref.indexOf(":") + 1);
-  if (ref.startsWith("groq:")) return groq?.languageModel(id);
-  if (ref.startsWith("anthropic:")) return anthropic?.languageModel(id);
-  return undefined;
+  const id = ref.slice(0, ref.indexOf(":"));
+  return built[id]?.languageModel(ref.slice(id.length + 1));
 }
 
-const ready = provider === "groq" ? groq : anthropic;
+function instructions(ref: string, text: string): Instructions {
+  const id = ref.slice(0, ref.indexOf(":"));
+  return isProviderId(id) ? (PROVIDERS[id].instructions?.(text) ?? text) : text;
+}
 
-describe.runIf(ready)(`AI eval on ${provider}`, () => {
+const ready = Object.keys(built).length > 0;
+const label = override || "routing table";
+
+describe.runIf(ready)(`AI eval on ${label}`, () => {
   for (const task of tasks) {
     for (const { name, text } of CASES[task]) {
       it(`${task}: ${name}`, async () => {
@@ -102,10 +108,7 @@ describe.runIf(ready)(`AI eval on ${provider}`, () => {
         const result = await runTaskWith(
           {
             model,
-            instructions: (ref, value) =>
-              ref.startsWith("anthropic:")
-                ? anthropicInstructions(value)
-                : value,
+            instructions,
             routes,
             dailyLimit: async () => Infinity,
             countOkToday: async () => 0,
@@ -131,6 +134,6 @@ describe.runIf(ready)(`AI eval on ${provider}`, () => {
 
 it.skipIf(ready)("needs an API key", () => {
   console.log(
-    `Set ${provider === "groq" ? "GROQ_API_KEY" : "ANTHROPIC_API_KEY"} in .env.local to run the AI eval.`,
+    "Set GROQ_API_KEY or ANTHROPIC_API_KEY in .env.local to run the AI eval.",
   );
 });

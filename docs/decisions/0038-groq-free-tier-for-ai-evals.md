@@ -1,6 +1,6 @@
 # 0038: Groq's free tier for AI evals, made-up data only
 
-- **Status:** Approved
+- **Status:** Superseded by 0039 (routing only; the eval flag stays)
 - **Proposed:** 2026-11-26 by the product team (lead, backend)
 - **Approved:** 2026-11-26 by Flovet (in chat: "Let's use a free provider for now", then sent a Groq key)
 - **Specs:** specs/25-ai-foundation.md
