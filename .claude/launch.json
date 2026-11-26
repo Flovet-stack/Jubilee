@@ -6,6 +6,12 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["dev", "--port", "3107"],
       "port": 3107
+    },
+    {
+      "name": "jubilee-start",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["start", "--port", "3117"],
+      "port": 3117
     }
   ]
 }

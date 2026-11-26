@@ -395,6 +395,18 @@ One dated entry per task: what was built, the review score, and what was left.
 - `pnpm check` passed (283 tests, build). Browser: /cvs body 14, h1 24, field 14 mouse / 16 touch; privacy page at 390 dark.
 - Reviewer 84/100; its four must-fixes (sign-in display size, editor step heading, design-system headings and intro) applied, not re-graded.
 
+## 2026-11-26: Grid Auditor overlay (spec 22, decision 0034)
+
+- Vendored `grid-auditor` 0.1.0 (`vendor/grid-auditor-0.1.0.tgz`, `file:` dependency). `pnpm-workspace.yaml` excludes it from `minimumReleaseAge`, because pnpm 11 can't find it on npm and the frozen install fails otherwise.
+- `src/components/grid-auditor.tsx`, rendered once in the locale layout: always on in dev. In production it needs `NEXT_PUBLIC_GRID_AUDITOR=true` plus `?grid=1`, which is kept in localStorage until `?grid=0`. The library loads only through a dynamic import. Flag validated in `src/env.ts`, documented in `.env.example`.
+- Checked in the browser:
+  - dev: Shift+G and Ctrl+Shift+G work, no console errors or hydration warnings;
+  - `next start` without `?grid=1`: the 69 KB library chunk is never requested;
+  - with `?grid=1` it works, persists across locales, and `?grid=0` clears it;
+  - 390 px and 1440 px.
+- Format, lint, typecheck, tests (283) and the build pass. One earlier test run had a single file fail under machine load; the re-run was clean.
+- Reviewer 98/100; its one suggestion (`.catch` on the import) applied afterwards.
+
 ## 2026-11-26: Dark mode greys for the shell
 
 - Flovet's values: desk #171717, content window and cards #161616, borders #232323 (`--desk`, `--card`, `--line` in both dark blocks of `globals.css`).
