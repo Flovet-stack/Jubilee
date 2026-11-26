@@ -231,7 +231,7 @@ export function PhoneField({
               // Part of the field (0029): field spacing and 16 px text, so the
               // dial code reads as part of the number and the heights match.
               fieldSpacing[size],
-              "shrink-0 text-(length:--text-base) font-medium tabular-nums",
+              "shrink-0 text-(length:--text-field) font-medium tabular-nums",
               "data-popup-open:shadow-[inset_0_0_0_1px_var(--violet)]",
             )}
           >

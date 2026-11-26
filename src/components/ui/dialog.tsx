@@ -101,7 +101,7 @@ function OverlayHeader({
   return (
     <div className="flex items-start justify-between gap-4 px-6 pt-5 pb-4">
       <div className="flex min-w-0 flex-col gap-1 pt-2">
-        <DialogPrimitive.Title className="text-xl font-bold text-ink">
+        <DialogPrimitive.Title className="text-lg font-bold text-ink">
           {title}
         </DialogPrimitive.Title>
         {description ? (

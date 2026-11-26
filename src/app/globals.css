@@ -229,23 +229,23 @@
 
 /* Static theme values (not themed, so not inline). */
 @theme {
-  /* Type scale (0007): 12 · 14 · 16 · 18 · 20 · 24 · 32 · 40. */
+  /* Type scale (0033): a 14 px base; each size is a role.
+     12 caption · 13 secondary · 14 body · 16 subsection and reading ·
+     18 section title · 24 page title · 32 display. */
   --text-xs: 0.75rem;
   --text-xs--line-height: 1.4;
-  --text-sm: 0.875rem;
+  --text-sm: 0.8125rem;
   --text-sm--line-height: 1.45;
-  --text-base: 1rem;
+  --text-base: 0.875rem;
   --text-base--line-height: 1.5;
+  --text-md: 1rem;
+  --text-md--line-height: 1.4;
   --text-lg: 1.125rem;
-  --text-lg--line-height: 1.45;
-  --text-xl: 1.25rem;
-  --text-xl--line-height: 1.3;
+  --text-lg--line-height: 1.35;
   --text-2xl: 1.5rem;
   --text-2xl--line-height: 1.2;
   --text-3xl: 2rem;
   --text-3xl--line-height: 1.15;
-  --text-4xl: 2.5rem;
-  --text-4xl--line-height: 1.15;
 
   /* Spacing: Tailwind's 4 px base gives 1 = 4, 2 = 8, 3 = 12, 4 = 16, 6 = 24,
      8 = 32, 12 = 48, 16 = 64, 24 = 96, 32 = 128. Use only those steps (0007). */
@@ -289,6 +289,17 @@
 
 /* ── Base ───────────────────────────────────────────────────────────── */
 @layer base {
+  /* Fields: 14 px with a mouse, 16 px on touch so iOS never zooms (0033). */
+  :root {
+    --text-field: var(--text-base);
+  }
+
+  @media (pointer: coarse) {
+    :root {
+      --text-field: var(--text-md);
+    }
+  }
+
   html {
     -webkit-tap-highlight-color: transparent;
     text-size-adjust: 100%;

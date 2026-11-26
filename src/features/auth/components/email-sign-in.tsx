@@ -148,7 +148,7 @@ function EmailSteps({
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-center text-xl font-bold text-ink">
+      <h2 className="text-center text-lg font-bold text-ink">
         {t("code.title")}
       </h2>
       <form action={formAction} noValidate className="flex flex-col gap-4">

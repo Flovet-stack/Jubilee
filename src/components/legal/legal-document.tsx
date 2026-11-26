@@ -43,16 +43,14 @@ export async function LegalDocument({
     <main className="mx-auto w-full max-w-(--container-reading) px-4 pt-12 pb-24 sm:pt-16">
       <article className="flex flex-col gap-12">
         <header className="flex flex-col gap-3">
-          <h1 className="text-3xl font-bold text-ink sm:text-4xl">
-            {t("title")}
-          </h1>
+          <h1 className="text-3xl font-bold text-ink">{t("title")}</h1>
           <p className="text-sm text-ink-muted">
             {t.rich("updated", {
               date: updated,
               time: (chunks) => <time dateTime={lastUpdated}>{chunks}</time>,
             })}
           </p>
-          <p className="text-lg text-ink">{t("intro")}</p>
+          <p className="text-md/[1.6] text-ink">{t("intro")}</p>
         </header>
 
         <nav aria-label={t("contents")}>
@@ -80,9 +78,9 @@ export async function LegalDocument({
                 // Receives focus from the contents links, so keyboard users
                 // continue from the section they jumped to.
                 tabIndex={-1}
-                className="flex scroll-mt-6 flex-col gap-3 outline-none"
+                className="flex scroll-mt-6 flex-col gap-3 text-md/[1.6] outline-none"
               >
-                <h2 id={`${id}-title`} className="text-xl font-bold text-ink">
+                <h2 id={`${id}-title`} className="text-lg font-bold text-ink">
                   {t(`sections.${id}.title`)}
                 </h2>
                 {blocks.map((block, i) =>

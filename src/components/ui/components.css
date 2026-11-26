@@ -229,7 +229,7 @@
     --py: 0.15em;
   }
 
-  /* Fields keep 16 px text (iOS zoom, 0020) and the height of their size,
+  /* Fields use --text-field (14 px mouse, 16 px touch, 0033) and the height of their size,
      so --py comes from the height; --px and icons follow the formula.
      `.jb-field` sits on the element that holds the variables (the input's
      wrapper, or the trigger itself); `.jb-field-box` pads the box. */
@@ -238,7 +238,7 @@
     --px: calc(var(--py) + (1lh - 1cap) / 2);
     --icon: 1.125em;
     --icon-inset: calc((1lh - var(--icon)) / 2);
-    font-size: var(--text-base);
+    font-size: var(--text-field);
     --tw-leading: 1.5;
     line-height: 1.5;
   }
@@ -300,13 +300,13 @@
      the start icon in size and distance from the edge. It fills the slot. */
   .jb-field-end .jb-type.jb-type-square {
     --py: inherit;
-    font-size: var(--text-base);
+    font-size: var(--text-field);
     line-height: 1.5;
     min-width: var(--field-h);
     min-height: var(--field-h);
   }
 
-  /* Buttons: the same box; the size is the font size (lg 16, md 14, sm 12). */
+  /* Buttons: the same box; the size is the font size (lg 16, md 14, sm 12; 0033). */
   .jb-button {
     min-height: var(--btn-h);
     font-size: var(--btn-text);
@@ -314,12 +314,12 @@
 
   .jb-button-lg {
     --btn-h: var(--control-h-lg);
-    --btn-text: var(--text-base);
+    --btn-text: var(--text-md);
   }
 
   .jb-button-md {
     --btn-h: var(--control-h);
-    --btn-text: var(--text-sm);
+    --btn-text: var(--text-base);
   }
 
   .jb-button-sm {

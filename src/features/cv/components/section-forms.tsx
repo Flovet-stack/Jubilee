@@ -58,7 +58,7 @@ export function Guidance({ step }: { step: GuidanceKey }) {
         </ul>
       </div>
       <div className="flex flex-col gap-1 rounded-card bg-well p-4 shadow-[inset_0_0_0_1px_var(--line)]">
-        <p className="text-sm font-semibold text-ink">{g("exampleLabel")}</p>
+        <p className="text-base font-semibold text-ink">{g("exampleLabel")}</p>
         <p className="text-sm text-ink-muted italic">{t("example")}</p>
       </div>
     </div>
@@ -177,7 +177,7 @@ function LinksField({
     update((c) => ({ ...c, basics: { ...c.basics, links: next } }));
   return (
     <fieldset className="flex flex-col gap-3">
-      <legend className="text-sm font-semibold text-ink">
+      <legend className="text-base font-semibold text-ink">
         {t("links")}{" "}
         <span className="font-normal text-ink-muted">{e("optional")}</span>
       </legend>

@@ -117,7 +117,7 @@ Exact values and contrast checks are in [0007](../decisions/0007-visual-foundati
 
 ### 8.2 Typography
 
-- **Plus Jakarta Sans** for everything (the face Ownr uses for headings): headings 700 with slightly tight tracking, body 400 at 16 / 1.5, labels 600, tabular figures for dates and scores. One family keeps fonts under 80 KB.
+- **Plus Jakarta Sans** for everything (the face Ownr uses for headings): headings 700 with slightly tight tracking, body 400 at 14 / 1.5 (sizes by role: decision 0033), labels 600, tabular figures for dates and scores. One family keeps fonts under 80 KB.
 - Scale 12 · 14 · 16 · 18 · 20 · 24 · 32 · 40 px; **at most three sizes per screen** besides meta.
 - CV fonts are a separate decision.
 

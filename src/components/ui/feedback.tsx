@@ -153,7 +153,7 @@ export function Progress({
       max={max}
       className={cn("flex flex-col gap-2", className)}
     >
-      <div className="flex items-baseline justify-between gap-4 text-sm">
+      <div className="flex items-baseline justify-between gap-4 text-base">
         <ProgressPrimitive.Label className="font-semibold text-ink">
           {label}
         </ProgressPrimitive.Label>
@@ -188,7 +188,7 @@ export function initials(name: string): string {
 
 const avatarSize = {
   sm: "size-8 text-xs",
-  md: "size-10 text-sm",
+  md: "size-10 text-base",
   lg: "size-14 text-lg",
 };
 
