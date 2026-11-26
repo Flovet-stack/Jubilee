@@ -446,3 +446,11 @@ One dated entry per task: what was built, the review score, and what was left.
 
 - Flovet approved 0036 (in chat), with Claude Haiku 5.5 as the starting model for every task. Status line, index and brief updated. Renumbered from 0034, which main had taken for the Grid Auditor decision.
 - Left: write the AI foundation spec (router, registry, routing table, usage log, caps, eval script, privacy page). Before building: Flovet to approve adding `ai`, `@ai-sdk/anthropic` and `ANTHROPIC_API_KEY`, create a Console API key in a Jubilee workspace, and set the daily caps.
+
+## 2026-11-26: Layered control surfaces, Geist and radius trial (spec 24, decision 0037)
+
+- New tokens `--control`, `--control-hover`, `--control-press`, `--control-active`, `--field-well` and shadows `--shadow-raised`, `--shadow-primary`, `--shadow-primary-press`, `--shadow-recessed` (light and both dark blocks).
+- Primary: violet with a top glow, bottom shade, inner and darker-violet outer rings. Secondary and quiet-on-hover: raised. Fields: recessed well, keeping the `--field` ring for 3:1. Sidebar active row: raised tab. No CSS borders; forced-colors gets a 1 px ButtonBorder outline.
+- Design-system page: "Geist" in the font switcher and a Radius switch (ours / pill, not saved).
+- `pnpm check` passed. Browser: 1440 px dark (buttons, fields) and light (secondary values); trial CSS checked by setting its attributes.
+- Reviewer 84/100; must-fixes (radius not saved, focus-ring 3:1 tests) applied, not re-graded.

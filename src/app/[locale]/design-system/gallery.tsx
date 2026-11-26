@@ -41,7 +41,7 @@ import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 import { FieldsDemo } from "./fields-demo";
 import { ShellDemo } from "./shell-demo";
-import { FontSwitcher } from "./font-switcher";
+import { FontSwitcher, RadiusSwitcher } from "./font-switcher";
 
 /* Sample content: fictional companies only (no-ai-slop). */
 
@@ -117,7 +117,10 @@ export function Gallery({ fontVariables }: { fontVariables: string }) {
               docs/design/design-system.md. Switch your system theme to see
               dark; use touch emulation to see the 44 px floor.
             </p>
-            <FontSwitcher fontVariables={fontVariables} />
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <FontSwitcher fontVariables={fontVariables} />
+              <RadiusSwitcher />
+            </div>
           </header>
 
           <Foundations />

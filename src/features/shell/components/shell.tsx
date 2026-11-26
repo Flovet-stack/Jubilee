@@ -475,12 +475,14 @@ const rowClasses = (active: boolean, collapsed: boolean) =>
     // Type spacing (0029): 16 px text sets a 40 px row; touch keeps 44.
     // Grey (ink-muted, 8:1 on the desk) for every row; the current page in
     // ink on a wash. Medium weight, and icons at 1.75 px to match it.
-    "jb-type flex w-full min-w-0 items-center rounded-control text-start text-base font-medium text-ink-muted outline-none select-none",
+    "jb-type jb-surface flex w-full min-w-0 items-center rounded-control text-start text-base font-medium text-ink-muted outline-none select-none",
     "[&_svg]:stroke-[1.75]",
     "pointer-coarse:min-h-11",
-    "transition-colors duration-(--dur-fast) hover-fine:bg-wash-hover",
+    "transition-[background-color,box-shadow,color] duration-(--dur-fast) hover-fine:bg-wash-hover",
     "focus-visible:shadow-[0_0_0_2px_var(--violet)]",
-    active && "bg-wash-hover font-semibold text-ink",
+    // The current page is a raised tab (0037).
+    active &&
+      "bg-control-active font-semibold text-ink shadow-raised hover-fine:bg-control-active",
     collapsed && "jb-type-square relative size-11 min-h-11 justify-center",
   );
 
