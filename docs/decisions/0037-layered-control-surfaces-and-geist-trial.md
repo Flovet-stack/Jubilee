@@ -1,4 +1,4 @@
-# 0036: Layered control surfaces, and a Geist and radius trial on the design-system page
+# 0037: Layered control surfaces, and a Geist and radius trial on the design-system page
 
 - **Status:** Approved
 - **Proposed:** 2026-11-26 by the product team (roles: UI, UX, Frontend)

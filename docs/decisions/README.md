@@ -55,7 +55,8 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0033 | [A 14 px base and a type scale set by hierarchy](0033-type-scale-from-14px.md) (supersedes 0007's type scale)                                       | Approved                                |
 | 0034 | [Grid Auditor overlay, always in dev, opt-in in production](0034-grid-auditor-dev-overlay.md)                                                       | Approved                                |
 | 0035 | [Sidebar header and a flush account menu with a language submenu](0035-sidebar-header-and-account-menu.md) (supersedes parts of 0027)               | Approved                                |
-| 0036 | [Layered control surfaces, and a Geist and radius trial](0036-layered-control-surfaces-and-geist-trial.md)                                          | Approved                                |
+| 0036 | [A swappable AI layer, routed per task, starting on Claude](0036-ai-provider-and-integration.md)                                                    | Approved                                |
+| 0037 | [Layered control surfaces, and a Geist and radius trial](0037-layered-control-surfaces-and-geist-trial.md)                                          | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

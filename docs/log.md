@@ -428,7 +428,26 @@ One dated entry per task: what was built, the review score, and what was left.
 - `pnpm check` passed (289 tests, build). Browser: 1440 px dark (menu, keyboard path, collapsed rail), 390 px light fr-fr (sheet, menu, language panel).
 - Reviewer 78 → 88/100; its last must-fix (height animation) was built after, not re-graded.
 
-## 2026-11-26: Layered control surfaces, Geist and radius trial (spec 24, decision 0036)
+## 2026-11-26: Account menu rows inset, lighter dividers
+
+- Rows sit 4 px in from the menu's edges with `--radius-control`; dividers stay edge to edge (Flovet).
+- New `--menu-line` for the dividers, set so its contrast with `--menu` matches `--desk` against `--line` (dark 1.14:1): dark #292929, light #e9e8ee.
+- Fixed: the forced-dark theme block had no `--menu`, so the menu was white when dark mode was switched on by hand.
+- Token tests pass (62); lint and typecheck pass. Checked at 1440 px dark.
+
+## 2026-11-26: Decision 0036, a swappable AI layer (Proposed)
+
+- Researched providers (Anthropic, OpenAI, Gemini, Mistral, Groq, OpenRouter, Vercel AI Gateway), the Vercel AI SDK, data terms, EU processing and the EU AI Act. Logged 0036 as Proposed.
+- Revised the same day on Flovet's input: the Vercel AI SDK with a per-task router in `src/lib/ai/` (seven tasks, each routed to a `provider:model` with fallbacks); evals decide when a task moves to a cheaper model; every task starts on Claude Haiku 5.5; free tiers get test data only.
+- Maps the MVP: AI in features 2, 4, 5, 6, 10; light in 7; optional in 1; none in 3, 8, 9.
+- Left: Flovet to approve 0036, the starting model, the two packages and the env var, and the daily caps. Mistral's terms and EU hosting are unverified.
+
+## 2026-11-26: Decision 0036 approved
+
+- Flovet approved 0036 (in chat), with Claude Haiku 5.5 as the starting model for every task. Status line, index and brief updated. Renumbered from 0034, which main had taken for the Grid Auditor decision.
+- Left: write the AI foundation spec (router, registry, routing table, usage log, caps, eval script, privacy page). Before building: Flovet to approve adding `ai`, `@ai-sdk/anthropic` and `ANTHROPIC_API_KEY`, create a Console API key in a Jubilee workspace, and set the daily caps.
+
+## 2026-11-26: Layered control surfaces, Geist and radius trial (spec 24, decision 0037)
 
 - New tokens `--control`, `--control-hover`, `--control-press`, `--control-active`, `--field-well` and shadows `--shadow-raised`, `--shadow-primary`, `--shadow-primary-press`, `--shadow-recessed` (light and both dark blocks).
 - Primary: violet with a top glow, bottom shade, inner and darker-violet outer rings. Secondary and quiet-on-hover: raised. Fields: recessed well, keeping the `--field` ring for 3:1. Sidebar active row: raised tab. No CSS borders; forced-colors gets a 1 px ButtonBorder outline.

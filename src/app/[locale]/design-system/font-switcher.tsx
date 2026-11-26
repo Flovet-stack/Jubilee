@@ -6,7 +6,7 @@ import { Select } from "@/components/ui/select";
 
 const PAIRS = [
   { value: "current", label: "Plus Jakarta Sans (current)" },
-  { value: "geist", label: "Geist (0036 trial)" },
+  { value: "geist", label: "Geist (0037 trial)" },
   { value: "figtree-geist", label: "Figtree headings + Geist body" },
   { value: "vietnam-lexend", label: "Be Vietnam Pro headings + Lexend body" },
 ];
@@ -68,11 +68,11 @@ export function FontSwitcher({ fontVariables }: { fontVariables: string }) {
 
 const RADII = [
   { value: "ours", label: "Radius: ours (0022)" },
-  { value: "pill", label: "Radius: pill (0036 trial)" },
+  { value: "pill", label: "Radius: pill (0037 trial)" },
 ];
 
 /**
- * Dev-only radius trial (0036): pill corners on controls, this page only,
+ * Dev-only radius trial (0037): pill corners on controls, this page only,
  * not saved. The attribute sits on <html> like the font trial, so portalled
  * menus and dialogs follow; it's removed when the page unmounts.
  */

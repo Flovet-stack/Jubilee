@@ -15,7 +15,7 @@ import { Tooltip } from "./tooltip";
  * 0020 sizes, 0022 radius).
  *
  * - primary: the one violet action on a screen.
- * - secondary: raised control surface (0036).
+ * - secondary: raised control surface (0037).
  * - quiet: text only, for low-stakes actions next to a primary.
  * - danger: destructive final actions; the label names the target (0008 §1b).
  *
@@ -45,13 +45,13 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          // Layered (0036): top glow and bottom shade read as a gradient.
+          // Layered (0037): top glow and bottom shade read as a gradient.
           "bg-violet text-on-violet shadow-primary",
           "hover-fine:bg-[color-mix(in_oklab,var(--violet)_88%,var(--ink))] active:bg-violet-press active:shadow-primary-press",
           "data-disabled:bg-well data-disabled:text-ink-subtle data-disabled:shadow-[inset_0_0_0_1px_var(--line)]",
         ],
         secondary: [
-          // Raised (0036): lit top edge and a soft outer ring, no border.
+          // Raised (0037): lit top edge and a soft outer ring, no border.
           "bg-control text-ink shadow-raised",
           "hover-fine:bg-control-hover active:bg-control-press",
           "data-disabled:bg-well data-disabled:text-ink-subtle data-disabled:shadow-[inset_0_0_0_1px_var(--line)]",
