@@ -475,3 +475,8 @@ One dated entry per task: what was built, the review score, and what was left.
 - Added `@ai-sdk/groq` 4.0.87 (pinned) and an optional `GROQ_API_KEY`; `pnpm ai:eval --provider groq` runs every task on `openai/gpt-oss-120b`.
 - Result: 7 of 8 cases pass. `email.followup` fails each run: Groq's JSON mode rejects its placeholder prompt; its feature spec writes the real prompt and schema.
 - Both keys were pasted in chat: rotate them before launch.
+
+## 2026-11-26: Spec 25 done (92/100); ai_usage applied
+
+- Applied the `ai_usage` migration to the live project (recorded as 20261126214949; file renamed to match).
+- Reviewer re-grade 92/100, no must-fixes. Before any AI feature ships: its eval must pass on its routed model (Haiku needs API credit).

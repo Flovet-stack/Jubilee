@@ -46,6 +46,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | [18: Icon size from the font size](18-icon-size.md)                         | Done (97/100) |
 | [19: CV editor in two panes](19-cv-editor-two-panes.md)                     | Done (95/100) |
 | [22: Grid Auditor overlay](22-grid-auditor.md)                              | Done (98/100) |
-| [25: AI foundation](25-ai-foundation.md)                                    | Ready         |
+| [25: AI foundation](25-ai-foundation.md)                                    | Done (92/100) |
 
 Planned next (each needs its decisions first): LinkedIn import, country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

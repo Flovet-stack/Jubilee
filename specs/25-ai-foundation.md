@@ -1,6 +1,6 @@
 # 25: AI foundation
 
-Status: Built, in review (reviewer 86/100; live eval blocked on Anthropic credit) · Written: 2026-11-26
+Status: Done (92/100, 2026-11-26) · Written: 2026-11-26
 
 ## Goal
 
