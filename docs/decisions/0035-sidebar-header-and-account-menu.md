@@ -1,10 +1,10 @@
 # 0035: Sidebar header and a flush account menu with a language submenu
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-26 by the product team (roles: UX, UI, Copy, Frontend)
-- **Approved:**
+- **Approved:** 2026-11-26 by Flovet
 - **Supersedes:** parts of 0027 (the collapse button in the collapsed rail, the account menu's language switch and footer)
-- **Specs:**
+- **Specs:** specs/23-sidebar-account-menu.md
 
 ## Context
 
