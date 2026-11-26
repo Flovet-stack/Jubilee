@@ -395,14 +395,54 @@ One dated entry per task: what was built, the review score, and what was left.
 - `pnpm check` passed (283 tests, build). Browser: /cvs body 14, h1 24, field 14 mouse / 16 touch; privacy page at 390 dark.
 - Reviewer 84/100; its four must-fixes (sign-in display size, editor step heading, design-system headings and intro) applied, not re-graded.
 
-## 2026-11-26: Decision 0034, a swappable AI layer (Proposed)
+## 2026-11-26: Grid Auditor overlay (spec 22, decision 0034)
 
-- Researched providers (Anthropic, OpenAI, Gemini, Mistral, Groq, OpenRouter, Vercel AI Gateway), the Vercel AI SDK, data terms, EU processing and the EU AI Act. Logged 0034 as Proposed.
+- Vendored `grid-auditor` 0.1.0 (`vendor/grid-auditor-0.1.0.tgz`, `file:` dependency). `pnpm-workspace.yaml` excludes it from `minimumReleaseAge`, because pnpm 11 can't find it on npm and the frozen install fails otherwise.
+- `src/components/grid-auditor.tsx`, rendered once in the locale layout: always on in dev. In production it needs `NEXT_PUBLIC_GRID_AUDITOR=true` plus `?grid=1`, which is kept in localStorage until `?grid=0`. The library loads only through a dynamic import. Flag validated in `src/env.ts`, documented in `.env.example`.
+- Checked in the browser:
+  - dev: Shift+G and Ctrl+Shift+G work, no console errors or hydration warnings;
+  - `next start` without `?grid=1`: the 69 KB library chunk is never requested;
+  - with `?grid=1` it works, persists across locales, and `?grid=0` clears it;
+  - 390 px and 1440 px.
+- Format, lint, typecheck, tests (283) and the build pass. One earlier test run had a single file fail under machine load; the re-run was clean.
+- Reviewer 98/100; its one suggestion (`.catch` on the import) applied afterwards.
+
+## 2026-11-26: Dark mode greys for the shell
+
+- Flovet's values: desk #171717, content window and cards #161616, borders #232323 (`--desk`, `--card`, `--line` in both dark blocks of `globals.css`).
+- Page #171717 (same as the desk) and wells #1c1c1c, so no green tint remains in the surfaces.
+- Token contrast tests pass (56). Checked /cvs and /privacy at 1440 px dark.
+
+## 2026-11-26: Darker dark content window, neutral dark greys
+
+- Dark `--card` (content window, cards) #161616 → #131313, a shade darker (Flovet).
+- Removed the last green tint from dark tokens: ink #f2f2f2, ink-muted #b6b6b6, ink-subtle #969696, field #808080, stage-saved #b0b0b0, scrim rgb(3 3 3 / 0.64).
+- Token contrast tests pass (56). Checked /cvs at 1440 px dark.
+
+## 2026-11-26: Sidebar header and flush account menu (spec 23, decision 0035)
+
+- Account button: up/down chevron. Collapsed rail: the logo mark is the expand button; the separate toggle is gone. Logo 18 px, mark 20 px.
+- Account menu: new `--menu` token (#ffffff / #1f1f1f), no inner padding, rows and dividers edge to edge, as wide as the sidebar content (232 px). Order: name and plan, Dark mode (small switch 34 × 20), Settings, Language, Sign out. Version and Terms footer removed.
+- Language opens a panel in the same menu (back row + full language names, check on the current one); slide-and-fade content and height animation, off under reduced motion. Keyboard: → opens, ← / Escape back, Escape again closes.
+- Fixed: on touch, tapping Language closed the menu (the pressed row unmounted and looked like an outside press).
+- `pnpm check` passed (289 tests, build). Browser: 1440 px dark (menu, keyboard path, collapsed rail), 390 px light fr-fr (sheet, menu, language panel).
+- Reviewer 78 → 88/100; its last must-fix (height animation) was built after, not re-graded.
+
+## 2026-11-26: Account menu rows inset, lighter dividers
+
+- Rows sit 4 px in from the menu's edges with `--radius-control`; dividers stay edge to edge (Flovet).
+- New `--menu-line` for the dividers, set so its contrast with `--menu` matches `--desk` against `--line` (dark 1.14:1): dark #292929, light #e9e8ee.
+- Fixed: the forced-dark theme block had no `--menu`, so the menu was white when dark mode was switched on by hand.
+- Token tests pass (62); lint and typecheck pass. Checked at 1440 px dark.
+
+## 2026-11-26: Decision 0036, a swappable AI layer (Proposed)
+
+- Researched providers (Anthropic, OpenAI, Gemini, Mistral, Groq, OpenRouter, Vercel AI Gateway), the Vercel AI SDK, data terms, EU processing and the EU AI Act. Logged 0036 as Proposed.
 - Revised the same day on Flovet's input: the Vercel AI SDK with a per-task router in `src/lib/ai/` (seven tasks, each routed to a `provider:model` with fallbacks); evals decide when a task moves to a cheaper model; every task starts on Claude Haiku 5.5; free tiers get test data only.
 - Maps the MVP: AI in features 2, 4, 5, 6, 10; light in 7; optional in 1; none in 3, 8, 9.
-- Left: Flovet to approve 0034, the starting model, the two packages and the env var, and the daily caps. Mistral's terms and EU hosting are unverified.
+- Left: Flovet to approve 0036, the starting model, the two packages and the env var, and the daily caps. Mistral's terms and EU hosting are unverified.
 
-## 2026-11-26: Decision 0034 approved
+## 2026-11-26: Decision 0036 approved
 
-- Flovet approved 0034 (in chat), with Claude Haiku 5.5 as the starting model for every task. Status line, index and brief updated.
+- Flovet approved 0036 (in chat), with Claude Haiku 5.5 as the starting model for every task. Status line, index and brief updated. Renumbered from 0034, which main had taken for the Grid Auditor decision.
 - Left: write the AI foundation spec (router, registry, routing table, usage log, caps, eval script, privacy page). Before building: Flovet to approve adding `ai`, `@ai-sdk/anthropic` and `ANTHROPIC_API_KEY`, create a Console API key in a Jubilee workspace, and set the daily caps.

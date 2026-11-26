@@ -21,6 +21,8 @@
   --page: #ffffff;
   --well: #f4f4f6;
   --desk: #fafafa; /* the app shell's background around the window (0027) */
+  --menu: #ffffff; /* account menu: one step lighter than the desk (0035) */
+  --menu-line: #e9e8ee; /* menu dividers: menu-to-line contrast = desk-to-line */
   --card: #ffffff;
   --line: #e5e4ea;
   --tint: #f3f0ff;
@@ -73,16 +75,18 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --page: #0a0f0b;
-    --well: #141a15;
-    --desk: #0e120e;
-    --card: #060d08;
-    --line: #262d27;
+    --page: #171717;
+    --well: #1c1c1c;
+    --desk: #171717;
+    --menu: #1f1f1f;
+    --menu-line: #292929;
+    --card: #131313;
+    --line: #232323;
     --tint: #252148;
-    --field: #7c837d;
-    --ink: #f1f3f1;
-    --ink-muted: #b3bab4;
-    --ink-subtle: #929993;
+    --field: #808080;
+    --ink: #f2f2f2;
+    --ink-muted: #b6b6b6;
+    --ink-subtle: #969696;
     --violet: #a48cff;
     --violet-press: #c3b4ff;
     --on-violet: #120d2e;
@@ -90,7 +94,7 @@
     --success: #5fd39a;
     --danger: #ff7b7b;
 
-    --stage-saved: #adb3ae;
+    --stage-saved: #b0b0b0;
     --stage-applied: #8fb0ff;
     --stage-interview: #f39ad3;
     --stage-rejected: #b2aaa5;
@@ -99,7 +103,7 @@
     --provider-line: #8e918f;
     --provider-ink: #e3e3e3;
 
-    --scrim: rgb(2 5 3 / 0.64);
+    --scrim: rgb(3 3 3 / 0.64);
     --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
   }
 }
@@ -107,16 +111,18 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --page: #0a0f0b;
-  --well: #141a15;
-  --desk: #0e120e;
-  --card: #060d08;
-  --line: #262d27;
+  --page: #171717;
+  --well: #1c1c1c;
+  --desk: #171717;
+  --menu: #1f1f1f;
+  --menu-line: #292929;
+  --card: #131313;
+  --line: #232323;
   --tint: #252148;
-  --field: #7c837d;
-  --ink: #f1f3f1;
-  --ink-muted: #b3bab4;
-  --ink-subtle: #929993;
+  --field: #808080;
+  --ink: #f2f2f2;
+  --ink-muted: #b6b6b6;
+  --ink-subtle: #969696;
   --violet: #a48cff;
   --violet-press: #c3b4ff;
   --on-violet: #120d2e;
@@ -124,7 +130,7 @@
   --success: #5fd39a;
   --danger: #ff7b7b;
 
-  --stage-saved: #adb3ae;
+  --stage-saved: #b0b0b0;
   --stage-applied: #8fb0ff;
   --stage-interview: #f39ad3;
   --stage-rejected: #b2aaa5;
@@ -133,7 +139,7 @@
   --provider-line: #8e918f;
   --provider-ink: #e3e3e3;
 
-  --scrim: rgb(2 5 3 / 0.64);
+  --scrim: rgb(3 3 3 / 0.64);
   --shadow-float: 0 12px 32px rgb(0 0 0 / 0.48);
 }
 
@@ -185,6 +191,8 @@
   --color-page: var(--page);
   --color-well: var(--well);
   --color-desk: var(--desk);
+  --color-menu: var(--menu);
+  --color-menu-line: var(--menu-line);
   --color-card: var(--card);
   --color-line: var(--line);
   --color-tint: var(--tint);

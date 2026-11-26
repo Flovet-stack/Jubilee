@@ -1,4 +1,4 @@
-# 0034: A swappable AI layer, routed per task, starting on Claude
+# 0036: A swappable AI layer, routed per task, starting on Claude
 
 - **Status:** Approved
 - **Proposed:** 2026-11-26 by the product team (roles: Tech Lead, PM, Database, Product, UX, Copy, Frontend, Backend)

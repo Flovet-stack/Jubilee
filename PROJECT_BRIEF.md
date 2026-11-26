@@ -69,7 +69,7 @@ Every component in `src/components/ui/` must meet all three before it ships. A r
 
 See `docs/decisions/README.md`. Product-wide ones:
 
-- 0034 (Approved 2026-11-26): a swappable AI layer: the Vercel AI SDK with a per-task routing table in `src/lib/ai/` (each task mapped to a `provider:model` with fallbacks); every task starts on Claude Haiku 5.5 and moves only when its eval passes; only providers with paid, no-training terms get real users' data; AI changes CVs only through accepted proposals.
+- 0036 (Approved 2026-11-26): a swappable AI layer: the Vercel AI SDK with a per-task routing table in `src/lib/ai/` (each task mapped to a `provider:model` with fallbacks); every task starts on Claude Haiku 5.5 and moves only when its eval passes; only providers with paid, no-training terms get real users' data; AI changes CVs only through accepted proposals.
 - 0031 (Approved 2026-11-25): CV editor in two panes (sections | Preview, Review, Guidance tabs); a top bar with a renamable "headline · name" title and a More menu (Duplicate, Delete; Export and Find jobs when they ship); review flags from checks without AI first, on-demand "Suggest a rewrite" after the AI provider decision.
 - 0027 (Approved 2026-11-24): app shell: padded grey frame, white content window, collapsible left sidebar (logo, notifications, collapse; Home, Job search, Applications tracker, To approve; saved CVs; Help and account at the bottom); calm notifications, no rejection pings.
 - 0023 (Approved 2026-11-22): `pnpm check` runs on every PR to `main` in one GitHub Actions job (`pnpm/setup`, Node 24, actions pinned to SHAs, read-only token, placeholder public env). Branch protection is Flovet's call.

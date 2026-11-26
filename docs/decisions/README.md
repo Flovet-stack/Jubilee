@@ -53,7 +53,9 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0031 | [CV editor in two panes, a top bar, and review flags on sections](0031-cv-editor-two-panes-and-review.md) (supersedes parts of 0024 §2–3)           | Approved                                |
 | 0032 | [A Resumes page, and five resumes in the sidebar](0032-resumes-page-and-sidebar-cap.md)                                                             | Approved                                |
 | 0033 | [A 14 px base and a type scale set by hierarchy](0033-type-scale-from-14px.md) (supersedes 0007's type scale)                                       | Approved                                |
-| 0034 | [A swappable AI layer, routed per task, starting on Claude](0034-ai-provider-and-integration.md)                                                    | Approved                                |
+| 0034 | [Grid Auditor overlay, always in dev, opt-in in production](0034-grid-auditor-dev-overlay.md)                                                       | Approved                                |
+| 0035 | [Sidebar header and a flush account menu with a language submenu](0035-sidebar-header-and-account-menu.md) (supersedes parts of 0027)               | Approved                                |
+| 0036 | [A swappable AI layer, routed per task, starting on Claude](0036-ai-provider-and-integration.md)                                                    | Approved                                |
 
 ## Still to decide (before the specs that need them)
 
