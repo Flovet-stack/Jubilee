@@ -4,7 +4,7 @@
 - **Proposed:** 2026-11-27 by the product team (roles: Product, UX, UI, Copy, Tech Lead, PM, Frontend, Backend)
 - **Approved:** 2026-11-27 by Flovet (in chat; the team's recommended order, rewrite first)
 - **Supersedes:** 0036's "Order of AI specs" (steps 2–5) for the editor's tasks only. 0031 §4 and 0036's rules (proposals, no invention, caps, minimisation) stand unchanged.
-- **Specs:** —
+- **Specs:** specs/29-suggest-a-rewrite.md
 
 ## Context
 
