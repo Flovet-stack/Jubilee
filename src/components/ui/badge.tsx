@@ -64,7 +64,7 @@ const stageClasses: Record<Stage, string> = {
     "bg-[color-mix(in_oklab,var(--stage-rejected)_10%,var(--card))] text-stage-rejected",
 };
 
-/** Small marks from AnimateIcons (0049): a stage is never colour alone (0007). */
+/** Small marks from AnimateIcons (0051): a stage is never colour alone (0007). */
 const stageIcon = {
   saved: HugeiconsBookmarkIcon,
   applied: HugeiconsSendIcon,

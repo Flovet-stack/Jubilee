@@ -10,7 +10,7 @@ export {
 } from "@/components/icons";
 
 /**
- * Account-menu icons. AnimateIcons first (0049); the unfold chevrons have no
+ * Account-menu icons. AnimateIcons first (0051); the unfold chevrons have no
  * Huge equivalent, so they stay drawn here in the same stroke style. They
  * size to their slot (1lh, 0029/0030) and take the row's colour.
  */

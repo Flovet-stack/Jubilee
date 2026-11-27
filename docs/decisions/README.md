@@ -68,7 +68,9 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0046 | [Raised controls in light mode get an off-white fill](0046-light-control-fill-off-white.md) (supersedes 0037's light control values)                                                          | Approved                                |
 | 0047 | [The editor fills the window and each pane scrolls on its own](0047-editor-panes-scroll-independently.md) (supersedes 0042's sticky right pane)                                               | Approved                                |
 | 0048 | [Skills by category as pills, and section headers on the desk colour](0048-skills-as-pills-and-desk-section-headers.md)                                                                       | Approved                                |
-| 0049 | [AnimateIcons as the icon source, with our icons as fallback](0049-animateicons-with-our-icons-as-fallback.md)                                                                                | Approved                                |
+| 0049 | [Where AI goes in the CV editor, and in what order](0049-ai-in-the-cv-editor.md)                                                                                                              | Proposed                                |
+| 0050 | [Ways to start a CV, on the Resumes page](0050-ways-to-start-a-cv.md) (supersedes 0032's /cvs/new and 0024's Create a CV step)                                                                | Approved                                |
+| 0051 | [AnimateIcons as the icon source, with our icons as fallback](0051-animateicons-with-our-icons-as-fallback.md)                                                                                | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

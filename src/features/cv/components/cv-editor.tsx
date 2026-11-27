@@ -18,6 +18,7 @@ import {
   HugeiconsCopyIcon,
   HugeiconsDownloadIcon,
   HugeiconsFileTextIcon,
+  HugeiconsPencilIcon,
   HugeiconsPlusIcon,
   HugeiconsTrashIcon,
   HugeiconsMoreHorizontalIcon,
@@ -64,6 +65,7 @@ import {
 } from "../schemas";
 import { ClassicPreview } from "../templates/classic/classic-preview";
 import { buildCvTree, type CvLabels, type TreeEntry } from "../tree";
+import { type RewriteFinding, targetFor } from "../rewrite";
 import {
   ContactForm,
   Guidance,
@@ -79,6 +81,7 @@ import {
   SectionBlock,
   SummaryCard,
 } from "./section-list";
+import { RewriteProvider, useRewriteApi } from "./rewrite";
 import { type SaveStatus, useAutosave } from "./use-autosave";
 
 /**
@@ -133,6 +136,14 @@ export function CvEditor(props: CvEditorProps) {
       initialContent: props.initialContent,
       initialUpdatedAt: props.initialUpdatedAt,
     });
+
+  const rewrites = useRewriteApi({
+    cvId: id,
+    language,
+    content,
+    update,
+    saveAll,
+  });
 
   const [step, setStep] = useState<EditorStep>({ type: "contact" });
   const [openEntry, setOpenEntry] = useState<string | undefined>();
@@ -194,6 +205,8 @@ export function CvEditor(props: CvEditorProps) {
   /* ── Opening and closing a form (0031 §2) ─────────────────────────── */
   const open = (next: EditorStep, entryId?: string) => {
     void flush();
+    // Proposals belong to the form they were asked in (spec 29).
+    rewrites.clear();
     setStep(next);
     setOpenEntry(entryId);
     if (!formOpen && tab !== "guidance") setTabBeforeForm(tab);
@@ -205,6 +218,7 @@ export function CvEditor(props: CvEditorProps) {
 
   const closeForm = (then?: Exclude<Tab, "guidance">) => {
     void flush();
+    rewrites.clear();
     setFormOpen(false);
     setFirstPass(false);
     setTab(then ?? tabBeforeForm);
@@ -455,6 +469,15 @@ export function CvEditor(props: CvEditorProps) {
     return text ? text.slice(0, 80) : t("notStarted");
   };
 
+  /** "Suggest a rewrite" on a finding: open its form, then ask (spec 29). */
+  const rewriteTarget = (f: Finding) => targetFor(f, content);
+  const rewriteFinding = (f: Finding) => {
+    const target = rewriteTarget(f);
+    if (!target) return;
+    open(f.step, f.entryId);
+    rewrites.request(target, f.code as RewriteFinding);
+  };
+
   const findingsAt = (s: EditorStep) =>
     findings.filter((f) => sameStep(f.step, s));
   const message = (f: Finding) =>
@@ -558,9 +581,21 @@ export function CvEditor(props: CvEditorProps) {
                 }
               >
                 {sectionWide.map((f) => (
-                  <FindingLine key={f.key} severity={severityOf(f.code)}>
-                    {message(f)}
-                  </FindingLine>
+                  <div key={f.key} className="flex flex-col items-start gap-1">
+                    <FindingLine severity={severityOf(f.code)}>
+                      {message(f)}
+                    </FindingLine>
+                    {rewriteTarget(f) ? (
+                      <Button
+                        variant="quiet"
+                        size="sm"
+                        icon={<HugeiconsPencilIcon />}
+                        onClick={() => rewriteFinding(f)}
+                      >
+                        {t("rewrite.suggest")}
+                      </Button>
+                    ) : null}
+                  </div>
                 ))}
                 {!section ? (
                   <SummaryCard onOpen={() => open(s)}>
@@ -749,6 +784,8 @@ export function CvEditor(props: CvEditorProps) {
       }}
       message={message}
       onGo={(f) => open(f.step, f.entryId)}
+      canRewrite={(f) => rewriteTarget(f) !== null}
+      onRewrite={rewriteFinding}
     />
   );
 
@@ -799,156 +836,164 @@ export function CvEditor(props: CvEditorProps) {
   );
 
   return (
-    <div
-      className="@container flex min-h-0 w-full flex-1 flex-col"
-      id="cv-editor-root"
-    >
-      {/* Two panes fill the window; each scrolls on its own (0047). */}
-      <div className="flex w-full flex-1 flex-col @4xl:min-h-0 @4xl:overflow-hidden">
-        <header className="flex items-center gap-2 border-b border-line px-4 py-2 lg:px-6">
-          <Tooltip content={t("back")}>
-            <Link
-              href={homeHref}
-              aria-label={t("back")}
-              className={buttonVariants({
-                variant: "secondary",
-                size: "md",
-                iconOnly: true,
-              })}
-            >
-              <span className="jb-type-icon">
-                <HugeiconsArrowLeftIcon />
-              </span>
-            </Link>
-          </Tooltip>
-          <div className="min-w-0 flex-1">
-            {editingTitle ? (
-              <>
-                <label htmlFor="cv-title" className="sr-only">
-                  {t("titleLabel")}
-                </label>
-                <Input
-                  id="cv-title"
-                  autoFocus
-                  value={title}
-                  maxLength={120}
-                  onChange={(e) => setTitle(e.target.value)}
-                  onFocus={() => {
-                    titleCancelled.current = false;
-                  }}
-                  onBlur={(e) => {
-                    setEditingTitle(false);
-                    if (!titleCancelled.current) void saveTitle(e.target.value);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      void saveTitle(e.currentTarget.value);
-                      titleCancelled.current = true;
-                      stopEditingTitle();
-                    }
-                    if (e.key === "Escape") {
-                      e.preventDefault();
-                      titleCancelled.current = true;
-                      setTitle(savedTitle.current);
-                      stopEditingTitle();
-                    }
-                  }}
-                  className="font-semibold"
-                />
-              </>
-            ) : (
-              <button
-                ref={titleButton}
-                type="button"
-                title={title}
-                aria-label={t("rename", { title })}
-                onClick={() => setEditingTitle(true)}
-                className="jb-type max-w-full truncate rounded-control text-start text-lg font-semibold text-ink hover-fine:bg-wash-hover"
+    <RewriteProvider value={rewrites}>
+      <div
+        className="@container flex min-h-0 w-full flex-1 flex-col"
+        id="cv-editor-root"
+      >
+        {/* Two panes fill the window; each scrolls on its own (0047). */}
+        <div className="flex w-full flex-1 flex-col @4xl:min-h-0 @4xl:overflow-hidden">
+          <header className="flex items-center gap-2 border-b border-line px-4 py-2 lg:px-6">
+            <Tooltip content={t("back")}>
+              <Link
+                href={homeHref}
+                aria-label={t("back")}
+                className={buttonVariants({
+                  variant: "secondary",
+                  size: "md",
+                  iconOnly: true,
+                })}
               >
-                {title}
-              </button>
-            )}
+                <span className="jb-type-icon">
+                  <HugeiconsArrowLeftIcon />
+                </span>
+              </Link>
+            </Tooltip>
+            <div className="min-w-0 flex-1">
+              {editingTitle ? (
+                <>
+                  <label htmlFor="cv-title" className="sr-only">
+                    {t("titleLabel")}
+                  </label>
+                  <Input
+                    id="cv-title"
+                    autoFocus
+                    value={title}
+                    maxLength={120}
+                    onChange={(e) => setTitle(e.target.value)}
+                    onFocus={() => {
+                      titleCancelled.current = false;
+                    }}
+                    onBlur={(e) => {
+                      setEditingTitle(false);
+                      if (!titleCancelled.current)
+                        void saveTitle(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        void saveTitle(e.currentTarget.value);
+                        titleCancelled.current = true;
+                        stopEditingTitle();
+                      }
+                      if (e.key === "Escape") {
+                        e.preventDefault();
+                        titleCancelled.current = true;
+                        setTitle(savedTitle.current);
+                        stopEditingTitle();
+                      }
+                    }}
+                    className="font-semibold"
+                  />
+                </>
+              ) : (
+                <button
+                  ref={titleButton}
+                  type="button"
+                  title={title}
+                  aria-label={t("rename", { title })}
+                  onClick={() => setEditingTitle(true)}
+                  className="jb-type max-w-full truncate rounded-control text-start text-lg font-semibold text-ink hover-fine:bg-wash-hover"
+                >
+                  {title}
+                </button>
+              )}
+            </div>
+            <SaveStatusLine
+              status={status}
+              heldBack={heldBack}
+              onRetry={() => void flush()}
+            />
+            <Button
+              variant="secondary"
+              size="sm"
+              className="@4xl:hidden"
+              onClick={() => setSheetOpen(true)}
+              icon={<HugeiconsFileTextIcon />}
+            >
+              {t("preview")}
+            </Button>
+            <Button
+              variant="secondary"
+              icon={<HugeiconsDownloadIcon />}
+              loading={downloading}
+              loadingLabel={t("pdf.preparing")}
+              disabled={pending}
+              onClick={() => void downloadPdf()}
+            >
+              {/* Icon only on phones, so the title keeps its room (0043). */}
+              <span className="max-sm:sr-only">{t("pdf.download")}</span>
+            </Button>
+            <Menu
+              align="end"
+              trigger={
+                <IconButton
+                  variant="secondary"
+                  label={t("more")}
+                  icon={<HugeiconsMoreHorizontalIcon />}
+                />
+              }
+              items={moreItems}
+            />
+          </header>
+
+          <div className="grid flex-1 @4xl:min-h-0 @4xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] @4xl:grid-rows-[minmax(0,1fr)]">
+            <div className="min-w-0 @4xl:overflow-y-auto @4xl:overscroll-contain @4xl:border-e @4xl:border-line">
+              {formOpen ? <div className="p-4 lg:p-6">{form}</div> : list}
+            </div>
+            <aside
+              aria-label={t("tabs.label")}
+              className="hidden @4xl:flex @4xl:flex-col @4xl:overflow-y-auto @4xl:overscroll-contain"
+            >
+              {isTwoPanes ? tabs : null}
+            </aside>
           </div>
-          <SaveStatusLine
-            status={status}
-            heldBack={heldBack}
-            onRetry={() => void flush()}
-          />
-          <Button
-            variant="secondary"
-            size="sm"
-            className="@4xl:hidden"
-            onClick={() => setSheetOpen(true)}
-            icon={<HugeiconsFileTextIcon />}
+
+          <Sheet
+            open={sheetOpen}
+            onOpenChange={setSheetOpen}
+            title={t("tabs.label")}
+            closeLabel={t("closePreview")}
+            side="bottom"
+            className="h-dvh max-h-none rounded-none"
           >
-            {t("preview")}
-          </Button>
-          <Button
-            variant="secondary"
-            icon={<HugeiconsDownloadIcon />}
-            loading={downloading}
-            loadingLabel={t("pdf.preparing")}
-            disabled={pending}
-            onClick={() => void downloadPdf()}
-          >
-            {/* Icon only on phones, so the title keeps its room (0043). */}
-            <span className="max-sm:sr-only">{t("pdf.download")}</span>
-          </Button>
-          <Menu
-            align="end"
-            trigger={
-              <IconButton
-                variant="secondary"
-                label={t("more")}
-                icon={<HugeiconsMoreHorizontalIcon />}
-              />
+            {sheetOpen && !isTwoPanes ? (
+              <div className="pb-4">{tabs}</div>
+            ) : null}
+          </Sheet>
+
+          <Dialog
+            open={deleteOpen}
+            onOpenChange={setDeleteOpen}
+            title={t("deleteDialog.title")}
+            description={t("deleteDialog.body", { title })}
+            closeLabel={t("deleteDialog.cancel")}
+            footer={
+              <>
+                <Button
+                  variant="secondary"
+                  onClick={() => setDeleteOpen(false)}
+                >
+                  {t("deleteDialog.cancel")}
+                </Button>
+                <Button variant="danger" onClick={remove} loading={pending}>
+                  {t("deleteDialog.confirm")}
+                </Button>
+              </>
             }
-            items={moreItems}
           />
-        </header>
-
-        <div className="grid flex-1 @4xl:min-h-0 @4xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] @4xl:grid-rows-[minmax(0,1fr)]">
-          <div className="min-w-0 @4xl:overflow-y-auto @4xl:overscroll-contain @4xl:border-e @4xl:border-line">
-            {formOpen ? <div className="p-4 lg:p-6">{form}</div> : list}
-          </div>
-          <aside
-            aria-label={t("tabs.label")}
-            className="hidden @4xl:flex @4xl:flex-col @4xl:overflow-y-auto @4xl:overscroll-contain"
-          >
-            {isTwoPanes ? tabs : null}
-          </aside>
         </div>
-
-        <Sheet
-          open={sheetOpen}
-          onOpenChange={setSheetOpen}
-          title={t("tabs.label")}
-          closeLabel={t("closePreview")}
-          side="bottom"
-          className="h-dvh max-h-none rounded-none"
-        >
-          {sheetOpen && !isTwoPanes ? <div className="pb-4">{tabs}</div> : null}
-        </Sheet>
-
-        <Dialog
-          open={deleteOpen}
-          onOpenChange={setDeleteOpen}
-          title={t("deleteDialog.title")}
-          description={t("deleteDialog.body", { title })}
-          closeLabel={t("deleteDialog.cancel")}
-          footer={
-            <>
-              <Button variant="secondary" onClick={() => setDeleteOpen(false)}>
-                {t("deleteDialog.cancel")}
-              </Button>
-              <Button variant="danger" onClick={remove} loading={pending}>
-                {t("deleteDialog.confirm")}
-              </Button>
-            </>
-          }
-        />
       </div>
-    </div>
+    </RewriteProvider>
   );
 }
 
@@ -1018,14 +1063,19 @@ function ReviewPanel({
   entryName,
   message,
   onGo,
+  canRewrite,
+  onRewrite,
 }: {
   findings: Finding[];
   stepName: (step: EditorStep) => string;
   entryName: (finding: Finding) => string | null;
   message: (finding: Finding) => string;
   onGo: (finding: Finding) => void;
+  canRewrite: (finding: Finding) => boolean;
+  onRewrite: (finding: Finding) => void;
 }) {
   const t = useTranslations("cv.editor.review");
+  const r = useTranslations("cv.editor.rewrite");
   const groups: { step: EditorStep; items: Finding[] }[] = [];
   for (const finding of findings) {
     const group = groups.find((g) => sameStep(g.step, finding.step));
@@ -1075,13 +1125,25 @@ function ReviewPanel({
                       <span className="min-w-0">{message(finding)}</span>
                     </span>
                   </div>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => onGo(finding)}
-                  >
-                    {t("goTo")}
-                  </Button>
+                  <div className="flex flex-wrap gap-2">
+                    {canRewrite(finding) ? (
+                      <Button
+                        variant="quiet"
+                        size="sm"
+                        icon={<HugeiconsPencilIcon />}
+                        onClick={() => onRewrite(finding)}
+                      >
+                        {r("suggest")}
+                      </Button>
+                    ) : null}
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => onGo(finding)}
+                    >
+                      {t("goTo")}
+                    </Button>
+                  </div>
                 </li>
               );
             })}

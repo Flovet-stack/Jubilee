@@ -1,7 +1,7 @@
 "use client";
 
-// AnimateIcons (Huge set) wrapped in our icon API (decision 0049).
-// Generated from the map in specs/29; one import per icon keeps bundles small.
+// AnimateIcons (Huge set) wrapped in our icon API (decision 0051).
+// Generated from the map in specs/30; one import per icon keeps bundles small.
 
 import { ArrowLeft02Icon as ArrowLeftSource } from "@animateicons/react/huge/arrow-left-0-2-icon";
 import { ArrowRight02Icon as ArrowRightSource } from "@animateicons/react/huge/arrow-right-0-2-icon";

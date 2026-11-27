@@ -19,6 +19,7 @@ const { isProviderId, PROVIDERS } = await import("@/lib/ai/providers");
 const { runTaskWith } = await import("@/lib/ai/run-task-core");
 const { ROUTES } = await import("@/lib/ai/routing");
 const { TASK_IDS } = await import("@/lib/ai/tasks");
+const { FIELD_MAX, newDetailsIn } = await import("@/features/cv/rewrite");
 
 type TaskId = (typeof TASK_IDS)[number];
 type UsageRow = import("@/lib/ai/run-task-core").UsageRow;
@@ -36,18 +37,80 @@ const cvEn = fixture("cv-en.txt");
 const cvFr = fixture("cv-fr.txt");
 const jobFr = fixture("job-fr.txt");
 
+type Case = {
+  name: string;
+  input: unknown;
+  /** Extra checks on a successful output: what failed, or null. */
+  check?: (output: unknown) => string | null;
+};
+
+const text = (name: string, value: string): Case => ({
+  name,
+  input: { text: value },
+});
+
+/** Common short words, to tell English from French in a check. */
+const WORDS = {
+  en: /(?<!\p{L})(the|and|with|for|of|in|to|on|your|you|from)(?!\p{L})/giu,
+  fr: /(?<!\p{L})(le|la|les|des|et|pour|avec|une|dans|du|sur|vous|de)(?!\p{L})/giu,
+};
+/** "en", "fr", or null when a short text has too few words to tell. */
+const languageOf = (value: string) => {
+  const fr = value.match(WORDS.fr)?.length ?? 0;
+  const en = value.match(WORDS.en)?.length ?? 0;
+  if (fr === en) return null;
+  return fr > en ? "fr" : "en";
+};
+
+type RewriteInput = {
+  language: "en" | "fr";
+  kind: "summary" | "bullet";
+  text: string;
+  title?: string;
+  employer?: string;
+  /** The aim for a "too long" finding, or the field's limit. */
+  maxLength: number;
+};
+
+/**
+ * Spec 29: no new detail (the editor's own check), the CV's language kept,
+ * and within the field's
+ * limit (a longer text can't be saved). Missing the shorter aim of a "too
+ * long" finding is printed, not failed: it's still a suggestion.
+ */
+const rewriteCases = (
+  JSON.parse(fixture("rewrite.json")) as { name: string; input: RewriteInput }[]
+).map(({ name, input }): Case => ({
+  name,
+  input,
+  check: (output) => {
+    const out = output as { text: string; reason: string };
+    const source = [input.text, input.title, input.employer].join("\n");
+    const added = newDetailsIn(out.text, source);
+    if (added.length > 0) return `new details: ${added.join(", ")}`;
+    for (const [part, value] of [
+      ["text", out.text],
+      ["reason", out.reason],
+    ] as const)
+      if ((languageOf(value) ?? input.language) !== input.language)
+        return `${part} not in ${input.language}`;
+    if (out.text.length > FIELD_MAX[input.kind])
+      return `too long for the field: ${out.text.length}`;
+    if (out.text.length > input.maxLength)
+      console.log(`note: ${out.text.length} > aim of ${input.maxLength}`);
+    return null;
+  },
+}));
+
 /** Fixture inputs per task. Feature specs replace these with real shapes. */
-const CASES: Record<TaskId, { name: string; text: string }[]> = {
-  "cv.import": [
-    { name: "English CV", text: cvEn },
-    { name: "French CV", text: cvFr },
-  ],
-  "job.extract": [{ name: "French job ad", text: jobFr }],
-  "cv.tailor": [{ name: "French CV + job", text: `${cvFr}\n\n${jobFr}` }],
-  "letter.write": [{ name: "French CV + job", text: `${cvFr}\n\n${jobFr}` }],
-  "cv.translate": [{ name: "French CV to English", text: cvFr }],
-  "cv.rewrite": [{ name: "English CV", text: cvEn }],
-  "email.followup": [{ name: "French job", text: jobFr }],
+const CASES: Record<TaskId, Case[]> = {
+  "cv.import": [text("English CV", cvEn), text("French CV", cvFr)],
+  "job.extract": [text("French job ad", jobFr)],
+  "cv.tailor": [text("French CV + job", `${cvFr}\n\n${jobFr}`)],
+  "letter.write": [text("French CV + job", `${cvFr}\n\n${jobFr}`)],
+  "cv.translate": [text("French CV to English", cvFr)],
+  "cv.rewrite": rewriteCases,
+  "email.followup": [text("French job", jobFr)],
 };
 
 const only = process.env.AI_EVAL_TASK;
@@ -102,7 +165,7 @@ const label = override || "routing table";
 
 describe.runIf(ready)(`AI eval on ${label}`, () => {
   for (const task of tasks) {
-    for (const { name, text } of CASES[task]) {
+    for (const { name, input, check } of CASES[task]) {
       it(`${task}: ${name}`, async () => {
         let usage: UsageRow | undefined;
         const result = await runTaskWith(
@@ -117,16 +180,21 @@ describe.runIf(ready)(`AI eval on ${label}`, () => {
             },
           },
           task,
-          { text },
+          // Each task's own input shape; runTask validates it.
+          input as never,
           { userId: "eval" },
         );
+        const problem = result.ok && check ? check(result.data) : null;
+        if (result.ok && check) console.log(result.data);
         console.log(
-          `${result.ok ? "PASS" : "FAIL"}  ${task}  ${name}  ` +
+          `${result.ok && !problem ? "PASS" : "FAIL"}  ${task}  ${name}  ` +
             `${usage?.model}  in ${usage?.inputTokens}  out ${usage?.outputTokens}  ` +
             `$${usage?.costUsd.toFixed(6)}` +
-            (usage?.errorReason ? `  (${usage.errorReason})` : ""),
+            (usage?.errorReason ? `  (${usage.errorReason})` : "") +
+            (problem ? `  (${problem})` : ""),
         );
         expect(result.ok).toBe(true);
+        expect(problem).toBeNull();
       });
     }
   }

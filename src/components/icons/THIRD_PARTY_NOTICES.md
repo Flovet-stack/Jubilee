@@ -124,7 +124,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## @animateicons/react 0.13.0 (decision 0049)
+## @animateicons/react 0.13.0 (decision 0051)
 
 Used as a dependency (not vendored) for the icons in `huge.tsx`.
 

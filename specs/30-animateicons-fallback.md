@@ -1,4 +1,4 @@
-# 29: AnimateIcons as the icon source, with our icons as fallback
+# 30: AnimateIcons as the icon source, with our icons as fallback
 
 Status: Built, in review (reviewer 84/100 before its must-fixes; touch fix and handle types applied; animation and 390/1440 screenshots not captured, browser pane hidden) · Written: 2026-11-27
 
@@ -8,7 +8,7 @@ Every icon on the platform comes from AnimateIcons' Huge set where it has an equ
 
 ## Decisions
 
-Implements [0049](../docs/decisions/0049-animateicons-with-our-icons-as-fallback.md). Builds on [0009](../docs/decisions/0009-design-system-components-icons-motion.md) (animated icons), [0030](../docs/decisions/0030-icon-size-from-font-size.md) and [0045](../docs/decisions/0045-larger-icons-in-icon-buttons-and-heavier-stroke.md) (size and stroke).
+Implements [0051](../docs/decisions/0051-animateicons-with-our-icons-as-fallback.md). Builds on [0009](../docs/decisions/0009-design-system-components-icons-motion.md) (animated icons), [0030](../docs/decisions/0030-icon-size-from-font-size.md) and [0045](../docs/decisions/0045-larger-icons-in-icon-buttons-and-heavier-stroke.md) (size and stroke).
 
 ## Acceptance criteria
 

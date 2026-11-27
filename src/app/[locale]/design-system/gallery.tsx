@@ -1089,7 +1089,7 @@ function IconSet() {
   return (
     <Section
       title="Icons"
-      intro="AnimateIcons, Huge set (0049), with our own icons as the fallback where it has no equivalent. 20 px in UI, 24 px in navigation. They play when their button is hovered or keyboard-focused, never on touch, never with reduced motion."
+      intro="AnimateIcons, Huge set (0051), with our own icons as the fallback where it has no equivalent. 20 px in UI, 24 px in navigation. They play when their button is hovered or keyboard-focused, never on touch, never with reduced motion."
     >
       <Well>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-6">

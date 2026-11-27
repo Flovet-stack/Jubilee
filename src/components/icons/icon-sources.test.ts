@@ -8,7 +8,7 @@ import { OUR_ICONS } from "./icon-sources";
 const dir = join(process.cwd(), "src/components/icons");
 const read = (file: string) => readFileSync(join(dir, file), "utf8");
 
-describe("icon sources (0049)", () => {
+describe("icon sources (0051)", () => {
   it("lists every fallback icon that index.ts exports, and nothing else", () => {
     const ours = [
       ...read("index.ts").matchAll(/^\s*(\w+Icon),$|\{ (\w+Icon) \}/gm),

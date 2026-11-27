@@ -1,10 +1,10 @@
-# 0049: AnimateIcons as the icon source, with our icons as fallback
+# 0051: AnimateIcons as the icon source, with our icons as fallback
 
 - **Status:** Approved
 - **Proposed:** 2026-11-27 by the product team (roles: Tech Lead, UI, Frontend), from Flovet's instruction
 - **Approved:** 2026-11-27 by Flovet
 - **Supersedes:** none. 0030 and 0045 (icon sizes, stroke) still apply.
-- **Specs:** specs/29-animateicons-fallback.md
+- **Specs:** specs/30-animateicons-fallback.md
 
 ## Context
 

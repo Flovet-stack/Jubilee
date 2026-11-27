@@ -1,5 +1,5 @@
 /**
- * Where each exported icon comes from (decision 0049). "animate" is
+ * Where each exported icon comes from (decision 0051). "animate" is
  * AnimateIcons' Huge set wrapped in our API; "ours" is the fallback, kept
  * where the Huge set has no equivalent. A test keeps this in step with
  * ./index.ts.

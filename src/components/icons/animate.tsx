@@ -21,7 +21,7 @@ export type WrappedIconProps = HTMLAttributes<HTMLSpanElement> & {
 };
 
 /**
- * Wraps an AnimateIcons icon in our icon API (decision 0049): the same
+ * Wraps an AnimateIcons icon in our icon API (decision 0051): the same
  * `size`, span props and start/stop ref as our own icons. Holding a ref on
  * the source icon turns off its own hover, so we drive it: the surrounding
  * button or link plays it (`useControlHover`), else the icon's own hover.

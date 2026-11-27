@@ -209,12 +209,15 @@ export function BulletsField({
   items,
   onChange,
   onBlur,
+  below,
 }: {
   label: ReactNode;
   hint?: ReactNode;
   items: string[];
   onChange: (items: string[]) => void;
   onBlur?: () => void;
+  /** Shown under a bullet's field, e.g. "Suggest a rewrite" (spec 29). */
+  below?: (index: number, item: string) => ReactNode;
 }) {
   const t = useTranslations("cv.editor.bullets");
   const groupId = useId();
@@ -262,6 +265,7 @@ export function BulletsField({
                   {t("count", { count: item.length })}
                 </p>
               ) : null}
+              {below?.(index, item)}
             </div>
             <RowActions
               onUp={

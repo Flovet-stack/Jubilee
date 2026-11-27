@@ -1,4 +1,4 @@
-// Icons (decision 0049): AnimateIcons' Huge set first, wrapped in our API;
+// Icons (decision 0051): AnimateIcons' Huge set first, wrapped in our API;
 // our own icons where it has no equivalent. Sources: ./icon-sources.ts.
 export * from "./huge";
 export type { IconAnimationHandle } from "./use-icon-accessibility";
