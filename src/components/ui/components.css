@@ -444,3 +444,9 @@
     outline-offset: -1px;
   }
 }
+
+/* AnimateIcons draws a 2 px stroke with no prop to change it; every icon
+   in the product uses 1.75 (0045, 0051). */
+[data-icon-source="animate"] :is(svg, svg *) {
+  stroke-width: 1.75;
+}

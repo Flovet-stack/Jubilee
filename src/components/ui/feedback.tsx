@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import {
   HugeiconsBadgeAlertIcon,
   HugeiconsCircleCheckIcon,
+  HugeiconsInformationCircleIcon,
   HugeiconsXIcon,
 } from "@/components/icons";
 import { cn } from "@/lib/utils";
@@ -17,27 +18,8 @@ import { IconButton } from "./button";
 
 export type AlertTone = "info" | "success" | "warning" | "danger";
 
-/** "i" in a circle. icons-animated has no info icon, so it's drawn here (0009). */
-function InfoMark() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 16.5v-5M12 8h.01" strokeWidth="2" />
-    </svg>
-  );
-}
-
 const toneIcon: Record<AlertTone, ReactNode> = {
-  info: <InfoMark />,
+  info: <HugeiconsInformationCircleIcon />,
   success: <HugeiconsCircleCheckIcon />,
   warning: <HugeiconsBadgeAlertIcon />,
   danger: <HugeiconsBadgeAlertIcon />,

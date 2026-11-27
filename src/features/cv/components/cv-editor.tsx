@@ -21,7 +21,7 @@ import {
   HugeiconsPencilIcon,
   HugeiconsPlusIcon,
   HugeiconsTrashIcon,
-  MoreIcon,
+  HugeiconsMoreHorizontalIcon,
 } from "@/components/icons";
 import { Button, buttonVariants, IconButton } from "@/components/ui/button";
 import { Dialog, Sheet } from "@/components/ui/dialog";
@@ -570,7 +570,7 @@ export function CvEditor(props: CvEditorProps) {
                           <IconButton
                             size="sm"
                             label={t("section.more", { section: name })}
-                            icon={<MoreIcon />}
+                            icon={<HugeiconsMoreHorizontalIcon />}
                             className={headerAction}
                           />
                         }
@@ -939,7 +939,7 @@ export function CvEditor(props: CvEditorProps) {
                 <IconButton
                   variant="secondary"
                   label={t("more")}
-                  icon={<MoreIcon />}
+                  icon={<HugeiconsMoreHorizontalIcon />}
                 />
               }
               items={moreItems}
