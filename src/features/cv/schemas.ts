@@ -70,9 +70,13 @@ const basics = z.object({
   links: z.array(link).max(10),
 });
 
+/** Hidden entries stay in the editor but leave the CV, PDF and review (0039). Optional: older content has none. */
+const hidden = z.boolean().optional();
+
 const entries = {
   work: z.object({
     id,
+    hidden,
     position: text(120),
     name: text(120),
     location: text(120),
@@ -83,6 +87,7 @@ const entries = {
   }),
   education: z.object({
     id,
+    hidden,
     institution: text(160),
     area: text(120),
     studyType: text(120),
@@ -94,13 +99,15 @@ const entries = {
   }),
   skills: z.object({
     id,
+    hidden,
     name: text(80),
     level: text(60),
     keywords: list(30, text(60)),
   }),
-  languages: z.object({ id, language: text(60), fluency: text(60) }),
+  languages: z.object({ id, hidden, language: text(60), fluency: text(60) }),
   projects: z.object({
     id,
+    hidden,
     name: text(120),
     description: text(2000),
     url,
@@ -109,6 +116,7 @@ const entries = {
   }),
   certificates: z.object({
     id,
+    hidden,
     name: text(160),
     issuer: text(120),
     date: partialDate.optional(),
@@ -116,6 +124,7 @@ const entries = {
   }),
   awards: z.object({
     id,
+    hidden,
     title: text(160),
     awarder: text(120),
     date: partialDate.optional(),
@@ -123,6 +132,7 @@ const entries = {
   }),
   volunteer: z.object({
     id,
+    hidden,
     organization: text(120),
     position: text(120),
     url,
@@ -132,6 +142,7 @@ const entries = {
   }),
   custom: z.object({
     id,
+    hidden,
     title: text(160),
     subtitle: text(160),
     ...dates,

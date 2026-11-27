@@ -111,7 +111,7 @@ const HugeiconsFileTextIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
         />
 
         <motion.path
@@ -119,7 +119,7 @@ const HugeiconsFileTextIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           variants={{
             normal: {
               pathLength: 1,
@@ -142,7 +142,7 @@ const HugeiconsFileTextIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           variants={{
             normal: {
               pathLength: 1,
@@ -165,7 +165,7 @@ const HugeiconsFileTextIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           variants={{
             normal: {
               pathLength: 1,

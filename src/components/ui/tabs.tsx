@@ -12,6 +12,8 @@ export type TabItem = {
   meta?: ReactNode;
   disabled?: boolean;
   panel: ReactNode;
+  /** e.g. a background and padding for a flush pane (0042). */
+  panelClassName?: string;
 };
 
 type TabsProps = {
@@ -22,6 +24,8 @@ type TabsProps = {
   /** Names the tab list for screen readers, e.g. "Application details". */
   label: string;
   className?: string;
+  /** e.g. a surface and inline padding when the tabs sit flush (0042). */
+  listClassName?: string;
 };
 
 /**
@@ -37,6 +41,7 @@ export function Tabs({
   onValueChange,
   label,
   className,
+  listClassName,
 }: TabsProps) {
   return (
     <TabsPrimitive.Root
@@ -47,7 +52,10 @@ export function Tabs({
     >
       <TabsPrimitive.List
         aria-label={label}
-        className="relative z-0 flex [scrollbar-width:none] gap-1 overflow-x-auto shadow-[inset_0_-1px_0_var(--line)]"
+        className={cn(
+          "relative z-0 flex [scrollbar-width:none] gap-1 overflow-x-auto shadow-[inset_0_-1px_0_var(--line)]",
+          listClassName,
+        )}
       >
         {items.map((item) => (
           <TabsPrimitive.Tab
@@ -79,7 +87,10 @@ export function Tabs({
         <TabsPrimitive.Panel
           key={item.value}
           value={item.value}
-          className="min-w-0 outline-none focus-visible:outline-2 focus-visible:outline-offset-4"
+          className={cn(
+            "min-w-0 outline-none focus-visible:outline-2 focus-visible:outline-offset-4",
+            item.panelClassName,
+          )}
         >
           {item.panel}
         </TabsPrimitive.Panel>

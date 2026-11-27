@@ -6,7 +6,13 @@ import fr from "@/messages/fr.json";
 
 import { cvName, emptyEntry, followsContent } from "./editor";
 import { emptyCvContent } from "./logic";
-import { BULLET_MAX, reviewCv, SUMMARY_MAX } from "./review";
+import {
+  BULLET_MAX,
+  reviewCv,
+  severityOf,
+  strongest,
+  SUMMARY_MAX,
+} from "./review";
 import type { CvContent } from "./schemas";
 
 let n = 0;
@@ -99,6 +105,15 @@ describe("reviewCv (0031 §3)", () => {
     expect(codes(content)).toEqual([]);
   });
 
+  it("skips hidden entries (0039)", () => {
+    const content = complete();
+    const { job } = firstJob(content);
+    job.highlights = [];
+    expect(codes(content)).toEqual(["noBullets"]);
+    job.hidden = true;
+    expect(codes(content)).toEqual([]);
+  });
+
   it("needs no bullets for education, but checks projects' bullets", () => {
     const content = complete();
     const education = content.sections.find((s) => s.kind === "education");
@@ -185,4 +200,22 @@ describe("finding messages (0031: every check in both languages)", () => {
       expect(t("summary", { count: 2 })).toMatch(/^2 /);
     });
   }
+});
+
+describe("severity (0042)", () => {
+  it("marks missing basics as warnings and polish as tips", () => {
+    expect(severityOf("contactReach")).toBe("warning");
+    expect(severityOf("noBullets")).toBe("warning");
+    expect(severityOf("bulletsWithoutNumbers")).toBe("tip");
+    expect(severityOf("longSummary")).toBe("tip");
+  });
+
+  it("takes the strongest tone of a group", () => {
+    const content = complete();
+    expect(strongest(reviewCv(content))).toBeNull();
+    content.basics.summary = "a".repeat(SUMMARY_MAX + 1);
+    expect(strongest(reviewCv(content))).toBe("tip");
+    content.basics.email = "";
+    expect(strongest(reviewCv(content))).toBe("warning");
+  });
 });

@@ -81,7 +81,8 @@
       "previewLabel": "Preview of your CV",
       "section": {
         "show": "Show on CV",
-        "hide": "Hide from CV"
+        "hide": "Hide from CV",
+        "hiddenMarker": "Hidden from CV"
       },
       "seeCv": "See your CV",
       "heading": "Heading on your CV",
@@ -107,7 +108,10 @@
       "actionErrors": {
         "notFound": "This CV no longer exists. Go back to Home."
       },
-      "closePreview": "Close CV views"
+      "closePreview": "Close CV views",
+      "entry": {
+        "show": "Show {entry} on CV"
+      }
     },
     "guidance": {
       "summary": {

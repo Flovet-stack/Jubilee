@@ -13,12 +13,14 @@ import { cn } from "@/lib/utils";
 import type { CvTree, TreeEntry } from "../../tree";
 import { COLOR, MARGIN, PAGE, SPACE, TYPE } from "./constants";
 import { carlito } from "./font";
+import { type Atom, paginate } from "./paginate";
 
 /**
  * The Classic template as HTML (decisions 0025, 0026), read only from the
- * semantic tree (0024 §3). The paper is drawn at its real size in points and
- * scaled to fit its container. Page breaks are estimates (0024): the PDF
- * (#15) sets the real ones.
+ * semantic tree (0024 §3), drawn as paper sheets page by page (0044). The
+ * document is laid out once per sheet at its real size in points; each sheet
+ * clips its slice, and `paginate()` picks the breaks with the PDF's rules.
+ * Breaks are a close estimate: the PDF (0038) sets the real ones.
  */
 
 const PX_PER_PT = 96 / 72;
@@ -32,87 +34,169 @@ const text = (size: number, lineHeight: number): CSSProperties => ({
 
 type ClassicPreviewProps = {
   tree: CvTree;
-  /** "Page 2 starts about here". */
-  pageBreakLabel: (page: number) => string;
   /** Shown in place of the name while it's empty. */
   namePlaceholder: string;
   className?: string;
 };
 
+/** Offset of `el` from `root`, in px, ignoring transforms. */
+function offsetWithin(el: HTMLElement, root: HTMLElement): number {
+  let y = 0;
+  let node: HTMLElement | null = el;
+  while (node && node !== root) {
+    y += node.offsetTop;
+    node = node.offsetParent as HTMLElement | null;
+  }
+  return y;
+}
+
+/**
+ * The top margin a block keeps when react-pdf moves it to a new page: its own,
+ * plus each enclosing block it opens (an entry, a section), in points.
+ */
+function gapAbove(el: HTMLElement, root: HTMLElement): number {
+  let gap = 0;
+  let node: HTMLElement | null = el;
+  while (node && node !== root) {
+    gap += parseFloat(getComputedStyle(node).marginTop) || 0;
+    const parent: HTMLElement | null = node.parentElement;
+    if (!parent || parent === root || parent.firstElementChild !== node) break;
+    node = parent;
+  }
+  return gap / PX_PER_PT;
+}
+
+/**
+ * The document's breakable pieces, in points: `data-pg="text"` splits into
+ * lines, `"keep"` never splits, `"heading"` wants 40 pt after it (0044).
+ */
+function measure(root: HTMLElement): Atom[] {
+  const atoms: Atom[] = [];
+  root.querySelectorAll<HTMLElement>("[data-pg]").forEach((el, group) => {
+    const top = offsetWithin(el, root) / PX_PER_PT;
+    const height = el.offsetHeight / PX_PER_PT;
+    const kind = el.dataset.pg;
+    const gap = gapAbove(el, root);
+    if (kind === "text") {
+      const line = parseFloat(getComputedStyle(el).lineHeight) / PX_PER_PT;
+      const count = line > 0 ? Math.max(1, Math.round(height / line)) : 1;
+      const step = height / count;
+      for (let i = 0; i < count; i++) {
+        atoms.push({
+          top: top + i * step,
+          bottom: top + (i + 1) * step,
+          kind: "line",
+          group,
+          ...(i === 0 && gap ? { gapAbove: gap } : {}),
+        });
+      }
+    } else {
+      atoms.push({
+        top,
+        bottom: top + height,
+        kind: kind === "heading" ? "heading" : "keep",
+        ...(gap ? { gapAbove: gap } : {}),
+      });
+    }
+  });
+  return atoms;
+}
+
 export function ClassicPreview({
   tree,
-  pageBreakLabel,
   namePlaceholder,
   className,
 }: ClassicPreviewProps) {
   const page = PAGE[tree.paper];
+  const perPage = page.height - 2 * MARGIN;
   const frame = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
-  const [contentHeight, setContentHeight] = useState(0);
+  const [layout, setLayout] = useState({ starts: [0], height: 0 });
 
   useLayoutEffect(() => {
     const outer = frame.current;
     const inner = content.current;
     if (!outer || !inner) return;
-    const observer = new ResizeObserver(() => {
+    let cancelled = false;
+    const update = () => {
+      if (cancelled) return;
       setScale(outer.clientWidth / (page.width * PX_PER_PT));
-      setContentHeight(inner.offsetHeight / PX_PER_PT);
-    });
+      const starts = paginate(measure(inner), perPage);
+      const height = inner.offsetHeight / PX_PER_PT;
+      setLayout((prev) =>
+        prev.height === height && prev.starts.join() === starts.join()
+          ? prev
+          : { starts, height },
+      );
+    };
+    update();
+    const observer = new ResizeObserver(update);
     observer.observe(outer);
     observer.observe(inner);
-    return () => observer.disconnect();
-  }, [page.width]);
+    // Lines rewrap once the CV font has loaded.
+    void document.fonts?.ready.then(update);
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [tree, page.width, perPage]);
 
-  // Each page holds its height minus top and bottom margins of content.
-  const perPage = page.height - 2 * MARGIN;
-  const pages = Math.max(1, Math.ceil(contentHeight / perPage));
-  const sheetHeight = pages * page.height;
-  const breaks = Array.from({ length: pages - 1 }, (_, i) => i + 1);
+  const sheets = layout.starts.map((start, i) => ({
+    start,
+    end: layout.starts[i + 1] ?? Math.max(layout.height, start),
+  }));
 
   return (
-    <div
-      ref={frame}
-      className={cn("w-full", className)}
-      style={{ height: sheetHeight * PX_PER_PT * scale }}
-    >
-      <div
-        className={cn(
-          carlito.className,
-          "relative origin-top-left bg-paper shadow-paper",
-        )}
-        style={{
-          width: pt(page.width),
-          height: pt(sheetHeight),
-          transform: `scale(${scale})`,
-          color: COLOR.text,
-        }}
-      >
+    <div ref={frame} className={cn("flex w-full flex-col gap-4", className)}>
+      {sheets.map(({ start, end }, i) => (
         <div
-          ref={content}
-          style={{
-            position: "absolute",
-            top: pt(MARGIN),
-            left: pt(MARGIN),
-            right: pt(MARGIN),
-            fontFeatureSettings: '"tnum"',
-          }}
+          key={i}
+          style={{ height: page.height * PX_PER_PT * scale }}
+          // Sheets after the first are for the eye only: the CV is read once.
+          aria-hidden={i > 0 || undefined}
+          inert={i > 0 || undefined}
         >
-          <ClassicDocument tree={tree} namePlaceholder={namePlaceholder} />
-        </div>
-        {breaks.map((n) => (
           <div
-            key={n}
-            aria-hidden
-            className="absolute inset-x-0 flex items-center gap-2 font-sans text-ink-muted"
-            style={{ top: pt(MARGIN + n * perPage) }}
+            className={cn(
+              carlito.className,
+              "relative origin-top-left bg-paper shadow-paper",
+            )}
+            style={{
+              width: pt(page.width),
+              height: pt(page.height),
+              transform: `scale(${scale})`,
+              color: COLOR.text,
+            }}
           >
-            <span className="flex-1 border-t border-dashed border-line" />
-            <span className="text-xs">{pageBreakLabel(n + 1)}</span>
-            <span className="w-4 border-t border-dashed border-line" />
+            <div
+              className="absolute overflow-hidden"
+              style={{
+                top: pt(MARGIN),
+                left: pt(MARGIN),
+                right: pt(MARGIN),
+                height: pt(Math.min(end - start, perPage)),
+              }}
+            >
+              <div
+                ref={i === 0 ? content : undefined}
+                style={{
+                  position: "absolute",
+                  top: pt(-start),
+                  left: 0,
+                  right: 0,
+                  fontFeatureSettings: '"tnum"',
+                }}
+              >
+                <ClassicDocument
+                  tree={tree}
+                  namePlaceholder={namePlaceholder}
+                />
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -126,7 +210,7 @@ function ClassicDocument({
 }) {
   return (
     <article lang={tree.language === "fr" ? "fr" : "en"}>
-      <header style={{ marginBottom: pt(SPACE.belowName) }}>
+      <header data-pg="keep" style={{ paddingBottom: pt(SPACE.belowName) }}>
         <h1
           style={{
             ...text(TYPE.name.size, TYPE.name.lineHeight),
@@ -155,6 +239,7 @@ function ClassicDocument({
 
       {tree.summary ? (
         <p
+          data-pg="text"
           style={{
             ...text(TYPE.body.size, TYPE.body.lineHeight),
             marginTop: pt(SPACE.belowHeading),
@@ -168,6 +253,7 @@ function ClassicDocument({
       {tree.sections.map((section) => (
         <section key={section.id} style={{ marginTop: pt(SPACE.aboveHeading) }}>
           <h2
+            data-pg="heading"
             style={{
               ...text(TYPE.heading.size, TYPE.heading.lineHeight),
               fontWeight: 700,
@@ -182,7 +268,11 @@ function ClassicDocument({
           </h2>
           {section.layout === "lines"
             ? section.lines.map((line, i) => (
-                <p key={i} style={text(TYPE.body.size, TYPE.body.lineHeight)}>
+                <p
+                  key={i}
+                  data-pg="text"
+                  style={text(TYPE.body.size, TYPE.body.lineHeight)}
+                >
                   {line}
                 </p>
               ))
@@ -233,13 +323,21 @@ function Corners({
 }
 
 function Entry({ entry, first }: { entry: TreeEntry; first: boolean }) {
+  const hasCorners =
+    entry.line1Left || entry.line1Right || entry.line2Left || entry.line2Right;
   return (
     <div style={{ marginTop: first ? 0 : pt(SPACE.betweenEntries) }}>
-      <Corners left={entry.line1Left} right={entry.line1Right} bold />
-      <Corners left={entry.line2Left} right={entry.line2Right} />
+      {/* The two corner lines stay together on one page, as in the PDF. */}
+      {hasCorners ? (
+        <div data-pg="keep">
+          <Corners left={entry.line1Left} right={entry.line1Right} bold />
+          <Corners left={entry.line2Left} right={entry.line2Right} />
+        </div>
+      ) : null}
       {entry.text.map((paragraph, i) => (
         <p
           key={i}
+          data-pg="text"
           style={{
             ...text(TYPE.body.size, TYPE.body.lineHeight),
             whiteSpace: "pre-line",
@@ -253,6 +351,7 @@ function Entry({ entry, first }: { entry: TreeEntry; first: boolean }) {
           {entry.bullets.map((bullet, i) => (
             <Fragment key={i}>
               <li
+                data-pg="text"
                 style={{
                   ...text(TYPE.body.size, TYPE.body.lineHeight),
                   display: "flex",

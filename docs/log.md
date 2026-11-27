@@ -532,3 +532,80 @@ One dated entry per task: what was built, the review score, and what was left.
 ## 2026-11-27: AI work renumbered after merging main
 
 - Main took decision 0038 (PDF download) and spec 25 (PDF export), so the AI work became decisions 0040 (Groq for evals, superseded) and 0041 (Groq default while testing) and spec 26 (AI foundation). References updated.
+
+## 2026-11-27: Spec 27, CV editor with flush panes and collapsible sections (0039)
+
+- Flovet approved 0039.
+- The editor now runs flush:
+  - no root padding or gap, and equal padding above and below the top bar;
+  - a 1 px border between the panes, with no padding in the left pane;
+  - no visible "Sections" title.
+- Sections are a flat list split by borders:
+  - Each header (card colour) has a collapse chevron, the title, the finding marker, an eye-off icon when the section is hidden, a plus and More.
+  - Each body (well colour) holds compact entry cards (the MarkedChange surface).
+  - The entry count and "Done / To do" are gone.
+- Entry cards:
+  - Drag reorders entries through motion's `Reorder` (no new dependency).
+  - Clicking or pressing Enter on the handle opens Move up and Move down (WCAG 2.5.7).
+  - An eye toggle hides an entry from the preview, PDF and review. The flag is optional, so old content parses unchanged.
+  - Delete keeps undo and now names the entry.
+- "Add section" is full width. The default sections are unchanged (Contact, Summary, Experience, Education, Skills), as the research found.
+- Bugs found and fixed in the browser:
+  - Hidden entries lost their label in the list.
+  - A drag also opened the handle's menu.
+  - Enter on the handle didn't open its menu.
+- Checks:
+  - `pnpm check` passes (364 tests, build).
+  - Browser: 1440 px in dark and light; 375 px light on touch; 390 px dark.
+  - The test resume was deleted afterwards.
+- Reviewer: 97/100. Its findings are fixed: named delete labels, type spacing in the section header, the unused Menu change undone, dead keys removed.
+- Left:
+  - A drag test in a 50-entry section wasn't run.
+  - Dragging whole sections is out of scope (0039).
+
+## 2026-11-27: Editor follow-up (0042)
+
+- Flovet's edits, logged as 0042. It supersedes 0038's menu placement and 0031 §3's single muted tone.
+- **Top bar:**
+  - no maximum width, and 8 px block padding;
+  - Back and More are secondary (bordered) icon buttons;
+  - Download PDF moved out of More onto the bar as a secondary icon button (spinner while preparing; the flow is unchanged).
+- **Section list:** no hover fill on titles. Bodies on `--desk`, lighter than well but not white, with a slight inset top shadow.
+- **Findings by severity:**
+  - Warnings (contact, headline, summary, bullets, dates) use the marigold badge and ink text.
+  - Tips (long summary, bullets without numbers, long bullets) use the violet "i" and muted text.
+  - Section markers take the strongest tone, and Review cards show the same icons. Never red.
+- **Right pane:** flush, with a white sticky tab bar. Preview sits on `--well`; Guidance and Review panels are padded on the card colour.
+- **Checks:**
+  - `pnpm check`;
+  - browser at 1440 px in light and dark, and 390 px with the sheet.
+- Not re-reviewed by the reviewer; a visual follow-up to spec 27.
+
+## 2026-11-27: Section list follow-up (0043)
+
+- **Renumbering:** main already uses 0040 and 0041 (the Groq decisions), so this branch's decisions are 0042 (top bar, severity) and 0043.
+- **0043 (Flovet's instruction):**
+  - Each section's entries sit in one bordered box, with rows split by borders.
+  - The section body has no tint.
+  - Rows tint very slightly on hover and show their icons.
+  - On hover, the section title underlines and its plus and More take the raised surface.
+  - The drag handle is flat, with no tooltip.
+  - Download is a labelled "Download PDF" button.
+- **Checks:** typecheck and `pnpm check`. Hover states weren't checked by eye; the browser pane was in the background.
+
+## 2026-11-27: Paginated preview (spec 28, 0044) and editor follow-ups (0045–0047)
+
+- **Paginated preview (0044):**
+  - The preview is paper sheets, A4 or Letter, stacked on grey. The dashed break lines are gone.
+  - `paginate.ts` mirrors the PDF's rules: orphans and widows at 2, keep blocks, heading presence of 40 pt, and a moved block's top margin.
+  - 11 unit tests pass. Only the first sheet is exposed to screen readers.
+  - A long Letter CV shows 2 sheets, and its PDF has 2 pages.
+- **Reviewer (spec 28): 89/100.**
+  - Fixed: the heading rule now looks past blocks between the heading and the break; page tops keep a moved block's margin; the font callback is cancelled on cleanup.
+  - Known gap: the PDF itself never applies `minPresenceAhead` to our headings, so the preview and the PDF can disagree at a heading. Flovet chose to leave the PDF unchanged (2026-11-27).
+- **Section list:** titles are `text-md` (16 px) and the padding is tighter. The separator was tried stronger, then reverted to `--line` at Flovet's request. Add section is a secondary button.
+- **0045:** icon-only buttons draw their icon at 1.25em, and every icon's stroke goes from 1.5 to 1.75.
+- **0046:** light-mode raised controls are off-white (#f5f5f6), so they show on white.
+- **0047:** from two-pane width, the editor fills the window and each pane scrolls on its own.
+- **Phones:** the Download label is icon-only under `sm`.
+- **Not done:** an A4/French CV in the browser; a heading near a page bottom checked against the PDF.

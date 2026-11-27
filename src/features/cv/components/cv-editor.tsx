@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { MotionConfig } from "motion/react";
 import Link from "next/link";
 import {
   type ReactNode,
@@ -13,18 +14,17 @@ import {
 
 import {
   HugeiconsArrowLeftIcon,
-  HugeiconsBadgeAlertIcon,
   HugeiconsChevronRightIcon,
   HugeiconsCopyIcon,
   HugeiconsDownloadIcon,
   HugeiconsFileTextIcon,
-  HugeiconsPencilIcon,
   HugeiconsPlusIcon,
   HugeiconsTrashIcon,
   MoreIcon,
 } from "@/components/icons";
 import { Button, buttonVariants, IconButton } from "@/components/ui/button";
 import { Dialog, Sheet } from "@/components/ui/dialog";
+import { ToneMark } from "@/components/ui/feedback";
 import { Input } from "@/components/ui/field";
 import { Menu, type MenuEntry } from "@/components/ui/menu";
 import { Tabs } from "@/components/ui/tabs";
@@ -37,17 +37,23 @@ import {
   type AnyEntry,
   type EditorStep,
   cvName,
+  emptyEntry,
   emptySection,
   followsContent,
   move,
   nextFirstPassStep,
   sameStep,
-  stepStatus,
 } from "../editor";
 import { deleteCvAction, duplicateCvAction } from "../editor-actions";
 import { fileNameFromDisposition } from "../file-name";
 import type { CvError } from "../logic";
-import { type Finding, reviewCv } from "../review";
+import {
+  type Finding,
+  reviewCv,
+  type Severity,
+  severityOf,
+  strongest,
+} from "../review";
 import {
   type CvContent,
   type CvLanguage,
@@ -58,7 +64,6 @@ import {
 } from "../schemas";
 import { ClassicPreview } from "../templates/classic/classic-preview";
 import { buildCvTree, type CvLabels, type TreeEntry } from "../tree";
-import { RowActions } from "./fields";
 import {
   ContactForm,
   Guidance,
@@ -66,6 +71,13 @@ import {
   SummaryForm,
   summaryLine,
 } from "./section-forms";
+import {
+  EmptyLine,
+  EntryList,
+  headerAction,
+  SectionBlock,
+  SummaryCard,
+} from "./section-list";
 import { type SaveStatus, useAutosave } from "./use-autosave";
 
 /**
@@ -140,12 +152,20 @@ export function CvEditor(props: CvEditorProps) {
     () => buildCvTree(previewContent, { language, market, labels }),
     [previewContent, language, market, labels],
   );
-  // Every entry as it prints, hidden sections included, for the list lines.
+  // Every entry as it prints, hidden sections and entries included, for the
+  // list lines.
   const printed = useMemo(() => {
     const all = buildCvTree(
       {
         ...content,
-        sections: content.sections.map((s) => ({ ...s, hidden: false })),
+        sections: content.sections.map(
+          (s) =>
+            ({
+              ...s,
+              hidden: false,
+              entries: s.entries.map((e) => ({ ...e, hidden: false })),
+            }) as CvSection,
+        ),
       },
       { language, market, labels },
     );
@@ -274,8 +294,7 @@ export function CvEditor(props: CvEditorProps) {
       }
     });
 
-  /* ── Download PDF (0038) ──────────────────────────────────────────── */
-  const [moreOpen, setMoreOpen] = useState(false);
+  /* ── Download PDF (0038; a top-bar button since 0042) ──────────────────────────────────────────── */
   const [downloading, setDownloading] = useState(false);
   const downloadingRef = useRef(false);
 
@@ -283,12 +302,9 @@ export function CvEditor(props: CvEditorProps) {
     if (downloadingRef.current) return;
     downloadingRef.current = true;
     setDownloading(true);
-    // A retry from the toast reopens the menu, so "Preparing…" is seen.
-    setMoreOpen(true);
     try {
       // The file must match the screen: save first, and stop if we can't.
       if (!(await saveAll())) {
-        setMoreOpen(false);
         toast({ title: t("pdf.unsaved"), closeLabel: t("dismiss") });
         return;
       }
@@ -296,7 +312,6 @@ export function CvEditor(props: CvEditorProps) {
         cache: "no-store",
       }).catch(() => null);
       if (!response?.ok) {
-        setMoreOpen(false);
         if (response?.status === 401) failed("unauthenticated");
         else if (response?.status === 404) failed("not_found");
         else
@@ -323,9 +338,7 @@ export function CvEditor(props: CvEditorProps) {
       link.remove();
       // Give the browser time to start reading the file before freeing it.
       setTimeout(() => URL.revokeObjectURL(url), 60_000);
-      setMoreOpen(false);
     } catch {
-      setMoreOpen(false);
       toast({
         title: t("pdf.failed"),
         closeLabel: t("dismiss"),
@@ -338,13 +351,6 @@ export function CvEditor(props: CvEditorProps) {
   };
 
   const moreItems: MenuEntry[] = [
-    {
-      label: downloading ? t("pdf.preparing") : t("pdf.download"),
-      icon: <HugeiconsDownloadIcon />,
-      onSelect: () => void downloadPdf(),
-      disabled: downloading || pending,
-      keepOpen: true,
-    },
     {
       label: t("duplicate"),
       icon: <HugeiconsCopyIcon />,
@@ -444,13 +450,8 @@ export function CvEditor(props: CvEditorProps) {
         [name, email || phone].filter(Boolean).join(" · ") || t("notStarted")
       );
     }
-    if (s.type === "summary") {
-      const text = content.basics.summary.trim();
-      return text ? text.slice(0, 80) : t("notStarted");
-    }
-    const section = content.sections.find((x) => x.id === s.id);
-    const count = section?.entries.length ?? 0;
-    return count === 0 ? t("notStarted") : t("entries", { count });
+    const text = content.basics.summary.trim();
+    return text ? text.slice(0, 80) : t("notStarted");
   };
 
   const findingsAt = (s: EditorStep) =>
@@ -468,162 +469,141 @@ export function CvEditor(props: CvEditorProps) {
     })),
   ];
 
+  const addEntry = (section: CvSection) => {
+    const entry = emptyEntry(section.kind);
+    setEntries(section.id, (all) => [...all, entry as AnyEntry]);
+    open({ type: "section", id: section.id }, entry.id);
+  };
+
+  const toggleEntry = (sectionId: string, entryId: string) =>
+    setEntries(sectionId, (all) =>
+      all.map((e) => (e.id === entryId ? { ...e, hidden: !e.hidden } : e)),
+    );
+
+  const entryLabels = {
+    move: (entry: string) => t("entry.move", { entry }),
+    moveUp: t("moveUp"),
+    moveDown: t("moveDown"),
+    show: (entry: string) => t("entry.show", { entry }),
+    remove: (entry: string) => t("entry.deleteNamed", { entry }),
+  };
+
   const list = (
-    <nav aria-labelledby="cv-sections-title" className="flex flex-col gap-3">
-      <h2
-        id="cv-sections-title"
-        ref={listTop}
-        tabIndex={-1}
-        className="text-sm font-semibold text-ink-muted outline-none"
-      >
+    <nav aria-label={t("sectionsLabel")} className="flex flex-col">
+      <h2 ref={listTop} tabIndex={-1} className="sr-only">
         {t("sectionsLabel")}
       </h2>
-      <ul className="flex flex-col gap-2 rounded-card bg-well p-2 shadow-[inset_0_0_0_1px_var(--line)]">
-        {rows.map(({ step: s, section, index }) => {
-          const done = stepStatus(content, s) === "done";
-          const rowFindings = findingsAt(s);
-          const sectionWide = rowFindings.filter((f) => !f.entryId);
-          const entries = (section?.entries ?? []) as AnyEntry[];
-          return (
-            <li
-              key={s.type === "section" ? s.id : s.type}
-              className="flex flex-col rounded-control bg-card shadow-[inset_0_0_0_1px_var(--line)]"
-            >
-              <div className="flex items-stretch gap-1 pe-1">
-                <button
-                  type="button"
-                  onClick={() => open(s)}
-                  className="flex min-h-11 min-w-0 flex-1 flex-col items-start gap-0.5 rounded-control px-3 py-2 text-start active:bg-wash-press hover-fine:bg-wash-hover"
-                >
-                  <span className="flex w-full items-center justify-between gap-2">
-                    <span
-                      className={cn(
-                        "flex min-w-0 items-center gap-1.5 font-semibold",
-                        section?.hidden ? "text-ink-muted" : "text-ink",
-                      )}
-                    >
-                      <span className="truncate">{stepName(s)}</span>
-                      {rowFindings.length > 0 ? (
-                        <FindingMarker
-                          label={t("review.marker", {
-                            count: rowFindings.length,
-                          })}
-                        />
-                      ) : null}
-                    </span>
-                    <span
-                      className={cn(
-                        "shrink-0 text-base",
-                        done ? "text-ink" : "text-ink-muted",
-                      )}
-                    >
-                      {section?.hidden
-                        ? t("hidden")
-                        : done
-                          ? t("status.done")
-                          : t("status.todo")}
-                    </span>
-                  </span>
-                  <span className="w-full truncate text-sm text-ink-muted">
-                    {rowSummary(s)}
-                  </span>
-                  {sectionWide.map((f) => (
-                    <FindingLine key={f.key}>{message(f)}</FindingLine>
-                  ))}
-                </button>
-                {index !== undefined ? (
-                  <Menu
-                    align="end"
-                    trigger={
+      <MotionConfig reducedMotion="user">
+        <ul className="flex flex-col">
+          {rows.map(({ step: s, section, index }) => {
+            const rowFindings = findingsAt(s);
+            const sectionWide = rowFindings.filter((f) => !f.entryId);
+            const entries = (section?.entries ?? []) as AnyEntry[];
+            const name = stepName(s);
+            return (
+              <SectionBlock
+                key={s.type === "section" ? s.id : s.type}
+                title={name}
+                marker={
+                  rowFindings.length > 0 ? (
+                    <FindingMarker
+                      label={t("review.marker", { count: rowFindings.length })}
+                      severity={strongest(rowFindings) ?? "tip"}
+                    />
+                  ) : null
+                }
+                hiddenLabel={
+                  section?.hidden ? t("section.hiddenMarker") : undefined
+                }
+                actions={
+                  section && index !== undefined ? (
+                    <>
                       <IconButton
                         size="sm"
-                        className="self-center"
-                        label={t("section.more", { section: stepName(s) })}
-                        icon={<MoreIcon />}
+                        label={t("entry.add", { section: name })}
+                        icon={<HugeiconsPlusIcon />}
+                        className={headerAction}
+                        disabled={entries.length >= 50}
+                        onClick={() => addEntry(section)}
                       />
+                      <Menu
+                        align="end"
+                        trigger={
+                          <IconButton
+                            size="sm"
+                            label={t("section.more", { section: name })}
+                            icon={<MoreIcon />}
+                            className={headerAction}
+                          />
+                        }
+                        items={sectionMenu(index)}
+                      />
+                    </>
+                  ) : null
+                }
+              >
+                {sectionWide.map((f) => (
+                  <FindingLine key={f.key} severity={severityOf(f.code)}>
+                    {message(f)}
+                  </FindingLine>
+                ))}
+                {!section ? (
+                  <SummaryCard onOpen={() => open(s)}>
+                    <span className="w-full truncate">{rowSummary(s)}</span>
+                  </SummaryCard>
+                ) : entries.length === 0 ? (
+                  <EmptyLine>{t("entry.none")}</EmptyLine>
+                ) : (
+                  <EntryList
+                    entries={entries}
+                    rows={entries.map((entry) => ({
+                      id: entry.id,
+                      label: entryLabel(entry),
+                      hidden: Boolean(entry.hidden),
+                      findings: rowFindings
+                        .filter((f) => f.entryId === entry.id)
+                        .map((f) => (
+                          <FindingLine
+                            key={f.key}
+                            severity={severityOf(f.code)}
+                          >
+                            {message(f)}
+                          </FindingLine>
+                        )),
+                    }))}
+                    onReorder={(next) => setEntries(section.id, () => next)}
+                    onMove={(i, by) =>
+                      setEntries(section.id, (all) => move(all, i, by))
                     }
-                    items={sectionMenu(index)}
+                    onOpen={(entryId) => open(s, entryId)}
+                    onToggle={(entryId) => toggleEntry(section.id, entryId)}
+                    onRemove={(entryId) => removeEntry(section.id, entryId)}
+                    labels={entryLabels}
                   />
-                ) : null}
-              </div>
-              {section && entries.length > 0 ? (
-                <ul className="flex flex-col border-t border-line py-1">
-                  {entries.map((entry, i) => {
-                    const label = entryLabel(entry);
-                    const entryFindings = rowFindings.filter(
-                      (f) => f.entryId === entry.id,
-                    );
-                    return (
-                      <li
-                        key={entry.id}
-                        className="group/row flex items-center gap-1 px-1"
-                      >
-                        <button
-                          type="button"
-                          onClick={() => open(s, entry.id)}
-                          className="jb-type flex min-h-11 min-w-0 flex-1 flex-col items-start justify-center rounded-control text-start text-base text-ink active:bg-wash-press hover-fine:bg-wash-hover"
-                        >
-                          <span className="w-full truncate">{label}</span>
-                          {entryFindings.map((f) => (
-                            <FindingLine key={f.key}>{message(f)}</FindingLine>
-                          ))}
-                        </button>
-                        <IconButton
-                          size="sm"
-                          label={t("editEntry", { entry: label })}
-                          icon={<HugeiconsPencilIcon />}
-                          onClick={() => open(s, entry.id)}
-                          className="pointer-fine:opacity-0 pointer-fine:group-focus-within/row:opacity-100 pointer-fine:group-hover/row:opacity-100"
-                        />
-                        <RowActions
-                          onUp={
-                            i > 0
-                              ? () =>
-                                  setEntries(section.id, (all) =>
-                                    move(all, i, -1),
-                                  )
-                              : undefined
-                          }
-                          onDown={
-                            i < entries.length - 1
-                              ? () =>
-                                  setEntries(section.id, (all) =>
-                                    move(all, i, 1),
-                                  )
-                              : undefined
-                          }
-                          onRemove={() => removeEntry(section.id, entry.id)}
-                          labels={{
-                            up: t("moveUp"),
-                            down: t("moveDown"),
-                            remove: t("entry.delete"),
-                          }}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
-      <Menu
-        trigger={
-          <Button
-            variant="quiet"
-            className="self-start"
-            icon={<HugeiconsPlusIcon />}
-            disabled={content.sections.length >= 20}
-          >
-            {t("addSection")}
-          </Button>
-        }
-        items={SECTION_KINDS.map((kind) => ({
-          label: kindName(kind),
-          onSelect: () => addSection(kind),
-        }))}
-      />
+                )}
+              </SectionBlock>
+            );
+          })}
+        </ul>
+      </MotionConfig>
+      <div className="p-4">
+        <Menu
+          trigger={
+            <Button
+              variant="secondary"
+              className="w-full"
+              icon={<HugeiconsPlusIcon />}
+              disabled={content.sections.length >= 20}
+            >
+              {t("addSection")}
+            </Button>
+          }
+          items={SECTION_KINDS.map((kind) => ({
+            label: kindName(kind),
+            onSelect: () => addSection(kind),
+          }))}
+        />
+      </div>
     </nav>
   );
 
@@ -733,9 +713,13 @@ export function CvEditor(props: CvEditorProps) {
 
   const shownTab: Tab = tab === "guidance" && !formOpen ? tabBeforeForm : tab;
 
+  // Flush pane (0042): a white tab bar, panels padded on their own.
+  const pad = "p-4 lg:p-6";
   const tabs = (
-    <div ref={tabsRef}>
+    <div ref={tabsRef} className="flex flex-1 flex-col">
       <Tabs
+        className="flex-1 gap-0"
+        listClassName="sticky top-0 z-10 bg-card px-4 lg:px-6"
         label={t("tabs.label")}
         value={shownTab}
         onValueChange={(value) => setTab(value as Tab)}
@@ -746,6 +730,7 @@ export function CvEditor(props: CvEditorProps) {
                   value: "guidance",
                   label: t("tabs.guidance"),
                   panel: <Guidance step={guidanceKey} />,
+                  panelClassName: pad,
                 },
               ]
             : []),
@@ -755,16 +740,17 @@ export function CvEditor(props: CvEditorProps) {
             panel: (
               <ClassicPreview
                 tree={tree}
-                pageBreakLabel={(page) => t("pageBreak", { page })}
                 namePlaceholder={t("namePlaceholder")}
               />
             ),
+            panelClassName: cn("flex-1 bg-well", pad),
           },
           {
             value: "review",
             label: t("tabs.review"),
             meta: findings.length > 0 ? findings.length : undefined,
             panel: review,
+            panelClassName: pad,
           },
         ]}
       />
@@ -773,17 +759,18 @@ export function CvEditor(props: CvEditorProps) {
 
   return (
     <div
-      className="@container mx-auto w-full max-w-[100rem]"
+      className="@container flex min-h-0 w-full flex-1 flex-col"
       id="cv-editor-root"
     >
-      <div className="flex w-full flex-col gap-6 px-4 py-4 lg:px-6 lg:py-6">
-        <header className="flex items-center gap-2 border-b border-line pb-4">
+      {/* Two panes fill the window; each scrolls on its own (0047). */}
+      <div className="flex w-full flex-1 flex-col @4xl:min-h-0 @4xl:overflow-hidden">
+        <header className="flex items-center gap-2 border-b border-line px-4 py-2 lg:px-6">
           <Tooltip content={t("back")}>
             <Link
               href={homeHref}
               aria-label={t("back")}
               className={buttonVariants({
-                variant: "quiet",
+                variant: "secondary",
                 size: "md",
                 iconOnly: true,
               })}
@@ -855,20 +842,37 @@ export function CvEditor(props: CvEditorProps) {
           >
             {t("preview")}
           </Button>
+          <Button
+            variant="secondary"
+            icon={<HugeiconsDownloadIcon />}
+            loading={downloading}
+            loadingLabel={t("pdf.preparing")}
+            disabled={pending}
+            onClick={() => void downloadPdf()}
+          >
+            {/* Icon only on phones, so the title keeps its room (0043). */}
+            <span className="max-sm:sr-only">{t("pdf.download")}</span>
+          </Button>
           <Menu
             align="end"
-            trigger={<IconButton label={t("more")} icon={<MoreIcon />} />}
+            trigger={
+              <IconButton
+                variant="secondary"
+                label={t("more")}
+                icon={<MoreIcon />}
+              />
+            }
             items={moreItems}
-            open={moreOpen}
-            onOpenChange={setMoreOpen}
           />
         </header>
 
-        <div className="grid gap-8 @4xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] @4xl:items-start">
-          <div className="min-w-0">{formOpen ? form : list}</div>
+        <div className="grid flex-1 @4xl:min-h-0 @4xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] @4xl:grid-rows-[minmax(0,1fr)]">
+          <div className="min-w-0 @4xl:overflow-y-auto @4xl:overscroll-contain @4xl:border-e @4xl:border-line">
+            {formOpen ? <div className="p-4 lg:p-6">{form}</div> : list}
+          </div>
           <aside
             aria-label={t("tabs.label")}
-            className="hidden @4xl:sticky @4xl:top-6 @4xl:block @4xl:max-h-[calc(100dvh-3rem)] @4xl:overflow-y-auto @4xl:pb-4"
+            className="hidden @4xl:flex @4xl:flex-col @4xl:overflow-y-auto @4xl:overscroll-contain"
           >
             {isTwoPanes ? tabs : null}
           </aside>
@@ -924,24 +928,43 @@ function useTwoPanes(): boolean {
 
 /* ── Review (0031 §3) ───────────────────────────────────────────────── */
 
-function FindingMarker({ label }: { label: string }) {
+const tone = (severity: Severity) =>
+  severity === "warning" ? "warning" : "info";
+
+/** Inside the section title's control, so it takes the control's icon size (0029, 0030). */
+function FindingMarker({
+  label,
+  severity,
+}: {
+  label: string;
+  severity: Severity;
+}) {
   return (
-    <span
-      className="inline-flex size-[1.125em] shrink-0 text-ink-muted [&_svg]:size-full"
-      title={label}
-    >
-      <HugeiconsBadgeAlertIcon aria-hidden="true" />
+    <span className="jb-type-icon" title={label}>
+      <ToneMark tone={tone(severity)} className="size-full" />
       <span className="sr-only">{label}</span>
     </span>
   );
 }
 
-function FindingLine({ children }: { children: ReactNode }) {
+/** Warnings read in ink, tips in muted ink; the icon carries the tone (0042). */
+function FindingLine({
+  severity,
+  children,
+}: {
+  severity: Severity;
+  children: ReactNode;
+}) {
   return (
-    <span className="flex w-full items-start gap-[0.5em] text-sm text-ink-muted">
+    <span
+      className={cn(
+        "flex w-full items-start gap-[0.5em] text-sm",
+        severity === "warning" ? "text-ink" : "text-ink-muted",
+      )}
+    >
       {/* 1.125em icon (0030), centred on the first line. */}
-      <span className="flex h-lh shrink-0 items-center [&_svg]:size-[1.125em]">
-        <HugeiconsBadgeAlertIcon aria-hidden="true" />
+      <span className="flex h-lh shrink-0 items-center">
+        <ToneMark tone={tone(severity)} className="size-[1.125em]" />
       </span>
       <span className="min-w-0">{children}</span>
     </span>
@@ -1001,7 +1024,15 @@ function ReviewPanel({
                         {where}
                       </span>
                     ) : null}
-                    <span className="text-ink">{message(finding)}</span>
+                    <span className="flex items-start gap-[0.5em] text-ink">
+                      <span className="flex h-lh shrink-0 items-center">
+                        <ToneMark
+                          tone={tone(severityOf(finding.code))}
+                          className="size-[1.125em]"
+                        />
+                      </span>
+                      <span className="min-w-0">{message(finding)}</span>
+                    </span>
                   </div>
                   <Button
                     variant="secondary"

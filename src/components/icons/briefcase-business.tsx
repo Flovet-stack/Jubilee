@@ -161,7 +161,7 @@ const HugeiconsBriefcaseBusinessIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
 
           <path
@@ -169,7 +169,7 @@ const HugeiconsBriefcaseBusinessIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
 
           <path
@@ -177,14 +177,14 @@ const HugeiconsBriefcaseBusinessIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
 
           <path
             d="M12 15V17"
             stroke="currentColor"
             strokeLinecap="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
         </motion.svg>
       </span>

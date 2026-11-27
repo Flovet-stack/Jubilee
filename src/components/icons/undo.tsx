@@ -100,7 +100,7 @@ const HugeiconsUndoIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           animate={reduceDefinition(controls)}
           transition={{
             duration: 0.6,
@@ -120,7 +120,7 @@ const HugeiconsUndoIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           animate={reduceDefinition(controls)}
           transition={{
             duration: 0.6,

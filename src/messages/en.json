@@ -424,11 +424,6 @@
       "addSection": "Add a section",
       "notStarted": "Not started",
       "hidden": "Hidden",
-      "entries": "{count, plural, one {# entry} other {# entries}}",
-      "status": {
-        "done": "Done",
-        "todo": "To do"
-      },
       "steps": {
         "contact": "Contact details",
         "summary": "Summary"
@@ -450,14 +445,14 @@
         "show": "Show on resume",
         "hide": "Hide from resume",
         "remove": "Remove section",
-        "more": "More for {section}"
+        "more": "More for {section}",
+        "hiddenMarker": "Hidden from resume"
       },
       "sectionRemoved": "Section removed",
       "dismiss": "Dismiss",
       "undo": "Undo",
       "next": "Next: {section}",
       "seeCv": "See your resume",
-      "pageBreak": "Page {page} starts about here",
       "namePlaceholder": "Your name",
       "moveUp": "Move up",
       "moveDown": "Move down",
@@ -479,7 +474,12 @@
         "done": "Done",
         "delete": "Delete entry",
         "edit": "Edit {entry}",
-        "untitled": "New entry"
+        "untitled": "New entry",
+        "show": "Show {entry} on resume",
+        "move": "Move {entry}",
+        "add": "Add to {section}",
+        "none": "No entries yet",
+        "deleteNamed": "Delete {entry}"
       },
       "bullets": {
         "label": "Bullet {number}",
@@ -578,7 +578,6 @@
         "cancel": "Keep it"
       },
       "actionError": "That didn’t work. Check your connection and try again.",
-      "editEntry": "Edit {entry}",
       "tabs": {
         "label": "Resume views",
         "preview": "Preview",

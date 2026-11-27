@@ -278,3 +278,23 @@ describe("errorFromDatabase", () => {
     expect(errorFromDatabase({ code: "42501" })).toEqual({ code: "database" });
   });
 });
+
+describe("entry hidden flag (0039)", () => {
+  it("parses entries with and without it, and rejects a non-boolean", () => {
+    const content = fullCv();
+    expect(validateContent(content).ok).toBe(true);
+    const section = content.sections[0]!;
+    const entry = section.entries[0]!;
+    entry.hidden = true;
+    const parsed = cvContentSchema.safeParse(content);
+    expect(parsed.success && parsed.data.sections[0]!.entries[0]!.hidden).toBe(
+      true,
+    );
+    expect(
+      cvContentSchema.safeParse({
+        ...content,
+        sections: [{ ...section, entries: [{ ...entry, hidden: "yes" }] }],
+      }).success,
+    ).toBe(false);
+  });
+});
