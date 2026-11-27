@@ -610,3 +610,13 @@ One dated entry per task: what was built, the review score, and what was left.
 - **0048:** Skills show by category; each skill is a pill with its own show/hide eye (`hiddenKeywords`, optional, no migration), and each category has its own eye. Section headers sit on `--desk`, with violet titles at 14 px.
 - **Phones:** the Download label is icon-only under `sm`.
 - **Not done:** an A4/French CV in the browser; a heading near a page bottom checked against the PDF.
+
+## 2026-11-27: AnimateIcons with our icons as fallback (spec 29, decision 0049)
+
+- Added `@animateicons/react` 0.13.0, pinned exactly. Only the Huge set is used, imported one icon per file.
+- Wrapped 41 icons in our existing API (`fromAnimateIcons`), so the names, `size`, refs and hover-from-the-control behaviour stay the same. Deleted the 33 vendored files they replace.
+- Moved the in-house glyphs to Huge icons too: the account menu (moon, language, log out, chevrons, check), the sidebar panel, the info alert and the stage badges.
+- Kept as fallbacks, listed in `icon-sources.ts` with a test: grip, the spinning loader, the unfold chevrons and the checkbox tick.
+- Stroke is forced to 1.75 (0045). The gallery labels each icon's source.
+- `MoreIcon` replaced by `HugeiconsMoreHorizontalIcon`. Per-icon `*Handle` types kept as aliases.
+- Reviewer 84/100; touch-hover fix applied after. Left: animation not seen in the browser (pane hidden), no 390/1440 screenshots; ExternalLink→ArrowUpRight01 and FileText→File01 lose detail (no closer Huge icon).

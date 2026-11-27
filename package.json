@@ -19,6 +19,7 @@
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.108",
     "@ai-sdk/groq": "4.0.87",
+    "@animateicons/react": "0.13.0",
     "@base-ui/react": "1.9.0",
     "@react-pdf/renderer": "4.9.1",
     "@supabase/ssr": "0.12.7",
