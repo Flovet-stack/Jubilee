@@ -24,6 +24,8 @@ Implements [0039](../docs/decisions/0039-cv-editor-flush-panes-and-collapsible-s
 - [0037](../docs/decisions/0037-layered-control-surfaces-and-geist-trial.md) (surfaces);
 - [0008](../docs/decisions/0008-interaction-disclosure-and-space.md) (undo).
 
+Follow-up: [0048](../docs/decisions/0048-skills-as-pills-and-desk-section-headers.md) (skills by category as pills, headers on `--desk` with violet titles).
+
 ## Acceptance criteria
 
 1. **Layout:**

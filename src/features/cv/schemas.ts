@@ -103,6 +103,8 @@ const entries = {
     name: text(80),
     level: text(60),
     keywords: list(30, text(60)),
+    /** Skills kept in the group but left off the CV (0048). */
+    hiddenKeywords: list(30, text(60)).optional(),
   }),
   languages: z.object({ id, hidden, language: text(60), fluency: text(60) }),
   projects: z.object({

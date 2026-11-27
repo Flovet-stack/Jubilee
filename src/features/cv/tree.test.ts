@@ -258,6 +258,27 @@ describe("hidden entries (0039)", () => {
     expect(text).not.toContain("Cobol");
   });
 
+  it("leaves hidden skills out, and a category whose skills are all hidden (0048)", () => {
+    const content = cv();
+    const skills = content.sections.find((s) => s.kind === "skills");
+    if (skills?.kind !== "skills") throw new Error("fixture");
+    const some = emptyEntry("skills", id);
+    some.name = "Data";
+    some.keywords = ["SQL", "Cobol"];
+    some.hiddenKeywords = ["Cobol"];
+    const none = emptyEntry("skills", id);
+    none.name = "Legacy";
+    none.keywords = ["Fortran"];
+    none.hiddenKeywords = ["Fortran"];
+    skills.entries = [some, none];
+    const text = treeText(
+      buildCvTree(content, { language: "en", market: "US", labels: en }),
+    ).join("\n");
+    expect(text).toContain("Data: SQL");
+    expect(text).not.toContain("Cobol");
+    expect(text).not.toContain("Legacy");
+  });
+
   it("drops a section whose entries are all hidden", () => {
     const content = cv();
     const work = content.sections.find((s) => s.kind === "work");

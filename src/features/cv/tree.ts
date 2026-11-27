@@ -260,7 +260,11 @@ function sectionBody(
         layout: "lines",
         lines: section.entries
           .map((e) => {
-            const skills = join(e.keywords);
+            const off = new Set(e.hiddenKeywords ?? []);
+            const shown = e.keywords.filter((k) => !off.has(k));
+            // Every skill hidden: the group leaves the CV too.
+            if (e.keywords.length > 0 && shown.length === 0) return "";
+            const skills = join(shown);
             const name = e.name.trim();
             if (name && skills) return `${name}: ${skills}`;
             return name || skills;

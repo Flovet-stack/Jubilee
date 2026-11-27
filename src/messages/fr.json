@@ -479,7 +479,9 @@
         "move": "Déplacer {entry}",
         "add": "Ajouter à {section}",
         "none": "Aucun élément pour l’instant",
-        "deleteNamed": "Supprimer {entry}"
+        "deleteNamed": "Supprimer {entry}",
+        "untitledGroup": "Catégorie sans nom",
+        "noSkills": "Aucune compétence dans cette catégorie"
       },
       "bullets": {
         "label": "Point {number}",
