@@ -1,8 +1,8 @@
 # 0050: Ways to start a CV, on the Resumes page
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Proposed:** 2026-11-27 by the product team (roles: Product, UX, UI, Copy, Database, Tech Lead, Frontend, Backend), revised the same day from Flovet's direction
-- **Approved:** —
+- **Approved:** 2026-11-27 by Flovet (in chat)
 - **Supersedes:** 0032's `/cvs/new` create screen (the options move to the top of the Resumes page) and 0024's "Create a CV" step (language and market stay, inside each option).
 - **Specs:** —
 
