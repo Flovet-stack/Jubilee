@@ -67,6 +67,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0045 | [Larger icons in icon-only buttons, and a heavier stroke](0045-larger-icons-in-icon-buttons-and-heavier-stroke.md) (supersedes 0030 for icon-only controls)                                   | Approved                                |
 | 0046 | [Raised controls in light mode get an off-white fill](0046-light-control-fill-off-white.md) (supersedes 0037's light control values)                                                          | Approved                                |
 | 0047 | [The editor fills the window and each pane scrolls on its own](0047-editor-panes-scroll-independently.md) (supersedes 0042's sticky right pane)                                               | Approved                                |
+| 0048 | [Skills by category as pills, and section headers on the desk colour](0048-skills-as-pills-and-desk-section-headers.md)                                                                       | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

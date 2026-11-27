@@ -479,7 +479,9 @@
         "move": "Move {entry}",
         "add": "Add to {section}",
         "none": "No entries yet",
-        "deleteNamed": "Delete {entry}"
+        "deleteNamed": "Delete {entry}",
+        "untitledGroup": "Unnamed category",
+        "noSkills": "No skills in this category yet"
       },
       "bullets": {
         "label": "Bullet {number}",

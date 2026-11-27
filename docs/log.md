@@ -607,5 +607,6 @@ One dated entry per task: what was built, the review score, and what was left.
 - **0045:** icon-only buttons draw their icon at 1.25em, and every icon's stroke goes from 1.5 to 1.75.
 - **0046:** light-mode raised controls are off-white (#f5f5f6), so they show on white.
 - **0047:** from two-pane width, the editor fills the window and each pane scrolls on its own.
+- **0048:** Skills show by category; each skill is a pill with its own show/hide eye (`hiddenKeywords`, optional, no migration), and each category has its own eye. Section headers sit on `--desk`, with violet titles at 14 px.
 - **Phones:** the Download label is icon-only under `sm`.
 - **Not done:** an A4/French CV in the browser; a heading near a page bottom checked against the PDF.
