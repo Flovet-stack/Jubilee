@@ -81,4 +81,5 @@ export { HugeiconsUndoIcon, type HugeiconsUndoIconHandle } from "./undo";
 export { HugeiconsUploadIcon, type HugeiconsUploadIconHandle } from "./upload";
 export { HugeiconsUserIcon, type HugeiconsUserIconHandle } from "./user";
 export { HugeiconsXIcon, type HugeiconsXIconHandle } from "./x";
+export { GripIcon } from "./grip";
 export { MoreIcon } from "./more";

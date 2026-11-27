@@ -28,6 +28,33 @@ export type Finding = {
   count?: number;
 };
 
+export type Severity = "warning" | "tip";
+
+/**
+ * Warnings are what a recruiter needs or expects; tips are polish (0042).
+ * Never red: findings are advice, not errors (0024, 0031).
+ */
+const SEVERITY: Record<FindingCode, Severity> = {
+  contactReach: "warning",
+  noHeadline: "warning",
+  noSummary: "warning",
+  noBullets: "warning",
+  noDates: "warning",
+  longSummary: "tip",
+  bulletsWithoutNumbers: "tip",
+  longBullets: "tip",
+};
+
+export const severityOf = (code: FindingCode): Severity => SEVERITY[code];
+
+/** The strongest tone among some findings, or null when there are none. */
+export function strongest(findings: Finding[]): Severity | null {
+  if (findings.length === 0) return null;
+  return findings.some((f) => severityOf(f.code) === "warning")
+    ? "warning"
+    : "tip";
+}
+
 /** About 4–5 lines on the page. */
 export const SUMMARY_MAX = 600;
 /** About two lines on the page (0024 §2 aims for one or two). */
@@ -59,7 +86,7 @@ export function reviewCv(content: CvContent): Finding[] {
     if (section.hidden) continue;
     const step: EditorStep = { type: "section", id: section.id };
     for (const entry of section.entries as AnyEntry[]) {
-      if (!entryHasContent(entry)) continue;
+      if (entry.hidden || !entryHasContent(entry)) continue;
       const at = (code: FindingCode, count?: number): Finding => ({
         key: `${code}:${entry.id}`,
         code,

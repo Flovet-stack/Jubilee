@@ -276,7 +276,7 @@ function sectionBody(
   }
 }
 
-/** The printable tree for a CV. Hidden and empty sections are left out. */
+/** The printable tree for a CV. Hidden and empty sections and hidden entries are left out. */
 export function buildCvTree(
   content: CvContent,
   options: { language: CvLanguage; market: CvMarket; labels: CvLabels },
@@ -294,7 +294,12 @@ export function buildCvTree(
   for (const section of content.sections) {
     if (section.hidden) continue;
     const heading = section.title.trim() || labels.headings[section.kind];
-    const body = sectionBody(section, language, labels.present);
+    // Hidden entries stay in the editor only (0039).
+    const shown = {
+      ...section,
+      entries: section.entries.filter((e) => !e.hidden),
+    } as Section;
+    const body = sectionBody(shown, language, labels.present);
     if (body.layout === "entries") {
       const entries = body.entries.filter((entry) => !isBlank(entry));
       if (entries.length > 0) {

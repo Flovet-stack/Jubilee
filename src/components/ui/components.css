@@ -215,8 +215,10 @@
     flex-shrink: 0;
   }
 
-  /* Icon only: square, the same distance on every side. */
+  /* Icon only: square, the same distance on every side. With no text beside
+     it, the icon is drawn larger (0045: 1.25em); the button keeps its size. */
   .jb-type.jb-type-square {
+    --icon: 1.25em;
     padding: calc(var(--py) + var(--icon-inset));
   }
 

@@ -118,14 +118,14 @@ const HugeiconsCircleCheckIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
         />
         <motion.path
           d="M8 12.5L10 14.5L15.5 9.5"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           animate={reduceDefinition(controls)}
           initial="normal"
           variants={PATH_VARIANTS}

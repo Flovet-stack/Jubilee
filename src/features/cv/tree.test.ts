@@ -239,3 +239,35 @@ describe("buildCvTree (decision 0024 §3, 0025, 0026)", () => {
     );
   });
 });
+
+describe("hidden entries (0039)", () => {
+  it("leaves a hidden entry out of the tree and keeps the rest", () => {
+    const content = cv();
+    const skills = content.sections.find((s) => s.kind === "skills");
+    if (skills?.kind !== "skills") throw new Error("fixture");
+    const shown = emptyEntry("skills", id);
+    shown.keywords = ["SQL"];
+    const hidden = emptyEntry("skills", id);
+    hidden.keywords = ["Cobol"];
+    hidden.hidden = true;
+    skills.entries = [shown, hidden];
+    const text = treeText(
+      buildCvTree(content, { language: "en", market: "US", labels: en }),
+    ).join("\n");
+    expect(text).toContain("SQL");
+    expect(text).not.toContain("Cobol");
+  });
+
+  it("drops a section whose entries are all hidden", () => {
+    const content = cv();
+    const work = content.sections.find((s) => s.kind === "work");
+    if (work?.kind !== "work") throw new Error("fixture");
+    work.entries = work.entries.map((e) => ({ ...e, hidden: true }));
+    const tree = buildCvTree(content, {
+      language: "en",
+      market: "US",
+      labels: en,
+    });
+    expect(tree.sections.map((s) => s.kind)).not.toContain("work");
+  });
+});

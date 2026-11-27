@@ -30,7 +30,8 @@ export default async function CvEditorPage({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="flex min-h-0 flex-1 flex-col">
+      {/* min-h-0: the editor fills the window and its panes scroll (0047). */}
       <Suspense fallback={<EditorSkeleton />}>
         <Editor locale={locale} params={params} searchParams={searchParams} />
       </Suspense>

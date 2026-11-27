@@ -15,7 +15,7 @@ import { IconButton } from "./button";
 
 /* ── Alert ──────────────────────────────────────────────────────────── */
 
-type AlertTone = "info" | "success" | "warning" | "danger";
+export type AlertTone = "info" | "success" | "warning" | "danger";
 
 /** "i" in a circle. icons-animated has no info icon, so it's drawn here (0009). */
 function InfoMark() {
@@ -49,6 +49,30 @@ const toneClasses: Record<AlertTone, string> = {
   warning: "text-paper-ink bg-marigold rounded-full p-0.5 -m-0.5",
   danger: "text-danger",
 };
+
+/**
+ * An Alert's tone icon on its own, for inline advice lines (0042). Sized by
+ * the caller (0030: 1.125em of the text beside it).
+ */
+export function ToneMark({
+  tone,
+  className,
+}: {
+  tone: AlertTone;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex shrink-0 [&_svg]:size-full",
+        toneClasses[tone],
+        className,
+      )}
+    >
+      {toneIcon[tone]}
+    </span>
+  );
+}
 
 type AlertProps = {
   tone?: AlertTone;

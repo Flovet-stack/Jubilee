@@ -424,11 +424,6 @@
       "addSection": "Ajouter une section",
       "notStarted": "Pas commencé",
       "hidden": "Masquée",
-      "entries": "{count, plural, one {# élément} other {# éléments}}",
-      "status": {
-        "done": "Fait",
-        "todo": "À faire"
-      },
       "steps": {
         "contact": "Coordonnées",
         "summary": "Profil"
@@ -450,14 +445,14 @@
         "show": "Afficher sur le CV",
         "hide": "Masquer du CV",
         "remove": "Supprimer la section",
-        "more": "Plus d’options pour {section}"
+        "more": "Plus d’options pour {section}",
+        "hiddenMarker": "Masquée du CV"
       },
       "sectionRemoved": "Section supprimée",
       "dismiss": "Fermer",
       "undo": "Annuler",
       "next": "Suivant : {section}",
       "seeCv": "Voir votre CV",
-      "pageBreak": "La page {page} commence environ ici",
       "namePlaceholder": "Votre nom",
       "moveUp": "Monter",
       "moveDown": "Descendre",
@@ -479,7 +474,12 @@
         "done": "Terminé",
         "delete": "Supprimer l’élément",
         "edit": "Modifier {entry}",
-        "untitled": "Nouvel élément"
+        "untitled": "Nouvel élément",
+        "show": "Afficher {entry} sur le CV",
+        "move": "Déplacer {entry}",
+        "add": "Ajouter à {section}",
+        "none": "Aucun élément pour l’instant",
+        "deleteNamed": "Supprimer {entry}"
       },
       "bullets": {
         "label": "Point {number}",
@@ -578,7 +578,6 @@
         "cancel": "Le garder"
       },
       "actionError": "Ça n’a pas marché. Vérifiez votre connexion et réessayez.",
-      "editEntry": "Modifier {entry}",
       "tabs": {
         "label": "Vues du CV",
         "preview": "Aperçu",

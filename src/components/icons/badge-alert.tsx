@@ -154,7 +154,7 @@ const HugeiconsBadgeAlertIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
 
           <path
@@ -162,7 +162,7 @@ const HugeiconsBadgeAlertIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
 
           <path
@@ -170,7 +170,7 @@ const HugeiconsBadgeAlertIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
         </motion.svg>
       </span>

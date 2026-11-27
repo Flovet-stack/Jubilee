@@ -112,14 +112,14 @@ const HugeiconsSendIcon = forwardRef<
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
           <path
             d="M15.498 8.48926L12.8008 11.1865"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="1.5"
+            strokeWidth="1.75"
           />
         </motion.g>
         <motion.path

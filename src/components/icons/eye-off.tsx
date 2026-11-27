@@ -109,27 +109,27 @@ const HugeiconsEyeOffIcon = forwardRef<
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
         />
         <path
           d="M14.1213 14.1213C13.5784 14.6642 12.8284 15 12 15C10.3431 15 9 13.6569 9 12C9 11.1716 9.33579 10.4216 9.87868 9.87868"
           stroke="currentColor"
           strokeLinecap="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
         />
         <path
           d="M17.5 17.4972C16.0669 18.3848 14.2454 19.0195 11.9669 19.0195C6.16702 19.0195 3.32862 14.9066 2.3176 12.981C2.10584 12.5777 1.99997 12.3761 2 12.0082C2.00003 11.6403 2.10621 11.4382 2.31858 11.0339C2.93281 9.86457 4.22009 7.89049 6.43385 6.51953"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
         />
         <motion.path
           d="M2 2L22 22"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           animate={reduceDefinition(controls)}
           variants={PATH_VARIANTS}
         />
