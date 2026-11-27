@@ -47,11 +47,11 @@ export function SectionBlock({
       render={<li />}
       className="flex flex-col border-b border-line"
     >
-      <div className="group/header flex items-center gap-1 bg-card py-0.5 ps-2 pe-3">
+      <div className="group/header flex items-center gap-1 bg-desk py-0.5 ps-2 pe-3">
         <Collapsible.Trigger
           className={cn(
-            "group/trigger jb-type flex min-h-11 min-w-0 flex-1 items-center rounded-control text-start text-md font-semibold pointer-fine:min-h-9",
-            hiddenLabel ? "text-ink-muted" : "text-ink",
+            "group/trigger jb-type flex min-h-11 min-w-0 flex-1 items-center rounded-control text-start text-base font-semibold pointer-fine:min-h-9",
+            hiddenLabel ? "text-ink-muted" : "text-violet",
           )}
         >
           <span className="jb-type-icon text-ink-muted transition-transform duration-(--dur-base) ease-enter group-data-panel-open/trigger:rotate-90 motion-reduce:transition-none rtl:-scale-x-100">
@@ -306,5 +306,108 @@ function EntryCard<T>({
         className={onHover}
       />
     </Reorder.Item>
+  );
+}
+
+export type SkillGroup = {
+  id: string;
+  /** The category name, or a fallback when it is empty. */
+  name: string;
+  hidden: boolean;
+  skills: { name: string; hidden: boolean }[];
+};
+
+/**
+ * Skills by category (0048): each category is a small heading with its own
+ * eye, and each skill under it is a pill with its own eye. The name and the
+ * pills open the category's form, where skills are added and deleted.
+ */
+export function SkillGroups({
+  groups,
+  onOpen,
+  onToggleGroup,
+  onToggleSkill,
+  showLabel,
+  emptyLabel,
+}: {
+  groups: SkillGroup[];
+  onOpen: (id: string) => void;
+  onToggleGroup: (id: string) => void;
+  onToggleSkill: (id: string, skill: string) => void;
+  showLabel: (name: string) => string;
+  emptyLabel: string;
+}) {
+  return (
+    <ul className="flex flex-col gap-3">
+      {groups.map((group) => (
+        <li key={group.id} className="flex flex-col gap-1">
+          <div className="flex min-w-0 items-center">
+            <button
+              type="button"
+              onClick={() => onOpen(group.id)}
+              className={cn(
+                "jb-type flex min-h-11 min-w-0 items-center rounded-control text-sm font-semibold pointer-fine:min-h-8 hover-fine:underline",
+                group.hidden ? "text-ink-muted" : "text-ink",
+              )}
+            >
+              <span className="min-w-0 truncate">{group.name}</span>
+            </button>
+            <IconButton
+              size="sm"
+              label={showLabel(group.name)}
+              aria-pressed={!group.hidden}
+              icon={
+                group.hidden ? <HugeiconsEyeOffIcon /> : <HugeiconsEyeIcon />
+              }
+              onClick={() => onToggleGroup(group.id)}
+              className="text-ink-muted"
+            />
+          </div>
+          {group.skills.length === 0 ? (
+            <EmptyLine>{emptyLabel}</EmptyLine>
+          ) : (
+            <ul className="flex flex-wrap gap-1.5">
+              {group.skills.map((skill, i) => {
+                const off = group.hidden || skill.hidden;
+                return (
+                  <li
+                    key={i}
+                    className={cn(
+                      "flex max-w-full min-w-0 items-center rounded-full border border-line bg-card ps-1",
+                      off && "border-dashed",
+                    )}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => onOpen(group.id)}
+                      className={cn(
+                        "jb-type flex min-h-11 min-w-0 items-center rounded-full text-sm pointer-fine:min-h-8 hover-fine:underline",
+                        off ? "text-ink-muted" : "text-ink",
+                      )}
+                    >
+                      <span className="min-w-0 truncate">{skill.name}</span>
+                    </button>
+                    <IconButton
+                      size="sm"
+                      label={showLabel(skill.name)}
+                      aria-pressed={!skill.hidden}
+                      icon={
+                        skill.hidden ? (
+                          <HugeiconsEyeOffIcon />
+                        ) : (
+                          <HugeiconsEyeIcon />
+                        )
+                      }
+                      onClick={() => onToggleSkill(group.id, skill.name)}
+                      className="rounded-full text-ink-muted"
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }

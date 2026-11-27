@@ -74,6 +74,7 @@ import {
 import {
   EmptyLine,
   EntryList,
+  SkillGroups,
   headerAction,
   SectionBlock,
   SummaryCard,
@@ -480,6 +481,20 @@ export function CvEditor(props: CvEditorProps) {
       all.map((e) => (e.id === entryId ? { ...e, hidden: !e.hidden } : e)),
     );
 
+  /** Hide or show one skill in a group (0048); stale names are dropped. */
+  const toggleSkill = (sectionId: string, entryId: string, skill: string) =>
+    setEntries(sectionId, (all) =>
+      all.map((e) => {
+        if (e.id !== entryId || !("keywords" in e)) return e;
+        const off = new Set(
+          (e.hiddenKeywords ?? []).filter((k) => e.keywords.includes(k)),
+        );
+        if (off.has(skill)) off.delete(skill);
+        else off.add(skill);
+        return { ...e, hiddenKeywords: [...off] };
+      }),
+    );
+
   const entryLabels = {
     move: (entry: string) => t("entry.move", { entry }),
     moveUp: t("moveUp"),
@@ -553,6 +568,32 @@ export function CvEditor(props: CvEditorProps) {
                   </SummaryCard>
                 ) : entries.length === 0 ? (
                   <EmptyLine>{t("entry.none")}</EmptyLine>
+                ) : section.kind === "skills" ? (
+                  <SkillGroups
+                    groups={entries.flatMap((entry) => {
+                      if (!("keywords" in entry)) return [];
+                      const off = new Set(entry.hiddenKeywords ?? []);
+                      return [
+                        {
+                          id: entry.id,
+                          name: entry.name.trim() || t("entry.untitledGroup"),
+                          hidden: Boolean(entry.hidden),
+                          skills: entry.keywords
+                            .filter((k) => k.trim())
+                            .map((k) => ({ name: k, hidden: off.has(k) })),
+                        },
+                      ];
+                    })}
+                    onOpen={(entryId) => open(s, entryId)}
+                    onToggleGroup={(entryId) =>
+                      toggleEntry(section.id, entryId)
+                    }
+                    onToggleSkill={(entryId, skill) =>
+                      toggleSkill(section.id, entryId, skill)
+                    }
+                    showLabel={entryLabels.show}
+                    emptyLabel={t("entry.noSkills")}
+                  />
                 ) : (
                   <EntryList
                     entries={entries}
