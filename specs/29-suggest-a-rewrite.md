@@ -1,6 +1,6 @@
 # 29: Suggest a rewrite
 
-Status: Ready · Written: 2026-11-27
+Status: Done (96/100, 2026-11-27; a new-detail flag and the `ai` revision row not seen in the browser; AC1 amended, see its note) · Written: 2026-11-27
 
 ## Goal
 
@@ -28,7 +28,7 @@ Implements [0049](../docs/decisions/0049-ai-in-the-cv-editor.md) place 1 and its
 
 1. **Where the button is.**
    - In an open form: next to the summary field, and next to each bullet that has text.
-   - In the Review tab and on the entry's finding line: on the `longSummary`, `bulletsWithoutNumbers` and `longBullets` findings. For a bullet finding, it rewrites the first matching bullet, and the form opens on that entry.
+   - In the Review tab, and on the Summary's finding line in the section list: on the `longSummary`, `bulletsWithoutNumbers` and `longBullets` findings. For a bullet finding, it rewrites the first matching bullet, and the form opens on that entry. (An entry's finding line sits inside the row's open button, which can't hold another button; the Review tab and the form carry it for bullets.)
    - Not on empty fields, and not on findings about something missing (`noSummary`, `noBullets`, `noHeadline`, `noDates`, `contactReach`): there's nothing of hers to reword.
    - Label "Suggest a rewrite" (copy in the message files, en and fr; never "AI").
 2. **The task.** `cv.rewrite` replaces its placeholder in `src/lib/ai/tasks.ts`:

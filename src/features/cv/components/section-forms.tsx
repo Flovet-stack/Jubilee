@@ -22,6 +22,7 @@ import {
   RowActions,
   TextField,
 } from "./fields";
+import { RewriteSlot } from "./rewrite";
 
 /**
  * The forms of the CV editor (spec 14, decision 0024 §2): Contact, Summary,
@@ -236,16 +237,19 @@ export function SummaryForm({
 }: Omit<Common, "languageTag"> & { content: CvContent }) {
   const t = useTranslations("cv.editor.summary");
   return (
-    <TextField
-      label={t("label")}
-      multiline
-      maxLength={2000}
-      value={content.basics.summary}
-      onChange={(summary) =>
-        update((c) => ({ ...c, basics: { ...c.basics, summary } }))
-      }
-      onBlur={flush}
-    />
+    <div className="flex flex-col gap-2">
+      <TextField
+        label={t("label")}
+        multiline
+        maxLength={2000}
+        value={content.basics.summary}
+        onChange={(summary) =>
+          update((c) => ({ ...c, basics: { ...c.basics, summary } }))
+        }
+        onBlur={flush}
+      />
+      <RewriteSlot target={{ kind: "summary" }} text={content.basics.summary} />
+    </div>
   );
 }
 
@@ -535,6 +539,12 @@ function EntryForm({
       items={items}
       onChange={(highlights) => set({ highlights } as Partial<AnyEntry>)}
       onBlur={flush}
+      below={(index, item) => (
+        <RewriteSlot
+          target={{ kind: "bullet", entryId: entry.id, index }}
+          text={item}
+        />
+      )}
     />
   );
   const month = (value: string | undefined) => (

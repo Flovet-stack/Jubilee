@@ -610,3 +610,16 @@ One dated entry per task: what was built, the review score, and what was left.
 - **0048:** Skills show by category; each skill is a pill with its own show/hide eye (`hiddenKeywords`, optional, no migration), and each category has its own eye. Section headers sit on `--desk`, with violet titles at 14 px.
 - **Phones:** the Download label is icon-only under `sm`.
 - **Not done:** an A4/French CV in the browser; a heading near a page bottom checked against the PDF.
+
+## 2026-11-27: AI in the editor (0049, 0050) and "Suggest a rewrite" (spec 29)
+
+- **Decisions:** 0049 (four places for AI in the editor, one proposal card, rewrite first) and 0050 (start cards on the Resumes page: Blank, For a job, LinkedIn, Upload; the base read from her CVs) approved by Flovet.
+- **Spec 29 built (reviewer 96/100, after fixes from 83):**
+  - `cv.rewrite` task: rewords one summary or bullet in the CV's language, no new facts; the reason describes the change.
+  - "Suggest a rewrite" under the summary and each bullet, on the Review tab's rewritable findings, and on the Summary's finding line.
+  - `ProposalCard` (reusable): old struck through, new highlighted, reason, Accept / Edit / Reject. Code flags numbers, names and tools not in the CV; Accept waits until they're edited out. After Edit, the warning stays under the field until she removes or keeps them.
+  - Accept saves, records an `ai` revision (only once the save succeeded) and offers Undo. Proposals live in memory only.
+  - Typographic hyphens and spaces from the model become plain ones.
+- **Fixed along the way:** the ESLint AI-import rule's `"ai"` pattern also blocked `@/lib/ai`, so features couldn't call `runTask`; it's now a regex. The editor page didn't pass `ai` messages to the client.
+- **Eval:** `pnpm ai:eval cv.rewrite` on Groq: 5/5 (en/fr bullets and summaries, a French long bullet), checking new details, language and field length. Anthropic stays unused while testing (0041).
+- **Not done:** a new-detail flag seen in the browser (the model never added one; unit tests cover the check); the `ai` revision row checked in the database.

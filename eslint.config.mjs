@@ -10,9 +10,11 @@ const noSupabaseImports = {
     "Supabase clients are for the data-access layer only: read in features/<feature>/queries.ts, write in actions.ts (decision 0002).",
 };
 
-// Decision 0036: features call runTask, never a provider SDK.
+// Decision 0036: features call runTask from "@/lib/ai", never a provider SDK
+// or the AI layer's internals. A regex, because the gitignore-style "ai"
+// pattern also matched "@/lib/ai" itself (spec 29).
 const noAiSdkImports = {
-  group: ["ai", "ai/*", "@ai-sdk/*"],
+  regex: "^(ai(/.*)?|@ai-sdk/.*|@/lib/ai/.+)$",
   message:
     "AI SDK packages are for src/lib/ai/ only: call runTask from @/lib/ai (decision 0036).",
 };
