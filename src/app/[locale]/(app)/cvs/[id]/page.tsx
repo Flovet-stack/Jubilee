@@ -76,7 +76,7 @@ async function Editor({
   return (
     <NextIntlClientProvider
       locale={locale}
-      messages={{ cv: messages.cv, fields: messages.fields }}
+      messages={{ cv: messages.cv, fields: messages.fields, ai: messages.ai }}
     >
       <ToastProvider>
         <CvEditor

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "English bullet, no number",
+    "input": {
+      "kind": "bullet",
+      "text": "Responsible for making the weekly sales dashboards for the regional team in Tableau",
+      "language": "en",
+      "title": "Data Analyst",
+      "employer": "Northwind Retail",
+      "finding": "bulletsWithoutNumbers",
+      "maxLength": 300
+    }
+  },
+  {
+    "name": "English summary",
+    "input": {
+      "kind": "summary",
+      "text": "I am a data analyst who has worked for 4 years in retail. I do a lot of different things like SQL queries, reporting, dashboards and also helping the marketing team understand their campaigns. I am looking for a new challenge in a bigger company where I can grow.",
+      "language": "en",
+      "maxLength": 2000
+    }
+  },
+  {
+    "name": "French bullet, no number",
+    "input": {
+      "kind": "bullet",
+      "text": "Chargée de la préparation des tableaux de bord mensuels pour la direction commerciale",
+      "language": "fr",
+      "title": "Analyste de données",
+      "employer": "Maison Lumière",
+      "finding": "bulletsWithoutNumbers",
+      "maxLength": 300
+    }
+  },
+  {
+    "name": "French summary",
+    "input": {
+      "kind": "summary",
+      "text": "Je suis analyste de données depuis 4 ans dans la distribution. Je fais beaucoup de choses différentes comme des requêtes SQL, du reporting, des tableaux de bord et j'aide aussi l'équipe marketing à comprendre ses campagnes. Je cherche un nouveau défi dans une entreprise plus grande.",
+      "language": "fr",
+      "maxLength": 2000
+    }
+  },
+  {
+    "name": "French long bullet",
+    "input": {
+      "kind": "bullet",
+      "text": "Mise en place, en lien avec les équipes marketing et finance, d'un suivi hebdomadaire des ventes par magasin et par catégorie, avec des alertes automatiques quand les ventes baissent de plus de 10 % par rapport à la semaine précédente, ce qui a permis de réagir plus vite",
+      "language": "fr",
+      "title": "Analyste de données",
+      "employer": "Maison Lumière",
+      "finding": "longBullets",
+      "maxLength": 200
+    }
+  }
+]

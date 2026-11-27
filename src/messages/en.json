@@ -588,7 +588,7 @@
       },
       "review": {
         "summary": "{count, plural, =0 {Nothing to fix} one {# thing to look at} other {# things to look at}}",
-        "intro": "Plain checks on what recruiters look for. Nothing is sent anywhere.",
+        "intro": "Plain checks on what recruiters look for. Suggest a rewrite sends only that text and its job title, without your contact details.",
         "clear": "Read it through once more before you send it.",
         "goTo": "Go to it",
         "marker": "{count, plural, one {# thing to look at} other {# things to look at}}",
@@ -606,6 +606,27 @@
       "actionErrors": {
         "notFound": "This resume no longer exists. Go back to Home.",
         "signedOut": "You’ve been signed out. Sign in again, then try once more."
+      },
+      "rewrite": {
+        "suggest": "Suggest a rewrite",
+        "loading": "Writing a suggestion…",
+        "ready": "Suggestion ready",
+        "cardTitle": "Suggested rewrite",
+        "was": "Your text:",
+        "now": "Suggestion:",
+        "accept": "Accept",
+        "edit": "Edit",
+        "reject": "Reject",
+        "dismiss": "Dismiss",
+        "same": "No better wording found. Your text reads well as it is.",
+        "newDetails": "New detail: check it’s true ({list}). Edit it to accept.",
+        "accepted": "Rewrite accepted",
+        "undo": "Undo",
+        "noteSummary": "Rewrote the summary",
+        "noteBullet": "Rewrote a bullet in {entry}",
+        "noteEntry": "an entry",
+        "checkDetails": "Check these are true before you keep them: {list}.",
+        "errorTitle": "Couldn’t suggest a rewrite"
       }
     },
     "guidance": {

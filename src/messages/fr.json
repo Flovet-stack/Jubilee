@@ -588,7 +588,7 @@
       },
       "review": {
         "summary": "{count, plural, =0 {Rien à corriger} one {# point à revoir} other {# points à revoir}}",
-        "intro": "Des vérifications simples sur ce que regardent les recruteurs. Rien n’est envoyé.",
+        "intro": "Des vérifications simples sur ce que regardent les recruteurs. « Proposer une reformulation » n’envoie que ce texte et l’intitulé du poste, sans vos coordonnées.",
         "clear": "Relisez-le une dernière fois avant de l’envoyer.",
         "goTo": "Y aller",
         "marker": "{count, plural, one {# point à revoir} other {# points à revoir}}",
@@ -606,6 +606,27 @@
       "actionErrors": {
         "notFound": "Ce CV n’existe plus. Revenez à l’accueil.",
         "signedOut": "Vous avez été déconnecté. Reconnectez-vous, puis réessayez."
+      },
+      "rewrite": {
+        "suggest": "Proposer une reformulation",
+        "loading": "Rédaction d’une proposition…",
+        "ready": "Proposition prête",
+        "cardTitle": "Reformulation proposée",
+        "was": "Votre texte :",
+        "now": "Proposition :",
+        "accept": "Accepter",
+        "edit": "Modifier",
+        "reject": "Refuser",
+        "dismiss": "Fermer",
+        "same": "Pas de meilleure formulation trouvée. Votre texte se lit bien.",
+        "newDetails": "Nouveau détail : vérifiez qu’il est exact ({list}). Modifiez-le pour l’accepter.",
+        "accepted": "Reformulation acceptée",
+        "undo": "Annuler",
+        "noteSummary": "Résumé reformulé",
+        "noteBullet": "Point reformulé dans {entry}",
+        "noteEntry": "une expérience",
+        "checkDetails": "Vérifiez que ces détails sont exacts avant de les garder : {list}.",
+        "errorTitle": "Impossible de proposer une reformulation"
       }
     },
     "guidance": {
