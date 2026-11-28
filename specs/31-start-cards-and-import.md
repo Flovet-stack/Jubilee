@@ -1,6 +1,6 @@
 # 31: Start cards, LinkedIn import and CV upload
 
-Status: Not started · Written: 2026-11-28
+Status: In progress (built; review pending) · Written: 2026-11-28
 
 ## Goal
 
@@ -191,3 +191,13 @@ Approved by Flovet in chat:
 
 - Screenshots of the card row, both dialogs, the pending state, an error and the editor with marks, at 390 px and 1440 px, in English and French, light and dark.
 - Reviewer skill at 90 or more. The score is recorded in this status line.
+
+## Build notes (deviations, with reasons)
+
+- **Model output is a flat import shape**, not the 0016 schema itself: the model never makes ids. `src/features/cv-import/map.ts` adds ids, keeps only `YYYY`/`YYYY-MM` dates, drops an end before its start and empty entries, then the content passes the 0016 schema in `createCv`.
+- **`importUnread`** (optional, in content) holds the parts the import couldn't place, until she dismisses the note. A second optional field beside `imported`; no migration.
+- **Idempotency** is the pending lock on the form (the button and inputs lock while it reads), not a server token: no table to store tokens in.
+- **The action reads messages with `loadMessages`**: `getTranslations` reads `next/root-params`, which Server Actions don't allow (found in the browser).
+- **`scripts/ai-eval.mjs`**: the task name was dropped when no `--provider` was given (pre-existing). Fixed.
+- **`run-task-core.test.ts`** uses `letter.write` (still a placeholder) now that `cv.import` has its real shape.
+- **For a job** is a disabled card with a `TODO(spec: for-a-job)`.

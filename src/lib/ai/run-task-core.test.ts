@@ -69,21 +69,21 @@ describe("runTask (decision 0036, spec 26)", () => {
           return model;
         },
       },
-      "cv.import",
+      "letter.write",
       { text: "Data analyst at Acme, 2021 to 2024." },
       user,
     );
     expect(result).toEqual({ ok: true, data: { text: "done" } });
     expect(seen).toEqual(["anthropic:claude-haiku-5-5"]);
-    expect(model.doGenerateCalls[0]?.temperature).toBe(0);
+    expect(model.doGenerateCalls[0]?.temperature).toBe(0.5);
   });
 
   it("writes one usage row with tokens and cost", async () => {
     const { deps: d, rows } = deps();
-    await runTaskWith(d, "cv.import", { text: "Some CV" }, user);
+    await runTaskWith(d, "letter.write", { text: "Some CV" }, user);
     expect(rows).toEqual([
       {
-        task: "cv.import",
+        task: "letter.write",
         provider: "anthropic",
         model: "claude-haiku-5-5",
         inputTokens: 1000,
@@ -100,7 +100,7 @@ describe("runTask (decision 0036, spec 26)", () => {
     const { deps: d, model } = deps();
     await runTaskWith(
       d,
-      "cv.import",
+      "letter.write",
       {
         text: "Aminata Diallo, aminata@example.fr, +33 6 12 34 56 78, 12 rue de la Paix, Paris. Analyst 2019 - 2023.",
       },
@@ -184,14 +184,14 @@ describe("runTask (decision 0036, spec 26)", () => {
 
   it("returns unavailable when no provider has a key", async () => {
     const { deps: d, rows } = deps({ model: () => undefined });
-    const result = await runTaskWith(d, "cv.import", { text: "CV" }, user);
+    const result = await runTaskWith(d, "letter.write", { text: "CV" }, user);
     expect(result).toEqual({ ok: false, reason: "unavailable" });
     expect(rows).toHaveLength(0);
   });
 
   it("returns failed for an invalid input without calling a model", async () => {
     const { deps: d, model } = deps();
-    const result = await runTaskWith(d, "cv.import", { text: "  " }, user);
+    const result = await runTaskWith(d, "letter.write", { text: "  " }, user);
     expect(result).toEqual({ ok: false, reason: "failed" });
     expect(model.doGenerateCalls).toHaveLength(0);
   });
@@ -203,7 +203,7 @@ describe("runTask (decision 0036, spec 26)", () => {
         throw new Error("db down");
       },
     });
-    const result = await runTaskWith(d, "cv.import", { text: "CV" }, user);
+    const result = await runTaskWith(d, "letter.write", { text: "CV" }, user);
     expect(result.ok).toBe(true);
   });
 });

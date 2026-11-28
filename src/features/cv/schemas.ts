@@ -176,7 +176,17 @@ const sectionSchema = z.discriminatedUnion("kind", [
 ]);
 
 export const cvContentSchema = z
-  .object({ basics, sections: z.array(sectionSchema).max(20) })
+  .object({
+    basics,
+    sections: z.array(sectionSchema).max(20),
+    /**
+     * Sections an import filled that she hasn't opened yet: "Imported: check
+     * it" (0050, spec 31). Section ids, plus "basics". Optional: no migration.
+     */
+    imported: z.array(z.string().max(40)).max(21).optional(),
+    /** Parts an import couldn't place, shown once until dismissed (spec 31). */
+    importUnread: z.array(z.string().max(200)).max(20).optional(),
+  })
   .superRefine((content, ctx) => {
     const seen = new Set<string>();
     const unique = (value: string, path: (string | number)[]) => {

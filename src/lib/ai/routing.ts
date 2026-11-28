@@ -35,7 +35,7 @@ const TASK_SETTINGS: Record<
   Omit<Route, "model" | "fallbacks"> &
     Partial<Pick<Route, "model" | "fallbacks">>
 > = {
-  "cv.import": { maxOutputTokens: 4000, temperature: 0, timeoutMs: 60_000 },
+  "cv.import": { maxOutputTokens: 8000, temperature: 0, timeoutMs: 90_000 },
   "job.extract": { maxOutputTokens: 1500, temperature: 0, timeoutMs: 30_000 },
   "cv.tailor": { maxOutputTokens: 3000, temperature: 0.3, timeoutMs: 60_000 },
   "letter.write": {

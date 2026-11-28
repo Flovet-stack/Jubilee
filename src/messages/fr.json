@@ -121,6 +121,7 @@
         "title": "IA et décisions automatisées",
         "blocks": [
           "Quand vous utilisez une fonctionnalité d’IA, par exemple l’import de votre profil LinkedIn ou l’adaptation de votre CV à une offre, Jubilee envoie le texte du CV et de l’offre que vous avez choisis à Groq, qui fait fonctionner des modèles d’IA ouverts, ou, si Groq n’est pas disponible, à Anthropic, qui fait fonctionner les modèles Claude.",
+          "Quand vous importez votre profil LinkedIn ou un CV, nous extrayons le texte du PDF sur notre serveur et n'envoyons que ce texte. Le fichier lui-même n'est jamais conservé. L'import remplit un nouveau CV, et chaque section remplie est signalée pour que vous la vérifiiez.",
           "Nous retirons d’abord votre adresse e-mail, votre numéro de téléphone et votre adresse postale. Les deux traitent le texte aux États-Unis et ne l’utilisent pas pour entraîner leurs modèles.",
           "Pour chaque requête d’IA, nous gardons une courte trace (la fonctionnalité, sa taille et son coût), pas le texte lui-même, afin de fixer des limites quotidiennes équitables.",
           "L’IA ne fait que proposer des modifications, et vous acceptez ou refusez chacune d’elles. Elle n’ajoute jamais d’expérience que vous n’avez pas, Jubilee ne prend aucune décision automatisée vous concernant, et rien n’est envoyé à un employeur sans votre accord."
@@ -755,6 +756,73 @@
       "error": "Nous n'avons pas pu charger vos CV.",
       "retry": "Réessayer",
       "justNow": "Modifié à l'instant"
+    },
+    "start": {
+      "label": "Façons de commencer un CV",
+      "blank": {
+        "title": "CV vierge",
+        "line": "Partir d'une page vide"
+      },
+      "job": {
+        "title": "Pour une offre",
+        "line": "Collez une offre, nous partons de votre expérience",
+        "soon": "Bientôt disponible"
+      },
+      "linkedin": {
+        "title": "Importer depuis LinkedIn",
+        "line": "Partez de votre profil, puis vérifiez chaque section"
+      },
+      "upload": {
+        "title": "Importer un CV",
+        "line": "Partez d'un PDF que vous avez déjà"
+      }
+    },
+    "import": {
+      "linkedin": {
+        "title": "Importer depuis LinkedIn",
+        "tabs": {
+          "label": "Mode d'import",
+          "pdf": "Importer le PDF",
+          "paste": "Coller le texte"
+        },
+        "pdfHelp": "Sur un ordinateur, ouvrez votre profil LinkedIn, choisissez Plus, puis Enregistrer au format PDF.",
+        "pasteHelp": "Ouvrez votre profil LinkedIn, sélectionnez toute la page, copiez-la et collez-la ici.",
+        "pasteLabel": "Le texte de votre profil",
+        "own": "Votre propre profil uniquement.",
+        "submit": "Importer"
+      },
+      "upload": {
+        "title": "Importer un CV",
+        "own": "Votre propre CV. Le fichier est lu, puis supprimé.",
+        "submit": "Importer"
+      },
+      "file": {
+        "label": "Fichier PDF",
+        "choose": "Choisir un PDF",
+        "drop": "ou déposez-le ici",
+        "remove": "Retirer",
+        "hint": "PDF, 5 Mo et 10 pages au maximum."
+      },
+      "pending": "Lecture en cours. Cela prend jusqu'à 30 secondes.",
+      "startBlank": "Commencer un CV vierge",
+      "errors": {
+        "too_large": "Ce fichier est trop lourd. Utilisez un PDF de moins de 5 Mo et 10 pages.",
+        "not_pdf": "Impossible d'ouvrir ce fichier. Choisissez un PDF sans mot de passe.",
+        "too_long": "Ce texte est trop long pour être lu en une fois. Collez 30 000 caractères au maximum.",
+        "no_text": "Ce fichier ne contient presque pas de texte. Collez le texte, ou commencez un CV vierge.",
+        "signedOut": "Vous avez été déconnecté. Reconnectez-vous, puis réessayez."
+      },
+      "revision": {
+        "linkedin": "Import LinkedIn",
+        "upload": "Import d'un CV"
+      },
+      "mark": "Importé : à vérifier",
+      "unread": {
+        "title": "Certaines parties n'ont pas été placées",
+        "body": "Ajoutez-les vous-même si vous le souhaitez : {items}.",
+        "dismiss": "Fermer"
+      },
+      "close": "Fermer"
     }
   },
   "shell": {

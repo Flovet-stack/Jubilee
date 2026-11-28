@@ -6,7 +6,9 @@ import { spawnSync } from "node:child_process";
 const args = process.argv.slice(2);
 const at = args.indexOf("--provider");
 const provider = at === -1 ? "" : (args[at + 1] ?? "");
-const task = args.find((arg, i) => !arg.startsWith("--") && i !== at + 1);
+const task = args.find(
+  (arg, i) => !arg.startsWith("--") && (at === -1 || i !== at + 1),
+);
 const result = spawnSync(
   "pnpm",
   ["exec", "vitest", "run", "--config", "vitest.eval.config.ts"],

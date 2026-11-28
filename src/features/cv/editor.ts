@@ -17,6 +17,11 @@ export type EditorStep =
 
 export type StepStatus = "done" | "todo";
 
+/** The key a step has in `content.imported` (spec 31): contact and summary share "basics". */
+export function importKey(step: EditorStep): string {
+  return step.type === "section" ? step.id : "basics";
+}
+
 /** The first pass on a new CV (0024 §1): contact, experience, education, skills, summary. */
 export const FIRST_PASS: readonly (
   "contact" | "work" | "education" | "skills" | "summary"

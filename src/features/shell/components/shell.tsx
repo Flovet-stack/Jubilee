@@ -972,7 +972,7 @@ export function CvSection(props: CvSectionProps) {
   const { locale, labels, collapsed } = useShell();
   const pathname = usePathname();
   const headingId = useId();
-  const newHref = `/${locale}/cvs/new`;
+  const newHref = `/${locale}/cvs`;
   const add = (
     <IconButton
       label={labels.cvs.create}

@@ -77,6 +77,9 @@ importers:
       tailwind-merge:
         specifier: ^3.7.1
         version: 3.7.1
+      unpdf:
+        specifier: 2.2.3
+        version: 2.2.3(@napi-rs/canvas@1.2.1)(pdfjs-dist@6.5.438)
       zod:
         specifier: 4.6.7
         version: 4.6.7
@@ -3086,6 +3089,17 @@ packages:
   unicode-trie@3.0.0:
     resolution: {integrity: sha512-Cy+7EIpopVQ7ZCVZ8dFo1fmTk1lHMNxY62SeEhxsVEmISZEryEGgKSLzz6z6pquJXXopamfpi2AzsDCJ7KmAOA==}
     engines: {node: '>=20.17.0'}
+
+  unpdf@2.2.3:
+    resolution: {integrity: sha512-fDdQW4Wh+fYow4W0/Cid+Hh4ql1hw3RxhpwXCVHrDzwOpcptqww5QejjssClz7l/srO1S8ObdYswXQbtg+bjbg==}
+    peerDependencies:
+      '@napi-rs/canvas': ^0.1.69 || ^1.0.0
+      pdfjs-dist: '*'
+    peerDependenciesMeta:
+      '@napi-rs/canvas':
+        optional: true
+      pdfjs-dist:
+        optional: true
 
   unrs-resolver@1.13.0:
     resolution: {integrity: sha512-mcPQo9Vm6kXd84d/WqMiYBi2CcA57QHBX/ev5PoUEb8b2oQzUvJ6xYsfseQblnCncgnVmCZGWiFwK7KkS5JZJA==}
@@ -6181,6 +6195,11 @@ snapshots:
   unicode-trie@3.0.0:
     dependencies:
       fflate: 0.8.3
+
+  unpdf@2.2.3(@napi-rs/canvas@1.2.1)(pdfjs-dist@6.5.438):
+    optionalDependencies:
+      '@napi-rs/canvas': 1.2.1
+      pdfjs-dist: 6.5.438
 
   unrs-resolver@1.13.0:
     dependencies:

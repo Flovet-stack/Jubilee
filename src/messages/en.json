@@ -121,6 +121,7 @@
         "title": "AI and automated decisions",
         "blocks": [
           "When you use an AI feature, such as importing your LinkedIn profile or tailoring your resume to a job, Jubilee sends the resume and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models.",
+          "When you import your LinkedIn profile or upload a resume, we read the text out of the PDF on our server and send only that text. The file itself is never stored. The import fills a new resume, and every section it filled is marked for you to check.",
           "We remove your email address, phone number and street address first. Both process the text in the US and don't use it to train their models.",
           "For each AI request we keep a short record (which feature, its size and its cost), not the text itself, so we can set fair daily limits.",
           "AI only suggests changes, and you accept or reject each one. It never adds experience you don't have, Jubilee makes no automated decisions about you, and nothing is sent to an employer without your approval."
@@ -753,6 +754,73 @@
       "error": "We couldn't load your resumes.",
       "retry": "Try again",
       "justNow": "Edited just now"
+    },
+    "start": {
+      "label": "Ways to start a resume",
+      "blank": {
+        "title": "Blank resume",
+        "line": "Start from an empty page"
+      },
+      "job": {
+        "title": "For a job",
+        "line": "Paste a job ad, we build from your experience",
+        "soon": "Coming soon"
+      },
+      "linkedin": {
+        "title": "Import from LinkedIn",
+        "line": "Use your profile, then check each section"
+      },
+      "upload": {
+        "title": "Upload a resume",
+        "line": "Start from a PDF you already have"
+      }
+    },
+    "import": {
+      "linkedin": {
+        "title": "Import from LinkedIn",
+        "tabs": {
+          "label": "How to import",
+          "pdf": "Upload PDF",
+          "paste": "Paste text"
+        },
+        "pdfHelp": "On a computer, open your LinkedIn profile, choose More, then Save to PDF.",
+        "pasteHelp": "Open your LinkedIn profile, select the whole page, copy it and paste it here.",
+        "pasteLabel": "Your profile text",
+        "own": "Your own profile only.",
+        "submit": "Import"
+      },
+      "upload": {
+        "title": "Upload a resume",
+        "own": "Your own resume. The file is read, then discarded.",
+        "submit": "Upload"
+      },
+      "file": {
+        "label": "PDF file",
+        "choose": "Choose a PDF",
+        "drop": "or drop it here",
+        "remove": "Remove",
+        "hint": "PDF, up to 5 MB and 10 pages."
+      },
+      "pending": "Reading it. This takes up to 30 seconds.",
+      "startBlank": "Start blank instead",
+      "errors": {
+        "too_large": "That file is too big. Use a PDF under 5 MB and 10 pages.",
+        "not_pdf": "We can't open that file. Choose a PDF without a password.",
+        "too_long": "That's more text than we can read at once. Paste up to 30,000 characters.",
+        "no_text": "We found almost no text in it. Paste the text instead, or start blank.",
+        "signedOut": "You've been signed out. Sign in again, then retry."
+      },
+      "revision": {
+        "linkedin": "LinkedIn import",
+        "upload": "Resume upload"
+      },
+      "mark": "Imported: check it",
+      "unread": {
+        "title": "We couldn't place some parts",
+        "body": "Add them yourself if you want them: {items}.",
+        "dismiss": "Dismiss"
+      },
+      "close": "Close"
     }
   },
   "shell": {

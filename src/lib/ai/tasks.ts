@@ -133,8 +133,105 @@ ${input.text}`,
   },
 });
 
+/**
+ * Import (spec 31, decisions 0050, 0052): a LinkedIn profile or a CV, as
+ * text, into flat sections. Code adds ids and checks dates before the CV is
+ * made (src/features/cv-import/map.ts). Fields are nullable, not optional,
+ * for providers with strict schemas (0036).
+ */
+const s = (max: number) => z.string().max(max).nullable();
+const importDates = { startDate: s(20), endDate: s(20) };
+const importHighlights = z.array(z.string().max(300)).max(20);
+
+export const importOutput = z.object({
+  language: z.enum(["en", "fr"]).nullable(),
+  basics: z.object({
+    name: s(120),
+    headline: s(160),
+    city: s(100),
+    region: s(100),
+    countryCode: s(2),
+    summary: s(2000),
+  }),
+  work: z
+    .array(
+      z.object({
+        position: s(120),
+        company: s(120),
+        location: s(120),
+        ...importDates,
+        summary: s(2000),
+        highlights: importHighlights,
+      }),
+    )
+    .max(50),
+  education: z
+    .array(
+      z.object({
+        institution: s(160),
+        degree: s(120),
+        area: s(120),
+        location: s(120),
+        ...importDates,
+      }),
+    )
+    .max(50),
+  skills: z.array(z.string().max(60)).max(60),
+  languages: z.array(z.object({ language: s(60), fluency: s(60) })).max(20),
+  certificates: z
+    .array(z.object({ name: s(160), issuer: s(120), date: s(20) }))
+    .max(50),
+  projects: z
+    .array(
+      z.object({
+        name: s(120),
+        description: s(2000),
+        ...importDates,
+        highlights: importHighlights,
+      }),
+    )
+    .max(50),
+  volunteer: z
+    .array(
+      z.object({
+        organization: s(120),
+        position: s(120),
+        ...importDates,
+        summary: s(2000),
+      }),
+    )
+    .max(50),
+  /** Parts it found but couldn't place, listed for her, never guessed. */
+  unread: z.array(z.string().max(200)).max(20),
+});
+
+const importTask = defineTask({
+  input: z.object({
+    text: sourceText,
+    source: z.enum(["linkedin", "upload"]),
+    locale: z.enum(["en", "fr"]),
+  }),
+  output: importOutput,
+  buildPrompt: ({ text, source }): TaskPrompt => ({
+    instructions: [
+      source === "linkedin"
+        ? "The text is a LinkedIn profile its owner exported or copied."
+        : "The text is a CV its owner uploaded.",
+      "Extract it into the given structure, exactly as written.",
+      "Use only facts in the text. Never invent or complete an employer, title, date, degree, skill, number or place. Leave a field null when the text doesn't give it.",
+      "Keep the text's own language; don't translate. Set language to the language most of the text is in.",
+      "Dates: YYYY-MM when a month is given, YYYY when only a year is. endDate is null for a current role (Present, aujourd'hui, en cours).",
+      "Map headings in English or French: Experience/Expérience to work, Education/Formation to education, Skills/Compétences and Top Skills to skills, Languages/Langues to languages, Licenses & certifications/Certifications to certificates, Projects/Projets to projects, Volunteering/Bénévolat to volunteer, Summary/About/Résumé/Infos to basics.summary. The headline under the name goes to basics.headline.",
+      "Bullet points of a role go to highlights; its paragraph text goes to summary.",
+      "Skip page furniture: page numbers, 'Contact', 'Page 1 of 3', profile URLs, 'See more'. Contact details were removed and show as [removed]; ignore them.",
+      "Put any other content you can't place in unread as a short label (for example 'Honors: 2 items'). Never put it in another section.",
+    ].join(" "),
+    prompt: text,
+  }),
+});
+
 export const TASKS = {
-  "cv.import": placeholder("Extract the CV from this LinkedIn profile."),
+  "cv.import": importTask,
   "job.extract": placeholder("Extract the requirements from this job ad."),
   "cv.tailor": placeholder("Suggest changes that fit this CV to the job."),
   "letter.write": placeholder("Write a cover letter from this CV and job."),

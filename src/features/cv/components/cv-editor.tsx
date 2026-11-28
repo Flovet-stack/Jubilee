@@ -23,9 +23,10 @@ import {
   HugeiconsTrashIcon,
   HugeiconsMoreHorizontalIcon,
 } from "@/components/icons";
+import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants, IconButton } from "@/components/ui/button";
 import { Dialog, Sheet } from "@/components/ui/dialog";
-import { ToneMark } from "@/components/ui/feedback";
+import { Alert, ToneMark } from "@/components/ui/feedback";
 import { Input } from "@/components/ui/field";
 import { Menu, type MenuEntry } from "@/components/ui/menu";
 import { Tabs } from "@/components/ui/tabs";
@@ -41,6 +42,7 @@ import {
   emptyEntry,
   emptySection,
   followsContent,
+  importKey,
   move,
   nextFirstPassStep,
   sameStep,
@@ -129,6 +131,7 @@ const twoPanes = () =>
 export function CvEditor(props: CvEditorProps) {
   const { id, language, market, locale, languageTag, labels, homeHref } = props;
   const t = useTranslations("cv.editor");
+  const importT = useTranslations("cv.import");
   const toast = useToast();
   const { content, update, flush, saveAll, rename, status, heldBack } =
     useAutosave({
@@ -204,6 +207,14 @@ export function CvEditor(props: CvEditorProps) {
 
   /* ── Opening and closing a form (0031 §2) ─────────────────────────── */
   const open = (next: EditorStep, entryId?: string) => {
+    // Opening an imported section counts as checking it (0050, spec 31).
+    const key = importKey(next);
+    if (content.imported?.includes(key)) {
+      update((c) => ({
+        ...c,
+        imported: (c.imported ?? []).filter((k) => k !== key),
+      }));
+    }
     void flush();
     // Proposals belong to the form they were asked in (spec 29).
     rewrites.clear();
@@ -407,7 +418,13 @@ export function CvEditor(props: CvEditorProps) {
 
   const removeSection = (sectionId: string) => {
     const before = content.sections;
-    setSections((sections) => sections.filter((s) => s.id !== sectionId));
+    update((c) => ({
+      ...c,
+      sections: c.sections.filter((s) => s.id !== sectionId),
+      ...(c.imported
+        ? { imported: c.imported.filter((k) => k !== sectionId) }
+        : {}),
+    }));
     toast({
       title: t("sectionRemoved"),
       closeLabel: t("dismiss"),
@@ -531,6 +548,23 @@ export function CvEditor(props: CvEditorProps) {
       <h2 ref={listTop} tabIndex={-1} className="sr-only">
         {t("sectionsLabel")}
       </h2>
+      {content.importUnread?.length ? (
+        <Alert
+          tone="info"
+          title={importT("unread.title")}
+          dismissLabel={importT("unread.dismiss")}
+          onDismiss={() =>
+            update((c) => {
+              const next = { ...c };
+              delete next.importUnread;
+              return next;
+            })
+          }
+          className="m-3"
+        >
+          {importT("unread.body", { items: content.importUnread.join(", ") })}
+        </Alert>
+      ) : null}
       <MotionConfig reducedMotion="user">
         <ul className="flex flex-col">
           {rows.map(({ step: s, section, index }) => {
@@ -543,12 +577,21 @@ export function CvEditor(props: CvEditorProps) {
                 key={s.type === "section" ? s.id : s.type}
                 title={name}
                 marker={
-                  rowFindings.length > 0 ? (
-                    <FindingMarker
-                      label={t("review.marker", { count: rowFindings.length })}
-                      severity={strongest(rowFindings) ?? "tip"}
-                    />
-                  ) : null
+                  <>
+                    {rowFindings.length > 0 ? (
+                      <FindingMarker
+                        label={t("review.marker", {
+                          count: rowFindings.length,
+                        })}
+                        severity={strongest(rowFindings) ?? "tip"}
+                      />
+                    ) : null}
+                    {content.imported?.includes(importKey(s)) ? (
+                      <Badge tone="violet" className="ms-2 shrink-0">
+                        {importT("mark")}
+                      </Badge>
+                    ) : null}
+                  </>
                 }
                 hiddenLabel={
                   section?.hidden ? t("section.hiddenMarker") : undefined
