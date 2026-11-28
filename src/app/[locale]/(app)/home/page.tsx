@@ -66,7 +66,7 @@ async function CvList({ locale }: { locale: Locale }) {
   // With no CVs the sidebar shows the one violet "Create" (0007, 0027).
   const create = (
     <ButtonLink
-      href={`/${locale}/cvs/new`}
+      href={`/${locale}/cvs`}
       variant={result.ok && cvs.length === 0 ? "secondary" : "primary"}
       icon={<HugeiconsPlusIcon />}
     >

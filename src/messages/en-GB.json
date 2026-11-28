@@ -14,7 +14,8 @@
       },
       "ai": {
         "blocks": {
-          "0": "When you use an AI feature, such as importing your LinkedIn profile or tailoring your CV to a job, Jubilee sends the CV and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models."
+          "0": "When you use an AI feature, such as importing your LinkedIn profile or tailoring your CV to a job, Jubilee sends the CV and job text you chose to Groq, which runs open AI models, or, if Groq is unavailable, to Anthropic, which runs the Claude models.",
+          "1": "When you import your LinkedIn profile or upload a CV, we read the text out of the PDF on our server and send only that text. The file itself is never stored. The import fills a new CV, and every section it filled is marked for you to check."
         }
       }
     }
@@ -140,6 +141,24 @@
       "error": "We couldn't load your CVs.",
       "retry": "Try again",
       "justNow": "Edited just now"
+    },
+    "start": {
+      "label": "Ways to start a CV",
+      "blank": {
+        "title": "Blank CV"
+      },
+      "upload": {
+        "title": "Upload a CV"
+      }
+    },
+    "import": {
+      "upload": {
+        "title": "Upload a CV",
+        "own": "Your own CV. The file is read, then discarded."
+      },
+      "revision": {
+        "upload": "CV upload"
+      }
     }
   },
   "shell": {

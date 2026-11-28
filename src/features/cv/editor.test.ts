@@ -143,3 +143,24 @@ describe("defaultTitle", () => {
     expect(defaultTitle("", "Resume")).toBe("Resume");
   });
 });
+
+describe("import marks (spec 31)", () => {
+  it("opening a section clears only its mark", async () => {
+    const { clearImportMark, importKey } = await import("./editor");
+    const content = { imported: ["basics", "s1", "s2"] };
+    expect(
+      clearImportMark(content, importKey({ type: "section", id: "s1" })),
+    ).toEqual({
+      imported: ["basics", "s2"],
+    });
+    expect(clearImportMark(content, importKey({ type: "summary" }))).toEqual({
+      imported: ["s1", "s2"],
+    });
+  });
+
+  it("leaves content without marks untouched", async () => {
+    const { clearImportMark } = await import("./editor");
+    const content = { imported: undefined };
+    expect(clearImportMark(content, "s1")).toBe(content);
+  });
+});

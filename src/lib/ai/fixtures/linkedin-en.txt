@@ -1,0 +1,33 @@
+Contact
+jordan.reyes@example.com
+www.linkedin.com/in/jordan-reyes-example (LinkedIn)
+Top Skills
+SQL
+Tableau
+Stakeholder Management
+Languages
+Spanish (Native or Bilingual)
+English (Full Professional)
+Certifications
+Google Data Analytics Certificate
+Jordan Reyes
+Senior Data Analyst at Northwind Example
+Austin, Texas, United States
+Summary
+Data analyst with six years in retail and logistics. I turn messy operational data into weekly decisions.
+Experience
+Northwind Example
+Senior Data Analyst
+March 2022 - Present (2 years 9 months)
+Austin, Texas, United States
+Built the weekly inventory dashboard used by 40 store managers.
+Cut report preparation time from two days to three hours by automating SQL pipelines.
+Contoso Freight Example
+Data Analyst
+June 2018 - February 2022 (3 years 9 months)
+Dallas, Texas
+Analysed delivery delays across 12 regional depots.
+Education
+University of Texas Example
+Bachelor of Science - BS, Statistics · (2014 - 2018)
+Page 1 of 1

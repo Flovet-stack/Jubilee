@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
     // The root layout sits under `[locale]`, so unmatched URLs need a 404
     // that renders without it (app/global-not-found.tsx).
     globalNotFound: true,
+    // Import takes a PDF up to 5 MB (spec 31); 6 MB leaves room for the form.
+    serverActions: { bodySizeLimit: "6mb" },
   },
   turbopack: {
     rules: {

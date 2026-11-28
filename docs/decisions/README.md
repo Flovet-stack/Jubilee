@@ -71,6 +71,7 @@ The product team researches every product, UX, UI and architecture decision for 
 | 0049 | [Where AI goes in the CV editor, and in what order](0049-ai-in-the-cv-editor.md)                                                                                                              | Proposed                                |
 | 0050 | [Ways to start a CV, on the Resumes page](0050-ways-to-start-a-cv.md) (supersedes 0032's /cvs/new and 0024's Create a CV step)                                                                | Approved                                |
 | 0051 | [AnimateIcons as the icon source, with our icons as fallback](0051-animateicons-with-our-icons-as-fallback.md)                                                                                | Approved                                |
+| 0052 | [LinkedIn import sources (profile PDF and paste)](0052-linkedin-import-sources.md)                                                                                                            | Approved                                |
 
 ## Still to decide (before the specs that need them)
 

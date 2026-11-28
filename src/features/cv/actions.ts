@@ -44,14 +44,22 @@ function invalidInput(issues: { message: string }[]) {
   return fail({ code: "invalid_input", issues: issues.map((i) => i.message) });
 }
 
-/** A new master CV with empty content. Returns its id. */
-export async function createCv(input: {
-  title: string;
-  language: string;
-  market: string;
-}): Promise<Result<{ id: string }>> {
+/**
+ * A new master CV, empty or with given content (an import, spec 31), which
+ * is validated first. Returns its id.
+ */
+export async function createCv(
+  input: { title: string; language: string; market: string },
+  content?: unknown,
+): Promise<Result<{ id: string }>> {
   const parsed = newCvSchema.safeParse(input);
   if (!parsed.success) return invalidInput(parsed.error.issues);
+  let initial = emptyCvContent();
+  if (content !== undefined) {
+    const valid = validateContent(content);
+    if (!valid.ok) return valid;
+    initial = valid.value;
+  }
 
   const supabase = await signedInClient();
   if (!supabase) return fail({ code: "unauthenticated" });
@@ -60,7 +68,7 @@ export async function createCv(input: {
     .from("cvs")
     .insert({
       ...parsed.data,
-      content: asJson(emptyCvContent()),
+      content: asJson(initial),
       schema_version: CV_SCHEMA_VERSION,
     })
     .select("id")

@@ -24,32 +24,33 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | `Done (NN/100)` | Reviewed at 90 or more. Record the score and the date.              |
 | `Dropped`       | Won't be built. Say why. The number is never reused.                |
 
-| Spec                                                                        | Status        |
-| --------------------------------------------------------------------------- | ------------- |
-| [01: Foundations](01-foundations.md)                                        | Done (92/100) |
-| [02: Auth database](02-auth-database.md)                                    | Done (96/100) |
-| [03: Design system](03-design-system.md)                                    | Done (96/100) |
-| [04: Privacy page](04-privacy-page.md)                                      | Done (91/100) |
-| [05: Sign-in](05-sign-in.md)                                                | In progress   |
-| [06: Sign-in refresh](06-sign-in-refresh.md)                                | In progress   |
-| [07: Terms page](07-terms-page.md)                                          | In progress   |
-| [08: Regional locales](08-regional-locales.md)                              | Done (96/100) |
-| [09: CV schema](09-cv-schema.md)                                            | Done (96/100) |
-| [10: Brand assets](10-brand-assets.md)                                      | Done (97/100) |
-| [11: Pull request checks](11-pull-request-checks.md)                        | Done (97/100) |
-| [12: Control sizes and radius](12-control-sizes-and-radius.md)              | Done (93/100) |
-| [13: Phone, date and password fields](13-phone-date-and-password-fields.md) | Done (98/100) |
-| [14: CV builder](14-cv-builder.md)                                          | Done (91/100) |
-| [15: App shell and sidebar](15-app-shell.md)                                | Done (93/100) |
-| [16: Button spacing](16-button-spacing.md)                                  | Done (94/100) |
-| [17: Type spacing in every control](17-type-spacing-everywhere.md)          | Done (96/100) |
-| [18: Icon size from the font size](18-icon-size.md)                         | Done (97/100) |
-| [19: CV editor in two panes](19-cv-editor-two-panes.md)                     | Done (95/100) |
-| [22: Grid Auditor overlay](22-grid-auditor.md)                              | Done (98/100) |
-| [25: PDF export](25-pdf-export.md)                                          | Done (93/100) |
-| [26: AI foundation](26-ai-foundation.md)                                    | Done (92/100) |
-| [27: CV editor collapsible sections](27-cv-editor-collapsible-sections.md)  | Done (97/100) |
-| [28: Paginated CV preview](28-paginated-cv-preview.md)                      | In progress   |
-| [29: Suggest a rewrite](29-suggest-a-rewrite.md)                            | Done (96/100) |
+| Spec                                                                           | Status        |
+| ------------------------------------------------------------------------------ | ------------- |
+| [01: Foundations](01-foundations.md)                                           | Done (92/100) |
+| [02: Auth database](02-auth-database.md)                                       | Done (96/100) |
+| [03: Design system](03-design-system.md)                                       | Done (96/100) |
+| [04: Privacy page](04-privacy-page.md)                                         | Done (91/100) |
+| [05: Sign-in](05-sign-in.md)                                                   | In progress   |
+| [06: Sign-in refresh](06-sign-in-refresh.md)                                   | In progress   |
+| [07: Terms page](07-terms-page.md)                                             | In progress   |
+| [08: Regional locales](08-regional-locales.md)                                 | Done (96/100) |
+| [09: CV schema](09-cv-schema.md)                                               | Done (96/100) |
+| [10: Brand assets](10-brand-assets.md)                                         | Done (97/100) |
+| [11: Pull request checks](11-pull-request-checks.md)                           | Done (97/100) |
+| [12: Control sizes and radius](12-control-sizes-and-radius.md)                 | Done (93/100) |
+| [13: Phone, date and password fields](13-phone-date-and-password-fields.md)    | Done (98/100) |
+| [14: CV builder](14-cv-builder.md)                                             | Done (91/100) |
+| [15: App shell and sidebar](15-app-shell.md)                                   | Done (93/100) |
+| [16: Button spacing](16-button-spacing.md)                                     | Done (94/100) |
+| [17: Type spacing in every control](17-type-spacing-everywhere.md)             | Done (96/100) |
+| [18: Icon size from the font size](18-icon-size.md)                            | Done (97/100) |
+| [19: CV editor in two panes](19-cv-editor-two-panes.md)                        | Done (95/100) |
+| [22: Grid Auditor overlay](22-grid-auditor.md)                                 | Done (98/100) |
+| [25: PDF export](25-pdf-export.md)                                             | Done (93/100) |
+| [26: AI foundation](26-ai-foundation.md)                                       | Done (92/100) |
+| [27: CV editor collapsible sections](27-cv-editor-collapsible-sections.md)     | Done (97/100) |
+| [28: Paginated CV preview](28-paginated-cv-preview.md)                         | In progress   |
+| [29: Suggest a rewrite](29-suggest-a-rewrite.md)                               | Done (96/100) |
+| [31: Start cards, LinkedIn import and CV upload](31-start-cards-and-import.md) | Done (93/100) |
 
-Planned next (each needs its decisions first): start cards with LinkedIn import and CV upload (0050), country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
+Planned next (each needs its decisions first): For a job (tailoring decision), country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.

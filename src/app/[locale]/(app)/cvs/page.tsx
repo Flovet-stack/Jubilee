@@ -4,12 +4,12 @@ import { getFormatter, getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { HugeiconsPlusIcon } from "@/components/icons";
-import { ButtonLink } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/feedback";
 import { CvIndex } from "@/features/cv/components/cv-index";
+import { StartCards } from "@/features/cv-import/components/start-cards";
 import { listCvs } from "@/features/cv/queries";
 import { editedJustNow } from "@/features/shell/logic";
+import { languageOf } from "@/i18n/locales";
 import { routing, type Locale } from "@/i18n/routing";
 
 export async function generateMetadata({
@@ -21,7 +21,7 @@ export async function generateMetadata({
   return { title: t("metaTitle"), robots: { index: false, follow: false } };
 }
 
-/** Every resume, a search, and the way to create one (0032, spec 20). */
+/** The start cards, then every resume and a search (0032, 0050, spec 31). */
 export default async function CvsPage({ params }: PageProps<"/[locale]/cvs">) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
@@ -52,8 +52,6 @@ async function CvsList({ locale }: { locale: Locale }) {
     getMessages({ locale }),
     listCvs(),
   ]);
-  const href = `/${locale}/cvs/new`;
-
   if (!result.ok) {
     return (
       <p className="text-ink-muted">
@@ -68,21 +66,29 @@ async function CvsList({ locale }: { locale: Locale }) {
     );
   }
 
-  // The one violet action on the page (0007).
-  const create = (
-    <ButtonLink href={href} variant="primary" icon={<HugeiconsPlusIcon />}>
-      {t("create")}
-    </ButtonLink>
+  const language = languageOf(locale);
+  // The cards are the page until she has a CV (0050).
+  const start = (
+    <NextIntlClientProvider
+      locale={locale}
+      messages={{
+        cv: {
+          start: messages.cv.start,
+          import: messages.cv.import,
+          create: messages.cv.create,
+        },
+        ai: messages.ai,
+      }}
+    >
+      <StartCards
+        locale={locale}
+        language={language}
+        market={language === "fr" ? "FR" : "US"}
+      />
+    </NextIntlClientProvider>
   );
 
-  if (result.value.length === 0) {
-    return (
-      <div className="flex flex-col items-start gap-3">
-        {create}
-        <p className="text-ink-muted">{t("reassure")}</p>
-      </div>
-    );
-  }
+  if (result.value.length === 0) return start;
 
   const now = new Date();
   const cvs = result.value.map((cv) => ({
@@ -98,8 +104,8 @@ async function CvsList({ locale }: { locale: Locale }) {
   }));
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>{create}</div>
+    <div className="flex flex-col gap-8">
+      {start}
       <NextIntlClientProvider
         locale={locale}
         messages={{ cv: { list: messages.cv.list } }}

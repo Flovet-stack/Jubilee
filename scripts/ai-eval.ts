@@ -36,6 +36,8 @@ const fixture = (name: string) =>
 const cvEn = fixture("cv-en.txt");
 const cvFr = fixture("cv-fr.txt");
 const jobFr = fixture("job-fr.txt");
+const linkedinEn = fixture("linkedin-en.txt");
+const linkedinFr = fixture("linkedin-fr.txt");
 
 type Case = {
   name: string;
@@ -102,9 +104,51 @@ const rewriteCases = (
   },
 }));
 
+/**
+ * Spec 31: every employer and year in the output is in the source (no
+ * invented facts), at least one role and the name were found, and the
+ * profile's language is kept.
+ */
+const importCase = (
+  name: string,
+  value: string,
+  source: "linkedin" | "upload",
+  language: "en" | "fr",
+): Case => ({
+  name,
+  input: { text: value, source, locale: language },
+  check: (output) => {
+    const out = output as {
+      language: string | null;
+      basics: { name: string | null };
+      work: {
+        company: string | null;
+        startDate: string | null;
+        endDate: string | null;
+      }[];
+    };
+    if (!out.basics.name) return "no name";
+    if (out.work.length === 0) return "no work";
+    for (const w of out.work) {
+      if (w.company && !value.includes(w.company))
+        return `employer not in source: ${w.company}`;
+      for (const d of [w.startDate, w.endDate])
+        if (d && !value.includes(d.slice(0, 4)))
+          return `year not in source: ${d}`;
+    }
+    if (out.language !== language) return `language ${out.language}`;
+    return null;
+  },
+});
+
 /** Fixture inputs per task. Feature specs replace these with real shapes. */
 const CASES: Record<TaskId, Case[]> = {
-  "cv.import": [text("English CV", cvEn), text("French CV", cvFr)],
+  "cv.import": [
+    importCase("LinkedIn profile (en)", linkedinEn, "linkedin", "en"),
+    importCase("LinkedIn profile (fr)", linkedinFr, "linkedin", "fr"),
+    importCase("Uploaded CV (fr)", cvFr, "upload", "fr"),
+    importCase("Uploaded CV (en)", cvEn, "upload", "en"),
+  ],
   "job.extract": [text("French job ad", jobFr)],
   "cv.tailor": [text("French CV + job", `${cvFr}\n\n${jobFr}`)],
   "letter.write": [text("French CV + job", `${cvFr}\n\n${jobFr}`)],
