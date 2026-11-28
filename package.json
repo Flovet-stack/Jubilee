@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
-    "ai:eval": "node scripts/ai-eval.mjs"
+    "ai:eval": "node scripts/ai-eval.mjs",
+    "brand": "node scripts/brand.mjs . && node scripts/render-brand-icons.mjs ."
   },
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.108",
