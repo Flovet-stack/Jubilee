@@ -51,6 +51,6 @@ One spec per task. A task is the smallest piece of work that can be built, revie
 | [27: CV editor collapsible sections](27-cv-editor-collapsible-sections.md)     | Done (97/100) |
 | [28: Paginated CV preview](28-paginated-cv-preview.md)                         | In progress   |
 | [29: Suggest a rewrite](29-suggest-a-rewrite.md)                               | Done (96/100) |
-| [31: Start cards, LinkedIn import and CV upload](31-start-cards-and-import.md) | Not started   |
+| [31: Start cards, LinkedIn import and CV upload](31-start-cards-and-import.md) | Done (93/100) |
 
 Planned next (each needs its decisions first): For a job (tailoring decision), country formats, tailoring and letters, job matches, approval-based apply, tracker, follow-ups, pass and payments.
