@@ -22,6 +22,15 @@ export function importKey(step: EditorStep): string {
   return step.type === "section" ? step.id : "basics";
 }
 
+/** Content with one "Imported: check it" mark removed (opening counts as checking). */
+export function clearImportMark<C extends { imported?: string[] }>(
+  content: C,
+  key: string,
+): C {
+  if (!content.imported?.includes(key)) return content;
+  return { ...content, imported: content.imported.filter((k) => k !== key) };
+}
+
 /** The first pass on a new CV (0024 §1): contact, experience, education, skills, summary. */
 export const FIRST_PASS: readonly (
   "contact" | "work" | "education" | "skills" | "summary"

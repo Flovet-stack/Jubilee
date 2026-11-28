@@ -26,10 +26,16 @@ const EN_STREET = new RegExp(
   "gu",
 );
 
+// LinkedIn profile URLs name the person (spec 31): the import reads them
+// back from the original text on the server instead.
+const LINKEDIN =
+  /(?:https?:\/\/)?(?:[a-z]{2,3}\.)?linkedin\.com\/in\/[\p{L}\p{N}_%-]+\/?/giu;
+
 export const REDACTED = "[removed]";
 
 export function stripContactDetails(text: string): string {
   return text
+    .replace(LINKEDIN, REDACTED)
     .replace(EMAIL, REDACTED)
     .replace(FR_STREET, REDACTED)
     .replace(EN_STREET, REDACTED)

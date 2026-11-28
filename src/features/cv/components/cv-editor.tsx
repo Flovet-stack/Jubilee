@@ -42,6 +42,7 @@ import {
   emptyEntry,
   emptySection,
   followsContent,
+  clearImportMark,
   importKey,
   move,
   nextFirstPassStep,
@@ -210,10 +211,7 @@ export function CvEditor(props: CvEditorProps) {
     // Opening an imported section counts as checking it (0050, spec 31).
     const key = importKey(next);
     if (content.imported?.includes(key)) {
-      update((c) => ({
-        ...c,
-        imported: (c.imported ?? []).filter((k) => k !== key),
-      }));
+      update((c) => clearImportMark(c, key));
     }
     void flush();
     // Proposals belong to the form they were asked in (spec 29).
@@ -418,6 +416,7 @@ export function CvEditor(props: CvEditorProps) {
 
   const removeSection = (sectionId: string) => {
     const before = content.sections;
+    const importedBefore = content.imported;
     update((c) => ({
       ...c,
       sections: c.sections.filter((s) => s.id !== sectionId),
@@ -428,7 +427,15 @@ export function CvEditor(props: CvEditorProps) {
     toast({
       title: t("sectionRemoved"),
       closeLabel: t("dismiss"),
-      action: { label: t("undo"), onClick: () => setSections(() => before) },
+      action: {
+        label: t("undo"),
+        onClick: () =>
+          update((c) => ({
+            ...c,
+            sections: before,
+            ...(importedBefore ? { imported: importedBefore } : {}),
+          })),
+      },
     });
   };
 

@@ -84,7 +84,10 @@ export function toCvContent(
     .map((e) => ({
       id: newId(),
       institution: str(e.institution),
-      area: str(e.area),
+      // Models often repeat the field in the degree ("BS, Statistics").
+      area: str(e.degree).toLowerCase().includes(str(e.area).toLowerCase())
+        ? ""
+        : str(e.area),
       studyType: str(e.degree),
       location: str(e.location),
       url: "",

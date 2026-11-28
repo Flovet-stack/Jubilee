@@ -250,11 +250,16 @@ function ImportDialog({
       readOnly={pending}
       error={fileError}
       formatSize={(bytes) =>
-        format.number(bytes / 1_000_000, {
-          style: "unit",
-          unit: "megabyte",
-          maximumFractionDigits: 1,
-        })
+        bytes < 1_000_000
+          ? format.number(Math.max(1, Math.round(bytes / 1000)), {
+              style: "unit",
+              unit: "kilobyte",
+            })
+          : format.number(bytes / 1_000_000, {
+              style: "unit",
+              unit: "megabyte",
+              maximumFractionDigits: 1,
+            })
       }
     />
   );

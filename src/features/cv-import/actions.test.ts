@@ -19,7 +19,7 @@ vi.mock("next/navigation", () => ({ redirect }));
 const { importCvAction } = await import("./actions");
 
 const profile =
-  "Aminata Diallo\naminata@example.fr\nExperience\n" +
+  "Aminata Diallo\naminata@example.fr\nwww.linkedin.com/in/aminata-d\nExperience\n" +
   "Data analyst at Acme, 2021 to 2024. ".repeat(10);
 
 const form = (fields: Record<string, string>) => {
@@ -85,10 +85,34 @@ describe("importCvAction (spec 31)", () => {
     expect(meta).toMatchObject({ language: "en", market: "US" });
     expect(content.basics.email).toBe("aminata@example.fr");
     expect(content.imported).toHaveLength(2);
+    expect(content.basics.links[0].url).toBe(
+      "https://www.linkedin.com/in/aminata-d",
+    );
     expect(addRevision).toHaveBeenCalledWith(
       { kind: "cv", id: "cv-1" },
       { source: "import", note: "Import LinkedIn" },
     );
+  });
+
+  it("sends the profile text, which runTask strips of contact details", async () => {
+    // runTask redacts every input (spec 26); this checks the action sends the
+    // text as is to it, and that the real redaction removes what matters.
+    runTask.mockResolvedValue({ ok: false, reason: "failed" });
+    await importCvAction({ error: null }, paste);
+    const sent = runTask.mock.calls[0]![1].text as string;
+    const { stripContactDetails } = await import("@/lib/ai/redact");
+    const clean = stripContactDetails(sent);
+    expect(clean).not.toContain("aminata@example.fr");
+    expect(clean).not.toContain("linkedin.com/in");
+  });
+
+  it("returns failed when the output fails its schema", async () => {
+    // runTask validates the output and reports a mismatch as "failed".
+    runTask.mockResolvedValue({ ok: false, reason: "failed" });
+    expect(await importCvAction({ error: null }, paste)).toEqual({
+      error: "failed",
+    });
+    expect(createCv).not.toHaveBeenCalled();
   });
 
   it("writes nothing when the AI fails", async () => {

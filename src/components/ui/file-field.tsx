@@ -31,6 +31,18 @@ type FileFieldProps = {
   className?: string;
 };
 
+/** Whether a file matches an `accept` list of MIME types and extensions. */
+export function accepts(accept: string, file: File): boolean {
+  return accept
+    .split(",")
+    .map((a) => a.trim().toLowerCase())
+    .some((a) =>
+      a.startsWith(".")
+        ? file.name.toLowerCase().endsWith(a)
+        : a === file.type.toLowerCase(),
+    );
+}
+
 /**
  * One file, chosen with a button or dropped (spec 31). The real input stays
  * in the form, so the file posts with it; a drop is copied into the input.
@@ -68,7 +80,8 @@ export function FileField({
     setOver(false);
     if (locked || !input.current) return;
     const dropped = event.dataTransfer.files[0];
-    if (!dropped) return;
+    // The picker filters by `accept`; a drop doesn't, so check it here.
+    if (!dropped || !accepts(accept, dropped)) return;
     const list = new DataTransfer();
     list.items.add(dropped);
     input.current.files = list.files;
