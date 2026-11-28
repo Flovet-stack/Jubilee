@@ -245,6 +245,7 @@ function ImportDialog({
       chooseLabel={t("file.choose")}
       dropLabel={t("file.drop")}
       removeLabel={t("file.remove")}
+      wrongTypeLabel={t("file.wrongType")}
       accept="application/pdf,.pdf"
       required
       readOnly={pending}

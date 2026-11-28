@@ -799,7 +799,8 @@
         "choose": "Choose a PDF",
         "drop": "or drop it here",
         "remove": "Remove",
-        "hint": "PDF, up to 5 MB and 10 pages."
+        "hint": "PDF, up to 5 MB and 10 pages.",
+        "wrongType": "That isn't a PDF. Choose a PDF file."
       },
       "pending": "Reading it. This takes up to 30 seconds.",
       "startBlank": "Start blank instead",

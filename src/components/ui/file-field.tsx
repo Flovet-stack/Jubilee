@@ -18,6 +18,8 @@ type FileFieldProps = {
   /** After the button on fine pointers: "or drop it here". */
   dropLabel: string;
   removeLabel: string;
+  /** Shown when a dropped file doesn't match `accept`: "Choose a PDF file." */
+  wrongTypeLabel: string;
   /** MIME types or extensions, as the input's `accept`. */
   accept: string;
   /** Format the chosen file's size ("1.2 MB"); the caller owns the locale. */
@@ -56,6 +58,7 @@ export function FileField({
   chooseLabel,
   dropLabel,
   removeLabel,
+  wrongTypeLabel,
   accept,
   formatSize,
   error,
@@ -68,9 +71,11 @@ export function FileField({
   const input = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [over, setOver] = useState(false);
+  const [wrongType, setWrongType] = useState(false);
   const locked = disabled || readOnly;
 
   const choose = (next: File | null) => {
+    setWrongType(false);
     setFile(next);
     onChange?.(next);
   };
@@ -81,7 +86,11 @@ export function FileField({
     if (locked || !input.current) return;
     const dropped = event.dataTransfer.files[0];
     // The picker filters by `accept`; a drop doesn't, so check it here.
-    if (!dropped || !accepts(accept, dropped)) return;
+    if (!dropped) return;
+    if (!accepts(accept, dropped)) {
+      setWrongType(true);
+      return;
+    }
     const list = new DataTransfer();
     list.items.add(dropped);
     input.current.files = list.files;
@@ -98,7 +107,7 @@ export function FileField({
     <Field
       label={label}
       hint={hint}
-      error={error}
+      error={wrongType ? wrongTypeLabel : error}
       disabled={disabled}
       className={className}
     >
@@ -111,7 +120,7 @@ export function FileField({
         onDragLeave={() => setOver(false)}
         onDrop={drop}
         data-over={over || undefined}
-        data-invalid={error ? true : undefined}
+        data-invalid={error || wrongType ? true : undefined}
         className={cn(
           "flex min-w-0 flex-col gap-3 rounded-control-lg border border-dashed border-line bg-well p-4 sm:flex-row sm:items-center",
           "transition-colors duration-(--dur-fast) ease-standard",

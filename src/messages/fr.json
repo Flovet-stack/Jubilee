@@ -801,7 +801,8 @@
         "choose": "Choisir un PDF",
         "drop": "ou déposez-le ici",
         "remove": "Retirer",
-        "hint": "PDF, 5 Mo et 10 pages au maximum."
+        "hint": "PDF, 5 Mo et 10 pages au maximum.",
+        "wrongType": "Ce n'est pas un PDF. Choisissez un fichier PDF."
       },
       "pending": "Lecture en cours. Cela prend jusqu'à 30 secondes.",
       "startBlank": "Commencer un CV vierge",
